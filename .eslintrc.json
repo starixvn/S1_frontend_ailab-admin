@@ -19,8 +19,6 @@
         "react" // eslint-plugin-react
     ],
     "rules": {
-        // "prettier/prettier": "error",
-        "indent": ["error", "tab"],
         "quotes": ["error", "double"],
         "import/no-unresolved": "off",
         "react/jsx-indent": "off",
