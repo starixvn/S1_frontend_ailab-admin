@@ -1,5 +1,8 @@
 {
 	"Common": {
+		
+	},
+	"Login":{
 		"lbl_Login": "Login",
 		"lbl_AdminLogin":"Admin Login"
 	}

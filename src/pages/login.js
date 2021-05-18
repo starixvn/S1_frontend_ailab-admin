@@ -20,7 +20,7 @@ const Index = () => {
 				<form>
 					<span data-feather="users" />
 					<h1 className="h3 mb-3 fw-normal">
-						{t("Common.lbl_AdminLogin")}
+						{t("Login.lbl_AdminLogin")}
 					</h1>
 					<div className="form-floating">
 						<input
