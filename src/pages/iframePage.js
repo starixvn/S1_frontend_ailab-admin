@@ -1,3 +1,3 @@
-const Index = props => <div>IframePage</div>;
+const Index = () => <div>IframePage</div>;
 
 export default Index;

@@ -6,11 +6,13 @@ import Login from "./pages/login";
 import path from "./path";
 import Dashboard from "./pages/dashboard";
 import IframePage from "./pages/iframePage";
+import Layout from "./components/layout";
 
 function App() {
 	return (
 		<Suspense fallback="loading">
 			<I18nextProvider i18n={i18n}>
+				<Layout />
 				<Router>
 					<Switch>
 						<Route path={`/${path.login.root}`}>
