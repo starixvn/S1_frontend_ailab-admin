@@ -5,6 +5,7 @@ import i18n from "./i18n/config";
 import Login from "./pages/login";
 import path from "./path";
 import Dashboard from "./pages/dashboard";
+import IframePage from "./pages/iframePage";
 
 function App() {
 	return (
@@ -17,6 +18,9 @@ function App() {
 						</Route>
 						<Route path="/">
 							<Dashboard />
+						</Route>
+						<Route path={`/${path.winLostReport.root}`}>
+							<IframePage />
 						</Route>
 					</Switch>
 				</Router>

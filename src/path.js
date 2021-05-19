@@ -4,5 +4,8 @@ export default {
 	},
 	login: {
 		root: "login"
+	},
+	winLostReport: {
+		root: "winLostReport"
 	}
 };
