@@ -20,13 +20,13 @@ const Header = () => {
 					setCollapse(prev => !prev);
 				}}
 				className={`navbar-toggler position-absolute d-md-none${
-					collapse === true ? "" : " collapsed"
+					collapse === true ? " collapsed" : ""
 				}`}
 				type="button"
 				data-bs-toggle="collapse"
 				data-bs-target="#sidebarMenu"
 				aria-controls="sidebarMenu"
-				aria-expanded={collapse}
+				aria-expanded={!collapse}
 				aria-label="Toggle navigation">
 				{collapse === true ? (
 					<span className="navbar-toggler-icon" />

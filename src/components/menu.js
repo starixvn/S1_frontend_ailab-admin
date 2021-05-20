@@ -15,14 +15,11 @@ const Menu = () => {
 			setShowArea(prev => [...prev, area]);
 		}
 	};
-	// 初始 : collapse
-	// 點選後 : collapsing
-	// 動畫結束 : collapse show
 	return (
 		<nav
 			id="sidebarMenu"
-			className={`col-md-3 col-lg-2 d-md-block bg-light sidebar collapse${
-				collapse === true ? " active show" : ""
+			className={`col-md-3 col-lg-2 bg-light sidebar collapse${
+				collapse === true ? "" : " show"
 			}`}>
 			<div className="position-sticky pt-3">
 				<div
@@ -44,10 +41,8 @@ const Menu = () => {
 						</button>
 						<div
 							id="Reports"
-							className={`accordion-collapse${
-								showArea.includes("reports")
-									? ""
-									: " collapse show"
+							className={`accordion-collapse collapse${
+								showArea.includes("reports") ? " show" : ""
 							}`}
 							aria-labelledby="flush-headingOne"
 							data-bs-parent="#accordionFlushExample">
@@ -103,7 +98,9 @@ const Menu = () => {
 						</button>
 						<div
 							id="CSD"
-							className="accordion-collapse collapse"
+							className={`accordion-collapse collapse${
+								showArea.includes("CSD") ? " show" : ""
+							}`}
 							aria-labelledby="flush-headingTwo"
 							data-bs-parent="#accordionFlushExample">
 							<Link
@@ -152,7 +149,9 @@ const Menu = () => {
 						</button>
 						<div
 							id="Finance"
-							className="accordion-collapse collapse"
+							className={`accordion-collapse collapse${
+								showArea.includes("Finance") ? " show" : ""
+							}`}
 							aria-labelledby="flush-headingTwo"
 							data-bs-parent="#accordionFlushExample">
 							<Link
@@ -237,7 +236,11 @@ const Menu = () => {
 						</button>
 						<div
 							id="Administration"
-							className="accordion-collapse collapse"
+							className={`accordion-collapse collapse${
+								showArea.includes("Administration")
+									? " show"
+									: ""
+							}`}
 							aria-labelledby="flush-headingOne"
 							data-bs-parent="#accordionFlushExample">
 							<Link
@@ -270,7 +273,9 @@ const Menu = () => {
 						</button>
 						<div
 							id="Marketing"
-							className="accordion-collapse collapse"
+							className={`accordion-collapse collapse${
+								showArea.includes("Marketing") ? " show" : ""
+							}`}
 							aria-labelledby="flush-headingOne"
 							data-bs-parent="#accordionFlushExample">
 							<Link
@@ -305,7 +310,9 @@ const Menu = () => {
 						</button>
 						<div
 							id="BankTransfer"
-							className="accordion-collapse collapse"
+							className={`accordion-collapse collapse${
+								showArea.includes("BankTransfer") ? " show" : ""
+							}`}
 							aria-labelledby="flush-headingOne"
 							data-bs-parent="#accordionFlushExample">
 							<Link

@@ -68,7 +68,7 @@ a:focus, button:focus, input:focus {
   outline: none;
 }
 
-#sidebarMenu.active + main {
+#sidebarMenu:not(.show) + main {
   margin-left: 0 !important;
   width: 100%;
   transition: 0.7s;
@@ -90,11 +90,11 @@ a:focus, button:focus, input:focus {
 @media (min-width: 768px) {
   #sidebarMenu {
     transition: 0.7s;
-    transform: translateX(0px);
+    transform: translateX(0);
     height: 100% !important;
   }
-  #sidebarMenu.active {
-    transform: translateX(-317px);
+  #sidebarMenu:not(.show) {
+    transform: translateX(-100%);
     transition: 0.7s;
   }
   .navbar-nav.px-3 {
@@ -104,29 +104,17 @@ a:focus, button:focus, input:focus {
     display: block !important;
     left: calc(317px + 1rem);
   }
-  .navbar-toggler[aria-expanded="true"] {
+  .navbar-toggler {
     transition: 0.7s;
     position: relative !important;
-    top: 0;
-    left: 1vw;
-  }
-  .navbar-toggler[aria-expanded="true"] .feather-x {
-    display: none;
-  }
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-    display: block;
-  }
-  .navbar-toggler[aria-expanded="false"] {
-    transition: 0.7s;
-    position: relative !important;
-    top: 0;
+    top: 0 !important;
     left: 1vw;
   }
   .navbar-toggler[aria-expanded="false"] .feather-x {
-    display: block;
+    display: none;
   }
   .navbar-toggler[aria-expanded="false"] .navbar-toggler-icon {
-    display: none;
+    display: block;
   }
   .navbar-brand {
     opacity: 1;
