@@ -1,9 +1,15 @@
 {
-	"Common": {
-		
-	},
-	"Login":{
+	"Common": {},
+	"Login": {
 		"lbl_Login": "Login",
-		"lbl_AdminLogin":"Admin Login"
+		"lbl_SignIn": "Sign in",
+		"lbl_AdminLogin": "Admin Login",
+		"lbl_UserName": "User Name",
+		"lbl_UserPassword": "User Password",
+		"lbl_RememberMe": "Remember Me"
+	},
+	"Error": {
+		"lbl_API_Error": "Oops! API went wrong...",
+		"lbl_Default_Error": "Oops! Something went wrong..."
 	}
 }

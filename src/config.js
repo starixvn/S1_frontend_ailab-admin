@@ -11,6 +11,8 @@ const SiteURL =
 
 axios.defaults.baseURL = SiteURL.apiURL;
 
+export default SiteURL;
+
 export const siteInfo = {
 	langList: ["en"],
 	defaultLang: "en"
