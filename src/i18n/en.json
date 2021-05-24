@@ -1,11 +1,5 @@
 {
-	"Common": {
-		
-	},
-	"Login":{
-		"lbl_Login": "Login",
-		"lbl_AdminLogin":"Admin Login"
-	},
+	"Common": {},
 	"Reports":{
 		"lbl_Report": "Report",
 		"lbl_Reports": "Reports",
@@ -57,6 +51,16 @@
 	},
 	"Admin":{
 		"lbl_Admin": "Admin",
-		"lbl_SignOut": "Sign out"
+		"lbl_SignOut": "Sign out",
+		"lbl_SignIn": "Sign in",
+		"lbl_AdminLogin": "Admin Login",
+		"lbl_UserName": "User Name",
+		"lbl_UserPassword": "User Password",
+		"lbl_RememberMe": "Remember Me",
+		"lbl_Login": "Login"
+	},
+	"Error": {
+		"lbl_API_Error": "Oops! API went wrong...",
+		"lbl_Default_Error": "Oops! Something went wrong..."
 	}
 }

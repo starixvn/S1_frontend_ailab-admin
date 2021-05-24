@@ -5,5 +5,5 @@ const rootURL = config.apiURL;
 
 export const homeRequest = axios.create({
 	withCredentials: true,
-	baseURL: `${rootURL}/api/Home`
+	baseURL: `${rootURL}/api/home`
 });

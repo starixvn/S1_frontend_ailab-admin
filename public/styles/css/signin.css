@@ -11,6 +11,10 @@ body.text-center {
   background-color: #f5f5f5;
 }
 
+#root{
+  width: 100%;
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;
