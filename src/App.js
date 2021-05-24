@@ -4,17 +4,36 @@ import { I18nextProvider } from "react-i18next";
 import { positions, Provider as ReactAlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import ContextRoute from "./components/context";
-
 import i18n from "./i18n/config";
 import Login from "./pages/login";
 import path from "./path";
 import Dashboard from "./pages/dashboard";
 import IframePage from "./pages/iframePage";
-import Layout from "./components/layout";
+import MenuList from "./datas/menu";
 
 const reactAlertOptions = {
 	timeout: 2500,
 	position: positions.MIDDLE
+};
+
+const iframeRoutes = () => {
+	const result = [];
+
+	MenuList.forEach(m => {
+		if (m.Childs) {
+			m.Childs.forEach(c => {
+				result.push(
+					<ContextRoute
+						path={`/${c.Controller}/${c.Action}`}
+						afterLogin={true}>
+						<IframePage />
+					</ContextRoute>
+				);
+			});
+		}
+	});
+
+	return result;
 };
 
 function App() {
@@ -31,16 +50,10 @@ function App() {
 								afterLogin={false}>
 								<Login />
 							</ContextRoute>
-
 							<ContextRoute exact path="/" afterLogin={true}>
 								<Dashboard />
 							</ContextRoute>
-
-							<ContextRoute
-								path={`/${path.winLostReport.root}`}
-								afterLogin={true}>
-								<IframePage />
-							</ContextRoute>
+							{iframeRoutes()}
 						</Switch>
 					</Router>
 				</ReactAlertProvider>

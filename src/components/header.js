@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import FeatherIcon from "feather-icons-react";
-import { toggleSideMenuContext } from "../context";
+import { toggleSideMenuContext } from "./context";
 
 const Header = () => {
 	const { t } = useTranslation();
-	const { setCollapse, collapse } = useContext(toggleSideMenuContext);
+	const { collapse, setCollapse } = useContext(toggleSideMenuContext);
 	return (
 		<header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 			<a
 				className={`navbar-brand col-md-3 col-lg-2 me-0 px-3${
 					collapse === true ? " active" : ""
 				}`}
-				href="#">
+				href="/">
 				{t("Admin.lbl_Admin")}
 			</a>
 			<button

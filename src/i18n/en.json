@@ -1,5 +1,12 @@
 {
 	"Common": {},
+	"Menu":{
+		"Reports":"Reports",
+		"CSD":"CSD",
+		"Finance":"Finance",
+		"Administration":"Administration",
+		"Marketing":"Marketing"
+	},
 	"Reports":{
 		"lbl_Report": "Report",
 		"lbl_Reports": "Reports",

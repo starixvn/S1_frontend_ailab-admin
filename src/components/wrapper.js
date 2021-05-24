@@ -9,7 +9,7 @@ import path from "../path";
 const Wrapper = ({ children, afterLogin }) => {
 	const history = useHistory();
 	const isMountedRef = useRef(null);
-
+	const [collapse, setCollapse] = useState(false);
 	const [userInfo, setUserInfo] = useState({
 		isLogin: null,
 		userName: null
@@ -40,9 +40,11 @@ const Wrapper = ({ children, afterLogin }) => {
 	}, []);
 
 	return (
-		<ct.userInfoContext.Provider value={{ userInfo, setUserInfo }}>
-			{children}
-		</ct.userInfoContext.Provider>
+		<ct.toggleSideMenuContext.Provider value={{ collapse, setCollapse }}>
+			<ct.userInfoContext.Provider value={{ userInfo, setUserInfo }}>
+				{children}
+			</ct.userInfoContext.Provider>
+		</ct.toggleSideMenuContext.Provider>
 	);
 };
 

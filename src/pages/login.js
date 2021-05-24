@@ -14,7 +14,6 @@ const Index = () => (
 		<HelmetProvider>
 			<DynamicAttr />
 		</HelmetProvider>
-
 		<Login />
 	</>
 );

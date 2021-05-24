@@ -22,3 +22,5 @@ ContextRoute.propTypes = {
 export default ContextRoute;
 
 export const userInfoContext = createContext({ isLogin: false });
+
+export const toggleSideMenuContext = createContext({});
