@@ -1,0 +1,46 @@
+html,
+body {
+  height: 100%;
+}
+
+body.text-center {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+#root{
+  width: 100%;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 30px;
+  margin: auto;
+  background: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid rgba(108,117,125,.5);
+  color: rgba(108,117,125,1);
+}
+
+.form-signin > form > .feather{
+  width: 32px;
+  height: 32px;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input{
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

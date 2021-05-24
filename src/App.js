@@ -10,6 +10,7 @@ import Login from "./pages/login";
 import path from "./path";
 import Dashboard from "./pages/dashboard";
 import IframePage from "./pages/iframePage";
+import Layout from "./components/layout";
 
 const reactAlertOptions = {
 	timeout: 2500,

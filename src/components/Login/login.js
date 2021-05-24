@@ -51,7 +51,7 @@ const Login = () => {
 			<form onSubmit={handleLogin}>
 				<span data-feather="users" />
 				<h1 className="h3 mb-3 fw-normal">
-					{t("Login.lbl_AdminLogin")}
+					{t("Admin.lbl_AdminLogin")}
 				</h1>
 				<div className="form-floating">
 					<input
@@ -63,7 +63,7 @@ const Login = () => {
 					/>
 					<label htmlFor="floatingInput">
 						<span data-feather="user" />
-						{t("Login.lbl_UserName")}
+						{t("Admin.lbl_UserName")}
 					</label>
 				</div>
 				<div className="form-floating">
@@ -76,7 +76,7 @@ const Login = () => {
 					/>
 					<label htmlFor="floatingPassword">
 						<span data-feather="lock" />
-						{t("Login.lbl_UserPassword")}
+						{t("Admin.lbl_UserPassword")}
 					</label>
 				</div>
 
@@ -94,7 +94,7 @@ const Login = () => {
 								});
 							}}
 						/>{" "}
-						{t("Login.lbl_RememberMe")}
+						{t("Admin.lbl_RememberMe")}
 					</label>
 				</div> */}
 
@@ -102,7 +102,7 @@ const Login = () => {
 					disabled={!userName || !userPassword}
 					className="w-100 btn btn-lg btn-primary"
 					type="submit">
-					{t("Login.lbl_SignIn")}
+					{t("Admin.lbl_SignIn")}
 				</button>
 			</form>
 		</main>
