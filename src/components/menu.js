@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FeatherIcon from "feather-icons-react";
@@ -8,43 +8,45 @@ import MenuList from "../datas/menu";
 const MenuItems = ({ areaHandler, t, showArea }) => {
 	const result = MenuList.map(m => {
 		const menuKey = m.displayKey;
+		const isOpen = showArea === m.Category;
 		const subItems = m.Childs.map(s => {
-			const { Controller, Action, FuncKey } = s;
-			const pathName = `/${Controller}/${Action}`;
+			const { Controller, Action, FuncKey, displayKey, Title } = s;
+			const pathName = `${Controller}/${Action}`;
+			const displayText = displayKey ? t(displayKey) : Title;
 			return (
 				<Link
-					key={`menu-${menuKey}-${s.FuncKey}`}
+					key={`menu-${menuKey}-${FuncKey}`}
 					className="nav-link"
 					to={{
-						pathname: pathName,
+						pathname: `/${pathName}`,
 						state: {
-							url: pathName,
-							funcKey: FuncKey
+							Category: m.Category,
+							Controller,
+							Action,
+							Title: displayText
 						}
 					}}>
-					{s.displayKey ? t(s.displayKey) : s.Title}
+					{displayText}
 				</Link>
 			);
 		});
 		return (
 			<div className="accordion-item" key={`Menu-${menuKey}`}>
 				<button
-					onClick={() => areaHandler({ area: menuKey })}
-					className={`accordion-button${
-						showArea.includes(menuKey) ? "" : " collapsed"
-					}`}
+					onClick={() => areaHandler({ area: m.Category })}
+					className={`accordion-button${isOpen ? "" : " collapsed"}`}
 					type="button"
 					data-bs-toggle="collapse"
 					data-bs-target={`#${menuKey}`}
-					aria-expanded={showArea.includes(menuKey)}
+					aria-expanded={isOpen}
 					aria-controls={menuKey}>
-					<FeatherIcon icon="file-text" />
+					<FeatherIcon icon={m.Icon} />
 					{t(menuKey)}
 				</button>
 				<div
 					id={menuKey}
 					className={`accordion-collapse collapse${
-						showArea.includes(menuKey) ? " show" : ""
+						isOpen ? " show" : ""
 					}`}
 					aria-labelledby="flush-headingOne"
 					data-bs-parent="#accordionFlushExample">
@@ -59,21 +61,21 @@ const MenuItems = ({ areaHandler, t, showArea }) => {
 
 const Menu = () => {
 	const { t } = useTranslation();
-	const { collapse } = useContext(toggleSideMenuContext);
-	const [showArea, setShowArea] = useState([]);
+	const { menu, setMenu } = useContext(toggleSideMenuContext);
 	const areaHandler = ({ area }) => {
-		if (showArea.includes(area)) {
-			setShowArea(prev => prev.filter(el => el !== area));
-		} else {
-			setShowArea(prev => [...prev, area]);
-		}
+		setMenu(prev => ({
+			...prev,
+			showArea: prev.showArea === area ? "" : area
+		}));
 	};
+
+	const isCollapse = menu.collapse;
 
 	return (
 		<nav
 			id="sidebarMenu"
 			className={`col-md-3 col-lg-2 bg-light sidebar collapse${
-				collapse === true ? "" : " show"
+				isCollapse ? "" : " show"
 			}`}>
 			<div className="position-sticky pt-3">
 				<div
@@ -82,7 +84,7 @@ const Menu = () => {
 					<MenuItems
 						areaHandler={areaHandler}
 						t={t}
-						showArea={showArea}
+						showArea={menu.showArea}
 					/>
 				</div>
 			</div>

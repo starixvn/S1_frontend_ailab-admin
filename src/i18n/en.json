@@ -1,11 +1,39 @@
 {
 	"Common": {},
 	"Menu":{
+		"Home":"Home",
 		"Reports":"Reports",
 		"CSD":"CSD",
 		"Finance":"Finance",
 		"Administration":"Administration",
-		"Marketing":"Marketing"
+		"Marketing":"Marketing",
+		"Dashboard":"Dashboard",
+		"WinLostReport":"Win Lost Report",
+		"MainFinancialReport":"Main Financial Report",
+		"DepositReport":"Deposit Report",
+		"StatisticalReport":"Statistical Report",
+		"CustomerStatisticalReport":"Customer Statistical Report",
+		"UserOnlineReport":"User Online Report",
+		"CustomerAdministration": "Customer Administration",
+		"Announcement":"Announcement",
+		"PersonalMsgBatch":"Personal Msg Batch",
+		"ChangeVipLevelBatch":"Change Vip Level (Batch)",
+		"WithdrawalKYCControl":"Withdrawal KYC Control",
+		"TeleCSD":"TeleCSD",
+		"BankCardManagement":"Bank Card Management",
+		"DepositRequest":"Deposit Request",
+		"WithdrawalRequest":"Withdrawal Request",
+		"BalanceAdjustment":"Balance Adjustment",
+		"BalanceAdjustmentBatch":"Balance Adjustment (Batch)",
+		"WithdrawalLimitAdjust":"WithdrawalLimit Adjustment",
+		"AdjustmentReport":"Adjustment Report",
+		"PaymentManagement":"Payment Management",
+		"DepositLimitManagement":"Deposit Limit Management",
+		"ThirdPartyAdjustment":"3RD Funds Adjustment",
+		"GroupSetting":"Group Setting",
+		"UserSetting":"User Setting",
+		"PointLevelManagement":"Point Level Management",
+		"BonusManagement":"Bonus Management"
 	},
 	"Reports":{
 		"lbl_Report": "Report",
@@ -19,7 +47,7 @@
 	},
 	"CSD":{
 		"lbl_CSD": "CSD",
-		"lbl_CustomerAdministration": "Customer Administration",
+		
 		"lbl_Announcement": "Announcement",
 		"lbl_PersonalMsgBatch":"Personal Msg Batch",
 		"lbl_ChangeVipLevel":"Change Vip Level (Batch)",
@@ -67,7 +95,6 @@
 		"lbl_Login": "Login"
 	},
 	"Error": {
-		"lbl_API_Error": "Oops! API went wrong...",
-		"lbl_Default_Error": "Oops! Something went wrong..."
+		"DefaultError": "Oops! Something went wrong..."
 	}
 }

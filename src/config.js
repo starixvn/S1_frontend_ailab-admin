@@ -1,4 +1,5 @@
 import axios from "axios";
+import { defMenuCategory } from "./datas/menu";
 
 const SiteURL =
 	process.env.NODE_ENV === "production"
@@ -15,5 +16,7 @@ export default SiteURL;
 
 export const siteInfo = {
 	langList: ["en"],
-	defaultLang: "en"
+	defaultLang: "en",
+	defaultIndex: "Home/DashboardNew",
+	defaultCategory: defMenuCategory.Home
 };

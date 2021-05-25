@@ -1,22 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useHandleAuth from "../../hook/useHandleAuth";
 import { userInfoContext } from "../context";
-import useLogin from "./useLogin";
 import path from "../../path";
 
 const Login = () => {
 	const { t } = useTranslation();
+	const { userInfo, setUserInfo } = useContext(userInfoContext);
+	const { Signin } = useHandleAuth({ userInfo, setUserInfo });
 
-	const { userInfo } = useContext(userInfoContext);
-
-	const {
-		userName,
-		userPassword,
-		setUserName,
-		setUserPassword,
-		onLogin
-	} = useLogin();
+	const [userName, setUserName] = useState("");
+	const [userPassword, setUserPassword] = useState("");
 
 	const onValidate = values => {
 		const _errors = {};
@@ -40,7 +35,7 @@ const Login = () => {
 		const isValid = Object.keys(validate).length === 0;
 
 		if (isValid) {
-			await onLogin(userName, userPassword);
+			Signin({ userName, password: userPassword });
 		}
 	};
 

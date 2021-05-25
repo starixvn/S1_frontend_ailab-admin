@@ -1,18 +1,18 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import { positions, Provider as ReactAlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import ContextRoute from "./components/context";
 import i18n from "./i18n/config";
 import Login from "./pages/login";
 import path from "./path";
-import Dashboard from "./pages/dashboard";
+import NoMatch from "./pages/404";
 import IframePage from "./pages/iframePage";
 import MenuList from "./datas/menu";
+import Wrapper from "./components/wrapper";
 
 const reactAlertOptions = {
-	timeout: 2500,
+	timeout: 5000,
 	position: positions.MIDDLE
 };
 
@@ -23,11 +23,11 @@ const iframeRoutes = () => {
 		if (m.Childs) {
 			m.Childs.forEach(c => {
 				result.push(
-					<ContextRoute
-						path={`/${c.Controller}/${c.Action}`}
-						afterLogin={true}>
+					<Route
+						key={`route-${m.displayKey}-${c.displayKey}`}
+						path={`/${c.Controller}/${c.Action}`}>
 						<IframePage />
-					</ContextRoute>
+					</Route>
 				);
 			});
 		}
@@ -43,19 +43,18 @@ function App() {
 				<ReactAlertProvider
 					template={AlertTemplate}
 					{...reactAlertOptions}>
-					<Router>
-						<Switch>
-							<ContextRoute
-								path={`/${path.login.root}`}
-								afterLogin={false}>
-								<Login />
-							</ContextRoute>
-							<ContextRoute exact path="/" afterLogin={true}>
-								<Dashboard />
-							</ContextRoute>
-							{iframeRoutes()}
-						</Switch>
-					</Router>
+					<Wrapper>
+						<Router>
+							<Switch>
+								<Route path={`/${path.login.root}`}>
+									<Login />
+								</Route>
+								<Route exact path="/" component={IframePage} />
+								{iframeRoutes()}
+								<Route component={NoMatch} />
+							</Switch>
+						</Router>
+					</Wrapper>
 				</ReactAlertProvider>
 			</I18nextProvider>
 		</Suspense>

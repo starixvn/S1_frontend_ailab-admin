@@ -1,243 +1,221 @@
+export const defMenuCategory = {
+	Home: "Home",
+	Reports: "Reports",
+	CSD: "CSD",
+	Finance: "Finance",
+	Administration: "Administration",
+	Marketing: "Marketing"
+};
+
 export default [
 	{
-		displayKey: "Menu.Reports",
-		Title: "Reports",
-		Icon: "icon-reports",
+		displayKey: "Menu.Home",
+		Icon: "home",
+		Category: defMenuCategory.Home,
 		Childs: [
 			{
-				displayKey: "",
-				Title: "Win Lost",
+				displayKey: "Menu.Dashboard",
+				FuncKey: "DashboardNew/Home",
+				Controller: "Home",
+				Action: "DashboardNew",
+				Icon: "",
+				Childs: null
+			}
+		]
+	},
+	{
+		displayKey: "Menu.Reports",
+		Icon: "file-text",
+		Category: defMenuCategory.Reports,
+		Childs: [
+			{
+				displayKey: "Menu.WinLostReport",
 				FuncKey: "LicWinLost/Report",
 				Controller: "Report",
 				Action: "LicWinLost",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Main Financial Report",
+				displayKey: "Menu.MainFinancialReport",
 				FuncKey: "Report/MainFinancialReport",
 				Controller: "Report",
 				Action: "MainFinancialReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Deposit Report",
+				displayKey: "Menu.DepositReport",
 				FuncKey: "Report/DepositReport",
 				Controller: "Report",
 				Action: "DepositReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Statistical Report",
+				displayKey: "Menu.StatisticalReport",
 				FuncKey: "Report/StatisticalReport",
 				Controller: "Report",
 				Action: "StatisticalReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Customer Statistical Report",
+				displayKey: "Menu.CustomerStatisticalReport",
 				FuncKey: "Report/CustomerStatisticalReport",
 				Controller: "Report",
 				Action: "CustomerStatisticalReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "User Online Report",
+				displayKey: "Menu.UserOnlineReport",
 				FuncKey: "Report/UserOnlineReport",
 				Controller: "Report",
 				Action: "UserOnlineReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			}
 		]
 	},
 	{
 		displayKey: "Menu.CSD",
-		Title: "CSD",
-		Icon: "icon-csd",
-		Roles: null,
+		Icon: "briefcase",
+		Category: defMenuCategory.CSD,
 		Childs: [
 			{
-				displayKey: "lbl_CustomerAdministration",
-				Title: "Customer Administration",
+				displayKey: "Menu.CustomerAdministration",
 				FuncKey: "CustManage/CustInfoList",
 				Controller: "CustManage",
 				Action: "CustInfoList",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "lbl_Announcement",
-				Title: "Announcement",
+				displayKey: "Menu.Announcement",
 				FuncKey: "Message/Announcement",
 				Controller: "Message",
 				Action: "Announcement",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "lbl_Announcement",
-				Title: "Personal Msg Batch",
+				displayKey: "Menu.PersonalMsgBatch",
 				FuncKey: "Message/PersonalMsgBatch",
 				Controller: "Message",
 				Action: "PersonalMsgBatch",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Change Vip Level (Batch)",
+				displayKey: "Menu.ChangeVipLevelBatch",
 				FuncKey: "Message/ChangeVipLevelBatch",
 				Controller: "Message",
 				Action: "ChangeVipLevelBatch",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Withdrawal KYC Control",
+				displayKey: "Menu.WithdrawalKYCControl",
 				FuncKey: "Message/WithdrawalKYCControl",
 				Controller: "Message",
 				Action: "WithdrawalKYCControl",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "TeleCSD",
+				displayKey: "Menu.TeleCSD",
 				FuncKey: "CustManage/TeleCSD",
 				Controller: "CustManage",
 				Action: "TeleCSD",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			}
 		]
 	},
 	{
 		displayKey: "Menu.Finance",
-		Title: "Finance",
-		Icon: "icon-finance",
-		Roles: null,
+		Icon: "dollar-sign",
+		Category: defMenuCategory.Finance,
 		Childs: [
 			{
-				displayKey: "lbl_BankCardList",
-				Title: "Bank Card Management",
+				displayKey: "Menu.BankCardManagement",
 				FuncKey: "Finance/BankInfoList",
 				Controller: "Finance",
 				Action: "BankInfoList",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "lbl_DepositRequest",
-				Title: "Deposit Request",
+				displayKey: "Menu.DepositRequest",
 				FuncKey: "Finance/DepositList",
 				Controller: "Finance",
 				Action: "DepositList",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "lbl_WithdrawalRequest",
-				Title: "Withdrawal Request",
+				displayKey: "Menu.WithdrawalRequest",
 				FuncKey: "Finance/WithdrawalList",
 				Controller: "Finance",
 				Action: "WithdrawalList",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Balance Adjustment",
+				displayKey: "Menu.BalanceAdjustment",
 				FuncKey: "Finance/PaymentAdjustment",
 				Controller: "Finance",
 				Action: "PaymentAdjustment",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Balance Adjustment (Batch)",
+				displayKey: "Menu.BalanceAdjustmentBatch",
 				FuncKey: "Finance/BalanceAdjustmentBatch",
 				Controller: "Finance",
 				Action: "BalanceAdjustmentBatch",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "WithdrawalLimit Adjustment",
+				displayKey: "Menu.WithdrawalLimitAdjust",
 				FuncKey: "Finance/WithdrawalLimitAdjust",
 				Controller: "Finance",
 				Action: "WithdrawalLimitAdjust",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Adjustment Report",
+				displayKey: "Menu.AdjustmentReport",
 				FuncKey: "Finance/AdjustmentReport",
 				Controller: "Finance",
 				Action: "PaymentAdjustmentReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Payment Management",
+				displayKey: "Menu.PaymentManagement",
 				FuncKey: "Finance/PaymentManage",
 				Controller: "Finance",
 				Action: "PaymentManage",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "Deposit Limit Management",
+				displayKey: "Menu.DepositLimitManagement",
 				FuncKey: "Finance/DepositLimitManage",
 				Controller: "Finance",
 				Action: "DepositLimitManagement",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "",
-				Title: "3RD Funds Adjustment",
+				displayKey: "Menu.ThirdPartyAdjustment",
 				FuncKey: "Finance/ThirdPartyAdjustment",
 				Controller: "Finance",
 				Action: "ThirdPartyAdjustment",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			}
 		]
@@ -245,27 +223,26 @@ export default [
 	{
 		displayKey: "Menu.Administration",
 		Title: "Administration",
-		Icon: "icon-admin",
-		Roles: null,
+		Icon: "user",
+
+		Category: defMenuCategory.Administration,
 		Childs: [
 			{
-				displayKey: "lbl_GroupSetting",
+				displayKey: "Menu.GroupSetting",
 				Title: "Group Setting",
 				FuncKey: "Admin/GroupAuthoritySetting",
 				Controller: "Admin",
 				Action: "GroupAuthoritySetting",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "lbl_UserSetting",
+				displayKey: "Menu.UserSetting",
 				Title: "User Setting",
 				FuncKey: "Admin/UserAuthoritySetting",
 				Controller: "Admin",
 				Action: "UserAuthoritySetting",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			}
 		]
@@ -273,27 +250,25 @@ export default [
 	{
 		displayKey: "Menu.Marketing",
 		Title: "Marketing",
-		Icon: "icon-marketing",
-		Roles: null,
+		Icon: "activity",
+		Category: defMenuCategory.Marketing,
 		Childs: [
 			{
-				displayKey: "PointLevelManagement",
+				displayKey: "Menu.PointLevelManagement",
 				Title: "Point Level Management",
 				FuncKey: "Marketing/PointLevelManagement",
 				Controller: "Marketing",
 				Action: "PointLevelManagement",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
-				displayKey: "BonusManage",
+				displayKey: "Menu.BonusManagement",
 				Title: "Bonus Management",
 				FuncKey: "Marketing/BonusManage",
 				Controller: "Marketing",
 				Action: "BonusManage",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -303,7 +278,6 @@ export default [
 				Controller: "Marketing",
 				Action: "BonusInfoReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -313,7 +287,6 @@ export default [
 				Controller: "Marketing",
 				Action: "BonusImport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -323,7 +296,6 @@ export default [
 				Controller: "Marketing",
 				Action: "PendingBonus",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -333,7 +305,6 @@ export default [
 				Controller: "Marketing",
 				Action: "RebateInfoReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -343,7 +314,6 @@ export default [
 				Controller: "Marketing",
 				Action: "RebateLogReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -353,7 +323,6 @@ export default [
 				Controller: "Marketing",
 				Action: "ReferralManagement",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -363,7 +332,6 @@ export default [
 				Controller: "Marketing",
 				Action: "ReferralReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -373,7 +341,6 @@ export default [
 				Controller: "Marketing",
 				Action: "NewsManage",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -383,7 +350,6 @@ export default [
 				Controller: "Marketing",
 				Action: "BannerManage",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -393,7 +359,6 @@ export default [
 				Controller: "Marketing",
 				Action: "DrawPrizeReport",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			},
 			{
@@ -403,7 +368,6 @@ export default [
 				Controller: "Marketing",
 				Action: "GameCasinoManagement",
 				Icon: "",
-				Roles: null,
 				Childs: null
 			}
 		]
