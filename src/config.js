@@ -18,5 +18,6 @@ export const siteInfo = {
 	langList: ["en"],
 	defaultLang: "en",
 	defaultIndex: "Home/DashboardNew",
-	defaultCategory: defMenuCategory.Home
+	defaultCategory: defMenuCategory.Home,
+	defaultFuncKey: "Home/DashboardNew"
 };

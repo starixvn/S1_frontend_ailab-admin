@@ -1,13 +1,15 @@
 {
 	"Common": {},
 	"Menu":{
-		"Home":"Home",
+		"Home":{
+			"Home":"Home",
+			"Dashboard":"Dashboard"
+		},
 		"Reports":"Reports",
 		"CSD":"CSD",
 		"Finance":"Finance",
 		"Administration":"Administration",
 		"Marketing":"Marketing",
-		"Dashboard":"Dashboard",
 		"WinLostReport":"Win Lost Report",
 		"MainFinancialReport":"Main Financial Report",
 		"DepositReport":"Deposit Report",
@@ -34,55 +36,6 @@
 		"UserSetting":"User Setting",
 		"PointLevelManagement":"Point Level Management",
 		"BonusManagement":"Bonus Management"
-	},
-	"Reports":{
-		"lbl_Report": "Report",
-		"lbl_Reports": "Reports",
-		"lbl_WinLost":"Win Lost",
-		"lbl_MainFinancial":" Main Financial",
-		"lbl_Deposit":" Deposit",
-		"lbl_Statistical":" Statistical",
-		"lbl_Customer":" Customer",
-		"lbl_UserOnline":" User Online"
-	},
-	"CSD":{
-		"lbl_CSD": "CSD",
-		
-		"lbl_Announcement": "Announcement",
-		"lbl_PersonalMsgBatch":"Personal Msg Batch",
-		"lbl_ChangeVipLevel":"Change Vip Level (Batch)",
-		"lbl_WithdrawalKYC":"Withdrawal KYC Control",
-		"lbl_TeleCSD":" TeleCSD"
-	},
-	"Finance":{
-		"lbl_Finance":"Finance",
-		"lbl_BankInfoList": "Bank Card Management",
-		"lbl_DepositList": "Deposit Request",
-		"lbl_WithdrawalList":"Withdrawal Request",
-		"lbl_BalanceAdjustment":"Balance Adjustment",
-		"lbl_BalanceAdjustmentBatch":"Balance Adjustment (Batch)",
-		"lbl_WithdrawalLimitAdjust":"WithdrawalLimit Adjustment",
-		"lbl_PaymentAdjustmentReport":"Adjustment Report",
-		"lbl_PaymentManage":"Payment Management",
-		"lbl_DepositLimitManagement":"Deposit Limit Management",
-		"lbl_ThirdPartyAdjustment":"3RD Funds Adjustment",
-		"lbl_DepositSubmission":"Deposit Submission",
-		"lbl_WithdrawalLimitManage":"WithdrawalLimit Manage"
-	},
-	"Administration":{
-		"lbl_Administration":"Administration",
-		"lbl_GroupAuthoritySetting": "Group Setting",
-		"lbl_UserAuthoritySetting": "User Setting"
-	},
-	"Marketing":{
-		"lbl_Marketing":"Marketing",
-		"lbl_GroupAuthoritySetting": "Group Setting",
-		"lbl_UserAuthoritySetting": "User Setting"
-	},
-	"BankTransfer":{
-		"lbl_BankTransfer": "Bank Transfer",
-		"lbl_TransferAccountManage": "Bank Transfer Account",
-		"lbl_TransferManage": "Transfer Management"
 	},
 	"Admin":{
 		"lbl_Admin": "Admin",

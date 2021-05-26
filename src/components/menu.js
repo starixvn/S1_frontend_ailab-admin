@@ -5,11 +5,13 @@ import FeatherIcon from "feather-icons-react";
 import { toggleSideMenuContext } from "./context";
 import MenuList from "../datas/menu";
 
-const MenuItems = ({ areaHandler, t, showArea }) => {
+const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys }) => {
 	const result = MenuList.map(m => {
 		const menuKey = m.displayKey;
 		const isOpen = showArea === m.Category;
-		const subItems = m.Childs.map(s => {
+		const subItems = m.Childs.filter(s =>
+			allowfuncKeys?.some(funcKey => funcKey === s.FuncKey)
+		).map(s => {
 			const { Controller, Action, FuncKey, displayKey, Title } = s;
 			const pathName = `${Controller}/${Action}`;
 			const displayText = displayKey ? t(displayKey) : Title;
@@ -23,14 +25,15 @@ const MenuItems = ({ areaHandler, t, showArea }) => {
 							Category: m.Category,
 							Controller,
 							Action,
-							Title: displayText
+							Title: displayText,
+							FuncKey: s.FuncKey
 						}
 					}}>
 					{displayText}
 				</Link>
 			);
 		});
-		return (
+		return subItems.length > 0 ? (
 			<div className="accordion-item" key={`Menu-${menuKey}`}>
 				<button
 					onClick={() => areaHandler({ area: m.Category })}
@@ -53,10 +56,10 @@ const MenuItems = ({ areaHandler, t, showArea }) => {
 					{subItems}
 				</div>
 			</div>
-		);
+		) : null;
 	});
 
-	return result;
+	return result.filter(r => r !== null);
 };
 
 const Menu = () => {
@@ -85,6 +88,7 @@ const Menu = () => {
 						areaHandler={areaHandler}
 						t={t}
 						showArea={menu.showArea}
+						allowfuncKeys={menu.allowfuncKeys}
 					/>
 				</div>
 			</div>

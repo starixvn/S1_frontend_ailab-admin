@@ -9,13 +9,13 @@ export const defMenuCategory = {
 
 export default [
 	{
-		displayKey: "Menu.Home",
+		displayKey: "Menu.Home.Home",
 		Icon: "home",
 		Category: defMenuCategory.Home,
 		Childs: [
 			{
-				displayKey: "Menu.Dashboard",
-				FuncKey: "DashboardNew/Home",
+				displayKey: "Menu.Home.Dashboard",
+				FuncKey: "Home/DashboardNew",
 				Controller: "Home",
 				Action: "DashboardNew",
 				Icon: "",

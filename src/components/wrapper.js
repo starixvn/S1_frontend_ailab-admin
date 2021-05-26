@@ -8,9 +8,11 @@ import { siteInfo } from "../config";
 const Wrapper = ({ children }) => {
 	const location = useLocation();
 	const [menu, setMenu] = useState({
+		allowfuncKeys: [],
 		collapse: false,
 		showArea: location?.state?.Category ?? siteInfo.defaultCategory
 	});
+
 	const [userInfo, setUserInfo] = useState({
 		isLogin: null,
 		userName: null
