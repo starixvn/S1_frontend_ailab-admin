@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import FeatherIcon from "feather-icons-react";
 import { toggleSideMenuContext } from "./context";
 import MenuList from "../datas/menu";
+import { siteInfo } from "../config";
 
 const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys }) => {
 	const result = MenuList.map(m => {
@@ -20,7 +21,7 @@ const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys }) => {
 					key={`menu-${menuKey}-${FuncKey}`}
 					className="nav-link"
 					to={{
-						pathname: `/${pathName}`,
+						pathname: `/${siteInfo.oldSitePrefixUrl}/${pathName}`,
 						state: {
 							Category: m.Category,
 							Controller,

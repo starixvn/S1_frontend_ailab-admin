@@ -10,6 +10,7 @@ import NoMatch from "./pages/404";
 import IframePage from "./pages/iframePage";
 import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
+import { siteInfo } from "./config";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -25,7 +26,7 @@ const iframeRoutes = () => {
 				result.push(
 					<Route
 						key={`route-${m.displayKey}-${c.displayKey}`}
-						path={`/${c.Controller}/${c.Action}`}>
+						path={`/${siteInfo.oldSitePrefixUrl}/${c.Controller}/${c.Action}`}>
 						<IframePage />
 					</Route>
 				);

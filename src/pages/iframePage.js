@@ -11,10 +11,13 @@ const Index = () => {
 	const { Controller, Action, Title, FuncKey } = location?.state ?? {};
 	const funcKey = FuncKey ?? siteInfo.defaultFuncKey;
 
-	const url =
-		Controller && Action
-			? `${Controller}/${Action}`
-			: siteInfo.defaultIndex;
+	const defaultIndex = siteInfo.defaultIndex.startsWith(
+		`${siteInfo.oldSitePrefixUrl}/`
+	)
+		? siteInfo.defaultIndex.replace(`${siteInfo.oldSitePrefixUrl}/`, "")
+		: siteInfo.defaultIndex;
+
+	const url = Controller && Action ? `${Controller}/${Action}` : defaultIndex;
 
 	return (
 		<Layout>

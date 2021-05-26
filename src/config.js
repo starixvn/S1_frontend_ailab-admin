@@ -14,10 +14,13 @@ axios.defaults.baseURL = SiteURL.apiURL;
 
 export default SiteURL;
 
+const oldSitePrefixUrl = "Internal";
+
 export const siteInfo = {
 	langList: ["en"],
 	defaultLang: "en",
-	defaultIndex: "Home/DashboardNew",
+	defaultIndex: `${oldSitePrefixUrl}/Home/DashboardNew`,
 	defaultCategory: defMenuCategory.Home,
-	defaultFuncKey: "Home/DashboardNew"
+	defaultFuncKey: "Home/DashboardNew",
+	oldSitePrefixUrl
 };
