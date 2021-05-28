@@ -24,12 +24,12 @@ export default [
 		]
 	},
 	{
-		displayKey: "Menu.Reports",
+		displayKey: "Menu.Reports.Reports",
 		Icon: "file-text",
 		Category: defMenuCategory.Reports,
 		Childs: [
 			{
-				displayKey: "Menu.WinLostReport",
+				displayKey: "Menu.Reports.WinLostReport",
 				FuncKey: "LicWinLost/Report",
 				Controller: "Report",
 				Action: "LicWinLost",
@@ -37,7 +37,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.MainFinancialReport",
+				displayKey: "Menu.Reports.MainFinancialReport",
 				FuncKey: "Report/MainFinancialReport",
 				Controller: "Report",
 				Action: "MainFinancialReport",
@@ -45,7 +45,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.DepositReport",
+				displayKey: "Menu.Reports.DepositReport",
 				FuncKey: "Report/DepositReport",
 				Controller: "Report",
 				Action: "DepositReport",
@@ -53,7 +53,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.StatisticalReport",
+				displayKey: "Menu.Reports.StatisticalReport",
 				FuncKey: "Report/StatisticalReport",
 				Controller: "Report",
 				Action: "StatisticalReport",
@@ -61,7 +61,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.CustomerStatisticalReport",
+				displayKey: "Menu.Reports.CustomerStatisticalReport",
 				FuncKey: "Report/CustomerStatisticalReport",
 				Controller: "Report",
 				Action: "CustomerStatisticalReport",
@@ -69,7 +69,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.UserOnlineReport",
+				displayKey: "Menu.Reports.UserOnlineReport",
 				FuncKey: "Report/UserOnlineReport",
 				Controller: "Report",
 				Action: "UserOnlineReport",
@@ -79,12 +79,12 @@ export default [
 		]
 	},
 	{
-		displayKey: "Menu.CSD",
+		displayKey: "Menu.CSD.CSD",
 		Icon: "briefcase",
 		Category: defMenuCategory.CSD,
 		Childs: [
 			{
-				displayKey: "Menu.CustomerAdministration",
+				displayKey: "Menu.CSD.CustomerAdministration",
 				FuncKey: "CustManage/CustInfoList",
 				Controller: "CustManage",
 				Action: "CustInfoList",
@@ -92,7 +92,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.Announcement",
+				displayKey: "Menu.CSD.Announcement",
 				FuncKey: "Message/Announcement",
 				Controller: "Message",
 				Action: "Announcement",
@@ -100,7 +100,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.PersonalMsgBatch",
+				displayKey: "Menu.CSD.PersonalMsgBatch",
 				FuncKey: "Message/PersonalMsgBatch",
 				Controller: "Message",
 				Action: "PersonalMsgBatch",
@@ -108,7 +108,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.ChangeVipLevelBatch",
+				displayKey: "Menu.CSD.ChangeVipLevelBatch",
 				FuncKey: "Message/ChangeVipLevelBatch",
 				Controller: "Message",
 				Action: "ChangeVipLevelBatch",
@@ -116,7 +116,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.WithdrawalKYCControl",
+				displayKey: "Menu.CSD.WithdrawalKYCControl",
 				FuncKey: "Message/WithdrawalKYCControl",
 				Controller: "Message",
 				Action: "WithdrawalKYCControl",
@@ -124,7 +124,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.TeleCSD",
+				displayKey: "Menu.CSD.TeleCSD",
 				FuncKey: "CustManage/TeleCSD",
 				Controller: "CustManage",
 				Action: "TeleCSD",
@@ -134,12 +134,12 @@ export default [
 		]
 	},
 	{
-		displayKey: "Menu.Finance",
+		displayKey: "Menu.Finance.Finance",
 		Icon: "dollar-sign",
 		Category: defMenuCategory.Finance,
 		Childs: [
 			{
-				displayKey: "Menu.BankCardManagement",
+				displayKey: "Menu.Finance.BankCardManagement",
 				FuncKey: "Finance/BankInfoList",
 				Controller: "Finance",
 				Action: "BankInfoList",
@@ -147,7 +147,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.DepositRequest",
+				displayKey: "Menu.Finance.DepositRequest",
 				FuncKey: "Finance/DepositList",
 				Controller: "Finance",
 				Action: "DepositList",
@@ -155,7 +155,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.WithdrawalRequest",
+				displayKey: "Menu.Finance.WithdrawalRequest",
 				FuncKey: "Finance/WithdrawalList",
 				Controller: "Finance",
 				Action: "WithdrawalList",
@@ -163,7 +163,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.BalanceAdjustment",
+				displayKey: "Menu.Finance.BalanceAdjustment",
 				FuncKey: "Finance/PaymentAdjustment",
 				Controller: "Finance",
 				Action: "PaymentAdjustment",
@@ -171,7 +171,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.BalanceAdjustmentBatch",
+				displayKey: "Menu.Finance.BalanceAdjustmentBatch",
 				FuncKey: "Finance/BalanceAdjustmentBatch",
 				Controller: "Finance",
 				Action: "BalanceAdjustmentBatch",
@@ -179,7 +179,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.WithdrawalLimitAdjust",
+				displayKey: "Menu.Finance.WithdrawalLimitAdjust",
 				FuncKey: "Finance/WithdrawalLimitAdjust",
 				Controller: "Finance",
 				Action: "WithdrawalLimitAdjust",
@@ -187,7 +187,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.AdjustmentReport",
+				displayKey: "Menu.Finance.AdjustmentReport",
 				FuncKey: "Finance/AdjustmentReport",
 				Controller: "Finance",
 				Action: "PaymentAdjustmentReport",
@@ -195,7 +195,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.PaymentManagement",
+				displayKey: "Menu.Finance.PaymentManagement",
 				FuncKey: "Finance/PaymentManage",
 				Controller: "Finance",
 				Action: "PaymentManage",
@@ -203,7 +203,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.DepositLimitManagement",
+				displayKey: "Menu.Finance.DepositLimitManagement",
 				FuncKey: "Finance/DepositLimitManage",
 				Controller: "Finance",
 				Action: "DepositLimitManagement",
@@ -211,7 +211,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.ThirdPartyAdjustment",
+				displayKey: "Menu.Finance.ThirdPartyAdjustment",
 				FuncKey: "Finance/ThirdPartyAdjustment",
 				Controller: "Finance",
 				Action: "ThirdPartyAdjustment",
@@ -221,14 +221,13 @@ export default [
 		]
 	},
 	{
-		displayKey: "Menu.Administration",
+		displayKey: "Menu.Administration.Administration",
 		Title: "Administration",
 		Icon: "user",
-
 		Category: defMenuCategory.Administration,
 		Childs: [
 			{
-				displayKey: "Menu.GroupSetting",
+				displayKey: "Menu.Administration.GroupSetting",
 				Title: "Group Setting",
 				FuncKey: "Admin/GroupAuthoritySetting",
 				Controller: "Admin",
@@ -237,7 +236,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.UserSetting",
+				displayKey: "Menu.Administration.UserSetting",
 				Title: "User Setting",
 				FuncKey: "Admin/UserAuthoritySetting",
 				Controller: "Admin",
@@ -248,13 +247,13 @@ export default [
 		]
 	},
 	{
-		displayKey: "Menu.Marketing",
+		displayKey: "Menu.Marketing.Marketing",
 		Title: "Marketing",
 		Icon: "activity",
 		Category: defMenuCategory.Marketing,
 		Childs: [
 			{
-				displayKey: "Menu.PointLevelManagement",
+				displayKey: "Menu.Marketing.PointLevelManagement",
 				Title: "Point Level Management",
 				FuncKey: "Marketing/PointLevelManagement",
 				Controller: "Marketing",
@@ -263,7 +262,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.BonusManagement",
+				displayKey: "Menu.Marketing.BonusManagement",
 				Title: "Bonus Management",
 				FuncKey: "Marketing/BonusManage",
 				Controller: "Marketing",
@@ -272,7 +271,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "BonusInfoReport",
+				displayKey: "Menu.Marketing.BonusInfoReport",
 				Title: "Bonus Report",
 				FuncKey: "Marketing/BonusInfoReport",
 				Controller: "Marketing",
@@ -281,7 +280,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "BonusImport",
+				displayKey: "Menu.Marketing.BonusImport",
 				Title: "Bonus Import",
 				FuncKey: "Marketing/BonusImport",
 				Controller: "Marketing",
@@ -290,7 +289,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "PendingBonus",
+				displayKey: "Menu.Marketing.PendingBonus",
 				Title: "Pending Bonus",
 				FuncKey: "Marketing/PendingBonus",
 				Controller: "Marketing",
@@ -299,7 +298,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "RebateInfoReport",
+				displayKey: "Menu.Marketing.RebateInfoReport",
 				Title: "Rebate Info",
 				FuncKey: "Marketing/RebateInfoReport",
 				Controller: "Marketing",
@@ -308,7 +307,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "RebateLogReport",
+				displayKey: "Menu.Marketing.RebateLogReport",
 				Title: "Rebate Report",
 				FuncKey: "Marketing/RebateLogReport",
 				Controller: "Marketing",
@@ -317,7 +316,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "ReferralManagement",
+				displayKey: "Menu.Marketing.ReferralManagement",
 				Title: "Referral Management",
 				FuncKey: "Marketing/ReferralManagement",
 				Controller: "Marketing",
@@ -326,7 +325,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "ReferralReport",
+				displayKey: "Menu.Marketing.ReferralReport",
 				Title: "Referral Report",
 				FuncKey: "Marketing/ReferralReport",
 				Controller: "Marketing",
@@ -335,7 +334,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "NewsManage",
+				displayKey: "Menu.Marketing.NewsManage",
 				Title: "News Management",
 				FuncKey: "Marketing/NewsManage",
 				Controller: "Marketing",
@@ -344,7 +343,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "BannerManagement",
+				displayKey: "Menu.Marketing.BannerManagement",
 				Title: "Banner Management",
 				FuncKey: "Marketing/BannerManage",
 				Controller: "Marketing",
@@ -353,7 +352,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "DrawPrizeReport",
+				displayKey: "Menu.Marketing.DrawPrizeReport",
 				Title: "Draw Prize Report",
 				FuncKey: "Marketing/DrawPrizeReport",
 				Controller: "Marketing",
@@ -362,7 +361,7 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "GameCasinoManagement",
+				displayKey: "Menu.Marketing.GameCasinoManagement",
 				Title: "Game Casino Management",
 				FuncKey: "Marketing/GameCasinoManagement",
 				Controller: "Marketing",
