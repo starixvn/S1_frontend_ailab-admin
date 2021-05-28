@@ -9,6 +9,15 @@ a:focus, button:focus, input:focus {
   justify-content: unset;
 }
 
+.navbar .quickLink {
+  margin-left: 0.3rem;
+  display: none;
+}
+
+.navbar .quickLink button {
+  background: transparent;
+}
+
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   display: none;
 }
@@ -83,6 +92,12 @@ a:focus, button:focus, input:focus {
 
 .navbar-nav.px-3 {
   margin: auto 15vw auto auto;
+  display: flex;
+  flex-flow: row;
+}
+
+.navbar-nav.px-3 li {
+  margin-left: 1rem;
 }
 
 .navbar-toggler {
@@ -103,6 +118,42 @@ iframe {
   height: 100%;
 }
 
+.quickLink {
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.quickLink > .btn {
+  margin: .25rem .125rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: auto;
+  padding: 0.375rem;
+  text-align: left;
+  font-size: 13px;
+}
+
+.quickLink > .btn button {
+  border: 0;
+  padding: 0;
+  display: flex;
+}
+
+.quickLink > .btn a {
+  text-decoration: none;
+}
+
+.quickLink > .btn:hover a {
+  color: white;
+}
+
+.quickLink > .btn:hover .feather {
+  color: white !important;
+}
+
 @media (min-width: 768px) {
   #sidebarMenu {
     transition: 0.7s;
@@ -112,6 +163,9 @@ iframe {
   #sidebarMenu:not(.show) {
     transform: translateX(-100%);
     transition: 0.7s;
+  }
+  .navbar .quickLink {
+    display: flex;
   }
   .navbar-nav.px-3 {
     margin: auto 0 auto auto;
