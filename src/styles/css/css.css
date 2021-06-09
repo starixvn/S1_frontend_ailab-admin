@@ -5,6 +5,15 @@ a:focus, button:focus, input:focus {
   box-shadow: none !important;
 }
 
+body {
+  padding-right: 0 !important;
+}
+
+body.modal-open {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .navbar {
   justify-content: unset;
 }
@@ -146,11 +155,11 @@ iframe {
   text-decoration: none;
 }
 
-.quickLink > .btn:hover a {
+.quickLink > .btn:hover a, .quickLink > .btn.active a {
   color: white;
 }
 
-.quickLink > .btn:hover .feather {
+.quickLink > .btn:hover .feather, .quickLink > .btn.active .feather {
   color: white !important;
 }
 

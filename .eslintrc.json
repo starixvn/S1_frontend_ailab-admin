@@ -254,6 +254,7 @@
         "no-dupe-class-members": "off",
         "no-undef": "off",
         "no-tabs":"off",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "arrow-body-style":"warn"
     }    
 }

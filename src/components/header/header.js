@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import FeatherIcon from "feather-icons-react";
 import { menuContext, userInfoContext } from "../context";
 import useHandleAuth from "../../hook/useHandleAuth";
+import TabBar from "./tabBar";
 
 const Header = () => {
 	const { t } = useTranslation();
@@ -39,6 +40,7 @@ const Header = () => {
 					<FeatherIcon icon="x" />
 				)}
 			</button>
+			<TabBar />
 			<ul className="navbar-nav px-3">
 				<li className="nav-item text-nowrap">
 					<a className="nav-link" href="#" onClick={SignOut}>

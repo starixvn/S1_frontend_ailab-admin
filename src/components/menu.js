@@ -6,7 +6,7 @@ import { menuContext } from "./context";
 import MenuList from "../datas/menu";
 import { siteInfo } from "../config";
 
-const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys }) => {
+const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys, clickMenu }) => {
 	const result = MenuList.map(m => {
 		const menuKey = m.displayKey;
 		const isOpen = showArea === m.Category;
@@ -16,19 +16,21 @@ const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys }) => {
 			const { Controller, Action, FuncKey, displayKey, Title } = s;
 			const pathName = `${Controller}/${Action}`;
 			const displayText = displayKey ? t(displayKey) : Title;
+			const params = {
+				Category: m.Category,
+				Controller,
+				Action,
+				Title: displayText,
+				FuncKey: s.FuncKey
+			};
 			return (
 				<Link
+					onClick={() => clickMenu(params)}
 					key={`menu-${menuKey}-${FuncKey}`}
 					className="nav-link"
 					to={{
 						pathname: `/${siteInfo.oldSitePrefixUrl}/${pathName}`,
-						state: {
-							Category: m.Category,
-							Controller,
-							Action,
-							Title: displayText,
-							FuncKey: s.FuncKey
-						}
+						state: params
 					}}>
 					{displayText}
 				</Link>
@@ -66,6 +68,26 @@ const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys }) => {
 const Menu = () => {
 	const { t } = useTranslation();
 	const { menu, setMenu } = useContext(menuContext);
+
+	const clickMenu = ({ Category, Controller, Action, Title, FuncKey }) => {
+		const { tabBar } = menu;
+		if (!tabBar.some(tab => tab.FuncKey === FuncKey)) {
+			setMenu(prev => {
+				const { tabBar: prevTabBar } = prev;
+				const newTabBar = prevTabBar.some(
+					prevTab => prevTab.FuncKey === FuncKey
+				)
+					? prevTabBar
+					: [
+							...prevTabBar,
+							{ Category, Controller, Action, Title, FuncKey }
+					  ];
+
+				return { ...prev, tabBar: newTabBar };
+			});
+		}
+	};
+
 	const areaHandler = ({ area }) => {
 		setMenu(prev => ({
 			...prev,
@@ -90,6 +112,7 @@ const Menu = () => {
 						t={t}
 						showArea={menu.showArea}
 						allowfuncKeys={menu.allowfuncKeys}
+						clickMenu={clickMenu}
 					/>
 				</div>
 			</div>
