@@ -9,14 +9,14 @@ import {
 } from "../service/api/home";
 import path from "../path";
 import { siteInfo } from "../config";
-import { toggleSideMenuContext } from "../components/context";
+import { menuContext } from "../components/context";
 
 const useHandleAuth = ({ userInfo, setUserInfo }) => {
 	const history = useHistory();
 	const isMountedRef = useRef(null);
 	const alert = useAlert();
 	const { t } = useTranslation();
-	const { setMenu } = useContext(toggleSideMenuContext);
+	const { setMenu } = useContext(menuContext);
 
 	useEffect(() => {
 		isMountedRef.current = true;

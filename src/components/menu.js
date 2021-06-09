@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FeatherIcon from "feather-icons-react";
-import { toggleSideMenuContext } from "./context";
+import { menuContext } from "./context";
 import MenuList from "../datas/menu";
 import { siteInfo } from "../config";
 
@@ -65,7 +65,7 @@ const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys }) => {
 
 const Menu = () => {
 	const { t } = useTranslation();
-	const { menu, setMenu } = useContext(toggleSideMenuContext);
+	const { menu, setMenu } = useContext(menuContext);
 	const areaHandler = ({ area }) => {
 		setMenu(prev => ({
 			...prev,

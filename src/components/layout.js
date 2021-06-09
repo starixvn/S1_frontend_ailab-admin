@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import Menu from "./menu";
-import Header from "./header";
+import Header from "./header/header";
 import useHandleAuth from "../hook/useHandleAuth";
-import { userInfoContext, toggleSideMenuContext } from "./context";
+import { userInfoContext, menuContext } from "./context";
 import { api_home_GetMenu } from "../service/api/home";
 
 const Layout = ({ children, afterLogin = true }) => {
 	const { userInfo, setUserInfo } = useContext(userInfoContext);
-	const { menu, setMenu } = useContext(toggleSideMenuContext);
+	const { menu, setMenu } = useContext(menuContext);
 	const { CheckSignIn } = useHandleAuth({
 		userInfo,
 		setUserInfo

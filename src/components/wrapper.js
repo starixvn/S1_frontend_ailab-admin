@@ -10,7 +10,8 @@ const Wrapper = ({ children }) => {
 	const [menu, setMenu] = useState({
 		allowfuncKeys: [],
 		collapse: false,
-		showArea: location?.state?.Category ?? siteInfo.defaultCategory
+		showArea: location?.state?.Category ?? siteInfo.defaultCategory,
+		tabBar: []
 	});
 
 	const [userInfo, setUserInfo] = useState({
@@ -19,11 +20,11 @@ const Wrapper = ({ children }) => {
 	});
 
 	return (
-		<ct.toggleSideMenuContext.Provider value={{ menu, setMenu }}>
+		<ct.menuContext.Provider value={{ menu, setMenu }}>
 			<ct.userInfoContext.Provider value={{ userInfo, setUserInfo }}>
 				{children}
 			</ct.userInfoContext.Provider>
-		</ct.toggleSideMenuContext.Provider>
+		</ct.menuContext.Provider>
 	);
 };
 

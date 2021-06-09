@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import Layout from "../components/layout";
-import { toggleSideMenuContext } from "../components/context";
+import { menuContext } from "../components/context";
 
 const Index = () => {
-	const { setMenu } = useContext(toggleSideMenuContext);
+	const { setMenu } = useContext(menuContext);
 
 	useEffect(() => {
 		setMenu(prev => ({ ...prev, showArea: null }));

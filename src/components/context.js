@@ -3,4 +3,4 @@ import { createContext } from "react";
 
 export const userInfoContext = createContext({ isLogin: false });
 
-export const toggleSideMenuContext = createContext({});
+export const menuContext = createContext({});

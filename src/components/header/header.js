@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import FeatherIcon from "feather-icons-react";
-import { toggleSideMenuContext, userInfoContext } from "./context";
-import useHandleAuth from "../hook/useHandleAuth";
+import { menuContext, userInfoContext } from "../context";
+import useHandleAuth from "../../hook/useHandleAuth";
 
 const Header = () => {
 	const { t } = useTranslation();
-	const { menu, setMenu } = useContext(toggleSideMenuContext);
+	const { menu, setMenu } = useContext(menuContext);
 	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const { SignOut } = useHandleAuth({ userInfo, setUserInfo });
 

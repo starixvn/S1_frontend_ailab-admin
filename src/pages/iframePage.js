@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Layout from "../components/layout";
 import config, { siteInfo } from "../config";
-import { toggleSideMenuContext } from "../components/context";
+import { menuContext } from "../components/context";
 
 const Index = () => {
 	const location = useLocation();
-	const { menu } = useContext(toggleSideMenuContext);
+	const { menu } = useContext(menuContext);
 
 	const { Controller, Action, Title, FuncKey } = location?.state ?? {};
 	const funcKey = FuncKey ?? siteInfo.defaultFuncKey;
