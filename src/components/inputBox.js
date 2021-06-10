@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const InputBox = ({
 	title,
@@ -22,4 +23,25 @@ const InputBox = ({
 		</div>
 	</div>
 );
+
+InputBox.defaultProps = {
+	title: "",
+	placeholder: "",
+	inputType: "",
+	className: ""
+};
+
+InputBox.propTypes = {
+	title: PropTypes.string,
+	value: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+		PropTypes.object
+	]).isRequired,
+	onChange: PropTypes.func.isRequired,
+	placeholder: PropTypes.string,
+	inputType: PropTypes.string,
+	className: PropTypes.string
+};
+
 export default InputBox;
