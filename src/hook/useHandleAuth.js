@@ -62,8 +62,14 @@ const useHandleAuth = ({ userInfo, setUserInfo }) => {
 				if (!isMountedRef.current) return;
 				if (res.data.errorCode === 0) {
 					setUserInfo({ isLogin: true, userName });
-					setMenu({ showArea: siteInfo.defaultCategory });
-					history.push(`/${siteInfo.defaultIndex}`);
+					setMenu(prev => ({
+						...prev,
+						showArea: siteInfo.defaultCategory,
+						tabBar: []
+					}));
+					history.push({
+						pathname: `/${siteInfo.defaultIndex}`
+					});
 				} else {
 					alert.error(res.data.message || t("Error.DefaultError"));
 				}
