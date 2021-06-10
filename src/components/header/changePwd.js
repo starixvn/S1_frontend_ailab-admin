@@ -2,8 +2,18 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { popBoxContext } from "../context";
 import { api_home_ChangePwd } from "../../service/api/home";
+import InputBox from "../inputBox";
 
-const initValue = { oldPwd: "", newPwd: "", confirmPwd: "" };
+const defPwd = {
+	oldPwd: "oldPwd",
+	newPwd: "newPwd",
+	confirmPwd: "confirmPwd"
+};
+const initValue = {
+	[defPwd.oldPwd]: "",
+	[defPwd.newPwd]: "",
+	[defPwd.confirmPwd]: ""
+};
 
 const ChangePwd = () => {
 	const { t } = useTranslation();
@@ -57,37 +67,24 @@ const ChangePwd = () => {
 	return (
 		<>
 			<div className="modal-body">
-				<div className="bd-example">
-					<div className="input-group mb-3">
-						{t("ChangePwd.lbl_OldPassword")}:
-						<input
-							type="password"
-							className="form-control"
-							value={pwd.oldPwd}
-							onChange={editField.bind(this, { col: "oldPwd" })}
-						/>
-					</div>
-					<div className="input-group mb-3">
-						{t("ChangePwd.lbl_NewPassword")}:
-						<input
-							type="password"
-							className="form-control"
-							value={pwd.newPwd}
-							onChange={editField.bind(this, { col: "newPwd" })}
-						/>
-					</div>
-					<div className="input-group mb-3">
-						{t("ChangePwd.ConfirmPassword")}:
-						<input
-							type="password"
-							className="form-control"
-							value={pwd.confirmPwd}
-							onChange={editField.bind(this, {
-								col: "confirmPwd"
-							})}
-						/>
-					</div>
-				</div>
+				<InputBox
+					title={t("ChangePwd.lbl_OldPassword")}
+					inputType="password"
+					value={pwd.oldPwd}
+					onChange={editField.bind(this, { col: defPwd.oldPwd })}
+				/>
+				<InputBox
+					title={t("ChangePwd.lbl_NewPassword")}
+					inputType="password"
+					value={pwd.newPwd}
+					onChange={editField.bind(this, { col: defPwd.newPwd })}
+				/>
+				<InputBox
+					title={t("ChangePwd.ConfirmPassword")}
+					inputType="password"
+					value={pwd.confirmPwd}
+					onChange={editField.bind(this, { col: defPwd.confirmPwd })}
+				/>
 			</div>
 			<div className="modal-footer">
 				<button
