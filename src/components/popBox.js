@@ -1,6 +1,5 @@
 import React, { useContext, lazy, Suspense } from "react";
 import { popBoxContext } from "./context";
-import ChangePwd from "./header/changePwd";
 
 export const defPopBoxType = {
 	default: "default",
@@ -16,12 +15,17 @@ const PopBox = () => {
 
 	let content = null;
 	switch (popBox.popBoxType) {
-		case defPopBoxType.changePwd:
-			content = lazy(() => import("./header/changePwd"));
-			// content = <ChangePwd />;
-			break;
+		case defPopBoxType.changePwd: {
+			const ChangePWD = lazy(() => import("./header/changePwd"));
+			content = (
+				<Suspense fallback={<div />}>
+					<ChangePWD />
+				</Suspense>
+			);
 
-		default:
+			break;
+		}
+		default: {
 			content = (
 				<div className="modal-body">
 					{popBox.content}
@@ -29,6 +33,7 @@ const PopBox = () => {
 				</div>
 			);
 			break;
+		}
 	}
 
 	return (
@@ -57,9 +62,6 @@ const PopBox = () => {
 						/>
 					</div>
 					{content}
-					<Suspense fallback={<div />}>
-						{/* <Content popBox={popBox} /> */}
-					</Suspense>
 				</div>
 			</div>
 		</div>
