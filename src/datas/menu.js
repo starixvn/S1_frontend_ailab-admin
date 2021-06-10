@@ -19,7 +19,8 @@ export default [
 				Controller: "Home",
 				Action: "DashboardNew",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				isIndex: true
 			}
 		]
 	},
