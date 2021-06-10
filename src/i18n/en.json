@@ -71,5 +71,17 @@
 	},
 	"Error": {
 		"DefaultError": "Oops! Something went wrong..."
+	},
+	"ChangePwd":{
+		"lbl_ChangePassword": "Change Password",
+		"lbl_OldPassword": "Old Password",
+		"lbl_NewPassword": "New Password",
+		"ConfirmPassword": "Confirm Password",
+		"PasswordNotMatchHint": "New password and confirm password does not match",
+		"PleaseEnterPassword": "Please enter password"
+	},
+	"PopBox":{
+		"lbl_Cancel": "Cancel",
+		"lbl_Submit": "Submit"
 	}
 }
