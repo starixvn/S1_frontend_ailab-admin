@@ -2,5 +2,5 @@
 import { createContext } from "react";
 
 export const userInfoContext = createContext({ isLogin: false });
-
 export const menuContext = createContext({});
+export const popBoxContext = createContext({});

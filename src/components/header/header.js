@@ -2,16 +2,26 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import FeatherIcon from "feather-icons-react";
 import { Link } from "react-router-dom";
-import { menuContext, userInfoContext } from "../context";
+import { menuContext, userInfoContext, popBoxContext } from "../context";
 import useHandleAuth from "../../hook/useHandleAuth";
 import TabBar from "./tabBar";
+import { defPopBoxType } from "../popBox";
 import { siteInfo } from "../../config";
 
 const Header = () => {
 	const { t } = useTranslation();
 	const { menu, setMenu } = useContext(menuContext);
 	const { userInfo, setUserInfo } = useContext(userInfoContext);
+	const { setPopBox } = useContext(popBoxContext);
 	const { SignOut } = useHandleAuth({ userInfo, setUserInfo });
+
+	const openChangePwd = () => {
+		setPopBox({
+			isOpen: true,
+			popBoxType: defPopBoxType.changePwd,
+			title: t("ChangePwd.lbl_ChangePassword")
+		});
+	};
 
 	const isCollapse = menu.collapse;
 	return (
@@ -47,6 +57,11 @@ const Header = () => {
 				<li className="nav-item text-nowrap">
 					<a className="nav-link" href="#" onClick={SignOut}>
 						{t("Admin.lbl_SignOut")}
+					</a>
+				</li>
+				<li className="nav-item text-nowrap">
+					<a className="nav-link" href="#" onClick={openChangePwd}>
+						{t("ChangePwd.lbl_ChangePassword")}
 					</a>
 				</li>
 			</ul>

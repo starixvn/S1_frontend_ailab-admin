@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from "react";
 import Menu from "./menu";
 import Header from "./header/header";
 import useHandleAuth from "../hook/useHandleAuth";
-import { userInfoContext, menuContext } from "./context";
+import { userInfoContext, menuContext, popBoxContext } from "./context";
 import { api_home_GetMenu } from "../service/api/home";
+import PopBox from "./popBox";
 
 const Layout = ({ children, afterLogin = true }) => {
 	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const { menu, setMenu } = useContext(menuContext);
+	const { popBox } = useContext(popBoxContext);
 	const { CheckSignIn } = useHandleAuth({
 		userInfo,
 		setUserInfo
@@ -56,8 +58,12 @@ const Layout = ({ children, afterLogin = true }) => {
 				<div className="row">
 					<Menu />
 					{children}
+					<PopBox />
 				</div>
 			</div>
+			{popBox.isOpen ? (
+				<div className="modal-backdrop fade show" />
+			) : null}
 		</>
 	) : (
 		children

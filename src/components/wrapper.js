@@ -19,10 +19,20 @@ const Wrapper = ({ children }) => {
 		userName: null
 	});
 
+	const [popBox, setPopBox] = useState({
+		isOpen: false,
+		title: "",
+		content: "",
+		hasBtn: false,
+		btnBar: null
+	});
+
 	return (
 		<ct.menuContext.Provider value={{ menu, setMenu }}>
 			<ct.userInfoContext.Provider value={{ userInfo, setUserInfo }}>
-				{children}
+				<ct.popBoxContext.Provider value={{ popBox, setPopBox }}>
+					{children}
+				</ct.popBoxContext.Provider>
 			</ct.userInfoContext.Provider>
 		</ct.menuContext.Provider>
 	);
