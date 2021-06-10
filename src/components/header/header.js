@@ -55,13 +55,13 @@ const Header = () => {
 			<TabBar />
 			<ul className="navbar-nav px-3">
 				<li className="nav-item text-nowrap">
-					<a className="nav-link" href="#" onClick={SignOut}>
-						{t("Admin.lbl_SignOut")}
+					<a className="nav-link" href="#" onClick={openChangePwd}>
+						{t("ChangePwd.lbl_ChangePassword")}
 					</a>
 				</li>
 				<li className="nav-item text-nowrap">
-					<a className="nav-link" href="#" onClick={openChangePwd}>
-						{t("ChangePwd.lbl_ChangePassword")}
+					<a className="nav-link" href="#" onClick={SignOut}>
+						{t("Admin.lbl_SignOut")}
 					</a>
 				</li>
 			</ul>
