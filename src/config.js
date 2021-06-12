@@ -7,7 +7,7 @@ const SiteURL =
 				apiURL: ""
 		  }
 		: {
-				apiURL: "http://admin.n88dev.com"
+				apiURL: ""
 		  };
 
 axios.defaults.baseURL = SiteURL.apiURL;
