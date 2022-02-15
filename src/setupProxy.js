@@ -17,7 +17,8 @@ module.exports = app => {
 			"/Marketing",
 			"/Message",
 			"/Report",
-			"/ServerInfo"
+			"/ServerInfo",
+			"/common"
 		],
 		createProxyMiddleware({
 			target: "http://admin.n88dev.com",
