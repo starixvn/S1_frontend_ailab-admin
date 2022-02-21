@@ -4573,6 +4573,14 @@ fieldset:disabled .btn {
   outline: 0;
 }
 
+a.accordion-button {
+  text-decoration: none;
+}
+
+a.accordion-button::after {
+  display: none;
+}
+
 .accordion-header {
   margin-bottom: 0;
 }
