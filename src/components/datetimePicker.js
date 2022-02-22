@@ -5,33 +5,48 @@ import moment from "moment";
 import daterangepicker from "daterangepicker";
 import PropTypes from "prop-types";
 
-export default function Component({ setDateRange }) {
+export default function Component({
+	id,
+	setDateRange,
+	isRange = true,
+	timePicker = true
+}) {
 	useEffect(() => {
 		const updateConfig = ({ startDate, endDate }) => {
 			let options = {
-				timePicker: true,
+				timePicker,
 				timePicker24Hour: false,
 				autoApply: true,
 				alwaysShowCalendars: true,
-				ranges: {
-					Today: [moment(), moment()],
-					Yesterday: [
-						moment().subtract(1, "days"),
-						moment().subtract(1, "days")
-					],
-					"Last 7 Days": [moment().subtract(6, "days"), moment()],
-					"Last 30 Days": [moment().subtract(29, "days"), moment()],
-					"This Month": [
-						moment().startOf("month"),
-						moment().endOf("month")
-					],
-					"Last Month": [
-						moment().subtract(1, "month").startOf("month"),
-						moment().subtract(1, "month").endOf("month")
-					]
-				},
+				singleDatePicker: !isRange,
+				showCustomRangeLabel: isRange,
+				ranges: isRange
+					? {
+							Today: [moment(), moment()],
+							Yesterday: [
+								moment().subtract(1, "days"),
+								moment().subtract(1, "days")
+							],
+							"Last 7 Days": [
+								moment().subtract(6, "days"),
+								moment()
+							],
+							"Last 30 Days": [
+								moment().subtract(29, "days"),
+								moment()
+							],
+							"This Month": [
+								moment().startOf("month"),
+								moment().endOf("month")
+							],
+							"Last Month": [
+								moment().subtract(1, "month").startOf("month"),
+								moment().subtract(1, "month").endOf("month")
+							]
+					  }
+					: null,
 				locale: {
-					format: "MM/DD/YYYY HH:mm:ss",
+					format: `MM/DD/YYYY${timePicker ? " HH:mm:ss" : ""}`,
 					separator: " - ",
 					applyLabel: "Apply",
 					cancelLabel: "Cancel",
@@ -60,15 +75,12 @@ export default function Component({ setDateRange }) {
 				endDate: endDate
 			};
 
-			$("#daterange").daterangepicker(
-				options,
-				function (start, end, label) {
-					setDateRange({
-						startDate: start.format(),
-						endDate: end.format()
-					});
-				}
-			);
+			$(`#${id}`).daterangepicker(options, function (start, end, label) {
+				setDateRange({
+					startDate: start.format(),
+					endDate: end.format()
+				});
+			});
 		};
 
 		updateConfig({
@@ -79,7 +91,7 @@ export default function Component({ setDateRange }) {
 
 	return (
 		<input
-			id="daterange"
+			id={id}
 			type="text"
 			className="form-control dateInput"
 			style={{ display: "block" }}
@@ -89,6 +101,15 @@ export default function Component({ setDateRange }) {
 	);
 }
 
+Component.defaultProps = {
+	id: "daterange",
+	isRange: true,
+	timePicker: true
+};
+
 Component.propTypes = {
-	setDateRange: PropTypes.func.isRequired
+	id: PropTypes.string,
+	setDateRange: PropTypes.func.isRequired,
+	isRange: PropTypes.bool,
+	timePicker: PropTypes.bool
 };
