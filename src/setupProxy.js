@@ -4,6 +4,7 @@ module.exports = app => {
 	app.use(
 		[
 			"/api",
+			"/apiV2",
 
 			"/lib",
 			"/js",

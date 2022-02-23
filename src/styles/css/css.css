@@ -2,6 +2,27 @@
 @import url(docs.css);
 @import url(signin.css);
 @import url(../fonts/style.css);
+.row {
+  margin-bottom: 1rem;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown-item {
+  padding: 0.4rem 1rem;
+}
+
+.scrollbar::-webkit-scrollbar, #sidebarMenu::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb, #sidebarMenu::-webkit-scrollbar-thumb {
+  background: rgba(149, 149, 149, 0.3);
+}
+
 a:focus, button:focus, input:focus {
   box-shadow: none !important;
 }
@@ -35,6 +56,49 @@ header {
 
 main {
   padding: 1rem !important;
+}
+
+.navbar.navbar-expand-lg {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.navbar.navbar-expand-lg + .row {
+  margin-top: 4rem;
+}
+
+.navbar .container-fluid {
+  justify-content: flex-start;
+}
+
+.navbar .container-fluid > a {
+  color: white;
+  text-decoration: none;
+  padding: 0.375rem 0.75rem 0.375rem 0;
+}
+
+.navbar .container-fluid > a ~ .btn-group {
+  margin: 0 0.375rem;
+}
+
+.navbar .container-fluid > a ~ .btn-group .dropdown-toggle {
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+}
+
+.navbar .container-fluid > a ~ .btn-group .dropdown-toggle span {
+  display: flex;
+}
+
+.navbar .container-fluid > a ~ .btn-group .dropdown-toggle span .icon-finance:before, .navbar .container-fluid > a ~ .btn-group .dropdown-toggle span .icon-marketing:before {
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.navbar .container-fluid > a ~ .btn-group .dropdown-menu {
+  width: auto;
 }
 
 .navbar .navbar-brand {
@@ -80,6 +144,7 @@ main {
   margin-right: 0.5rem;
   color: rgba(255, 255, 255, 0.55);
   font-size: xx-small;
+  display: flex;
 }
 
 .navbar .quickLink > h6 i {
@@ -97,6 +162,18 @@ main {
   align-items: center;
   font-size: 13px;
   padding-right: 0;
+}
+
+.navbar .quickLink > .btn.active {
+  padding-right: inherit;
+}
+
+.navbar .quickLink > .btn.active > button {
+  min-width: auto;
+}
+
+.navbar .quickLink > .btn.active > button:before {
+  content: '';
 }
 
 .navbar .quickLink > .btn > button {
@@ -122,7 +199,7 @@ main {
 input[type=date] {
   min-height: 2.4rem;
   border-radius: 0.25rem;
-  border: 1px solid #6c757d;
+  border: 1px solid #ced4da;
   outline: none;
   padding: 0.375rem;
 }
@@ -131,45 +208,6 @@ input[type=date] {
   display: flex;
   flex-flow: column;
   height: 100%;
-}
-
-.quickLink {
-  padding: 1.5rem 1.25rem;
-  margin: auto 0 0;
-}
-
-.quickLink > h6 {
-  display: flex;
-  margin-bottom: 1rem;
-}
-
-.quickLink > .btn {
-  margin: 0 .125rem 0.5rem;
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-}
-
-.quickLink > .btn a {
-  text-decoration: none;
-  color: #6c757d;
-  text-align: left;
-}
-
-.quickLink > .btn .icon-close:before {
-  font-size: 12px;
-}
-
-.quickLink > .btn:hover a, .quickLink > .btn:hover button {
-  color: white !important;
-}
-
-.quickLink > .btn button {
-  background: transparent;
-  border: 0;
-  padding: 0;
-  margin: auto 0 auto auto;
-  text-align: right;
 }
 
 .container-fluid > .row {
@@ -206,14 +244,6 @@ iframe {
   height: 100% !important;
 }
 
-#sidebarMenu::-webkit-scrollbar {
-  width: 5px;
-}
-
-#sidebarMenu::-webkit-scrollbar-thumb {
-  background: rgba(149, 149, 149, 0.3);
-}
-
 #sidebarMenu:not(.show) {
   transform: translateX(-100%);
   transition: 0.3s;
@@ -227,6 +257,7 @@ iframe {
 
 #sidebarMenu + main {
   transition: 0.3s;
+  position: relative;
 }
 
 #sidebarMenu .accordion-item {
@@ -234,61 +265,250 @@ iframe {
 }
 
 #sidebarMenu .accordion-button {
-  background-color: white;
+  background: white;
 }
 
 #sidebarMenu .accordion-button:hover {
   color: #0c63e4;
-  background-color: #e7f1ff;
+  background: #e7f1ff;
+}
+
+#sidebarMenu .accordion-collapse .accordion-button {
+  background: transparent;
+  padding: 0.5rem 1rem 0.5rem 3.35rem;
+  font-size: .875rem;
+  box-shadow: none;
+}
+
+#sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse .nav-link {
+  padding: 0.5rem 1rem 0.5rem 5rem;
+}
+
+#sidebarMenu .accordion-button + .accordion-collapse .accordion-button + .accordion-collapse .accordion-button:before, #sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse .nav-link:before {
+  left: 4rem !important;
 }
 
 #sidebarMenu.sidebar {
-  padding: 4.5rem 0 0;
+  padding: 5rem 0 0;
 }
 
 #sidebarMenu.sidebar .nav-link {
   padding-left: 3.35rem;
+  position: relative;
 }
 
-#sidebarMenu.sidebar .nav-link:before {
+#sidebarMenu.sidebar .nav-link:before, #sidebarMenu.sidebar .accordion-collapse .accordion-button:before, #sidebarMenu.sidebar .accordion-collapse .accordion-button + .accordion-collapse .nav-link:before {
   content: '.';
-  margin-right: 0.5rem;
+  font-size: 16px;
   vertical-align: text-bottom;
+  position: absolute;
+  left: 2.5rem;
+  top: 0;
+}
+
+input.dropdown-toggle {
+  text-align: left;
+  cursor: auto;
+}
+
+.btn-outline-secondary {
+  border-color: #ced4da;
 }
 
 .bd-example {
   background: white;
 }
 
+.bd-example > .row {
+  border-bottom: 1px solid #dee2e6;
+}
+
 .bd-example .btn-group {
+  margin-bottom: 1rem;
+}
+
+.bd-example .btn-group .input-group input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.bd-example .btn-group .input-group + .btn-outline-secondary:hover {
+  background: none;
+  border-color: #ced4da;
+}
+
+.bd-example > .btn-group {
   min-width: 160px;
   display: inline-flex;
   flex-flow: column;
 }
 
-.bd-example .btn-group > :not(.btn-check) + .btn {
+.bd-example > .btn-group > :not(.btn-check) + .btn {
   border-radius: 0.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.bd-example .btn-group .dropdown-menu {
+.bd-example > .btn-group .dropdown-menu {
   min-width: 100%;
   width: auto;
 }
 
-.bd-example > button {
-  vertical-align: bottom;
+.bd-example > .btn-group .dropdown-menu .input-group {
+  padding: 0.4rem 1rem;
 }
 
-.bd-example > button[alt="export"] {
+.bd-example > .d-flex > .btn-group .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+  display: flex;
+  align-items: center;
+}
+
+.bd-example > .d-flex > .btn-group .dropdown-toggle:after {
+  margin-left: 1rem;
+}
+
+.bd-example > .d-flex > .btn-group .dropdown-menu + .input-group .form-control {
+  border-radius: 0.25rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.bd-example > .btn {
+  vertical-align: bottom;
+  margin-bottom: 1rem !important;
+}
+
+.bd-example > .btn[alt="export"] {
   display: flex;
   margin-right: 0;
   margin-left: auto;
+  align-items: center;
 }
 
-@media (max-width: 768px) {
+h6 {
+  white-space: nowrap;
+}
+
+.small {
+  color: #999;
+}
+
+.form-check-label {
+  width: 100%;
+}
+
+.card {
+  margin: 1rem 0;
+  box-shadow: 0 0 0.3rem rgba(18, 38, 63, 0.1);
+}
+
+.card .btn-group {
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.card .card-body .card-title {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.card .card-body div:not(.text-center) .small {
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+
+.card .card-footer {
+  display: flex;
+  background: white;
+}
+
+.card .card-footer > button {
+  flex: 1;
+}
+
+.card .card-footer > button:before {
+  font-size: 12px;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  color: #212529;
+}
+
+.avatar:before {
+  font-size: 3rem;
+}
+
+.financeInformation > .card-body > .row > .col-md-4 {
+  margin-bottom: 1rem;
+}
+
+.financeInformation > .card-body .card-title + .row > .col-xxl-4 .small + div {
+  font-weight: bold;
+}
+
+.financeInformation > .card-body .card-title + .row > .col-xxl-4 > .card {
+  margin-top: 0;
+  flex-flow: row;
+  align-items: center;
+}
+
+.financeInformation > .card-body .card-title + .row > .col-xxl-4 > .card > div:last-child {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  background: #0d6efd;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.financeInformation > .card-body .bg-success {
+  color: white;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 920px) {
+  .navbar .container-fluid {
+    padding: 0 0.5rem;
+  }
+  .navbar .container-fluid > a {
+    flex: 20;
+    padding: 0.375rem;
+  }
+  .navbar .container-fluid > a ~ .btn-group {
+    flex: 1;
+    position: static;
+  }
+  .navbar .container-fluid > a ~ .btn-group .dropdown-toggle {
+    padding: 0.375rem 0;
+  }
+  .navbar .container-fluid > a ~ .btn-group .dropdown-toggle:after {
+    display: none;
+  }
+  .navbar .container-fluid > a ~ .btn-group .dropdown-toggle span span {
+    display: none;
+  }
+  .navbar .container-fluid > a ~ .btn-group .dropdown-menu {
+    width: auto;
+    right: 0;
+  }
   .navbar .quickLink {
     display: none;
   }

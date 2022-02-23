@@ -34,7 +34,8 @@
 			"AdjustmentReport":"Adjustment Report",
 			"PaymentManagement":"Payment Management",
 			"DepositLimitManagement":"Deposit Limit Management",
-			"ThirdPartyAdjustment":"3RD Funds Adjustment"
+			"ThirdPartyAdjustment":"3RD Funds Adjustment",
+			"DepositList":"Deposit List"
 		},
 		"Administration":{
 			"Administration":"Administration",
@@ -83,5 +84,13 @@
 	"PopBox":{
 		"lbl_Cancel": "Cancel",
 		"lbl_Submit": "Submit"
+	},
+	"DepositList":{
+		"SubmitDate":"Submit Date",
+		"Currency":"Currency"
+	},
+	"Hint":{
+		"PleaseSelect":"Please Select {{colName}}",
+		"ItemsSelected":"{{count}} items selected"
 	}
 }
