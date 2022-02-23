@@ -105,7 +105,7 @@ export default function Component({ title, options, selected, onSelect }) {
 	};
 
 	return (
-		<div className="bd-example">
+		<div className="btn-group">
 			<h6>{title}</h6>
 			<div className="btn-group" ref={ref}>
 				<button
