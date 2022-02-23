@@ -38,7 +38,13 @@ Item.propTypes = {
 	checked: PropTypes.bool.isRequired
 };
 
-export default function Component({ title, options, selected, onSelect }) {
+export default function Component({
+	title,
+	options,
+	selected,
+	onSelect,
+	displayItems
+}) {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 	const [newOptions, setNewOptions] = useState([]);
@@ -46,11 +52,11 @@ export default function Component({ title, options, selected, onSelect }) {
 	const ref = useRef(null);
 
 	const _currentSelected =
-		selected.length <= 4
+		selected.length <= displayItems
 			? selected.map(s => s.displayText).join(", ")
 			: t("Hint.ItemsSelected", { count: selected.length });
 	const displaySelected =
-		_currentSelected || t("Hint.PleaseSelect", { colName: title });
+		_currentSelected || t("Hint.NothingSelected", { colName: title });
 
 	useEffect(() => {
 		function handleClickOutside(event) {
@@ -133,12 +139,14 @@ export default function Component({ title, options, selected, onSelect }) {
 }
 
 Component.defaultProps = {
-	selected: { value: "", displayText: "" }
+	selected: { value: "", displayText: "" },
+	displayItems: 4
 };
 
 Component.propTypes = {
 	title: PropTypes.string.isRequired,
 	selected: PropTypes.arrayOf(PropTypes.any),
 	onSelect: PropTypes.func.isRequired,
-	options: PropTypes.arrayOf(PropTypes.any).isRequired
+	options: PropTypes.arrayOf(PropTypes.any).isRequired,
+	displayItems: PropTypes.number
 };

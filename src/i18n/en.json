@@ -87,10 +87,11 @@
 	},
 	"DepositList":{
 		"SubmitDate":"Submit Date",
-		"Currency":"Currency"
+		"Currency":"Currency",
+		"Status":"Status"
 	},
 	"Hint":{
-		"PleaseSelect":"Please Select {{colName}}",
+		"NothingSelected":"Nothing Selected",
 		"ItemsSelected":"{{count}} items selected"
 	}
 }

@@ -22,3 +22,8 @@ export const getAllDataRequest = axios.create({
 	withCredentials: true,
 	baseURL: `${rootURL}/apiV2/GetAllData`
 });
+
+export const enumRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/apiV2/Enum`
+});
