@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useAllSiteListFetcher } from "./useAllSiteListFetcher";
 import { api_getAllData_GetCurrency } from "../service/api/getAllData";
 
-const useSelectCurrencies = () => {
+const useSelectCurrencies = siteId => {
 	const { allSiteList } = useAllSiteListFetcher();
 
 	const [selected, setSelected] = useState([]);
@@ -18,34 +19,27 @@ const useSelectCurrencies = () => {
 						data: { data: mapList }
 					} = res;
 
-					let allCurrencyId = new Set([]);
-
-					allSiteList.forEach(s => {
-						allCurrencyId = new Set([
-							...allCurrencyId,
-							...s.iCurrencyList
-						]);
-					});
-
 					const result = [];
 
-					allCurrencyId.forEach(c => {
-						const displayText =
-							mapList.find(x => x.currencyId === c)?.isoCode ??
-							"";
+					allSiteList
+						.find(s => s.siteId === siteId)
+						?.iCurrencyList.forEach(c => {
+							const displayText =
+								mapList.find(x => x.currencyId === c)
+									?.isoCode ?? "";
 
-						result.push({ value: c, displayText });
-					});
+							result.push({ value: c, displayText });
+						});
 
 					setCurrencyList(result);
 				}
 			} catch (error) {}
 		};
 
-		if (allSiteList?.length) {
+		if (allSiteList?.length && siteId) {
 			setCurrencies();
 		}
-	}, [JSON.stringify(allSiteList)]);
+	}, [siteId, JSON.stringify(allSiteList)]);
 
 	const OnSelectCurrency = item => {
 		setSelected(prev => {
@@ -63,3 +57,11 @@ const useSelectCurrencies = () => {
 };
 
 export default useSelectCurrencies;
+
+useSelectCurrencies.defaultProps = {
+	siteId: null
+};
+
+useSelectCurrencies.propTypes = {
+	siteId: PropTypes.number
+};
