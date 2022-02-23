@@ -7,3 +7,8 @@ export const homeRequest = axios.create({
 	withCredentials: true,
 	baseURL: `${rootURL}/api/home`
 });
+
+export const commonRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/api/Common`
+});
