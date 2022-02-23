@@ -86,6 +86,7 @@ export default function Component({
 	));
 
 	const ClickDropdown = () => {
+		e.preventDefault();
 		setOpen(prev => !prev);
 	};
 
