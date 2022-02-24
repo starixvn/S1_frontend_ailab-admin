@@ -51,14 +51,15 @@ const Component = ({
 Component.defaultProps = {
 	title: "",
 	placeholder: "",
-	renderProps: null
+	renderProps: null,
+	selectedIndex: 0
 };
 Component.propTypes = {
 	title: string,
 	placeholder: string,
 	options: arrayOf(any).isRequired,
 	onSelect: func.isRequired,
-	selectedIndex: number.isRequired,
+	selectedIndex: number,
 	renderProps: func
 };
 
