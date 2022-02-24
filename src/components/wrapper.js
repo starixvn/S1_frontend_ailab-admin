@@ -10,7 +10,7 @@ const Wrapper = ({ children }) => {
 	const [menu, setMenu] = useState({
 		allowfuncKeys: [],
 		collapse: false,
-		showArea: location?.state?.Category ?? siteInfo.defaultCategory,
+		showArea: [location?.state?.Category] ?? [siteInfo.defaultCategory],
 		tabBar: []
 	});
 

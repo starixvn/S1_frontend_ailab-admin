@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import Menu from "./menu";
+import Menu from "./menu/menu";
 import Header from "./header/header";
 import useHandleAuth from "../hook/useHandleAuth";
 import { userInfoContext, menuContext, popBoxContext } from "./context";
-import { api_home_GetMenu } from "../service/api/home";
+import { api_permission_GetUserMenu } from "../service/api/permission";
+
 import PopBox from "./popBox";
 
 const Layout = ({ children, afterLogin = true }) => {
@@ -21,7 +22,7 @@ const Layout = ({ children, afterLogin = true }) => {
 		} else if (userInfo.isLogin && !menu?.allowfuncKeys?.length) {
 			const getMenuList = async () => {
 				try {
-					const res = await api_home_GetMenu();
+					const res = await api_permission_GetUserMenu();
 					const { errorCode, data } = res.data;
 					if (errorCode === 0) {
 						const allowfuncKeys = [];
@@ -42,15 +43,16 @@ const Layout = ({ children, afterLogin = true }) => {
 						};
 
 						setAllowFuncKeys(data);
+
 						setMenu(prev => ({ ...prev, allowfuncKeys }));
 					}
 				} catch (error) {}
 			};
 
 			getMenuList();
+			console.log(menu);
 		}
 	}, [userInfo.isLogin]);
-
 	return afterLogin && userInfo.isLogin ? (
 		<>
 			<Header />
