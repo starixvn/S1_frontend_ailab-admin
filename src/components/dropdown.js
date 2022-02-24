@@ -38,7 +38,7 @@ const Component = ({
 					</option>
 				)}
 
-				{options.map((data, index) => (
+				{options?.map((data, index) => (
 					<option key={index} value={index}>
 						{renderOption(data)}
 					</option>
