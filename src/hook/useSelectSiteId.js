@@ -19,13 +19,13 @@ const useSelectSiteId = props => {
 			setOptions(tmpOptions);
 
 			if (defaultSelectFirst && tmpOptions.length) {
-				setSelected({ ...tmpOptions[0], index: 0 });
+				setSelected(tmpOptions[0]);
 			}
 		}
 	}, [JSON.stringify(allSiteList), defaultSelectFirst]);
 
-	const OnSelect = (index, item) => {
-		setSelected({ ...item, index });
+	const OnSelect = item => {
+		setSelected(item);
 	};
 
 	const getAPIPayload = () => [selected.value];
