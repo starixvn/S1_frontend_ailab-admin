@@ -1,46 +1,60 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/forbid-prop-types */
-import React from "react";
-import { any, arrayOf, func, number, string } from "prop-types";
+import React, { useEffect, useState } from "react";
+import { any, arrayOf, func, string } from "prop-types";
 import { Form } from "react-bootstrap";
 
-const Component = ({
-	title,
-	placeholder,
-	options,
-	onSelect,
-	selectedIndex,
-	renderProps
-}) => {
+const optionParser = (value = "", _options = []) => {
+	let _option;
+
+	if (typeof value === "string" || value === "") {
+		if (_options.some(option => option === value)) {
+			_option = { value, displayText: value };
+		} else {
+			_option = { value: -1 };
+		}
+	}
+
+	return _option || value;
+};
+
+const Component = ({ title, value, options = [], onSelect, placeholder }) => {
+	const [selected, setSelected] = useState(optionParser(value, options));
+
+	const parsedOptions =
+		options.map(option => optionParser(option, options)) ?? [];
+
 	const handleChange = event => {
-		const index = event.target.value;
+		const _selected = parsedOptions.find(
+			_option => _option.value === event.target.value
+		);
 
-		onSelect(Number(index), options[index]);
+		setSelected(_selected);
+		onSelect(_selected);
 	};
 
-	const renderOption = data => {
-		if (typeof renderProps === "function") return renderProps(data);
-
-		if (typeof data === "object") return data.displayText;
-
-		if (typeof data === "string" || typeof data === "number") return data;
-
-		return null;
-	};
+	useEffect(() => {
+		setSelected(optionParser(value, options));
+	}, [value]);
 
 	return (
 		<>
 			{title && <h6>{title}</h6>}
 
-			<Form.Select value={selectedIndex} onChange={handleChange}>
+			<Form.Select value={selected.value} onChange={handleChange}>
 				{placeholder && (
 					<option disabled value={-1} key={-1}>
 						{placeholder}
 					</option>
 				)}
 
-				{options.map((data, index) => (
-					<option key={index} value={index}>
-						{renderOption(data)}
+				{parsedOptions.map((option, index) => (
+					<option
+						key={`${index}-${option.value}`}
+						value={option.value}>
+						{option.displayKey
+							? option.displayKey
+							: option.displayText}
 					</option>
 				))}
 			</Form.Select>
@@ -50,16 +64,15 @@ const Component = ({
 
 Component.defaultProps = {
 	title: "",
-	placeholder: "",
-	renderProps: null
+	placeholder: "-"
 };
+
 Component.propTypes = {
 	title: string,
-	placeholder: string,
+	value: any.isRequired,
 	options: arrayOf(any).isRequired,
 	onSelect: func.isRequired,
-	selectedIndex: number.isRequired,
-	renderProps: func
+	placeholder: string
 };
 
 export default Component;
