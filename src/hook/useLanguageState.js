@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-const useLanguageState = (initialLanguage, { siteId, allSiteList }) => {
-	const [language, setLanguage] = useState(initialLanguage);
+const useLanguageState = ({ siteId, allSiteList }) => {
+	const [language, setLanguage] = useState("");
 	const [languageList, setLanguageList] = useState([]);
 
 	useEffect(() => {
@@ -9,7 +9,6 @@ const useLanguageState = (initialLanguage, { siteId, allSiteList }) => {
 		const _languageList = JSON.parse(
 			allSiteList.find(list => list.siteId === siteId)?.langList || "[]"
 		);
-
 		setLanguage(_languageList[0] ?? "");
 
 		if (_languageList.length > 0) {
