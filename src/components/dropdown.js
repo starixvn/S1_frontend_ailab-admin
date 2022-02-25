@@ -65,7 +65,7 @@ const Component = ({ title, value, options = [], onSelect, placeholder }) => {
 Component.defaultProps = {
 	title: "",
 	value: "",
-	placeholder: "-"
+	placeholder: null
 };
 
 Component.propTypes = {
