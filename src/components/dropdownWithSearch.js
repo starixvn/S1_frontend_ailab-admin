@@ -114,7 +114,7 @@ export default function Component({
 	return (
 		<div className="btn-group">
 			<h6>{title}</h6>
-			<div className="btn-group" ref={ref}>
+			<div className="" ref={ref}>
 				<button
 					className={`btn btn-outline-secondary dropdown-toggle${
 						open ? " show" : ""
