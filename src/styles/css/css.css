@@ -464,13 +464,7 @@ h6 {
   align-items: center;
 }
 
-.financeInformation > .card-body .bg-success {
-  color: white;
-  padding: 0 0.5rem;
-  border-radius: 0.25rem;
-}
-
-.enIcon {
+.financeInformation > .card-body .card-title + .row > .col-xxl-4 > .card > div:last-child {
   width: 3rem;
   height: 3rem;
   border-radius: 100%;
@@ -484,35 +478,10 @@ h6 {
   font-size: 1.5rem;
 }
 
-.gameInformation .card {
-  margin-top: 0;
-  flex-flow: row;
-  align-items: center;
-}
-
-.gameInformation .card .small + div {
-  font-weight: bold;
-}
-
-.gameInformation .row .col-md-6 {
-  padding: 0 1rem 1rem;
-}
-
-.walletInformation .row div:nth-child(2) i {
-  margin-left: 0.5rem;
-  display: inline-flex;
-}
-
-.walletInformation .row div:nth-child(2) i:before {
-  font-size: 12px;
-}
-
-.walletInformation .row div:last-child {
-  text-align: right;
-}
-
-.walletInformation .row:last-child div:last-child {
-  font-weight: bold;
+.financeInformation > .card-body .bg-success {
+  color: white;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
 }
 
 @media (max-width: 920px) {

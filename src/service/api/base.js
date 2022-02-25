@@ -8,6 +8,26 @@ export const homeRequest = axios.create({
 	baseURL: `${rootURL}/api/home`
 });
 
+export const commonRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/api/Common`
+});
+
+export const personalMessageRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/api/PersonalMessage`
+});
+
+export const getAllDataRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/apiV2/GetAllData`
+});
+
+export const enumRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/apiV2/Enum`
+});
+
 export const permissionRequest = axios.create({
 	withCredentials: true,
 	baseURL: `${rootURL}/ApiV2/Permission`

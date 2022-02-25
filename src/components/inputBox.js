@@ -11,7 +11,7 @@ const InputBox = ({
 }) => (
 	<div className={className}>
 		<h6>{title}</h6>
-		<div className="input-group mb-3">
+		<div className="input-group">
 			<input
 				type={inputType ?? "text"}
 				className="form-control"

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import useHandleAuth from "../../hook/useHandleAuth";
+import { useHandleAuth } from "../../hook";
 import { userInfoContext } from "../context";
 import path from "../../path";
 

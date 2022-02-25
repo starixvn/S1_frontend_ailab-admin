@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import FeatherIcon from "feather-icons-react";
 import { Link } from "react-router-dom";
 import { menuContext, userInfoContext, popBoxContext } from "../context";
-import useHandleAuth from "../../hook/useHandleAuth";
+import { useHandleAuth } from "../../hook";
 import TabBar from "./tabBar";
 import { defPopBoxType } from "../popBox";
 import { siteInfo } from "../../config";
@@ -25,7 +24,7 @@ const Header = () => {
 
 	const isCollapse = menu.collapse;
 	return (
-		<header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		<header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap shadow">
 			<Link
 				className={`navbar-brand col-md-3 col-lg-2 me-0 px-3${
 					isCollapse ? " active" : ""
@@ -33,39 +32,73 @@ const Header = () => {
 				to={`/${siteInfo.defaultIndex}`}>
 				{t("Admin.lbl_Admin")}
 			</Link>
+			<TabBar />
 			<button
-				onClick={() => {
-					setMenu(prev => ({ ...prev, collapse: !prev.collapse }));
-				}}
-				className={`navbar-toggler position-absolute d-md-none${
-					isCollapse ? " collapsed" : ""
-				}`}
+				className="navbar-toggler"
 				type="button"
 				data-bs-toggle="collapse"
 				data-bs-target="#sidebarMenu"
-				aria-controls="sidebarMenu"
-				aria-expanded={!isCollapse}
-				aria-label="Toggle navigation">
-				{isCollapse ? (
-					<span className="navbar-toggler-icon" />
-				) : (
-					<FeatherIcon icon="x" />
-				)}
+				aria-expanded="true"
+				onClick={() => {
+					setMenu(prev => ({ ...prev, collapse: !prev.collapse }));
+				}}>
+				<i className="icon icon-menu" />
 			</button>
-			<TabBar />
-			<ul className="navbar-nav px-3">
-				<li className="nav-item text-nowrap">
-					<a className="nav-link" href="#" onClick={openChangePwd}>
-						{t("ChangePwd.lbl_ChangePassword")}
-					</a>
-				</li>
-				<li className="nav-item text-nowrap">
-					<a className="nav-link" href="#" onClick={SignOut}>
+			<UserDropdown SignOut={SignOut} openChangePwd={openChangePwd} />
+		</header>
+	);
+};
+
+const UserDropdown = ({ SignOut, openChangePwd }) => {
+	const { t } = useTranslation();
+	const [isOpen, setIsOpen] = useState(false);
+	const ref = useRef(null);
+
+	useEffect(() => {
+		function handleClickOutside(event) {
+			if (ref.current && !ref.current.contains(event.target)) {
+				setIsOpen(false);
+			}
+		}
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [ref]);
+
+	return (
+		<div className="btn-group" ref={ref}>
+			<button
+				type="button"
+				className={`btn btn-outline-secondary btn-sm dropdown-toggle${
+					isOpen ? " show" : ""
+				}`}
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+				onClick={() => setIsOpen(prev => !prev)}>
+				<i className="icon icon-admin" />
+			</button>
+			<ul
+				className={`dropdown-menu dropdown-menu-end${
+					isOpen ? " show" : ""
+				}`}
+				data-bs-popper="none">
+				<li>
+					<a className="dropdown-item" href="#" onClick={SignOut}>
 						{t("Admin.lbl_SignOut")}
 					</a>
 				</li>
+				<li>
+					<a
+						className="dropdown-item"
+						href="#"
+						onClick={openChangePwd}>
+						{t("ChangePwd.lbl_ChangePassword")}
+					</a>
+				</li>
 			</ul>
-		</header>
+		</div>
 	);
 };
 

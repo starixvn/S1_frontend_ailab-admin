@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./styles/css/bootstrap.css";
+import "./styles/lib/daterangepicker.css";
 import "./styles/css/css.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

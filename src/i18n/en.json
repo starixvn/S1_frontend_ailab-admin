@@ -133,5 +133,14 @@
 	"PopBox":{
 		"lbl_Cancel": "Cancel",
 		"lbl_Submit": "Submit"
+	},
+	"DepositList":{
+		"SubmitDate":"Submit Date",
+		"Currency":"Currency",
+		"Status":"Status"
+	},
+	"Hint":{
+		"NothingSelected":"Nothing Selected",
+		"ItemsSelected":"{{count}} items selected"
 	}
 }
