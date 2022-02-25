@@ -5,28 +5,31 @@ import { menuContext } from "../context";
 import MenuList from "../../datas/menu";
 import { siteInfo } from "../../config";
 
-const Levels = props => {
-	const {
-		areaHandler,
-		t,
-		showArea,
-		allowfuncKeys,
-		clickMenu,
-		isFirstLevel
-	} = props;
-	const subItems = props.level.map(s => {
-		if (!s.Childs) {
-			const { Controller, Action, FuncKey, displayKey, Title } = s;
-			const pathName = `${Controller}/${Action}`;
-			const displayText = t(displayKey);
+const Levels = ({
+	level,
+	areaHandler,
+	t,
+	isFirstLevel,
+	showArea,
+	allowfuncKeys,
+	clickMenu
+}) => {
+	if (!level) return null;
+	const subItems = level.map(s => {
+		const { Controller, Action, FuncKey, displayKey, Title } = s;
+		const pathName = `${Controller}/${Action}`;
+		const displayText = t(displayKey);
 
-			const params = {
-				Category: props.level.Category,
-				Controller,
-				Action,
-				Title: displayText,
-				FuncKey: s.FuncKey
-			};
+		const params = {
+			Category: level.Category,
+			Controller,
+			Action,
+			Title: displayText,
+			FuncKey
+		};
+
+		if (!s.Childs) {
+			if (!(FuncKey in allowfuncKeys)) return null;
 			return (
 				<Link
 					onClick={() => clickMenu(params)}
@@ -44,11 +47,23 @@ const Levels = props => {
 		let isOpen = true;
 		/* eslint no-useless-return: 0 */
 		s.Category?.forEach((el, i) => {
-			if (el !== props.showArea[i]) {
+			if (el !== showArea?.[i]) {
 				isOpen = false;
 				return;
 			}
 		});
+
+		const links = Levels({
+			isFirstLevel: false,
+			level: s.Childs,
+			areaHandler,
+			t,
+			showArea,
+			allowfuncKeys,
+			clickMenu
+		});
+
+		if (!links.length) return null;
 		const content = (
 			<>
 				<button
@@ -69,21 +84,13 @@ const Levels = props => {
 					}`}
 					aria-labelledby="flush-headingOne"
 					data-bs-parent="#accordionFlushExample">
-					<Levels
-						isFirstLevel={false}
-						level={s.Childs}
-						areaHandler={areaHandler}
-						t={t}
-						showArea={showArea}
-						allowfuncKeys={allowfuncKeys}
-						clickMenu={clickMenu}
-					/>
+					{links}
 				</div>
 			</>
 		);
-
+		console.log(displayKey);
 		return isFirstLevel ? (
-			<div className="accordion-item" key={`Menu-${s.displayKey}`}>
+			<div className="accordion-item" key={`Menu-${displayKey}`}>
 				{content}
 			</div>
 		) : (
@@ -94,17 +101,16 @@ const Levels = props => {
 };
 
 const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys, clickMenu }) => {
-	const result = (
-		<Levels
-			level={MenuList}
-			areaHandler={areaHandler}
-			t={t}
-			isFirstLevel={true}
-			showArea={showArea}
-			allowfuncKeys={allowfuncKeys}
-			clickMenu={clickMenu}
-		/>
-	);
+	const result = Levels({
+		level: MenuList,
+		areaHandler,
+		t,
+		isFirstLevel: true,
+		showArea,
+		allowfuncKeys,
+		clickMenu
+	});
+
 	return result;
 };
 

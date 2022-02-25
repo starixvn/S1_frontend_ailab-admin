@@ -19,23 +19,27 @@ const Layout = ({ children, afterLogin = true }) => {
 	useEffect(() => {
 		if (userInfo.isLogin === null) {
 			CheckSignIn({ afterLogin });
-		} else if (userInfo.isLogin && !menu?.allowfuncKeys?.length) {
+		} else if (
+			userInfo.isLogin &&
+			!Object.keys(menu?.allowfuncKeys).length
+		) {
 			const getMenuList = async () => {
 				try {
 					const res = await api_permission_GetUserMenu();
 					const { errorCode, data } = res.data;
 					if (errorCode === 0) {
-						const allowfuncKeys = [];
+						const allowfuncKeys = {};
 						const setAllowFuncKeys = dataList => {
 							dataList.forEach(d => {
 								if (d.funcKey) {
-									allowfuncKeys.push(funcKey);
+									allowfuncKeys[d.funcKey] = d.funcKey;
 								}
 
 								if (d.childs) {
 									d.childs.forEach(c => {
 										if (c.funcKey) {
-											allowfuncKeys.push(c.funcKey);
+											allowfuncKeys[c.funcKey] =
+												c.funcKey;
 										}
 									});
 								}

@@ -438,7 +438,10 @@ export default [
 			{
 				displayKey: "Menu.Finance.Report",
 				Icon: "",
-				Category: [defMenuCategory.Finance.Report],
+				Category: [
+					defMenuCategory.Finance.Finance,
+					defMenuCategory.Finance.Report
+				],
 				Childs: [
 					{
 						displayKey: "Menu.Finance.DepositTimeReport",
@@ -469,7 +472,10 @@ export default [
 			{
 				displayKey: "Menu.Finance.Setting",
 				Icon: "",
-				Category: [defMenuCategory.Finance.Setting],
+				Category: [
+					defMenuCategory.Finance.Finance,
+					defMenuCategory.Finance.Setting
+				],
 				Childs: [
 					{
 						displayKey: "Menu.Finance.BankAccount",
@@ -665,22 +671,7 @@ export default [
 						Controller: "Marketing",
 						Action: "VerificationRewardReport",
 						Icon: "",
-						Category: [
-							defMenuCategory.Marketing.Marketing,
-							defMenuCategory.Marketing.Reward,
-							defMenuCategory.Game
-						],
-						Childs: [
-							{
-								displayKey: "Menu.Marketing.mdfk",
-								Title: "Verification Reward Report",
-								FuncKey: "Marketing/mdfk",
-								Controller: "mdfk",
-								Action: "mdfk",
-								Icon: "",
-								Childs: null
-							}
-						]
+						Childs: null
 					}
 				]
 			},

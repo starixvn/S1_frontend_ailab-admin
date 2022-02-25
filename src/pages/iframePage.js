@@ -18,11 +18,10 @@ const Index = () => {
 		: siteInfo.defaultIndex;
 
 	const url = Controller && Action ? `${Controller}/${Action}` : defaultIndex;
-
 	return (
 		<Layout>
 			<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				{menu?.allowfuncKeys?.some(fKey => fKey === funcKey) && (
+				{funcKey in menu?.allowfuncKeys && (
 					<iframe
 						title={Title ?? "Index"}
 						src={`${config.apiURL}/${url}`}

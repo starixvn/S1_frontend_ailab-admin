@@ -39,7 +39,7 @@
 			"BalanceAdjustment":"Withdrawable Adjustment",
 			"BalanceAdjustmentBatch":"Balance Adjustment (Batch)",
 			"WithdrawalLimitAdjust":"WithdrawalLimit Adjustment",
-			"AdjustmentReport":"Adjustment Report",
+			"AdjustmentReport":"Adjustment",
 			"PaymentManagement":"Payment Gateway",
 			"DepositLimitManagement":"Deposit Limit",
 			"ThirdPartyAdjustment":"Game Wallet Adjustment",
@@ -47,7 +47,12 @@
 			"BonusPayout": "Bonus Payout",
 			"Setting": "Setting",
 			"Report": "Report",
-			"BankAccount": "Bank Account"
+			"BankAccount": "Bank Account",
+			"DepositTimeReport": "Deposit Time",
+			"WithdrawalTimeReport": "Withdrawal Time",
+			"WithdrawalLimitManagement": "Withdrawal Limit",
+			"USDTWithdrawalLimitManagement": "Crypto Withdrawal Limit",
+			"AdjustmentLimitManagement": "Adjustment Limit"
 		},
 		"Administration":{
 			"Administration":"Administration",
@@ -81,8 +86,7 @@
 			"VipLevelReview": "Vip Level Review",
 			"VipRebateManagement": "Vip Rebate Management",
 			"VerificationReward": "Verification Reward",
-			"VerificationRewardReport": "Verification Reward Report",
-			"mdfk":"fdfsd"
+			"VerificationRewardReport": "Verification Reward Report"
 		},
 		"BankFinancial":{
 			"BankFinancial": "Bank Transfer",
