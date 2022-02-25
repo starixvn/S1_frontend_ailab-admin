@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-// import PropTypes from "prop-types";
 import { useAllSiteListFetcher } from "./useAllSiteListFetcher";
 import useGetCurrencyData from "./useGetCurrencyData";
 
 const useSelectCurrencies = props => {
-	const { siteId, defaultSelectAll } = props;
+	const { siteId, defaultSelectAll, defaultSelectFirst } = props;
 	const { allSiteList } = useAllSiteListFetcher(
 		Boolean(!props.allSiteList?.length)
 	);
@@ -23,7 +22,9 @@ const useSelectCurrencies = props => {
 			if (currencyData) {
 				setCurrencyList(currencyData);
 
-				if (defaultSelectAll) {
+				if (defaultSelectFirst) {
+					setSelected(currencyData?.[0] ? [currencyData?.[0]] : []);
+				} else if (defaultSelectAll) {
 					setSelected(currencyData);
 				}
 			}
@@ -46,11 +47,3 @@ const useSelectCurrencies = props => {
 };
 
 export default useSelectCurrencies;
-
-// useSelectCurrencies.defaultProps = {
-// 	siteId: null
-// };
-
-// useSelectCurrencies.propTypes = {
-// 	props: PropTypes.number
-// };
