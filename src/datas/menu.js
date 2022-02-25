@@ -665,7 +665,22 @@ export default [
 						Controller: "Marketing",
 						Action: "VerificationRewardReport",
 						Icon: "",
-						Childs: null
+						Category: [
+							defMenuCategory.Marketing.Marketing,
+							defMenuCategory.Marketing.Reward,
+							defMenuCategory.Game
+						],
+						Childs: [
+							{
+								displayKey: "Menu.Marketing.mdfk",
+								Title: "Verification Reward Report",
+								FuncKey: "Marketing/mdfk",
+								Controller: "mdfk",
+								Action: "mdfk",
+								Icon: "",
+								Childs: null
+							}
+						]
 					}
 				]
 			},

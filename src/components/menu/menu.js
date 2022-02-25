@@ -133,17 +133,27 @@ const Menu = () => {
 	const areaHandler = ({ area }) => {
 		setMenu(prev => {
 			let oldShowArea = JSON.parse(JSON.stringify(prev.showArea));
-			if (prev.showArea.join("") === area.join("")) {
-				return {
-					...prev,
-					showArea: oldShowArea.slice(0, -1)
-				};
-			}
-			if (oldShowArea[oldShowArea.length - 1] === area[area.length - 2]) {
+
+			if (area.length > prev.showArea) {
+				// open
 				oldShowArea.push(area[area.length - 1]);
-			} else {
+			} else if (
+				area[area.length - 2] === oldShowArea[oldShowArea.length - 2] &&
+				area[area.length - 1] !== oldShowArea[oldShowArea.length - 1]
+			) {
+				// open
 				oldShowArea = area;
+			} else {
+				// close
+
+				const idx = oldShowArea.indexOf(area[area.length - 1]);
+				if (idx >= 0) {
+					oldShowArea = oldShowArea.slice(0, idx);
+				} else {
+					oldShowArea = area;
+				}
 			}
+
 			return {
 				...prev,
 				showArea: oldShowArea

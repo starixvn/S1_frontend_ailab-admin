@@ -50,7 +50,6 @@ const Layout = ({ children, afterLogin = true }) => {
 			};
 
 			getMenuList();
-			console.log(menu);
 		}
 	}, [userInfo.isLogin]);
 	return afterLogin && userInfo.isLogin ? (
