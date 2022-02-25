@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { menuContext, userInfoContext, popBoxContext } from "../context";
-import useHandleAuth from "../../hook/useHandleAuth";
+import { useHandleAuth } from "../../hook";
 import TabBar from "./tabBar";
 import { defPopBoxType } from "../popBox";
 import { siteInfo } from "../../config";
