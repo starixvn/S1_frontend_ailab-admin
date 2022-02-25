@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { any, arrayOf, func, string } from "prop-types";
 import { Form } from "react-bootstrap";
 
-const optionParser = (value = "", _options = []) => {
+const optionParser = (value, _options = []) => {
 	let _option;
 
 	if (typeof value === "string" || value === "") {
@@ -64,12 +64,13 @@ const Component = ({ title, value, options = [], onSelect, placeholder }) => {
 
 Component.defaultProps = {
 	title: "",
+	value: "",
 	placeholder: "-"
 };
 
 Component.propTypes = {
 	title: string,
-	value: any.isRequired,
+	value: any,
 	options: arrayOf(any).isRequired,
 	onSelect: func.isRequired,
 	placeholder: string
