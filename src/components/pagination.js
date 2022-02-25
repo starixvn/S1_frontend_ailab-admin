@@ -1,6 +1,19 @@
-import React from "react";
+import React, { Children } from "react";
 import PropTypes from "prop-types";
 import { Pagination } from "react-bootstrap";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+
+	> div {
+		&:first-child {
+			align-items: center;
+			display: flex;
+		}
+	}
+`;
 
 const defPage = {
 	prevPage: "prevPage",
@@ -37,7 +50,15 @@ const pageNumbers = (currentPage, totalPages) => {
 	return rangeWithDots;
 };
 
-const BasicPagination = ({ currentPage, totalPages, clickPageNumber }) => {
+const BasicPagination = ({
+	t,
+	currentPage,
+	totalPages,
+	clickPageNumber,
+	pageSize,
+	totalEntries,
+	onSelectEntry
+}) => {
 	const _clickPageNumber = p => {
 		let page = 1;
 
@@ -62,21 +83,38 @@ const BasicPagination = ({ currentPage, totalPages, clickPageNumber }) => {
 		</Pagination.Item>
 	));
 
+	const startEntry = (currentPage - 1) * pageSize + 1;
+	const _lastEntry = startEntry + pageSize - 1;
+
 	if (totalPages !== 0)
 		return (
-			<Pagination className="d-flex justify-content-center">
-				<Pagination.Prev
-					disabled={currentPage === 1}
-					onClick={() => _clickPageNumber(defPage.prevPage)}
-				/>
+			<Wrapper>
+				<div onSelectEntry={onSelectEntry}>drop</div>
+				{Children}
+				<div>
+					{t("Hint.ShowingEntriesHint", {
+						firstEntry: startEntry,
+						lastEntry:
+							_lastEntry > totalEntries
+								? totalEntries
+								: _lastEntry,
+						totalEntries: totalEntries || 0
+					})}
+				</div>
+				<Pagination className="d-flex justify-content-center">
+					<Pagination.Prev
+						disabled={currentPage === 1}
+						onClick={() => _clickPageNumber(defPage.prevPage)}
+					/>
 
-				{_arr}
+					{_arr}
 
-				<Pagination.Next
-					disabled={currentPage === totalPages}
-					onClick={() => _clickPageNumber(defPage.nextPage)}
-				/>
-			</Pagination>
+					<Pagination.Next
+						disabled={currentPage === totalPages}
+						onClick={() => _clickPageNumber(defPage.nextPage)}
+					/>
+				</Pagination>
+			</Wrapper>
 		);
 
 	return null;
@@ -84,13 +122,17 @@ const BasicPagination = ({ currentPage, totalPages, clickPageNumber }) => {
 
 BasicPagination.defaultProps = {
 	currentPage: 1,
-	totalPages: 0
+	totalPages: 0,
+	pageSize: 10,
+	totalEntries: 0
 };
 
 BasicPagination.propTypes = {
 	currentPage: PropTypes.number,
 	totalPages: PropTypes.number,
-	clickPageNumber: PropTypes.func.isRequired
+	clickPageNumber: PropTypes.func.isRequired,
+	pageSize: PropTypes.number,
+	totalEntries: PropTypes.number
 };
 
 export { BasicPagination as Pagination };
