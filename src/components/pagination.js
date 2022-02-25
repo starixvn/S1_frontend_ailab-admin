@@ -125,7 +125,7 @@ BasicPagination.defaultProps = {
 	totalPages: 0,
 	pageSize: 10,
 	totalEntries: 0,
-	t:()=>{}
+	t: () => {}
 };
 
 BasicPagination.propTypes = {
@@ -133,8 +133,8 @@ BasicPagination.propTypes = {
 	totalPages: PropTypes.number,
 	clickPageNumber: PropTypes.func.isRequired,
 	pageSize: PropTypes.number,
-	totalEntries: PropTypes.number
-	t:PropTypes.func
+	totalEntries: PropTypes.number,
+	t: PropTypes.func
 };
 
 export { BasicPagination as Pagination };
