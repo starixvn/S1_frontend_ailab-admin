@@ -89,8 +89,6 @@ const BasicPagination = ({
 	if (totalPages !== 0)
 		return (
 			<Wrapper>
-				<div onSelectEntry={onSelectEntry}>drop</div>
-				{Children}
 				<div>
 					{t("Hint.ShowingEntriesHint", {
 						firstEntry: startEntry,
