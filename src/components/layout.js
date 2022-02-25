@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Menu from "./menu";
 import Header from "./header/header";
-import useHandleAuth from "../hook/useHandleAuth";
+import { useHandleAuth } from "../hook";
 import { userInfoContext, menuContext, popBoxContext } from "./context";
 import { api_home_GetMenu } from "../service/api/home";
 import PopBox from "./popBox";
