@@ -26,7 +26,7 @@ const Component = ({ title, value, options = [], onSelect, placeholder }) => {
 
 	const handleChange = event => {
 		const _selected = parsedOptions.find(
-			_option => _option.value === event.target.value
+			_option => _option.value.toString() === event.target.value
 		);
 
 		setSelected(_selected);
