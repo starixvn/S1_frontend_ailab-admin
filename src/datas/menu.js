@@ -478,10 +478,10 @@ export default [
 				],
 				Childs: [
 					{
-						displayKey: "Menu.Finance.BankAccount",
-						FuncKey: "Finance/BankAccount",
+						displayKey: "Menu.Finance.BankCardManagement",
+						FuncKey: "Finance/BankInfoList",
 						Controller: "Finance",
-						Action: "BankAccount",
+						Action: "BankInfoList",
 						Icon: "",
 						Childs: null
 					},
@@ -555,10 +555,9 @@ export default [
 					},
 					{
 						displayKey: "Menu.Marketing.AppliedBonus",
-						Title: "Bonus Import",
-						FuncKey: "Marketing/AppliedBonus",
+						FuncKey: "Marketing/BonusInfoReport",
 						Controller: "Marketing",
-						Action: "AppliedBonus",
+						Action: "BonusInfoReport",
 						Icon: "",
 						Childs: null
 					},
@@ -703,15 +702,6 @@ export default [
 					}
 				]
 			},
-			{
-				displayKey: "Menu.Marketing.BonusImport",
-				Title: "Bonus Import",
-				FuncKey: "Marketing/BonusImport",
-				Controller: "Marketing",
-				Action: "BonusImport",
-				Icon: "",
-				Childs: null
-			},
 
 			{
 				displayKey: "Menu.Marketing.VipLevelReview",
@@ -828,11 +818,10 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.Administration.UserActivityLog",
-				Title: "User Activity Log",
-				FuncKey: "Admin/UserActivityLog",
+				displayKey: "Menu.Administration.AdjustmentLogReport",
+				FuncKey: "Admin/AdjustmentLogReport",
 				Controller: "Admin",
-				Action: "UserActivityLog",
+				Action: "AdjustmentLogReport",
 				Icon: "",
 				Childs: null
 			}
