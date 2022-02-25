@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAllSiteListFetcher } from "./useAllSiteListFetcher";
-import useGetCurrencyData from "./useGetCurrencyData";
+import { useGetCurrencyData } from "./useGetCurrencyData";
 
 const useSelectCurrencies = props => {
 	const { siteId, defaultSelectAll, defaultSelectFirst } = props;
@@ -46,4 +46,4 @@ const useSelectCurrencies = props => {
 	return { selected, OnSelectCurrency, currencyList, getAPIPayload };
 };
 
-export default useSelectCurrencies;
+export { useSelectCurrencies };

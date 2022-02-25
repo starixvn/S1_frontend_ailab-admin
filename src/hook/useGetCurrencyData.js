@@ -60,4 +60,4 @@ const useGetCurrencyData = props => {
 	return { currencyData, getCurrencyName };
 };
 
-export default useGetCurrencyData;
+export { useGetCurrencyData };

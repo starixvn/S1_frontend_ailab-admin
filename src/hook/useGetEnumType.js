@@ -115,4 +115,4 @@ const useSelectEnumTypes = props => {
 	return { selected, OnSelect, options, getAPIPayload };
 };
 
-export default useSelectEnumTypes;
+export { useSelectEnumTypes };

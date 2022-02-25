@@ -33,4 +33,4 @@ const useSelectSiteId = props => {
 	return { selected, OnSelect, options, getAPIPayload };
 };
 
-export default useSelectSiteId;
+export { useSelectSiteId };
