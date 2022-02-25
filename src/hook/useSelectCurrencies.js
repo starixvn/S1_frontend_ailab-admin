@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useAllSiteListFetcher } from "./useAllSiteListFetcher";
-import useGetCurrencyData from "./useGetCurrencyData";
+import { useGetCurrencyData } from "./useGetCurrencyData";
 
 const useSelectCurrencies = props => {
+	const isFetch = Boolean(!props.allSiteList?.length);
 	const { siteId, defaultSelectAll, defaultSelectFirst } = props;
-	const { allSiteList } = useAllSiteListFetcher(
-		Boolean(!props.allSiteList?.length)
-	);
+	const { allSiteList } = useAllSiteListFetcher(isFetch);
+
+	const list = isFetch ? allSiteList : props.allSiteList;
 
 	const [selected, setSelected] = useState([]);
 	const [currencyList, setCurrencyList] = useState([]);
@@ -14,10 +15,8 @@ const useSelectCurrencies = props => {
 	const { currencyData } = useGetCurrencyData({ currencyIds });
 
 	useEffect(() => {
-		if (allSiteList?.length && siteId) {
-			setCurrencyIds(
-				allSiteList.find(s => s.siteId === siteId)?.iCurrencyList
-			);
+		if (list?.length && siteId) {
+			setCurrencyIds(list.find(s => s.siteId === siteId)?.iCurrencyList);
 
 			if (currencyData) {
 				setCurrencyList(currencyData);
@@ -29,7 +28,7 @@ const useSelectCurrencies = props => {
 				}
 			}
 		}
-	}, [siteId, JSON.stringify(allSiteList), currencyData]);
+	}, [siteId, JSON.stringify(list), currencyData]);
 
 	const OnSelectCurrency = item => {
 		setSelected(prev => {
@@ -46,4 +45,4 @@ const useSelectCurrencies = props => {
 	return { selected, OnSelectCurrency, currencyList, getAPIPayload };
 };
 
-export default useSelectCurrencies;
+export { useSelectCurrencies };

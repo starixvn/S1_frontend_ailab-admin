@@ -84,4 +84,4 @@ const useHandleAuth = ({ userInfo, setUserInfo }) => {
 	return { CheckSignIn, SignOut, Signin };
 };
 
-export default useHandleAuth;
+export { useHandleAuth };
