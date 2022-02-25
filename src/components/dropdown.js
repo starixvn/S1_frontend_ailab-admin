@@ -48,7 +48,7 @@ const Component = ({ title, value, options = [], onSelect, placeholder }) => {
 					</option>
 				)}
 
-				{parsedOptions.map((option, index) => (
+				{parsedOptions?.map((option, index) => (
 					<option
 						key={`${index}-${option.value}`}
 						value={option.value}>

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAlert } from "react-alert";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 import { api_common_AdminUserSiteList } from "../service/api/common";
 
-const useAllSiteListFetcher = () => {
+const useAllSiteListFetcher = (fetch = true) => {
 	const alert = useAlert();
 	const { t } = useTranslation();
 	const [allSiteList, setAllSiteList] = useState([]);
@@ -21,10 +22,19 @@ const useAllSiteListFetcher = () => {
 			}
 		};
 
-		getData();
-	}, []);
+		if (fetch) {
+			getData();
+		}
+	}, [fetch]);
 
 	return { allSiteList };
 };
 
 export { useAllSiteListFetcher };
+
+useAllSiteListFetcher.defaultProps = {
+	fetch: false
+};
+useAllSiteListFetcher.propTypes = {
+	fetch: PropTypes.bool
+};

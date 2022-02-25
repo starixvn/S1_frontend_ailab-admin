@@ -1,50 +1,35 @@
 import { useState, useEffect } from "react";
-// import PropTypes from "prop-types";
 import { useAllSiteListFetcher } from "./useAllSiteListFetcher";
-import { api_getAllData_GetCurrency } from "../service/api/getAllData";
+import useGetCurrencyData from "./useGetCurrencyData";
 
 const useSelectCurrencies = props => {
-	const { siteId, defaultSelectAll } = props;
-	const { allSiteList } = useAllSiteListFetcher();
+	const { siteId, defaultSelectAll, defaultSelectFirst } = props;
+	const { allSiteList } = useAllSiteListFetcher(
+		Boolean(!props.allSiteList?.length)
+	);
 
 	const [selected, setSelected] = useState([]);
 	const [currencyList, setCurrencyList] = useState([]);
+	const [currencyIds, setCurrencyIds] = useState([]);
+	const { currencyData } = useGetCurrencyData({ currencyIds });
 
 	useEffect(() => {
-		const setCurrencies = async () => {
-			try {
-				const res = await api_getAllData_GetCurrency();
-
-				if (res.data.errorCode === 0) {
-					const {
-						data: { data: mapList }
-					} = res;
-
-					const result = [];
-
-					allSiteList
-						.find(s => s.siteId === siteId)
-						?.iCurrencyList.forEach(c => {
-							const displayText =
-								mapList.find(x => x.currencyId === c)
-									?.isoCode ?? "";
-
-							result.push({ value: c, displayText });
-						});
-
-					setCurrencyList(result);
-
-					if (defaultSelectAll) {
-						setSelected(result);
-					}
-				}
-			} catch (error) {}
-		};
-
 		if (allSiteList?.length && siteId) {
-			setCurrencies();
+			setCurrencyIds(
+				allSiteList.find(s => s.siteId === siteId)?.iCurrencyList
+			);
+
+			if (currencyData) {
+				setCurrencyList(currencyData);
+
+				if (defaultSelectFirst) {
+					setSelected(currencyData?.[0] ? [currencyData?.[0]] : []);
+				} else if (defaultSelectAll) {
+					setSelected(currencyData);
+				}
+			}
 		}
-	}, [siteId, JSON.stringify(allSiteList)]);
+	}, [siteId, JSON.stringify(allSiteList), currencyData]);
 
 	const OnSelectCurrency = item => {
 		setSelected(prev => {
@@ -62,11 +47,3 @@ const useSelectCurrencies = props => {
 };
 
 export default useSelectCurrencies;
-
-// useSelectCurrencies.defaultProps = {
-// 	siteId: null
-// };
-
-// useSelectCurrencies.propTypes = {
-// 	props: PropTypes.number
-// };
