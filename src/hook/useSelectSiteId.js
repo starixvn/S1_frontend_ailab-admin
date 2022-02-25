@@ -28,7 +28,7 @@ const useSelectSiteId = props => {
 		setSelected({ ...item, index });
 	};
 
-	const getAPIPayload = () => selected.map(s => s.value);
+	const getAPIPayload = () => [selected.value];
 
 	return { selected, OnSelect, options, getAPIPayload };
 };
