@@ -1,66 +1,70 @@
 {
-	"Common": {},
-	"Menu":{
-		"Home":{
-			"Home":"Home",
-			"Dashboard":"Dashboard"
+	"Common": {
+		"Download": "Download",
+		"DateRange": "Date Range",
+		"Search": "Search"
+	},
+	"Menu": {
+		"Home": {
+			"Home": "Home",
+			"Dashboard": "Dashboard"
 		},
-		"Reports":{
-			"Reports":"Reports",
-			"WinLostReport":"Win Lost Report",
-			"MainFinancialReport":"Main Financial Report",
-			"DepositReport":"Deposit Report",
-			"StatisticalReport":"Statistical Report",
-			"CustomerStatisticalReport":"Customer Statistical Report",
-			"UserOnlineReport":"User Online Report"
+		"Reports": {
+			"Reports": "Reports",
+			"WinLostReport": "Win Lost Report",
+			"MainFinancialReport": "Main Financial Report",
+			"DepositReport": "Deposit Report",
+			"StatisticalReport": "Statistical Report",
+			"CustomerStatisticalReport": "Customer Statistical Report",
+			"UserOnlineReport": "User Online Report"
 		},
-		"CSD":{
-			"CSD":"CSD",
+		"CSD": {
+			"CSD": "CSD",
 			"CustomerAdministration": "Customer Administration",
-			"Announcement":"Announcement",
-			"PersonalMsgBatch":"Personal Msg Batch",
-			"ChangeVipLevelBatch":"Change Vip Level (Batch)",
-			"WithdrawalKYCControl":"Withdrawal KYC Control",
-			"TeleCSD":"TeleCSD"
+			"Announcement": "Announcement",
+			"PersonalMsgBatch": "Personal Msg Batch",
+			"ChangeVipLevelBatch": "Change Vip Level (Batch)",
+			"WithdrawalKYCControl": "Withdrawal KYC Control",
+			"TeleCSD": "TeleCSD"
 		},
-		"Finance":{
-			"Finance":"Finance",
-			"BankCardManagement":"Bank Card Management",
-			"DepositRequest":"Deposit Request",
-			"WithdrawalRequest":"Withdrawal Request",
-			"BalanceAdjustment":"Balance Adjustment",
-			"BalanceAdjustmentBatch":"Balance Adjustment (Batch)",
-			"WithdrawalLimitAdjust":"WithdrawalLimit Adjustment",
-			"AdjustmentReport":"Adjustment Report",
-			"PaymentManagement":"Payment Management",
-			"DepositLimitManagement":"Deposit Limit Management",
-			"ThirdPartyAdjustment":"3RD Funds Adjustment",
-			"DepositList":"Deposit List"
+		"Finance": {
+			"Finance": "Finance",
+			"BankCardManagement": "Bank Card Management",
+			"DepositRequest": "Deposit Request",
+			"WithdrawalRequest": "Withdrawal Request",
+			"BalanceAdjustment": "Balance Adjustment",
+			"BalanceAdjustmentBatch": "Balance Adjustment (Batch)",
+			"WithdrawalLimitAdjust": "WithdrawalLimit Adjustment",
+			"AdjustmentReport": "Adjustment Report",
+			"PaymentManagement": "Payment Management",
+			"DepositLimitManagement": "Deposit Limit Management",
+			"ThirdPartyAdjustment": "3RD Funds Adjustment",
+			"DepositList": "Deposit List"
 		},
-		"Administration":{
-			"Administration":"Administration",
-			"GroupSetting":"Group Setting",
-			"UserSetting":"User Setting"
+		"Administration": {
+			"Administration": "Administration",
+			"GroupSetting": "Group Setting",
+			"UserSetting": "User Setting"
 		},
 
-		"Marketing":{
-			"Marketing":"Marketing",
-			"PointLevelManagement":"Point Level Management",
-			"BonusManagement":"Bonus Management",
-			"BonusInfoReport":"Bonus Report",
-			"BonusImport":"Bonus Import",
-			"PendingBonus":"Pending Bonus",
-			"RebateInfoReport":"Rebate Info",
-			"RebateLogReport":"Rebate Report",
-			"ReferralManagement":"Referral Management",
-			"ReferralReport":"Referral Report",
-			"NewsManage":"News Management",
-			"BannerManagement":"Banner Management",
-			"DrawPrizeReport":"Draw Prize Report",
-			"GameCasinoManagement":"Game Casino Management"
+		"Marketing": {
+			"Marketing": "Marketing",
+			"PointLevelManagement": "Point Level Management",
+			"BonusManagement": "Bonus Management",
+			"BonusInfoReport": "Bonus Report",
+			"BonusImport": "Bonus Import",
+			"PendingBonus": "Pending Bonus",
+			"RebateInfoReport": "Rebate Info",
+			"RebateLogReport": "Rebate Report",
+			"ReferralManagement": "Referral Management",
+			"ReferralReport": "Referral Report",
+			"NewsManage": "News Management",
+			"BannerManagement": "Banner Management",
+			"DrawPrizeReport": "Draw Prize Report",
+			"GameCasinoManagement": "Game Casino Management"
 		}
 	},
-	"Admin":{
+	"Admin": {
 		"lbl_Admin": "Admin",
 		"lbl_SignOut": "Sign out",
 		"lbl_SignIn": "Sign in",
@@ -73,7 +77,7 @@
 	"Error": {
 		"DefaultError": "Oops! Something went wrong..."
 	},
-	"ChangePwd":{
+	"ChangePwd": {
 		"lbl_ChangePassword": "Change Password",
 		"lbl_OldPassword": "Old Password",
 		"lbl_NewPassword": "New Password",
@@ -81,17 +85,30 @@
 		"PasswordNotMatchHint": "New password and confirm password does not match",
 		"PleaseEnterPassword": "Please enter password"
 	},
-	"PopBox":{
+	"Alert": {
+		"Success": "success"
+	},
+	"PopBox": {
 		"lbl_Cancel": "Cancel",
-		"lbl_Submit": "Submit"
+		"lbl_Submit": "Submit",
+		"lbl_Ok": "OK",
+		"Success": "Success"
 	},
-	"DepositList":{
-		"SubmitDate":"Submit Date",
-		"Currency":"Currency",
-		"Status":"Status"
+	"DepositList": {
+		"SubmitDate": "Submit Date",
+		"Currency": "Currency",
+		"Status": "Status"
 	},
-	"Hint":{
-		"NothingSelected":"Nothing Selected",
-		"ItemsSelected":"{{count}} items selected"
+	"Hint": {
+		"NothingSelected": "Nothing Selected",
+		"ItemsSelected": "{{count}} items selected"
+	},
+	"CSD": {
+		"PersonalMessage": {
+			"Title": "PersonalMessage",
+			"AddNew": "Add New",
+			"UploadBatchMessage": "Upload Batch Message",
+			"PopUp": "Pop Up"
+		}
 	}
 }

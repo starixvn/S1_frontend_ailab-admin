@@ -12,6 +12,8 @@ import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 
+import { PersonalMessage } from "./pages/CSD";
+
 const reactAlertOptions = {
 	timeout: 5000,
 	position: positions.BOTTOM_RIGHT
@@ -50,6 +52,12 @@ function App() {
 								<Route path={`/${path.login.root}`}>
 									<Login />
 								</Route>
+
+								<Route
+									path="/NewAdmin/Member/PersonalMessageBatch"
+									component={PersonalMessage}
+								/>
+
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
 								<Route component={NoMatch} />
