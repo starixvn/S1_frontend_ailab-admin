@@ -12,6 +12,7 @@ import IframePage from "./pages/iframePage";
 import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
+import DepositListing from "./pages/finance/depositListing";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -56,6 +57,10 @@ function App() {
 								</Route>
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
+								<Route
+									component={DepositListing}
+									path={`/${path.depositListing.root}`}
+								/>
 								<Route component={NoMatch} />
 							</Switch>
 						</Router>
