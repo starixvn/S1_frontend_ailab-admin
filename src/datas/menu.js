@@ -393,7 +393,8 @@ export default [
 				Controller: "Finance",
 				Action: "DepositList",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.Finance.WithdrawalRequest",

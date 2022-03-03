@@ -135,10 +135,28 @@
 	"DepositList":{
 		"SubmitDate":"Submit Date",
 		"Currency":"Currency",
-		"Status":"Status"
+		"Status":"Status",
+		"Type":"Type",
+		"VIPLevel":"VIPLevel",
+		"ReferenceId":"Reference Id",
+		"MemberCode":"Member Code",
+		"Amount":"Amount",
+		"SiteId":"SiteId",
+		"Submit":"Submit",
+		"AddNew":"Add New",
+		"Reject":"Reject",
+		"CompanyAccount":"Company Account",
+		"Bank":"Bank",
+		"CompanyAccountName":"Company Account Name",
+		"BankReferenceNo":"Bank Reference No.",
+		"DepositDate":"Deposit Date",
+		"Remark":"Remark",
+		"BankSlip":"Bank Slip",
+		"Cancel":"Cancel"
 	},
 	"Hint":{
 		"NothingSelected":"Nothing Selected",
-		"ItemsSelected":"{{count}} items selected"
+		"ItemsSelected":"{{count}} items selected",
+		"ShowingEntriesHint": "Showing {{firstEntry}} to {{lastEntry}} of {{totalEntries}} entries"
 	}
 }

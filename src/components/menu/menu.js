@@ -16,7 +16,7 @@ const Levels = ({
 }) => {
 	if (!level) return null;
 	const subItems = level.map(s => {
-		const { Controller, Action, FuncKey, displayKey, Title } = s;
+		const { Controller, Action, FuncKey, displayKey, Title, NewAdmin } = s;
 		const pathName = `${Controller}/${Action}`;
 		const displayText = t(displayKey);
 
@@ -25,7 +25,8 @@ const Levels = ({
 			Controller,
 			Action,
 			Title: displayText,
-			FuncKey
+			FuncKey,
+			NewAdmin
 		};
 
 		if (!s.Childs) {
@@ -36,7 +37,11 @@ const Levels = ({
 					key={`menu-${displayKey}-${FuncKey}`}
 					className="nav-link"
 					to={{
-						pathname: `/${siteInfo.oldSitePrefixUrl}/${pathName}`,
+						pathname: `/${
+							NewAdmin
+								? siteInfo.newSitePrefixUrl
+								: siteInfo.oldSitePrefixUrl
+						}/${pathName}`,
 						state: params
 					}}>
 					{displayText}
@@ -88,7 +93,7 @@ const Levels = ({
 				</div>
 			</>
 		);
-		console.log(displayKey);
+
 		return isFirstLevel ? (
 			<div className="accordion-item" key={`Menu-${displayKey}`}>
 				{content}
