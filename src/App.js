@@ -16,7 +16,7 @@ import DepositListing from "./pages/finance/depositListing";
 
 const reactAlertOptions = {
 	timeout: 5000,
-	position: positions.MIDDLE
+	position: positions.BOTTOM_RIGHT
 };
 
 const iframeRoutes = () => {
@@ -55,6 +55,7 @@ function App() {
 								<Route exact path={`/${path.dashboard.root}`}>
 									<Dashboard />
 								</Route>
+
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
 								<Route
