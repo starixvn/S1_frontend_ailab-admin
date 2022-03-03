@@ -27,3 +27,8 @@ export const enumRequest = axios.create({
 	withCredentials: true,
 	baseURL: `${rootURL}/apiV2/Enum`
 });
+
+export const permissionRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/ApiV2/Permission`
+});

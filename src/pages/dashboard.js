@@ -1,7 +1,9 @@
 import Layout from "../components/layout";
+import Menu from "../components/menu/menu";
 
 const Index = () => (
 	<Layout>
+		<Menu />
 		<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 			{/* <div className="row bd-example">
 				<div className="col-lg-4">

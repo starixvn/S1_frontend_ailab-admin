@@ -16,48 +16,95 @@
 		},
 		"CSD":{
 			"CSD":"CSD",
+			"Communication":"Communication",
+			"KYC":"KYC",
+			"MemberGameSetting":"MemberGameSetting",
 			"CustomerAdministration": "Customer Administration",
-			"Announcement":"Announcement",
-			"PersonalMsgBatch":"Personal Msg Batch",
+			"PersonalMessage":"Personal Message",
 			"ChangeVipLevelBatch":"Change Vip Level (Batch)",
 			"WithdrawalKYCControl":"Withdrawal KYC Control",
-			"TeleCSD":"TeleCSD"
+			"TeleCSD":"TeleCSD",
+			"TagManagement":"Tag Management",
+			"RegistrationManagement": "Registration Management",
+			"DisableUserForGame": "Disable User For Game",
+			"UserBetLimit": "User Bet Limit",
+			"TpFailRecordReport": "Bet Failure Record"
+
 		},
 		"Finance":{
 			"Finance":"Finance",
 			"BankCardManagement":"Bank Card Management",
 			"DepositRequest":"Deposit Request",
 			"WithdrawalRequest":"Withdrawal Request",
-			"BalanceAdjustment":"Balance Adjustment",
-			"BalanceAdjustmentBatch":"Balance Adjustment (Batch)",
+			"BalanceAdjustment":"Withdrawable Adjustment",
+			"BalanceAdjustmentBatch":"Adjustment Listing",
 			"WithdrawalLimitAdjust":"WithdrawalLimit Adjustment",
-			"AdjustmentReport":"Adjustment Report",
-			"PaymentManagement":"Payment Management",
-			"DepositLimitManagement":"Deposit Limit Management",
-			"ThirdPartyAdjustment":"3RD Funds Adjustment",
-			"DepositList":"Deposit List"
+			"AdjustmentReport":"Adjustment",
+			"PaymentManagement":"Payment Gateway",
+			"DepositLimitManagement":"Deposit Limit",
+			"ThirdPartyAdjustment":"Game Wallet Adjustment",
+			"WithdrawalAccountingList": "Withdrawal Accounting",
+			"BonusPayout": "Bonus Payout",
+			"Setting": "Setting",
+			"Report": "Report",
+			"DepositTimeReport": "Deposit Time",
+			"WithdrawalTimeReport": "Withdrawal Time",
+			"WithdrawalLimitManagement": "Withdrawal Limit",
+			"USDTWithdrawalLimitManagement": "Crypto Withdrawal Limit",
+			"AdjustmentLimitManagement": "Adjustment Limit"
 		},
 		"Administration":{
 			"Administration":"Administration",
 			"GroupSetting":"Group Setting",
-			"UserSetting":"User Setting"
+			"UserSetting":"User Setting",
+			"AdjustmentLogReport":"User Activity Log",
+			"SpecialPasswordManagement": "Special Password Management"
 		},
-
+		"Game":{
+			"FailBet":"FailBet",
+			"Game":"Game"
+		},
 		"Marketing":{
 			"Marketing":"Marketing",
+			"Rebate":"Rebate",
+			"Bonus":"Bonus",
+			"Reward":"Reward",
+			"Referral":"Referral",
+			"Setting":"Setting",
 			"PointLevelManagement":"Point Level Management",
 			"BonusManagement":"Bonus Management",
-			"BonusInfoReport":"Bonus Report",
-			"BonusImport":"Bonus Import",
+			"AppliedBonus":"Bonus Report",
 			"PendingBonus":"Pending Bonus",
 			"RebateInfoReport":"Rebate Info",
 			"RebateLogReport":"Rebate Report",
 			"ReferralManagement":"Referral Management",
 			"ReferralReport":"Referral Report",
-			"NewsManage":"News Management",
-			"BannerManagement":"Banner Management",
 			"DrawPrizeReport":"Draw Prize Report",
-			"GameCasinoManagement":"Game Casino Management"
+			"VipRebateInfoReport" : "Vip Rebate Report",
+			"VipLevelReview": "Vip Level Review",
+			"VipRebateManagement": "Vip Rebate Management",
+			"VerificationReward": "Verification Reward",
+			"VerificationRewardReport": "Verification Reward Report"
+		},
+		"BankFinancial":{
+			"BankFinancial": "Bank Transfer",
+			"TransferAccountManage":"Bank Transfer Account",
+			"TransferManage": "Transfer Management",
+			"TransferInfoReport": "Transfer Report",
+			"BankFinancialReport": "BankFinancial Report",
+			"ReasonManagement": "Reason Management"
+		},
+		"Content": {
+			"Content":"Content",
+			"Announcement":"Announcement",
+			"NewsManage":"News Management",
+			"BannerManagement": "Banner Management",
+			"GameCasinoManagement": "Game Casino Management",
+			"LatestHighlightVideoManagement": "Latest Highlight Video Management",
+			"DomainManagement": "Domain Management",
+			"VendersMaintenance": "Venders Maintenance",
+			"LeaderBoardExtraPoint": "LeaderBoard ExtraPoint",
+			"AppLinkManagement": "App Link Management"
 		}
 	},
 	"Admin":{
