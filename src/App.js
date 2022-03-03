@@ -14,7 +14,7 @@ import { siteInfo } from "./config";
 
 const reactAlertOptions = {
 	timeout: 5000,
-	position: positions.MIDDLE
+	position: positions.BOTTOM_RIGHT
 };
 
 const iframeRoutes = () => {
