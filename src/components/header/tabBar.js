@@ -26,12 +26,19 @@ const useHandleTab = ({ locationFuncKey, currentState }) => {
 						if (Childs) {
 							return Childs.every(c => {
 								if (c.isIndex) {
-									const { Controller, FuncKey, Action } = c;
+									const {
+										Controller,
+										FuncKey,
+										Action,
+										NewAdmin
+									} = c;
+
 									tabBar = {
 										Controller,
 										FuncKey,
 										Action,
-										Title: t(c.displayKey)
+										Title: t(c.displayKey),
+										NewAdmin
 									};
 									return false;
 								}
@@ -65,9 +72,11 @@ const useHandleTab = ({ locationFuncKey, currentState }) => {
 
 		if (locationFuncKey === FuncKey) {
 			history.push({
-				pathname: `/${siteInfo.oldSitePrefixUrl}/${getPathName(
-					afterCloselinkState
-				)}`,
+				pathname: `/${
+					currentState.NewAdmin
+						? siteInfo.newSitePrefixUrl
+						: siteInfo.oldSitePrefixUrl
+				}/${getPathName(afterCloselinkState)}`,
 				state: afterCloselinkState
 			});
 		}
@@ -87,8 +96,15 @@ const TabBar = () => {
 	const length = menu.tabBar?.length - 1 ?? 0;
 	const allowToClose = length !== 0;
 	const tabs = menu.tabBar?.map(
-		({ Category, Controller, Action, Title, FuncKey }, idx) => {
-			const linkState = { Category, Controller, Action, Title, FuncKey };
+		({ Category, Controller, Action, Title, FuncKey, NewAdmin }, idx) => {
+			const linkState = {
+				Category,
+				Controller,
+				Action,
+				Title,
+				FuncKey,
+				NewAdmin
+			};
 
 			const afterCloselinkState =
 				idx === length ? menu.tabBar[idx - 1] : menu.tabBar[idx + 1];
@@ -125,9 +141,11 @@ const TabItem = ({ linkState, clickClose, active, allowToClose }) => (
 	<div className={`btn btn-outline-primary${active ? " active" : ""}`}>
 		<Link
 			to={{
-				pathname: `/${siteInfo.oldSitePrefixUrl}/${getPathName(
-					linkState
-				)}`,
+				pathname: `/${
+					linkState?.NewAdmin
+						? siteInfo.newSitePrefixUrl
+						: siteInfo.oldSitePrefixUrl
+				}/${getPathName(linkState)}`,
 				state: linkState
 			}}>
 			{linkState.Title}
@@ -146,7 +164,8 @@ TabItem.propTypes = {
 	linkState: PropTypes.shape({
 		Controller: PropTypes.string.isRequired,
 		Action: PropTypes.string.isRequired,
-		Title: PropTypes.string.isRequired
+		Title: PropTypes.string.isRequired,
+		NewAdmin: PropTypes.bool
 	}).isRequired,
 	clickClose: PropTypes.func.isRequired,
 	active: PropTypes.bool.isRequired,

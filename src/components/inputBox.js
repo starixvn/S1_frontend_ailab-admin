@@ -1,5 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const Requried = styled.label`
+	color: #a94442;
+`;
 
 const InputBox = ({
 	title,
@@ -7,10 +12,16 @@ const InputBox = ({
 	onChange,
 	placeholder,
 	inputType,
-	className
+	className,
+	disabled,
+	required,
+	onBlur
 }) => (
 	<div className={className}>
-		<h6>{title}</h6>
+		<h6>
+			{required && <Requried>*</Requried>}
+			{title}
+		</h6>
 		<div className="input-group">
 			<input
 				type={inputType ?? "text"}
@@ -19,6 +30,8 @@ const InputBox = ({
 				value={value}
 				aria-describedby="basic-addon1"
 				onChange={onChange}
+				disabled={disabled}
+				onBlur={onBlur}
 			/>
 		</div>
 	</div>
@@ -28,7 +41,10 @@ InputBox.defaultProps = {
 	title: "",
 	placeholder: "",
 	inputType: "",
-	className: ""
+	className: "",
+	disabled: false,
+	required: false,
+	onBlur: () => {}
 };
 
 InputBox.propTypes = {
@@ -41,7 +57,10 @@ InputBox.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	placeholder: PropTypes.string,
 	inputType: PropTypes.string,
-	className: PropTypes.string
+	className: PropTypes.string,
+	disabled: PropTypes.bool,
+	required: PropTypes.bool,
+	onBlur: PropTypes.func
 };
 
 export default InputBox;

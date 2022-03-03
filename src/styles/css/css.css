@@ -214,23 +214,31 @@ input[type=date] {
   justify-content: flex-end;
 }
 
-.table th, .table td {
+.table > :not(caption) > * > * {
+  vertical-align: middle;
+}
+
+.table th {
   border: 1px solid #dee2e6;
   white-space: nowrap;
 }
 
-.table th .btn-sm, .table td .btn-sm {
+.table th .btn-sm {
   margin-left: 0.5rem;
   padding: 0 0.5rem;
   background: transparent;
 }
 
-.table th .btn-sm i.icon-view-show:before, .table td .btn-sm i.icon-view-show:before {
+.table th .btn-sm i.icon-view-show:before {
   content: "\e906" !important;
 }
 
 .table.w-auto:nth-child(n+2) tr th:first-child {
   display: none;
+}
+
+.table td button {
+  margin-right: 0.2rem;
 }
 
 iframe {
@@ -280,12 +288,20 @@ iframe {
   box-shadow: none;
 }
 
-#sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse .nav-link {
-  padding: 0.5rem 1rem 0.5rem 5rem;
+#sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse > .nav-link {
+  padding: 0.5rem 1rem 0.5rem 4.5rem;
 }
 
-#sidebarMenu .accordion-button + .accordion-collapse .accordion-button + .accordion-collapse .accordion-button:before, #sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse .nav-link:before {
+#sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse > .accordion-button:before, #sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse > .nav-link:before, #sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse > .nav-link.accordion-button + .accordion-collapse > .nav-link:before {
   left: 4rem !important;
+}
+
+#sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse > .nav-link.accordion-button + .accordion-collapse > .nav-link {
+  padding: 0.5rem 1rem 0.5rem 5.5rem;
+}
+
+#sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse > .nav-link.accordion-button + .accordion-collapse > .accordion-button:before, #sidebarMenu .accordion-collapse .accordion-button + .accordion-collapse > .nav-link.accordion-button + .accordion-collapse > .nav-link:before {
+  left: 5rem !important;
 }
 
 #sidebarMenu.sidebar {
@@ -297,7 +313,7 @@ iframe {
   position: relative;
 }
 
-#sidebarMenu.sidebar .nav-link:before, #sidebarMenu.sidebar .accordion-collapse .accordion-button:before, #sidebarMenu.sidebar .accordion-collapse .accordion-button + .accordion-collapse .nav-link:before {
+#sidebarMenu.sidebar .nav-link:before, #sidebarMenu.sidebar .accordion-collapse .accordion-button:before, #sidebarMenu.sidebar .accordion-collapse .accordion-button + .accordion-collapse > .nav-link:before, #sidebarMenu.sidebar .accordion-collapse .accordion-button + .accordion-collapse > .nav-link.accordion-button + .accordion-collapse > .nav-link:before {
   content: '.';
   font-size: 16px;
   vertical-align: text-bottom;
@@ -464,7 +480,13 @@ h6 {
   align-items: center;
 }
 
-.financeInformation > .card-body .card-title + .row > .col-xxl-4 > .card > div:last-child {
+.financeInformation > .card-body .bg-success {
+  color: white;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.enIcon {
   width: 3rem;
   height: 3rem;
   border-radius: 100%;
@@ -478,10 +500,35 @@ h6 {
   font-size: 1.5rem;
 }
 
-.financeInformation > .card-body .bg-success {
-  color: white;
-  padding: 0 0.5rem;
-  border-radius: 0.25rem;
+.gameInformation .card {
+  margin-top: 0;
+  flex-flow: row;
+  align-items: center;
+}
+
+.gameInformation .card .small + div {
+  font-weight: bold;
+}
+
+.gameInformation .row .col-md-6 {
+  padding: 0 1rem 1rem;
+}
+
+.walletInformation .row div:nth-child(2) i {
+  margin-left: 0.5rem;
+  display: inline-flex;
+}
+
+.walletInformation .row div:nth-child(2) i:before {
+  font-size: 12px;
+}
+
+.walletInformation .row div:last-child {
+  text-align: right;
+}
+
+.walletInformation .row:last-child div:last-child {
+  font-weight: bold;
 }
 
 @media (max-width: 920px) {
@@ -512,4 +559,48 @@ h6 {
   .navbar .quickLink {
     display: none;
   }
+}
+
+.square {
+  padding: 0.25rem 0.5rem;
+  color: white;
+  width: 5rem;
+  text-align: center;
+}
+
+.modal-body {
+  overflow-y: auto;
+  max-height: 512px;
+  max-width: 490px;
+  overflow-x: clip;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: rgba(149, 149, 149, 0.3);
+}
+
+.modal-body .rdw-editor-toolbar {
+  position: relative;
+}
+
+.modal-body .rdw-editor-toolbar .rdw-colorpicker-wrapper {
+  position: unset;
+}
+
+.modal-body .rdw-editor-toolbar .rdw-colorpicker-wrapper .rdw-colorpicker-modal {
+  left: auto;
+  right: 0;
+  top: 0;
+  transform: translateY(calc(50% + 20px));
+}
+
+input[type="color"].btn {
+  height: unset;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
 }

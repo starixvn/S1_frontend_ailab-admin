@@ -16,9 +16,11 @@ const Wrapper = ({ children }) => {
 	} = useConfirmModal();
 	const location = useLocation();
 	const [menu, setMenu] = useState({
-		allowfuncKeys: [],
+		allowfuncKeys: {},
 		collapse: false,
-		showArea: location?.state?.Category ?? siteInfo.defaultCategory,
+		showArea: location?.state?.Category
+			? [location?.state?.Category]
+			: [siteInfo.defaultCategory],
 		tabBar: []
 	});
 
