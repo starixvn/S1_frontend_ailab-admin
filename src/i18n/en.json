@@ -157,6 +157,8 @@
 	"Hint":{
 		"NothingSelected":"Nothing Selected",
 		"ItemsSelected":"{{count}} items selected",
-		"ShowingEntriesHint": "Showing {{firstEntry}} to {{lastEntry}} of {{totalEntries}} entries"
+		"ShowingEntriesHint": "Showing {{firstEntry}} to {{lastEntry}} of {{totalEntries}} entries",
+		"Show": "Show",
+		"Entries": "Entries"
 	}
 }
