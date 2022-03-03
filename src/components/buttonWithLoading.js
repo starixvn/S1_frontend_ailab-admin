@@ -17,7 +17,7 @@ const ButtonWithLoading = ({
 		disabled={loading}
 		onClick={onClick}
 		type={type}
-		style={style}
+		style={{ width: "80px" }}
 		variant={variant}
 		alt={alt}
 		{...props}>
@@ -42,7 +42,6 @@ ButtonWithLoading.defaultProps = {
 	variant: "primary",
 	alt: "submit",
 	children: null,
-	style: {},
 	props: {}
 };
 
@@ -53,7 +52,6 @@ ButtonWithLoading.propTypes = {
 	variant: string,
 	alt: string,
 	children: node,
-	style: objectOf(any),
 	props: objectOf(any)
 };
 
