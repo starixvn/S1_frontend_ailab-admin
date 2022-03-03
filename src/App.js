@@ -5,6 +5,7 @@ import { positions, Provider as ReactAlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import i18n from "./i18n/config";
 import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
 import path from "./path";
 import NoMatch from "./pages/404";
 import IframePage from "./pages/iframePage";
@@ -49,6 +50,9 @@ function App() {
 							<Switch>
 								<Route path={`/${path.login.root}`}>
 									<Login />
+								</Route>
+								<Route exact path={`/${path.dashboard.root}`}>
+									<Dashboard />
 								</Route>
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
