@@ -14,9 +14,11 @@ import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import DepositListing from "./pages/finance/depositListing";
 
+import { PersonalMessage } from "./pages/CSD";
+
 const reactAlertOptions = {
 	timeout: 5000,
-	position: positions.MIDDLE
+	position: positions.BOTTOM_RIGHT
 };
 
 const iframeRoutes = () => {
@@ -55,6 +57,12 @@ function App() {
 								<Route exact path={`/${path.dashboard.root}`}>
 									<Dashboard />
 								</Route>
+
+								<Route
+									path="/NewAdmin/Member/PersonalMessageBatch"
+									component={PersonalMessage}
+								/>
+
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
 								<Route

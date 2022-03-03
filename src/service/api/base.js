@@ -15,7 +15,7 @@ export const commonRequest = axios.create({
 
 export const personalMessageRequest = axios.create({
 	withCredentials: true,
-	baseURL: `${rootURL}/api/PersonalMessage`
+	baseURL: `${rootURL}/apiV2/PersonalMessage`
 });
 
 export const getAllDataRequest = axios.create({
