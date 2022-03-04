@@ -126,61 +126,6 @@ export default [
 		]
 	},
 	{
-		displayKey: "Menu.Reports.Reports",
-		Icon: "report",
-		Category: [defMenuCategory.Reports],
-		Childs: [
-			{
-				displayKey: "Menu.Reports.WinLostReport",
-				FuncKey: "LicWinLost/Report",
-				Controller: "Report",
-				Action: "LicWinLost",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.MainFinancialReport",
-				FuncKey: "Report/MainFinancialReport",
-				Controller: "Report",
-				Action: "MainFinancialReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.DepositReport",
-				FuncKey: "Report/DepositReport",
-				Controller: "Report",
-				Action: "DepositReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.StatisticalReport",
-				FuncKey: "Report/StatisticalReport",
-				Controller: "Report",
-				Action: "StatisticalReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.CustomerStatisticalReport",
-				FuncKey: "Report/CustomerStatisticalReport",
-				Controller: "Report",
-				Action: "CustomerStatisticalReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.UserOnlineReport",
-				FuncKey: "Report/UserOnlineReport",
-				Controller: "Report",
-				Action: "UserOnlineReport",
-				Icon: "",
-				Childs: null
-			}
-		]
-	},
-	{
 		displayKey: "Menu.CSD.CSD",
 		Icon: "csd",
 		Category: [defMenuCategory.CSD.CSD],
@@ -782,6 +727,61 @@ export default [
 				FuncKey: "BankFinancial/ReasonManagement",
 				Controller: "BankFinancial",
 				Action: "ReasonManagement",
+				Icon: "",
+				Childs: null
+			}
+		]
+	},
+	{
+		displayKey: "Menu.Reports.Reports",
+		Icon: "report",
+		Category: [defMenuCategory.Reports],
+		Childs: [
+			{
+				displayKey: "Menu.Reports.WinLostReport",
+				FuncKey: "LicWinLost/Report",
+				Controller: "Report",
+				Action: "LicWinLost",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.MainFinancialReport",
+				FuncKey: "Report/MainFinancialReport",
+				Controller: "Report",
+				Action: "MainFinancialReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.DepositReport",
+				FuncKey: "Report/DepositReport",
+				Controller: "Report",
+				Action: "DepositReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.StatisticalReport",
+				FuncKey: "Report/StatisticalReport",
+				Controller: "Report",
+				Action: "StatisticalReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.CustomerStatisticalReport",
+				FuncKey: "Report/CustomerStatisticalReport",
+				Controller: "Report",
+				Action: "CustomerStatisticalReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.UserOnlineReport",
+				FuncKey: "Report/UserOnlineReport",
+				Controller: "Report",
+				Action: "UserOnlineReport",
 				Icon: "",
 				Childs: null
 			}

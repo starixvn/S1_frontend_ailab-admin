@@ -50,7 +50,7 @@
 		"Finance": {
 			"Finance": "Finance",
 			"BankCardManagement": "Bank Card Management",
-			"DepositRequest": "Deposit Request",
+			"DepositRequest": "Deposit Listing",
 			"WithdrawalRequest": "Withdrawal Request",
 			"BalanceAdjustment": "Withdrawable Adjustment",
 			"BalanceAdjustmentBatch": "Adjustment Listing",
