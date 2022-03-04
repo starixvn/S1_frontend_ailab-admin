@@ -22,7 +22,7 @@ const InputBox = ({
 			{required && <Requried>*</Requried>}
 			{title}
 		</h6>
-		<div className="input-group">
+		<div className="input-group has-validation">
 			<input
 				type={inputType ?? "text"}
 				className="form-control"
@@ -32,7 +32,9 @@ const InputBox = ({
 				onChange={onChange}
 				disabled={disabled}
 				onBlur={onBlur}
+				required={required}
 			/>
+			<div className="invalid-feedback">Please choose a username.</div>
 		</div>
 	</div>
 );

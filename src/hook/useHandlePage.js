@@ -7,7 +7,6 @@ const useHandlePage = ({ callback }) => {
 
 	const clickPageNumber = pageNum => {
 		setPageData(prev => ({ ...prev, page: pageNum }));
-		callback({ page: pageNum, pageSize: pageData.entries });
 	};
 
 	const onSelectEntry = pageSizeData => {
