@@ -41,6 +41,7 @@ const InputBox = ({
 
 InputBox.defaultProps = {
 	title: "",
+	value: "",
 	placeholder: "",
 	inputType: "",
 	className: "",
@@ -55,7 +56,7 @@ InputBox.propTypes = {
 		PropTypes.string,
 		PropTypes.number,
 		PropTypes.object
-	]).isRequired,
+	]),
 	onChange: PropTypes.func.isRequired,
 	placeholder: PropTypes.string,
 	inputType: PropTypes.string,
