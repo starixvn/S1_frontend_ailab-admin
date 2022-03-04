@@ -5,6 +5,7 @@ import { positions, Provider as ReactAlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import i18n from "./i18n/config";
 import Login from "./pages/login";
+import Tagmanagement from "./pages/csd/tagManagement";
 import Dashboard from "./pages/dashboard";
 import path from "./path";
 import NoMatch from "./pages/404";
@@ -51,6 +52,10 @@ function App() {
 							<Switch>
 								<Route path={`/${path.login.root}`}>
 									<Login />
+								</Route>
+
+								<Route path={`/${path.tagManagement.root}`}>
+									<Tagmanagement />
 								</Route>
 								<Route exact path={`/${path.dashboard.root}`}>
 									<Dashboard />

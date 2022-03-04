@@ -207,7 +207,8 @@ export default [
 				Controller: "CustManage",
 				Action: "TagManagement",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.CSD.RegistrationManagement",
