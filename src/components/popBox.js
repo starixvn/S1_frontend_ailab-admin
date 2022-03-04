@@ -38,7 +38,9 @@ const PopBox = () => {
 
 	return (
 		<div
-			className={`modal fade${popBox.isOpen ? " show" : ""}`}
+			className={`modal fade${
+				popBox.isOpen ? " show" : ""
+			} modal-level-1`}
 			id="exampleModalCenter"
 			tabIndex="-1"
 			aria-labelledby="exampleModalCenterTitle"
