@@ -162,10 +162,12 @@
 		"BankSlip": "Bank Slip",
 		"Cancel": "Cancel"
 	},
-	"Hint": {
-		"NothingSelected": "Nothing Selected",
-		"ItemsSelected": "{{count}} items selected",
-		"ShowingEntriesHint": "Showing {{firstEntry}} to {{lastEntry}} of {{totalEntries}} entries"
+	"Hint":{
+		"NothingSelected":"Nothing Selected",
+		"ItemsSelected":"{{count}} items selected",
+		"ShowingEntriesHint": "Showing {{firstEntry}} to {{lastEntry}} of {{totalEntries}} entries",
+		"Show": "Show",
+		"Entries": "Entries"
 	},
 	"CSD": {
 		"PersonalMessage": {

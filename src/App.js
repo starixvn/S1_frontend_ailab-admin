@@ -58,11 +58,6 @@ function App() {
 									<Dashboard />
 								</Route>
 
-								<Route
-									path="/NewAdmin/Member/PersonalMessageBatch"
-									component={PersonalMessage}
-								/>
-
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
 								<Route
