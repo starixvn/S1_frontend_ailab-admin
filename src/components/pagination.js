@@ -75,7 +75,7 @@ const BasicPagination = ({
 	totalPages,
 	clickPageNumber,
 	pageSize,
-	totalEntries,
+	rowCount,
 	onSelectEntry,
 	entryOptions,
 	headerComponent
@@ -92,7 +92,7 @@ const BasicPagination = ({
 		}
 
 		if (page !== currentPage && clickPageNumber) {
-			clickPageNumber(page);
+			clickPageNumber({ pageNumber: page });
 		}
 	};
 
@@ -132,10 +132,8 @@ const BasicPagination = ({
 						{t("Hint.ShowingEntriesHint", {
 							firstEntry,
 							lastEntry:
-								lastEntry > totalEntries
-									? totalEntries
-									: lastEntry,
-							totalEntries: totalEntries || 0
+								lastEntry > rowCount ? rowCount : lastEntry,
+							rowCount: rowCount || 0
 						})}
 					</div>
 					<Pagination className="d-flex justify-content-center float-end">
@@ -162,7 +160,7 @@ BasicPagination.defaultProps = {
 	currentPage: 1,
 	totalPages: 0,
 	pageSize: 10,
-	totalEntries: 0,
+	rowCount: 0,
 	t: () => {},
 	entryOptions: defaultEntryOptions,
 	headerComponent: null
@@ -173,7 +171,7 @@ BasicPagination.propTypes = {
 	totalPages: PropTypes.number,
 	clickPageNumber: PropTypes.func.isRequired,
 	pageSize: PropTypes.number,
-	totalEntries: PropTypes.number,
+	rowCount: PropTypes.number,
 	t: PropTypes.func,
 	children: PropTypes.node.isRequired,
 	onSelectEntry: PropTypes.func.isRequired,
