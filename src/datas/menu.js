@@ -186,12 +186,13 @@ export default [
 		Category: [defMenuCategory.CSD.CSD],
 		Childs: [
 			{
-				displayKey: "Menu.CSD.CustomerAdministration",
+				displayKey: "Menu.CSD.MemberListing",
 				FuncKey: "CustManage/CustInfoList",
-				Controller: "CustManage",
-				Action: "CustInfoList",
+				Controller: "member",
+				Action: "memberList",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.CSD.ChangeVipLevelBatch",

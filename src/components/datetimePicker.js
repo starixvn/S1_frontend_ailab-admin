@@ -9,7 +9,8 @@ export default function Component({
 	id,
 	setDateRange,
 	isRange = true,
-	timePicker = true
+	timePicker = true,
+	disabled = false
 }) {
 	useEffect(() => {
 		const updateConfig = ({ startDate, endDate }) => {
@@ -106,6 +107,7 @@ export default function Component({
 			style={{ display: "block" }}
 			autoComplete="off"
 			required
+			disabled={disabled}
 		/>
 	);
 }

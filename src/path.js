@@ -15,5 +15,8 @@ export default {
 	},
 	dashboard: {
 		root: "dashboard"
+	},
+	memberList: {
+		root: `${siteInfo.newSitePrefixUrl}/member/memberList`
 	}
 };
