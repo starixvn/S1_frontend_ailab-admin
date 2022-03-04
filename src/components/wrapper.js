@@ -15,7 +15,6 @@ const Wrapper = ({ children }) => {
 			: [siteInfo.defaultCategory],
 		tabBar: []
 	});
-
 	const [userInfo, setUserInfo] = useState({
 		isLogin: null,
 		userName: null

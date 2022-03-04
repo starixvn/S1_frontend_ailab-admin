@@ -88,7 +88,6 @@ const Levels = ({
 				</div>
 			</>
 		);
-		console.log(displayKey);
 		return isFirstLevel ? (
 			<div className="accordion-item" key={`Menu-${displayKey}`}>
 				{content}
@@ -138,8 +137,7 @@ const Menu = () => {
 
 	const areaHandler = ({ area }) => {
 		setMenu(prev => {
-			let oldShowArea = JSON.parse(JSON.stringify(prev.showArea));
-
+			let oldShowArea = JSON.parse(JSON.stringify(prev.showArea)) ?? [];
 			if (area.length > prev.showArea) {
 				// open
 				oldShowArea.push(area[area.length - 1]);

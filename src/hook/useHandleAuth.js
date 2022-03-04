@@ -16,7 +16,7 @@ const useHandleAuth = ({ userInfo, setUserInfo }) => {
 	const isMountedRef = useRef(null);
 	const alert = useAlert();
 	const { t } = useTranslation();
-	const { setMenu } = useContext(menuContext);
+	const { menu, setMenu } = useContext(menuContext);
 
 	useEffect(() => {
 		isMountedRef.current = true;
@@ -62,6 +62,7 @@ const useHandleAuth = ({ userInfo, setUserInfo }) => {
 				if (!isMountedRef.current) return;
 				if (res.data.errorCode === 0) {
 					setUserInfo({ isLogin: true, userName });
+
 					setMenu(prev => ({
 						...prev,
 						showArea: siteInfo.defaultCategory,
