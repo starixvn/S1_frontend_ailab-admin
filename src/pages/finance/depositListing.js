@@ -141,10 +141,15 @@ export default function Page() {
 		} catch (error) {}
 	};
 
-	const onSubmit = async ({ page, pageSize }) => {
+	const onSubmit = async ({
+		currentPage,
+		pageSize,
+		clickPageNumber,
+		resetPage
+	}) => {
 		try {
 			const res = await api_Deposit_GetList({
-				pageNumber: page,
+				pageNumber: currentPage ?? 1,
 				pageSize,
 				siteIds: siteId_getAPIPayload(siteId_selected),
 				depositId: refId,
@@ -171,6 +176,10 @@ export default function Page() {
 					rowCount: res.data.rowCount,
 					totalPages: res.data.totalPages
 				});
+
+				if (resetPage) {
+					clickPageNumber({ pageNumber: 1, execCallback: false });
+				}
 			}
 		} catch (error) {
 			console.log(error);
@@ -256,8 +265,10 @@ export default function Page() {
 						type="submit"
 						onClick={() =>
 							onSubmit({
-								page: currentPage,
-								pageSize
+								currentPage,
+								pageSize,
+								clickPageNumber,
+								resetPage: true
 							})
 						}>
 						{t("DepositList.Submit")}
@@ -285,7 +296,7 @@ export default function Page() {
 							clickPageNumber,
 							onSelectEntry,
 							totalPages: result.totalPages,
-							totalEntries: result.rowCount
+							rowCount: result.rowCount
 						}}
 					/>
 				)}
@@ -510,7 +521,7 @@ const Result = ({ datas, options, selectAll, onReject, pageInfo }) => {
 					t={t}
 					currentPage={pageInfo.currentPage}
 					totalPages={pageInfo.totalPages}
-					totalEntries={pageInfo.totalEntries}
+					rowCount={pageInfo.rowCount}
 					pageSize={pageInfo.pageSize}
 					clickPageNumber={pageInfo.clickPageNumber}
 					onSelectEntry={pageInfo.onSelectEntry}
