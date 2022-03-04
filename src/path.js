@@ -1,3 +1,5 @@
+import { siteInfo } from "./config";
+
 export default {
 	home: {
 		root: "/"
@@ -5,8 +7,8 @@ export default {
 	login: {
 		root: "login"
 	},
-	depositListing: {
-		root: "newadmin/finance/depositList"
+	depositList: {
+		root: `${siteInfo.newSitePrefixUrl}/finance/depositList`
 	},
 	dashboard: {
 		root: "dashboard"
