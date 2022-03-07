@@ -1,5 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useAlert } from "react-alert";
 import { Button, Form, Modal, InputGroup, FormControl } from "react-bootstrap";
 import styled from "styled-components";
 import dayjs from "dayjs";
@@ -20,7 +21,8 @@ import {
 	useSelectEnumTypes,
 	useSelectCheckBox,
 	useGetCurrencyData,
-	useMounted
+	useMounted,
+	useHandlePage
 } from "../../hook";
 
 import {
@@ -30,8 +32,7 @@ import {
 import { api_WithdrawalLimitAdjustment_GetCustAndWalletInfo } from "../../service/api/WithdrawalLimitAdjustment";
 import { api_BaseData_GetBankInfoOffListByCustVerify } from "../../service/api/baseData";
 import { api_DepositSubmission_Submit } from "../../service/api/depositSubmission";
-
-import { popBoxContext } from "../../components/context";
+import { Empty } from "../../components/empty";
 
 const Requried = styled.label`
 	color: #a94442;
@@ -45,14 +46,18 @@ const Title = ({ displayText, required }) => (
 );
 
 export default function Page() {
+	const alert = useAlert();
 	const [refId, setRefId] = useState("");
 	const { allSiteList } = useAllSiteListFetcher();
 	const [memberCode, setMemberCode] = useState("");
 	const { dateRange, setDateRange } = useGetDateRange();
 	const { t } = useTranslation();
 
-	const [pageInfo, setPageInfo] = useState({ pageNumber: 1, pageSize: 10 });
-	const [datas, setDatas] = useState(null);
+	const [result, setResult] = useState({
+		datas: null,
+		totalPages: null,
+		rowCount: null
+	});
 	const {
 		GetSelected: RejectTransId_GetSelected,
 		OnSelect: RejectTransId_OnSelect,
@@ -60,7 +65,7 @@ export default function Page() {
 		IsSelected: RejectTransId_IsSelected,
 		IsSelectAll: RejectTransId_IsSelectAll
 	} = useSelectCheckBox({
-		datas: datas?.map(d => d.transId)
+		datas: result?.datas?.map(d => d.transId)
 	});
 
 	const [showPopup, setShowPopup] = useState(false);
@@ -129,15 +134,23 @@ export default function Page() {
 		try {
 			if (RejectTransId_GetSelected()?.length) {
 				const res = await api_Deposit_BatchRejected({ rejectTransIds });
+				if (res.data.errorCode !== 0) {
+					alert.error(`[${res.data.errorCode}] ${res.data.message}`);
+				}
 			}
 		} catch (error) {}
 	};
 
-	const onSubmit = async () => {
+	const onSubmit = async ({
+		currentPage,
+		pageSize,
+		clickPageNumber,
+		resetPage
+	}) => {
 		try {
 			const res = await api_Deposit_GetList({
-				pageNumber: pageInfo.pageNumber,
-				pageSize: pageInfo.pageSize,
+				pageNumber: currentPage ?? 1,
+				pageSize,
 				siteIds: siteId_getAPIPayload(siteId_selected),
 				depositId: refId,
 				userName: memberCode,
@@ -158,23 +171,32 @@ export default function Page() {
 			});
 
 			if (res.data.errorCode === 0) {
-				setDatas(res.data.data);
-				setPageInfo(prev => ({
-					pageSize: 10,
-					pageNumber: res.data.pageNumber,
+				setResult({
+					datas: res.data.data,
 					rowCount: res.data.rowCount,
 					totalPages: res.data.totalPages
-				}));
+				});
+
+				if (resetPage) {
+					clickPageNumber({ pageNumber: 1, execCallback: false });
+				}
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
+	const {
+		currentPage,
+		pageSize,
+		clickPageNumber,
+		onSelectEntry
+	} = useHandlePage({ callback: onSubmit });
+
 	return (
 		<Layout>
 			<main className="col-md-9 col-lg-10">
-				<h1 className="h2">{t("Menu.Finance.DepositList")}</h1>
+				<h1 className="h2">{t("Menu.Finance.DepositRequest")}</h1>
 				<div className="bd-example">
 					<h6>{t("DepositList.SubmitDate")}</h6>
 					<DatetimePicker id="range" setDateRange={setDateRange} />
@@ -238,13 +260,23 @@ export default function Page() {
 						onClick={handleShowPopup}>
 						{t("DepositList.AddNew")}
 					</Button>
-					<Button variant="primary" type="submit" onClick={onSubmit}>
+					<Button
+						variant="primary"
+						type="submit"
+						onClick={() =>
+							onSubmit({
+								currentPage,
+								pageSize,
+								clickPageNumber,
+								resetPage: true
+							})
+						}>
 						{t("DepositList.Submit")}
 					</Button>
 				</div>
-				{datas && (
+				{result?.datas && (
 					<Result
-						datas={datas}
+						datas={result?.datas}
 						options={{
 							currencyList,
 							DepositTypeEnum_options,
@@ -258,7 +290,14 @@ export default function Page() {
 							IsSelectAll: RejectTransId_IsSelectAll
 						}}
 						onReject={onReject}
-						pageInfo={pageInfo}
+						pageInfo={{
+							currentPage,
+							pageSize,
+							clickPageNumber,
+							onSelectEntry,
+							totalPages: result.totalPages,
+							rowCount: result.rowCount
+						}}
 					/>
 				)}
 				<Popup
@@ -475,32 +514,42 @@ const Result = ({ datas, options, selectAll, onReject, pageInfo }) => {
 
 	return (
 		<div className="bd-example">
-			<Button variant="danger" type="button" onClick={onReject}>
-				{t("DepositList.Reject")}
-			</Button>
-			<div className="table-responsive d-flex">
-				<table className="table table-striped table-hover w-auto">
-					<thead className="table-dark">
-						<tr>{titleRows}</tr>
-					</thead>
-					<tbody>{bodyRows}</tbody>
-				</table>
-			</div>
-			<Pagination
-				t={t}
-				currentPage={pageInfo.pageNumber}
-				totalPages={pageInfo.totalPages}
-				clickPageNumber={pageInfo.pageNumber}
-				pageSize={pageInfo.pageSize}
-				totalEntries={pageInfo.rowCount}
-			/>
+			{!datas.length ? (
+				<Empty />
+			) : (
+				<Pagination
+					t={t}
+					currentPage={pageInfo.currentPage}
+					totalPages={pageInfo.totalPages}
+					rowCount={pageInfo.rowCount}
+					pageSize={pageInfo.pageSize}
+					clickPageNumber={pageInfo.clickPageNumber}
+					onSelectEntry={pageInfo.onSelectEntry}
+					headerComponent={
+						<Button
+							variant="danger"
+							type="button"
+							onClick={onReject}>
+							{t("DepositList.Reject")}
+						</Button>
+					}>
+					<div className="table-responsive d-flex">
+						<table className="table table-striped table-hover w-auto">
+							<thead className="table-dark">
+								<tr>{titleRows}</tr>
+							</thead>
+							<tbody>{bodyRows}</tbody>
+						</table>
+					</div>
+				</Pagination>
+			)}
 		</div>
 	);
 };
 
 const Popup = ({ showPopup, handleClosePopup, t }) => {
 	const isMountedRef = useMounted();
-	const { setPopBox } = useContext(popBoxContext);
+	const alert = useAlert();
 	const {
 		selected: siteId_selected,
 		OnSelect: siteId_OnSelect,
@@ -567,58 +616,61 @@ const Popup = ({ showPopup, handleClosePopup, t }) => {
 		} catch (error) {}
 	};
 
-	const onSubmit = async () => {
-		let popupIsOpen = false;
-		let msg = "";
-		let errorCode = null;
-		try {
-			const Detail = {
-				SiteId: siteId_selected.value,
-				UserName: memberCode,
-				Amount: amount,
-				Comment: Remark,
-				RefId: BankReferenceNo,
-				DepositTime: dayjs(dateRange.startDate).unix(),
-				BankName: companyAccount_selected.bankName,
-				AccountHolderName: companyAccount_selected.accountName,
-				AccountNumber: companyAccount_selected.accountNo,
-				SysId: companyAccount_selected.sysId,
-				CurrencyId: currency?.[0],
-				SabaId: ""
-			};
-
-			const formData = new FormData();
-			formData.append("Detail", JSON.stringify(Detail));
-			formData.append("Receipt", BankSlip);
-
-			const res = await api_DepositSubmission_Submit(formData);
-
-			if (res.data.errorCode === 0) {
-				handleClosePopup();
-				popupIsOpen = true;
-				msg = "Updated successfully.";
-			} else {
-				popupIsOpen = true;
-				errorCode = res.data.errorCode;
-				msg = res.data.message;
-			}
-		} catch (error) {
-			popupIsOpen = true;
-			errorCode = 999;
-			msg = "Something went wrong...";
+	const onVaild = () => {
+		let checked = true;
+		if (!memberCode) {
+			alert.error("Member code does not allow null.");
+			checked = false;
+		} else if (!companyAccount_selected.length) {
+			alert.error("Company account does not allow null.");
+			checked = false;
+		} else if (amount === "") {
+			alert.error("Amount does not allow null.");
+			checked = false;
+		} else if (dateRange?.startDate === "") {
+			alert.error("Deposit date does not allow null.");
+			checked = false;
+		} else if (!BankSlip) {
+			alert.error("Bank slip does not allow null.");
+			checked = false;
 		}
 
-		if (popupIsOpen) {
-			setPopBox({
-				isOpen: true,
-				title: "Notification",
-				content: (
-					<p>
-						{errorCode && `[${errorCode}] `}
-						{msg}
-					</p>
-				)
-			});
+		return checked;
+	};
+
+	const onSubmit = async () => {
+		if (onVaild()) {
+			try {
+				const Detail = {
+					SiteId: siteId_selected.value,
+					UserName: memberCode,
+					Amount: amount,
+					Comment: Remark,
+					RefId: BankReferenceNo,
+					DepositTime: dayjs(dateRange.startDate).unix(),
+					BankName: companyAccount_selected.bankName,
+					AccountHolderName: companyAccount_selected.accountName,
+					AccountNumber: companyAccount_selected.accountNo,
+					SysId: companyAccount_selected.sysId,
+					CurrencyId: currency?.[0],
+					SabaId: ""
+				};
+
+				const formData = new FormData();
+				formData.append("Detail", JSON.stringify(Detail));
+				formData.append("Receipt", BankSlip);
+
+				const res = await api_DepositSubmission_Submit(formData);
+
+				if (res.data.errorCode === 0) {
+					handleClosePopup();
+					alert.show(t("Alert.Success"));
+				} else {
+					alert.error(`[${res.data.errorCode}] ${res.data.message}`);
+				}
+			} catch (error) {
+				alert.error("[999] Something went wrong...");
+			}
 		}
 	};
 
@@ -633,89 +685,91 @@ const Popup = ({ showPopup, handleClosePopup, t }) => {
 			</Modal.Header>
 
 			<Modal.Body>
-				<Dropdown
-					title={t("DepositList.SiteId")}
-					options={siteId_options}
-					onSelect={siteId_OnSelect}
-					value={siteId_selected}
-				/>
-
-				<Title
-					displayText={t("DepositList.MemberCode")}
-					required={true}
-				/>
-				<InputGroup>
-					<FormControl
-						value={memberCode}
-						onChange={e => setMemberCode(e.target.value)}
-						onBlur={onSearchUser}
-						aria-describedby="basic-addon2"
+				<Form noValidate validated={false} onSubmit={onSubmit}>
+					<Dropdown
+						title={t("DepositList.SiteId")}
+						options={siteId_options}
+						onSelect={siteId_OnSelect}
+						value={siteId_selected}
 					/>
-					<InputGroup.Text id="basic-addon2">
-						{currencyData?.[0]?.displayText || "-"}
-					</InputGroup.Text>
-				</InputGroup>
 
-				<Dropdown
-					title={`${t("DepositList.CompanyAccount")}`}
-					options={companyAccount_Options}
-					onSelect={companyAccount_OnSelect}
-					value={companyAccount_selected}
-					required={true}
-				/>
-
-				<InputBox
-					title={`${t("DepositList.Bank")}`}
-					disabled={true}
-					value={companyAccount_selected?.bankName || ""}
-				/>
-
-				<InputBox
-					title={`${t("DepositList.CompanyAccountName")}`}
-					disabled={true}
-					value={companyAccount_selected?.accountName || ""}
-				/>
-
-				<InputBox
-					title={`${t("DepositList.Amount")}`}
-					required={true}
-					value={amount}
-					onChange={e => setAmount(e.target.value)}
-				/>
-
-				<InputBox
-					title={`${t("DepositList.BankReferenceNo")}`}
-					value={BankReferenceNo}
-					onChange={e => setBankReferenceNo(e.target.value)}
-				/>
-
-				<Title
-					displayText={t("DepositList.DepositDate")}
-					required={true}
-				/>
-
-				<DatetimePicker
-					id="singleRange"
-					isRange={false}
-					setDateRange={setDateRange}
-				/>
-
-				<InputBox
-					title={`${t("DepositList.Remark")}`}
-					value={Remark}
-					onChange={e => setRemark(e.target.value)}
-				/>
-
-				<Form.Group controlId="formFile">
 					<Title
-						displayText={t("DepositList.BankSlip")}
+						displayText={t("DepositList.MemberCode")}
 						required={true}
 					/>
-					<Form.Control
-						type="file"
-						onChange={e => setBankSlip(e.target.files?.[0])}
+					<InputGroup>
+						<FormControl
+							value={memberCode}
+							onChange={e => setMemberCode(e.target.value)}
+							onBlur={onSearchUser}
+							aria-describedby="basic-addon2"
+						/>
+						<InputGroup.Text id="basic-addon2">
+							{currencyData?.[0]?.displayText || "-"}
+						</InputGroup.Text>
+					</InputGroup>
+
+					<Dropdown
+						title={`${t("DepositList.CompanyAccount")}`}
+						options={companyAccount_Options}
+						onSelect={companyAccount_OnSelect}
+						value={companyAccount_selected}
+						required={true}
 					/>
-				</Form.Group>
+
+					<InputBox
+						title={`${t("DepositList.Bank")}`}
+						disabled={true}
+						value={companyAccount_selected?.bankName || ""}
+					/>
+
+					<InputBox
+						title={`${t("DepositList.CompanyAccountName")}`}
+						disabled={true}
+						value={companyAccount_selected?.accountName || ""}
+					/>
+
+					<InputBox
+						title={`${t("DepositList.Amount")}`}
+						required={true}
+						value={amount}
+						onChange={e => setAmount(e.target.value)}
+					/>
+
+					<InputBox
+						title={`${t("DepositList.BankReferenceNo")}`}
+						value={BankReferenceNo}
+						onChange={e => setBankReferenceNo(e.target.value)}
+					/>
+
+					<Title
+						displayText={t("DepositList.DepositDate")}
+						required={true}
+					/>
+
+					<DatetimePicker
+						id="singleRange"
+						isRange={false}
+						setDateRange={setDateRange}
+					/>
+
+					<InputBox
+						title={`${t("DepositList.Remark")}`}
+						value={Remark}
+						onChange={e => setRemark(e.target.value)}
+					/>
+
+					<Form.Group controlId="formFile">
+						<Title
+							displayText={t("DepositList.BankSlip")}
+							required={true}
+						/>
+						<Form.Control
+							type="file"
+							onChange={e => setBankSlip(e.target.files?.[0])}
+						/>
+					</Form.Group>
+				</Form>
 			</Modal.Body>
 
 			<Modal.Footer>

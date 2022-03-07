@@ -4,13 +4,25 @@ import { Pagination } from "react-bootstrap";
 import styled from "styled-components";
 import Dropdown from "./dropdown";
 
-const Wrapper = styled.div`
-	> div {
-		&:first-child {
-			align-items: center;
-			display: flex;
+const Header = styled.div`
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+
+	.page-dropdown {
+		display: flex;
+		align-items: center;
+		> select {
+			margin: auto 0.5rem;
 		}
 	}
+`;
+
+const Bottom = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 0.5rem;
 `;
 
 const defPage = {
@@ -63,9 +75,10 @@ const BasicPagination = ({
 	totalPages,
 	clickPageNumber,
 	pageSize,
-	totalEntries,
+	rowCount,
 	onSelectEntry,
-	entryOptions
+	entryOptions,
+	headerComponent
 }) => {
 	const _clickPageNumber = p => {
 		let page = 1;
@@ -79,7 +92,7 @@ const BasicPagination = ({
 		}
 
 		if (page !== currentPage && clickPageNumber) {
-			clickPageNumber(page);
+			clickPageNumber({ pageNumber: page });
 		}
 	};
 
@@ -98,43 +111,46 @@ const BasicPagination = ({
 
 	if (totalPages !== 0)
 		return (
-			<Wrapper>
-				<div>
-					{t("Hint.Show")}
-					<div className="btn-group">
+			<>
+				<Header>
+					<div className="page-dropdown">
+						{t("Hint.Show")}
 						<Dropdown
 							options={entryOptions ?? defaultEntryOptions}
 							value={pageSize}
 							onSelect={onSelectEntry}
 						/>
+						{t("Hint.Entries").toLowerCase()}
 					</div>
-					{t("Hint.Entries").toLowerCase()}
-				</div>
+					{headerComponent}
+				</Header>
 
 				{children}
 
-				<div>
-					{t("Hint.ShowingEntriesHint", {
-						firstEntry,
-						lastEntry:
-							lastEntry > totalEntries ? totalEntries : lastEntry,
-						totalEntries: totalEntries || 0
-					})}
-				</div>
-				<Pagination className="d-flex justify-content-center float-end">
-					<Pagination.Prev
-						disabled={currentPage === 1}
-						onClick={() => _clickPageNumber(defPage.prevPage)}
-					/>
+				<Bottom>
+					<div>
+						{t("Hint.ShowingEntriesHint", {
+							firstEntry,
+							lastEntry:
+								lastEntry > rowCount ? rowCount : lastEntry,
+							rowCount: rowCount || 0
+						})}
+					</div>
+					<Pagination className="d-flex justify-content-center float-end">
+						<Pagination.Prev
+							disabled={currentPage === 1}
+							onClick={() => _clickPageNumber(defPage.prevPage)}
+						/>
 
-					{_arr}
+						{_arr}
 
-					<Pagination.Next
-						disabled={currentPage === totalPages}
-						onClick={() => _clickPageNumber(defPage.nextPage)}
-					/>
-				</Pagination>
-			</Wrapper>
+						<Pagination.Next
+							disabled={currentPage === totalPages}
+							onClick={() => _clickPageNumber(defPage.nextPage)}
+						/>
+					</Pagination>
+				</Bottom>
+			</>
 		);
 
 	return null;
@@ -144,9 +160,10 @@ BasicPagination.defaultProps = {
 	currentPage: 1,
 	totalPages: 0,
 	pageSize: 10,
-	totalEntries: 0,
+	rowCount: 0,
 	t: () => {},
-	entryOptions: defaultEntryOptions
+	entryOptions: defaultEntryOptions,
+	headerComponent: null
 };
 
 BasicPagination.propTypes = {
@@ -154,11 +171,12 @@ BasicPagination.propTypes = {
 	totalPages: PropTypes.number,
 	clickPageNumber: PropTypes.func.isRequired,
 	pageSize: PropTypes.number,
-	totalEntries: PropTypes.number,
+	rowCount: PropTypes.number,
 	t: PropTypes.func,
 	children: PropTypes.node.isRequired,
 	onSelectEntry: PropTypes.func.isRequired,
-	entryOptions: PropTypes.arrayOf(PropTypes.object)
+	entryOptions: PropTypes.arrayOf(PropTypes.object),
+	headerComponent: PropTypes.node
 };
 
 export { BasicPagination as Pagination };

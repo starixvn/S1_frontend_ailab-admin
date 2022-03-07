@@ -121,6 +121,7 @@ export default function Component({
 					}`}
 					data-bs-toggle="dropdown"
 					aria-expanded={open}
+					type="button"
 					onClick={ClickDropdown}>
 					{displaySelected}
 				</button>

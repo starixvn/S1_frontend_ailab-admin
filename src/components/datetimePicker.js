@@ -9,7 +9,8 @@ export default function Component({
 	id,
 	setDateRange,
 	isRange = true,
-	timePicker = true
+	timePicker = true,
+	disabled = false
 }) {
 	useEffect(() => {
 		const updateConfig = ({ startDate, endDate }) => {
@@ -22,26 +23,35 @@ export default function Component({
 				showCustomRangeLabel: isRange,
 				ranges: isRange
 					? {
-							Today: [moment(), moment()],
+							Today: [
+								moment().startOf("day"),
+								moment().endOf("day")
+							],
 							Yesterday: [
-								moment().subtract(1, "days"),
-								moment().subtract(1, "days")
+								moment().subtract(1, "days").startOf("day"),
+								moment().subtract(1, "days").endOf("day")
 							],
 							"Last 7 Days": [
-								moment().subtract(6, "days"),
-								moment()
+								moment().subtract(6, "days").startOf("day"),
+								moment().endOf("day")
 							],
 							"Last 30 Days": [
-								moment().subtract(29, "days"),
-								moment()
+								moment().subtract(29, "days").startOf("day"),
+								moment().endOf("day")
 							],
 							"This Month": [
-								moment().startOf("month"),
-								moment().endOf("month")
+								moment().startOf("month").startOf("day"),
+								moment().endOf("month").endOf("day")
 							],
 							"Last Month": [
-								moment().subtract(1, "month").startOf("month"),
-								moment().subtract(1, "month").endOf("month")
+								moment()
+									.subtract(1, "month")
+									.startOf("month")
+									.startOf("day"),
+								moment()
+									.subtract(1, "month")
+									.endOf("month")
+									.endOf("day")
 							]
 					  }
 					: null,
@@ -97,6 +107,7 @@ export default function Component({
 			style={{ display: "block" }}
 			autoComplete="off"
 			required
+			disabled={disabled}
 		/>
 	);
 }

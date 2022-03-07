@@ -1,23 +1,26 @@
 import { useState } from "react";
 
-const initValue = { page: 1, entries: 10 };
+const initValue = { currentPage: 1, pageSize: 10 };
 
 const useHandlePage = ({ callback }) => {
 	const [pageData, setPageData] = useState(initValue);
 
-	const clickPageNumber = pageNum => {
-		setPageData(prev => ({ ...prev, page: pageNum }));
-		callback({ page: pageNum, pageSize: pageData.entries });
+	const clickPageNumber = ({ pageNumber, execCallback = true }) => {
+		setPageData(prev => ({ ...prev, currentPage: pageNumber }));
+
+		if (execCallback) {
+			callback({ currentPage: pageNumber, pageSize: pageData.pageSize });
+		}
 	};
 
 	const onSelectEntry = pageSizeData => {
-		setPageData({ page: 1, entries: pageSizeData.value });
-		callback({ page: 1, pageSize: pageSizeData.value });
+		setPageData({ currentPage: 1, pageSize: pageSizeData.value });
+		callback({ currentPage: 1, pageSize: pageSizeData.value });
 	};
 
 	return {
-		currentPage: pageData.page,
-		pageSize: pageData.entries,
+		currentPage: pageData.currentPage,
+		pageSize: pageData.pageSize,
 		clickPageNumber,
 		onSelectEntry
 	};
