@@ -32,3 +32,11 @@ export const getLocalStorage = key => {
 export const removeLocalStorage = key => {
 	localStorage.removeItem(key);
 };
+
+export const classNames = classNameList => {
+	if (!classNameList || classNameList?.length < 0) {
+		return "";
+	}
+
+	return classNameList.filter(Boolean).join(" ");
+};
