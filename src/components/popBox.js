@@ -3,6 +3,7 @@ import { popBoxContext } from "./context";
 
 export const defPopBoxType = {
 	default: "default",
+	csdAddPersonalMessage: "csdAddPersonalMessage",
 	changePwd: "changePwd"
 };
 
@@ -25,6 +26,21 @@ const PopBox = () => {
 
 			break;
 		}
+
+		case defPopBoxType.csdAddPersonalMessage: {
+			const ModalAddPersonalMessage = lazy(() =>
+				import("../pages/csd/PersonalMessage/ModalAddPersonalMessage")
+			);
+
+			content = (
+				<Suspense fallback={<div />}>
+					<ModalAddPersonalMessage popBoxData={popBox.data} />
+				</Suspense>
+			);
+
+			break;
+		}
+
 		default: {
 			content = (
 				<div className="modal-body">

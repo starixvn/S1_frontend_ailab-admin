@@ -14,7 +14,7 @@ import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import DepositListing from "./pages/finance/depositListing";
 
-import { PersonalMessage } from "./pages/CSD";
+import { PersonalMessage } from "./pages/csd";
 
 const reactAlertOptions = {
 	timeout: 5000,
