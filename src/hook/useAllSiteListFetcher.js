@@ -8,6 +8,7 @@ const useAllSiteListFetcher = (fetch = true) => {
 	const alert = useAlert();
 	const { t } = useTranslation();
 	const [allSiteList, setAllSiteList] = useState([]);
+	const [siteId, setSiteId] = useState(null);
 
 	useEffect(() => {
 		const getData = async () => {
@@ -27,7 +28,7 @@ const useAllSiteListFetcher = (fetch = true) => {
 		}
 	}, [fetch]);
 
-	return { allSiteList };
+	return { allSiteList, siteId, setSiteId };
 };
 
 export { useAllSiteListFetcher };

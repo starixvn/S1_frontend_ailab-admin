@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import * as ct from "./context";
 import { siteInfo } from "../config";
 import { ModalConfirm } from "./Modal/modalConfirm";
-import { useConfirmModal } from "../hook";
+import { useAllSiteListFetcher, useConfirmModal } from "../hook";
 
 const Wrapper = ({ children }) => {
 	const {
@@ -29,6 +29,8 @@ const Wrapper = ({ children }) => {
 		userName: null
 	});
 
+	const { allSiteList, siteId, setSiteId } = useAllSiteListFetcher();
+
 	const [popBox, setPopBox] = useState({
 		isOpen: false,
 		title: "",
@@ -48,7 +50,10 @@ const Wrapper = ({ children }) => {
 						{...confirmInfo}
 					/>
 
-					{children}
+					<ct.allSiteListContext.Provider
+						value={{ allSiteList, siteId, setSiteId }}>
+						{children}
+					</ct.allSiteListContext.Provider>
 				</ct.popBoxContext.Provider>
 			</ct.userInfoContext.Provider>
 		</ct.menuContext.Provider>
