@@ -3,7 +3,8 @@ import { popBoxContext } from "./context";
 
 export const defPopBoxType = {
 	default: "default",
-	changePwd: "changePwd"
+	changePwd: "changePwd",
+	tagPopBox: "tagPopBox"
 };
 
 const PopBox = () => {
@@ -20,6 +21,19 @@ const PopBox = () => {
 			content = (
 				<Suspense fallback={<div />}>
 					<ChangePWD />
+				</Suspense>
+			);
+
+			break;
+		}
+		case defPopBoxType.tagPopBox: {
+			const TagPopBox = lazy(() => import("./tagManagement/tagPopBox"));
+			content = (
+				<Suspense fallback={<div />}>
+					<TagPopBox
+						tagData={popBox.tagData}
+						refresh={popBox.refresh}
+					/>
 				</Suspense>
 			);
 

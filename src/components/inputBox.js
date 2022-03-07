@@ -22,7 +22,7 @@ const InputBox = ({
 			{required && <Requried>*</Requried>}
 			{title}
 		</h6>
-		<div className="input-group">
+		<div className="input-group has-validation">
 			<input
 				type={inputType ?? "text"}
 				className="form-control"
@@ -32,13 +32,16 @@ const InputBox = ({
 				onChange={onChange}
 				disabled={disabled}
 				onBlur={onBlur}
+				required={required}
 			/>
+			<div className="invalid-feedback">Please choose a username.</div>
 		</div>
 	</div>
 );
 
 InputBox.defaultProps = {
 	title: "",
+	value: "",
 	placeholder: "",
 	inputType: "",
 	className: "",
@@ -53,7 +56,7 @@ InputBox.propTypes = {
 		PropTypes.string,
 		PropTypes.number,
 		PropTypes.object
-	]).isRequired,
+	]),
 	onChange: PropTypes.func.isRequired,
 	placeholder: PropTypes.string,
 	inputType: PropTypes.string,
