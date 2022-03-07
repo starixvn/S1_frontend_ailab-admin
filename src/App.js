@@ -14,7 +14,7 @@ import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import DepositListing from "./pages/finance/depositListing";
-import { PersonalMessage } from "./pages/csd";
+import { PersonalMessage, RegistrationManagement } from "./pages/csd";
 import MemberList from "./pages/csd/memberList";
 
 const reactAlertOptions = {
@@ -66,6 +66,11 @@ function App() {
 								<Route
 									path={`/${path.personalMessage.root}`}
 									component={PersonalMessage}
+								/>
+
+								<Route
+									path={`/${path.registrationManagement.root}`}
+									component={RegistrationManagement}
 								/>
 
 								<Route
