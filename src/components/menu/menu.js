@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { menuContext } from "../context";
@@ -16,7 +16,7 @@ const Levels = ({
 }) => {
 	if (!level) return null;
 	const subItems = level.map(s => {
-		const { Controller, Action, FuncKey, displayKey, Title } = s;
+		const { Controller, Action, FuncKey, displayKey, Title, NewAdmin } = s;
 		const pathName = `${Controller}/${Action}`;
 		const displayText = t(displayKey);
 
@@ -25,7 +25,8 @@ const Levels = ({
 			Controller,
 			Action,
 			Title: displayText,
-			FuncKey
+			FuncKey,
+			NewAdmin
 		};
 
 		if (!s.Childs) {
@@ -36,7 +37,11 @@ const Levels = ({
 					key={`menu-${displayKey}-${FuncKey}`}
 					className="nav-link"
 					to={{
-						pathname: `/${siteInfo.oldSitePrefixUrl}/${pathName}`,
+						pathname: `/${
+							NewAdmin
+								? siteInfo.newSitePrefixUrl
+								: siteInfo.oldSitePrefixUrl
+						}/${pathName}`,
 						state: params
 					}}>
 					{displayText}
@@ -65,7 +70,7 @@ const Levels = ({
 
 		if (!links.length) return null;
 		const content = (
-			<>
+			<Fragment key={`Menu-${displayKey}`}>
 				<button
 					onClick={() => areaHandler({ area: s.Category })}
 					className={`accordion-button${isOpen ? "" : " collapsed"}`}
@@ -86,8 +91,9 @@ const Levels = ({
 					data-bs-parent="#accordionFlushExample">
 					{links}
 				</div>
-			</>
+			</Fragment>
 		);
+
 		return isFirstLevel ? (
 			<div className="accordion-item" key={`Menu-${displayKey}`}>
 				{content}

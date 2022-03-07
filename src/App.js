@@ -5,6 +5,7 @@ import { positions, Provider as ReactAlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import i18n from "./i18n/config";
 import Login from "./pages/login";
+import Tagmanagement from "./pages/CSD/tagManagement";
 import Dashboard from "./pages/dashboard";
 import path from "./path";
 import NoMatch from "./pages/404";
@@ -12,10 +13,13 @@ import IframePage from "./pages/iframePage";
 import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
+import DepositListing from "./pages/finance/depositListing";
+// import { PersonalMessage } from "./pages/CSD";
+import MemberList from "./pages/CSD/memberList";
 
 const reactAlertOptions = {
 	timeout: 5000,
-	position: positions.MIDDLE
+	position: positions.BOTTOM_RIGHT
 };
 
 const iframeRoutes = () => {
@@ -51,11 +55,29 @@ function App() {
 								<Route path={`/${path.login.root}`}>
 									<Login />
 								</Route>
+
+								<Route path={`/${path.tagManagement.root}`}>
+									<Tagmanagement />
+								</Route>
 								<Route exact path={`/${path.dashboard.root}`}>
 									<Dashboard />
 								</Route>
+
+								{/* <Route
+									path="/NewAdmin/Member/PersonalMessageBatch"
+									component={PersonalMessage}
+								/> */}
+
+								<Route
+									path={`/${path.memberList.root}`}
+									component={MemberList}
+								/>
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
+								<Route
+									component={DepositListing}
+									path={`/${path.depositList.root}`}
+								/>
 								<Route component={NoMatch} />
 							</Switch>
 						</Router>

@@ -47,6 +47,7 @@ const Layout = ({ children, afterLogin = true }) => {
 						};
 
 						setAllowFuncKeys(data);
+
 						setMenu(prev => ({ ...prev, allowfuncKeys }));
 					}
 				} catch (error) {}

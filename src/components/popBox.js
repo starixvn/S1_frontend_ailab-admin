@@ -3,7 +3,8 @@ import { popBoxContext } from "./context";
 
 export const defPopBoxType = {
 	default: "default",
-	changePwd: "changePwd"
+	changePwd: "changePwd",
+	tagPopBox: "tagPopBox"
 };
 
 const PopBox = () => {
@@ -25,6 +26,19 @@ const PopBox = () => {
 
 			break;
 		}
+		case defPopBoxType.tagPopBox: {
+			const TagPopBox = lazy(() => import("./tagManagement/tagPopBox"));
+			content = (
+				<Suspense fallback={<div />}>
+					<TagPopBox
+						tagData={popBox.tagData}
+						refresh={popBox.refresh}
+					/>
+				</Suspense>
+			);
+
+			break;
+		}
 		default: {
 			content = (
 				<div className="modal-body">
@@ -38,7 +52,9 @@ const PopBox = () => {
 
 	return (
 		<div
-			className={`modal fade${popBox.isOpen ? " show" : ""}`}
+			className={`modal fade${
+				popBox.isOpen ? " show" : ""
+			} modal-level-1`}
 			id="exampleModalCenter"
 			tabIndex="-1"
 			aria-labelledby="exampleModalCenterTitle"

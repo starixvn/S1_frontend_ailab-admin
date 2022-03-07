@@ -1,11 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Pagination } from "react-bootstrap";
+import styled from "styled-components";
+import Dropdown from "./dropdown";
+
+const Header = styled.div`
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+
+	.page-dropdown {
+		display: flex;
+		align-items: center;
+		> select {
+			margin: auto 0.5rem;
+		}
+	}
+`;
+
+const Bottom = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 0.5rem;
+`;
 
 const defPage = {
 	prevPage: "prevPage",
 	nextPage: "nextPage"
 };
+
+const defaultEntryOptions = [
+	{ value: 10, displayText: 10 },
+	{ value: 25, displayText: 25 },
+	{ value: 50, displayText: 50 },
+	{ value: 75, displayText: 75 },
+	{ value: 100, displayText: 100 }
+];
 
 const pageNumbers = (currentPage, totalPages) => {
 	const pairs = 2;
@@ -37,7 +68,18 @@ const pageNumbers = (currentPage, totalPages) => {
 	return rangeWithDots;
 };
 
-const BasicPagination = ({ currentPage, totalPages, clickPageNumber }) => {
+const BasicPagination = ({
+	t,
+	children,
+	currentPage,
+	totalPages,
+	clickPageNumber,
+	pageSize,
+	rowCount,
+	onSelectEntry,
+	entryOptions,
+	headerComponent
+}) => {
 	const _clickPageNumber = p => {
 		let page = 1;
 
@@ -50,33 +92,65 @@ const BasicPagination = ({ currentPage, totalPages, clickPageNumber }) => {
 		}
 
 		if (page !== currentPage && clickPageNumber) {
-			clickPageNumber(page);
+			clickPageNumber({ pageNumber: page });
 		}
 	};
+
 	const arr = pageNumbers(currentPage, totalPages);
 	const _arr = arr?.map(i => (
 		<Pagination.Item
 			key={`pageNumber-${i}`}
-			onClick={() => _clickPageNumber(i)}>
+			onClick={() => _clickPageNumber(i)}
+			active={i === currentPage}>
 			{i}
 		</Pagination.Item>
 	));
 
+	const firstEntry = (currentPage - 1) * pageSize + 1;
+	const lastEntry = firstEntry + pageSize - 1;
+
 	if (totalPages !== 0)
 		return (
-			<Pagination className="d-flex justify-content-center">
-				<Pagination.Prev
-					disabled={currentPage === 1}
-					onClick={() => _clickPageNumber(defPage.prevPage)}
-				/>
+			<>
+				<Header>
+					<div className="page-dropdown">
+						{t("Hint.Show")}
+						<Dropdown
+							options={entryOptions ?? defaultEntryOptions}
+							value={pageSize}
+							onSelect={onSelectEntry}
+						/>
+						{t("Hint.Entries").toLowerCase()}
+					</div>
+					{headerComponent}
+				</Header>
 
-				{_arr}
+				{children}
 
-				<Pagination.Next
-					disabled={currentPage === totalPages}
-					onClick={() => _clickPageNumber(defPage.nextPage)}
-				/>
-			</Pagination>
+				<Bottom>
+					<div>
+						{t("Hint.ShowingEntriesHint", {
+							firstEntry,
+							lastEntry:
+								lastEntry > rowCount ? rowCount : lastEntry,
+							rowCount: rowCount || 0
+						})}
+					</div>
+					<Pagination className="d-flex justify-content-center float-end">
+						<Pagination.Prev
+							disabled={currentPage === 1}
+							onClick={() => _clickPageNumber(defPage.prevPage)}
+						/>
+
+						{_arr}
+
+						<Pagination.Next
+							disabled={currentPage === totalPages}
+							onClick={() => _clickPageNumber(defPage.nextPage)}
+						/>
+					</Pagination>
+				</Bottom>
+			</>
 		);
 
 	return null;
@@ -84,13 +158,25 @@ const BasicPagination = ({ currentPage, totalPages, clickPageNumber }) => {
 
 BasicPagination.defaultProps = {
 	currentPage: 1,
-	totalPages: 0
+	totalPages: 0,
+	pageSize: 10,
+	rowCount: 0,
+	t: () => {},
+	entryOptions: defaultEntryOptions,
+	headerComponent: null
 };
 
 BasicPagination.propTypes = {
 	currentPage: PropTypes.number,
 	totalPages: PropTypes.number,
-	clickPageNumber: PropTypes.func.isRequired
+	clickPageNumber: PropTypes.func.isRequired,
+	pageSize: PropTypes.number,
+	rowCount: PropTypes.number,
+	t: PropTypes.func,
+	children: PropTypes.node.isRequired,
+	onSelectEntry: PropTypes.func.isRequired,
+	entryOptions: PropTypes.arrayOf(PropTypes.object),
+	headerComponent: PropTypes.node
 };
 
 export { BasicPagination as Pagination };

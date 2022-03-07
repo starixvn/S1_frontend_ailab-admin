@@ -1,8 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from "react";
-import { any, arrayOf, func, string } from "prop-types";
+import { any, arrayOf, func, string, bool } from "prop-types";
 import { Form } from "react-bootstrap";
+import styled from "styled-components";
+
+const Requried = styled.label`
+	color: #a94442;
+`;
 
 const optionParser = (value, _options = []) => {
 	let _option;
@@ -18,7 +23,14 @@ const optionParser = (value, _options = []) => {
 	return _option || value;
 };
 
-const Component = ({ title, value, options = [], onSelect, placeholder }) => {
+const Component = ({
+	title,
+	value,
+	options = [],
+	onSelect,
+	placeholder,
+	required
+}) => {
 	const [selected, setSelected] = useState(optionParser(value, options));
 
 	const parsedOptions =
@@ -39,7 +51,12 @@ const Component = ({ title, value, options = [], onSelect, placeholder }) => {
 
 	return (
 		<>
-			{title && <h6>{title}</h6>}
+			{title && (
+				<h6>
+					{required && <Requried>*</Requried>}
+					{title}
+				</h6>
+			)}
 
 			<Form.Select value={selected.value} onChange={handleChange}>
 				{placeholder && (
@@ -65,7 +82,8 @@ const Component = ({ title, value, options = [], onSelect, placeholder }) => {
 Component.defaultProps = {
 	title: "",
 	value: "",
-	placeholder: "-"
+	placeholder: null,
+	required: false
 };
 
 Component.propTypes = {
@@ -73,7 +91,8 @@ Component.propTypes = {
 	value: any,
 	options: arrayOf(any).isRequired,
 	onSelect: func.isRequired,
-	placeholder: string
+	placeholder: string,
+	required: bool
 };
 
 export default Component;

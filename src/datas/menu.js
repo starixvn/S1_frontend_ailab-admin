@@ -126,72 +126,18 @@ export default [
 		]
 	},
 	{
-		displayKey: "Menu.Reports.Reports",
-		Icon: "report",
-		Category: [defMenuCategory.Reports],
-		Childs: [
-			{
-				displayKey: "Menu.Reports.WinLostReport",
-				FuncKey: "LicWinLost/Report",
-				Controller: "Report",
-				Action: "LicWinLost",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.MainFinancialReport",
-				FuncKey: "Report/MainFinancialReport",
-				Controller: "Report",
-				Action: "MainFinancialReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.DepositReport",
-				FuncKey: "Report/DepositReport",
-				Controller: "Report",
-				Action: "DepositReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.StatisticalReport",
-				FuncKey: "Report/StatisticalReport",
-				Controller: "Report",
-				Action: "StatisticalReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.CustomerStatisticalReport",
-				FuncKey: "Report/CustomerStatisticalReport",
-				Controller: "Report",
-				Action: "CustomerStatisticalReport",
-				Icon: "",
-				Childs: null
-			},
-			{
-				displayKey: "Menu.Reports.UserOnlineReport",
-				FuncKey: "Report/UserOnlineReport",
-				Controller: "Report",
-				Action: "UserOnlineReport",
-				Icon: "",
-				Childs: null
-			}
-		]
-	},
-	{
 		displayKey: "Menu.CSD.CSD",
 		Icon: "csd",
 		Category: [defMenuCategory.CSD.CSD],
 		Childs: [
 			{
-				displayKey: "Menu.CSD.CustomerAdministration",
+				displayKey: "Menu.CSD.MemberListing",
 				FuncKey: "CustManage/CustInfoList",
-				Controller: "CustManage",
-				Action: "CustInfoList",
+				Controller: "member",
+				Action: "memberList",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.CSD.ChangeVipLevelBatch",
@@ -207,7 +153,8 @@ export default [
 				Controller: "CustManage",
 				Action: "TagManagement",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.CSD.RegistrationManagement",
@@ -319,7 +266,7 @@ export default [
 			{
 				displayKey: "Menu.Content.BannerManagement",
 				Title: "Banner Management",
-				FuncKey: "Marketing/BannerManage",
+				FuncKey: "CMS/BannerManage",
 				Controller: "Marketing",
 				Action: "BannerManage",
 				Icon: "",
@@ -328,7 +275,7 @@ export default [
 			{
 				displayKey: "Menu.Content.GameCasinoManagement",
 				Title: "Game Casino Management",
-				FuncKey: "Marketing/GameCasinoManagement",
+				FuncKey: "CMS/GameCasinoManagement",
 				Controller: "Marketing",
 				Action: "GameCasinoManagement",
 				Icon: "",
@@ -379,6 +326,81 @@ export default [
 				Action: "AppLinkManagement",
 				Icon: "",
 				Childs: null
+			},
+			{
+				displayKey: "Menu.CSD.TpFailRecordReport",
+				FuncKey: "CustManage/TpFailRecordReport",
+				Controller: "CustManage",
+				Action: "TpFailRecordReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.CSD.Communication",
+				Icon: "",
+				Category: [
+					defMenuCategory.CSD.CSD,
+					defMenuCategory.CSD.Communication
+				],
+				Childs: [
+					{
+						displayKey: "Menu.CSD.PersonalMessage",
+						FuncKey: "Message/PersonalMsgBatch",
+						Controller: "Message",
+						Action: "PersonalMsgBatch",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.CSD.TeleCSD",
+						FuncKey: "CustManage/TeleCSD",
+						Controller: "CustManage",
+						Action: "TeleCSD",
+						Icon: "",
+						Childs: null
+					}
+				]
+			},
+			{
+				displayKey: "Menu.CSD.KYC",
+				Icon: "",
+				Category: [defMenuCategory.CSD.CSD, defMenuCategory.CSD.KYC],
+				Childs: [
+					{
+						displayKey: "Menu.CSD.WithdrawalKYCControl",
+						FuncKey: "Message/WithdrawalKYCControl",
+						Controller: "Message",
+						Action: "WithdrawalKYCControl",
+						Icon: "",
+						Childs: null
+					}
+				]
+			},
+			{
+				displayKey: "Menu.CSD.MemberGameSetting",
+				Icon: "",
+				Category: [
+					defMenuCategory.CSD.CSD,
+					defMenuCategory.CSD.MemberGameSetting
+				],
+				Childs: [
+					{
+						displayKey: "Menu.CSD.DisableUserForGame",
+						FuncKey: "CustManage/DisableUserForGame",
+						Controller: "CustManage",
+						Action: "DisableUserForGame",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.CSD.UserBetLimit",
+						FuncKey: "CustManage/UserBetLimit",
+						Controller: "CustManage",
+						Action: "UserBetLimit",
+						Icon: "",
+						Childs: null
+					}
+				]
 			}
 		]
 	},
@@ -393,13 +415,15 @@ export default [
 				Controller: "Finance",
 				Action: "DepositList",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
-				displayKey: "Menu.Finance.WithdrawalRequest",
-				FuncKey: "Finance/WithdrawalList",
-				Controller: "Finance",
-				Action: "WithdrawalList",
+				displayKey: "Menu.Content.BannerManagement",
+				Title: "Banner Management",
+				FuncKey: "Marketing/BannerManage",
+				Controller: "Marketing",
+				Action: "BannerManage",
 				Icon: "",
 				Childs: null
 			},
@@ -411,6 +435,7 @@ export default [
 				Icon: "",
 				Childs: null
 			},
+
 			{
 				displayKey: "Menu.Finance.BalanceAdjustment",
 				FuncKey: "Finance/PaymentAdjustment",
@@ -420,10 +445,20 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.Finance.WithdrawalLimitAdjust",
-				FuncKey: "Finance/WithdrawalLimitAdjust",
-				Controller: "Finance",
-				Action: "WithdrawalLimitAdjust",
+				displayKey: "Menu.Content.DomainManagement",
+				Title: "Domain Management",
+				FuncKey: "CMS/DomainManage",
+				Controller: "Marketing",
+				Action: "DomainManage",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Content.VendersMaintenance",
+				Title: "Venders Maintenance",
+				FuncKey: "CMS/TpMaintain",
+				Controller: "Marketing",
+				Action: "TpMaintain",
 				Icon: "",
 				Childs: null
 			},
@@ -728,6 +763,99 @@ export default [
 				Action: "FailBet",
 				Icon: "",
 				Childs: null
+			},
+			{
+				displayKey: "Menu.Finance.Report",
+				Icon: "",
+				Category: [
+					defMenuCategory.Finance.Finance,
+					defMenuCategory.Finance.Report
+				],
+				Childs: [
+					{
+						displayKey: "Menu.Finance.DepositTimeReport",
+						FuncKey: "Finance/DepositTimeReport",
+						Controller: "Finance",
+						Action: "DepositTimeReport",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.Finance.WithdrawalTimeReport",
+						FuncKey: "Finance/WithdrawalTimeReport",
+						Controller: "Finance",
+						Action: "WithdrawalTimeReport",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.Finance.AdjustmentReport",
+						FuncKey: "Finance/AdjustmentReport",
+						Controller: "Finance",
+						Action: "PaymentAdjustmentReport",
+						Icon: "",
+						Childs: null
+					}
+				]
+			},
+			{
+				displayKey: "Menu.Finance.Setting",
+				Icon: "",
+				Category: [
+					defMenuCategory.Finance.Finance,
+					defMenuCategory.Finance.Setting
+				],
+				Childs: [
+					{
+						displayKey: "Menu.Finance.BankCardManagement",
+						FuncKey: "Finance/BankInfoList",
+						Controller: "Finance",
+						Action: "BankInfoList",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.Finance.PaymentManagement",
+						FuncKey: "Finance/PaymentManage",
+						Controller: "Finance",
+						Action: "PaymentManage",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.Finance.DepositLimitManagement",
+						FuncKey: "Finance/DepositLimitManage",
+						Controller: "Finance",
+						Action: "DepositLimitManagement",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.Finance.WithdrawalLimitManagement",
+						FuncKey: "Finance/WithdrawalLimitManagement",
+						Controller: "Finance",
+						Action: "WithdrawalLimitManagement",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey:
+							"Menu.Finance.USDTWithdrawalLimitManagement",
+						FuncKey: "Finance/USDTWithdrawalLimitManagement",
+						Controller: "Finance",
+						Action: "USDTWithdrawalLimitManagement",
+						Icon: "",
+						Childs: null
+					},
+					{
+						displayKey: "Menu.Finance.AdjustmentLimitManagement",
+						FuncKey: "Finance/AdjustmentLimitManagement",
+						Controller: "Finance",
+						Action: "AdjustmentLimitManagement",
+						Icon: "",
+						Childs: null
+					}
+				]
 			}
 		]
 	},
@@ -753,8 +881,23 @@ export default [
 				Controller: "BankFinancial",
 				Action: "TransferManage",
 				Icon: "",
-				Childs: null
+				Category: [
+					defMenuCategory.Marketing.Marketing,
+					defMenuCategory.Marketing.Setting
+				],
+				Childs: [
+					{
+						displayKey: "Menu.Marketing.PointLevelManagement",
+						Title: "Point Level Management",
+						FuncKey: "Marketing/PointLevelManagement",
+						Controller: "Marketing",
+						Action: "PointLevelManagement",
+						Icon: "",
+						Childs: null
+					}
+				]
 			},
+
 			{
 				displayKey: "Menu.BankFinancial.TransferInfoReport",
 				Title: "Transfer Report",
@@ -765,20 +908,83 @@ export default [
 				Childs: null
 			},
 			{
-				displayKey: "Menu.BankFinancial.BankFinancialReport",
-				Title: "BankFinancial Report",
-				FuncKey: "BankFinancial/BankFinancialReport",
-				Controller: "BankFinancial",
-				Action: "BankFinancialReport",
-				Icon: "",
-				Childs: null
-			},
-			{
 				displayKey: "Menu.BankFinancial.ReasonManagement",
 				Title: "Reason Management",
 				FuncKey: "BankFinancial/ReasonManagement",
 				Controller: "BankFinancial",
 				Action: "ReasonManagement",
+				Icon: "",
+				Childs: null
+			}
+		]
+	},
+	// {
+	// 	displayKey: "Menu.Game.Game",
+	// 	Title: "Game",
+	// 	Icon: "admin",
+	// 	Category: [defMenuCategory.Game],
+	// 	Childs: [
+	// 		{
+	// 			displayKey: "Menu.BankFinancial.BankFinancialReport",
+	// 			Title: "BankFinancial Report",
+	// 			FuncKey: "BankFinancial/BankFinancialReport",
+	// 			Controller: "BankFinancial",
+	// 			Action: "BankFinancialReport",
+	// 			Icon: "",
+	// 			Childs: null
+	// 		}
+	// 	]
+	// },
+	{
+		displayKey: "Menu.Reports.Reports",
+		Icon: "report",
+		Category: [defMenuCategory.Reports],
+		Childs: [
+			{
+				displayKey: "Menu.Reports.WinLostReport",
+				FuncKey: "LicWinLost/Report",
+				Controller: "Report",
+				Action: "LicWinLost",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.MainFinancialReport",
+				FuncKey: "Report/MainFinancialReport",
+				Controller: "Report",
+				Action: "MainFinancialReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.DepositReport",
+				FuncKey: "Report/DepositReport",
+				Controller: "Report",
+				Action: "DepositReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.StatisticalReport",
+				FuncKey: "Report/StatisticalReport",
+				Controller: "Report",
+				Action: "StatisticalReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.CustomerStatisticalReport",
+				FuncKey: "Report/CustomerStatisticalReport",
+				Controller: "Report",
+				Action: "CustomerStatisticalReport",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Reports.UserOnlineReport",
+				FuncKey: "Report/UserOnlineReport",
+				Controller: "Report",
+				Action: "UserOnlineReport",
 				Icon: "",
 				Childs: null
 			}

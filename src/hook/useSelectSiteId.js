@@ -2,16 +2,19 @@ import { useEffect, useState } from "react";
 import { useAllSiteListFetcher } from "./useAllSiteListFetcher";
 
 const useSelectSiteId = props => {
+	const isFetch = Boolean(!props?.allSiteList?.length);
+
 	const { defaultSelectFirst } = props ?? { defaultSelectFirst: true };
-	const { allSiteList } = useAllSiteListFetcher(
-		Boolean(!props?.allSiteList?.length)
-	);
+	const { allSiteList } = useAllSiteListFetcher(isFetch);
+
+	const list = isFetch ? allSiteList : props?.allSiteList;
+
 	const [selected, setSelected] = useState();
 	const [options, setOptions] = useState([]);
 
 	useEffect(() => {
-		if (allSiteList?.length) {
-			const tmpOptions = allSiteList.map(s => ({
+		if (list?.length) {
+			const tmpOptions = list.map(s => ({
 				value: s.siteId,
 				displayText: s.siteName
 			}));
@@ -22,7 +25,7 @@ const useSelectSiteId = props => {
 				setSelected(tmpOptions[0]);
 			}
 		}
-	}, [JSON.stringify(allSiteList), defaultSelectFirst]);
+	}, [JSON.stringify(list), defaultSelectFirst]);
 
 	const OnSelect = item => {
 		setSelected(item);
