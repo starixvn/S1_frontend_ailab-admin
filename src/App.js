@@ -14,7 +14,7 @@ import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import DepositListing from "./pages/finance/depositListing";
-// import { PersonalMessage } from "./pages/CSD";
+import { PersonalMessage } from "./pages/csd";
 import MemberList from "./pages/csd/memberList";
 
 const reactAlertOptions = {
@@ -63,10 +63,10 @@ function App() {
 									<Dashboard />
 								</Route>
 
-								{/* <Route
-									path="/NewAdmin/Member/PersonalMessageBatch"
+								<Route
+									path={`/${path.personalMessage.root}`}
 									component={PersonalMessage}
-								/> */}
+								/>
 
 								<Route
 									path={`/${path.memberList.root}`}

@@ -4,7 +4,8 @@ import { popBoxContext } from "./context";
 export const defPopBoxType = {
 	default: "default",
 	changePwd: "changePwd",
-	tagPopBox: "tagPopBox"
+	tagPopBox: "tagPopBox",
+	csdAddPersonalMessage: "csdAddPersonalMessage"
 };
 
 const PopBox = () => {
@@ -26,6 +27,21 @@ const PopBox = () => {
 
 			break;
 		}
+
+		case defPopBoxType.csdAddPersonalMessage: {
+			const ModalAddPersonalMessage = lazy(() =>
+				import("../pages/csd/PersonalMessage/ModalAddPersonalMessage")
+			);
+
+			content = (
+				<Suspense fallback={<div />}>
+					<ModalAddPersonalMessage popBoxData={popBox.data} />
+				</Suspense>
+			);
+
+			break;
+		}
+
 		case defPopBoxType.tagPopBox: {
 			const TagPopBox = lazy(() => import("./tagManagement/tagPopBox"));
 			content = (
@@ -39,6 +55,7 @@ const PopBox = () => {
 
 			break;
 		}
+
 		default: {
 			content = (
 				<div className="modal-body">
