@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useSelectSiteId } from "../../hook";
 import { allSiteListContext } from "../context";
 
 const SiteIdDropdown = () => {
-	const { allSiteList, setSiteId } = useContext(allSiteListContext);
+	const { allSiteList, siteId, setSiteId } = useContext(allSiteListContext);
 
 	const {
 		selected: siteIdSelected,
@@ -16,11 +16,16 @@ const SiteIdDropdown = () => {
 	});
 
 	const handleSiteIdClick = option => () => {
-		setSiteId(option.value);
 		onSiteIdSelect(option);
 	};
 
 	const title = siteIdSelected?.displayText || "";
+
+	useEffect(() => {
+		if (siteIdSelected?.value !== siteId) {
+			setSiteId(siteIdSelected?.value);
+		}
+	}, [siteIdSelected?.value, siteId]);
 
 	return (
 		<DropdownButton title={title} style={{ marginRight: "8px" }}>
