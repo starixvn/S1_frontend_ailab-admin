@@ -4,16 +4,11 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import * as ct from "./context";
 import { siteInfo } from "../config";
-import { ModalConfirm } from "./Modal/modalConfirm";
 import { useAllSiteListFetcher, useConfirmModal } from "../hook";
 
 const Wrapper = ({ children }) => {
-	const {
-		showConfirmModal,
-		confirmInfo,
-		setShowConfirmModal,
-		confirm
-	} = useConfirmModal();
+	const { conformPopBox, setConformPopBox, confirm } = useConfirmModal();
+
 	const location = useLocation();
 	const [menu, setMenu] = useState({
 		allowfuncKeys: {},
@@ -43,13 +38,13 @@ const Wrapper = ({ children }) => {
 		<ct.menuContext.Provider value={{ menu, setMenu }}>
 			<ct.userInfoContext.Provider value={{ userInfo, setUserInfo }}>
 				<ct.popBoxContext.Provider
-					value={{ popBox, setPopBox, confirm }}>
-					<ModalConfirm
-						show={showConfirmModal}
-						setShow={setShowConfirmModal}
-						{...confirmInfo}
-					/>
-
+					value={{
+						popBox,
+						setPopBox,
+						confirm,
+						conformPopBox,
+						setConformPopBox
+					}}>
 					<ct.allSiteListContext.Provider
 						value={{ allSiteList, siteId, setSiteId }}>
 						{children}

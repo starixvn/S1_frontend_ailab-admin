@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { bool, func, node, string } from "prop-types";
 import { Button, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { popBoxContext } from "../context";
 
-const ModalConfirm = ({
-	show,
-	setShow,
-	title,
-	icon,
-	content,
-	onOk,
-	onCancel
-}) => {
+const ModalConfirm = () => {
 	const { t } = useTranslation();
+	const { conformPopBox, setConformPopBox } = useContext(popBoxContext);
+
+	const {
+		icon,
+		title,
+		content,
+		onOk = () => null,
+		onCancel = () => null
+	} = conformPopBox;
 
 	const handleClose = () => {
-		setShow(false);
+		setConformPopBox({
+			isOpen: false
+		});
 	};
 
 	const handleCancel = () => {
@@ -31,12 +35,7 @@ const ModalConfirm = ({
 	};
 
 	return (
-		<Modal
-			show={show}
-			className="fade modal-level-2"
-			aria-labelledby="contained-modal-title-vcenter"
-			centered
-			onHide={handleClose}>
+		<>
 			<Modal.Header closeButton>
 				{icon}
 				<Modal.Title>{title}</Modal.Title>
@@ -50,25 +49,8 @@ const ModalConfirm = ({
 					{t("PopBox.lbl_Ok")}
 				</Button>
 			</Modal.Footer>
-		</Modal>
+		</>
 	);
 };
 
-ModalConfirm.defaultProps = {
-	title: "",
-	icon: null,
-	content: null,
-	onOk: () => null,
-	onCancel: () => null
-};
-
-ModalConfirm.propTypes = {
-	show: bool.isRequired,
-	setShow: func.isRequired,
-	title: string,
-	icon: node,
-	content: node,
-	onOk: func,
-	onCancel: func
-};
 export { ModalConfirm };
