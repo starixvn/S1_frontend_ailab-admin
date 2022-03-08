@@ -41,9 +41,15 @@ const PersonalMessage = () => {
 	const { exportMessageReport } = useExportMessageReportFetcher();
 
 	const handleSearchSubmit = async pageData => {
-		const { page, pageSize } = pageData ?? {};
+		const { currentPage, pageSize } = pageData ?? {};
 
-		getBatchMessageList({ page, pageSize, siteId, startDate, endDate });
+		getBatchMessageList({
+			currentPage,
+			pageSize,
+			siteId,
+			startDate,
+			endDate
+		});
 	};
 
 	const {
