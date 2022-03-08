@@ -8,6 +8,7 @@ const useGetBatchMessageListFetcher = () => {
 	const [loading, setLoading] = useState(false);
 	const [batchMessageList, setBatchMessageList] = useState([]);
 	const [totalPages, setTotalPages] = useState(0);
+	const [rowCount, setRowCount] = useState(0);
 
 	const getBatchMessageList = async ({
 		siteId,
@@ -19,7 +20,7 @@ const useGetBatchMessageListFetcher = () => {
 		setLoading(true);
 
 		try {
-			const data = await api_personalMessage_GetBatchMessageList({
+			const response = await api_personalMessage_GetBatchMessageList({
 				pageNumber: currentPage,
 				siteIds: [siteId],
 				startDate,
@@ -31,9 +32,10 @@ const useGetBatchMessageListFetcher = () => {
 				return;
 			}
 
-			const results = data?.data ?? [];
+			const results = response?.data ?? [];
 			setBatchMessageList([...results]);
-			setTotalPages(data.totalPages);
+			setTotalPages(response.totalPages);
+			setRowCount(response.rowCount);
 		} catch (error) {
 			setBatchMessageList([]);
 		}
@@ -43,6 +45,7 @@ const useGetBatchMessageListFetcher = () => {
 
 	return {
 		loading,
+		rowCount,
 		totalPages,
 		batchMessageList,
 		getBatchMessageList

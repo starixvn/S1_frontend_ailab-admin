@@ -28,6 +28,7 @@ const PersonalMessage = () => {
 
 	const {
 		loading,
+		rowCount,
 		totalPages,
 		batchMessageList,
 		getBatchMessageList
@@ -116,10 +117,10 @@ const PersonalMessage = () => {
 						t={t}
 						currentPage={currentPage}
 						totalPages={totalPages}
-						clickPageNumber={clickPageNumber}
 						pageSize={pageSize}
-						totalEntries={pageSize}
-						onSelectEntry={onSelectEntry}>
+						rowCount={rowCount}
+						onSelectEntry={onSelectEntry}
+						clickPageNumber={clickPageNumber}>
 						<PersonalMessageTable
 							loading={loading}
 							batchMessageList={batchMessageList}
