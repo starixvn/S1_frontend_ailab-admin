@@ -13,14 +13,14 @@ const useGetBatchMessageListFetcher = () => {
 		siteId,
 		startDate,
 		endDate,
-		page = 1,
+		currentPage = 1,
 		pageSize = 10
 	}) => {
 		setLoading(true);
 
 		try {
 			const data = await api_personalMessage_GetBatchMessageList({
-				pageNumber: page,
+				pageNumber: currentPage,
 				siteIds: [siteId],
 				startDate,
 				endDate,
