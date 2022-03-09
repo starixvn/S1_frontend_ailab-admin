@@ -13,6 +13,7 @@ import IframePage from "./pages/iframePage";
 import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
+import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
 // import { PersonalMessage } from "./pages/CSD";
 import MemberList from "./pages/csd/memberList";
@@ -78,6 +79,10 @@ function App() {
 								<Route
 									component={DepositListing}
 									path={`/${path.depositList.root}`}
+								/>
+								<Route
+									component={WithdrawalSetting}
+									path={`/${path.withdrawalSetting.root}`}
 								/>
 								<Route component={NoMatch} />
 							</Switch>
