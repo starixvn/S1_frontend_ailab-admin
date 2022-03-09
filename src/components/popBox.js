@@ -34,7 +34,7 @@ const PopBox = () => {
 			case defPopBoxType.csdAddPersonalMessage: {
 				const ModalAddPersonalMessage = lazy(() =>
 					import(
-						"../pages/CSD/PersonalMessage/ModalAddPersonalMessage"
+						"../pages/csd/PersonalMessage/ModalAddPersonalMessage"
 					)
 				);
 

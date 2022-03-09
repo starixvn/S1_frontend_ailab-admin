@@ -5,7 +5,7 @@ import { positions, Provider as ReactAlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import i18n from "./i18n/config";
 import Login from "./pages/login";
-import Tagmanagement from "./pages/CSD/tagManagement";
+import Tagmanagement from "./pages/csd/tagManagement";
 import Dashboard from "./pages/dashboard";
 import path from "./path";
 import NoMatch from "./pages/404";
@@ -15,8 +15,8 @@ import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import DepositListing from "./pages/finance/depositListing";
 // import { PersonalMessage } from "./pages/CSD";
-import MemberList from "./pages/CSD/memberList";
-import { PersonalMessage } from "./pages/CSD";
+import MemberList from "./pages/csd/memberList";
+import { PersonalMessage } from "./pages/csd";
 
 const reactAlertOptions = {
 	timeout: 5000,
