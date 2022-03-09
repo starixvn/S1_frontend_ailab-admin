@@ -143,8 +143,7 @@ const Menu = () => {
 
 	const areaHandler = ({ area }) => {
 		setMenu(prev => {
-			let oldShowArea = JSON.parse(JSON.stringify(prev.showArea));
-
+			let oldShowArea = JSON.parse(JSON.stringify(prev.showArea)) ?? [];
 			if (area.length > prev.showArea) {
 				// open
 				oldShowArea.push(area[area.length - 1]);
