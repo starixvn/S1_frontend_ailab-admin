@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import PropTypes, { resetWarningCache } from "prop-types";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import { useAlert } from "react-alert";
 import { Link } from "react-router-dom";
+import { allSiteListContext } from "../../components/context";
 import Layout from "../../components/layout";
 import InputBox from "../../components/inputBox";
 import DatetimePicker from "../../components/datetimePicker";
 import {
-	useAllSiteListFetcher,
 	useGetDateRange,
 	useSelectCurrencies,
 	useSelectEnumTypes,
@@ -22,7 +22,6 @@ import {
 	api_BaseData_GetTagByStatus,
 	defStatus
 } from "../../service/api/baseData";
-import Dropdown from "../../components/dropdown";
 import { Empty } from "../../components/empty";
 
 const defCol = {
@@ -41,92 +40,13 @@ const defCol = {
 	loginIp: "loginIp"
 };
 
-const initValue = {
-	birthCheck: false,
-	siteId: 1
-};
-
-const defInputType = {
-	datePicker: "datePicker",
-	inputbox: "inputbox",
-	dropdown: "dropdown",
-	dropdownWithSearch: "dropdownWithSearch"
-};
-
-const defInput = [
-	{
-		title: "MemberList.RegisterDate",
-		inputType: defInputType.datePicker,
-		col: defCol.registerDate
-	},
-	{
-		title: "MemberList.Site",
-		inputType: defInputType.dropdown,
-		col: defCol.siteId
-	},
-	{
-		title: "MemberList.Currency",
-		inputType: defInputType.dropdownWithSearch,
-		col: defCol.currencyIds
-	},
-	{
-		title: "MemberList.MemberCode",
-		inputType: defInputType.inputbox,
-		col: defCol.userName
-	},
-	{
-		title: "MemberList.FullName",
-		inputType: defInputType.inputbox,
-		col: defCol.accountName
-	},
-	{
-		title: "MemberList.SabaId",
-		inputType: defInputType.inputbox,
-		col: defCol.tpUserName
-	},
-	{
-		title: "MemberList.AffiliateId",
-		inputType: defInputType.inputbox,
-		col: defCol.affCode
-	},
-	{
-		title: "MemberList.Status",
-		inputType: defInputType.dropdownWithSearch,
-		col: defCol.statuses
-	},
-	{
-		title: "MemberList.EmailAddress",
-		inputType: defInputType.inputbox,
-		col: defCol.email
-	},
-	{
-		title: "MemberList.PhoneNumber",
-		inputType: defInputType.inputbox,
-		col: defCol.phoneNo
-	},
-	{
-		title: "MemberList.DateOfBirth",
-		inputType: defInputType.datePicker,
-		col: defCol.birthCheck
-	},
-	{
-		title: "MemberList.BankAccountNumber",
-		inputType: defInputType.inputbox,
-		col: defCol.bankAccountNumber
-	},
-	{
-		title: "MemberList.LoginIp",
-		inputType: defInputType.inputbox,
-		col: defCol.loginIp
-	}
-];
-
 const MemberList = () => {
 	const { t } = useTranslation();
 	const alert = useAlert();
 	const isMountedRef = useRef(null);
-	const [data, setData] = useState(initValue);
+	const [data, setData] = useState({});
 	const [report, setReport] = useState([]);
+	const { siteId } = useContext(allSiteListContext);
 
 	const {
 		dateRange: registerDate,
@@ -139,7 +59,7 @@ const MemberList = () => {
 		currencyList,
 		selected: selectedCurrencies,
 		getAPIPayload: getCurrencies
-	} = useSelectCurrencies({ siteId: data.siteId, defaultSelectAll: true });
+	} = useSelectCurrencies({ siteId, defaultSelectAll: true });
 
 	const {
 		selected: selectedStatus,
@@ -181,7 +101,7 @@ const MemberList = () => {
 				: null,
 			currencyIds: getCurrencies(),
 			statuses: getStatus(),
-			siteIds: [data.siteId]
+			siteIds: [siteId]
 		};
 
 		api_customerManage_GetCustInfoList({ ...payload }).then(
@@ -246,7 +166,7 @@ const MemberList = () => {
 					clickPageNumber={clickPageNumber}
 				/>
 
-				{report?.data?.length ? (
+				{report?.data && (
 					<ReportPanel
 						report={report}
 						t={t}
@@ -258,7 +178,7 @@ const MemberList = () => {
 						clickPageNumber={clickPageNumber}
 						onSelectEntry={onSelectEntry}
 					/>
-				) : null}
+				)}
 			</main>
 		</Layout>
 	);
@@ -281,115 +201,9 @@ const FormPanel = ({
 	currentPage,
 	clickPageNumber
 }) => {
-	const { allSiteList } = useAllSiteListFetcher();
-
 	const editField = ({ col, val }) => {
 		setData(pre => ({ ...pre, [col]: val }));
 	};
-
-	const arr = defInput.map(el => {
-		const { title, inputType, col } = el;
-
-		if (inputType === defInputType.datePicker) {
-			if (col === defCol.registerDate) {
-				return (
-					<div key={`input-${col}`}>
-						<h6>{t(title)}</h6>
-						<DatetimePicker
-							id="registerDate"
-							setDateRange={setRegisterDate}
-						/>
-					</div>
-				);
-			}
-			if (col === defCol.birthCheck) {
-				return (
-					<div key={`input-${col}`} className="btn-group mt-3">
-						<h6>{t(title)}</h6>
-						<div className="d-flex">
-							<div className="btn-group">
-								<DatetimePicker
-									id="birth"
-									setDateRange={setBirth}
-									isRange={false}
-									disabled={!data.birthCheck}
-								/>
-								<div className="btn btn-outline-secondary">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										checked={data.birthCheck}
-										onChange={() => {
-											setData(pre => ({
-												...pre,
-												birthCheck: !pre.birthCheck
-											}));
-										}}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-				);
-			}
-		}
-		if (inputType === defInputType.dropdown && col === defCol.siteId) {
-			return (
-				<div key={`input-${col}`} className="btn-group">
-					<Dropdown
-						title={t(title)}
-						value={data.siteId}
-						options={allSiteList.map(s => ({
-							value: s.siteId,
-							displayText: s.siteName
-						}))}
-						onSelect={val =>
-							editField({ col: defCol.siteId, val: val.value })
-						}
-					/>
-				</div>
-			);
-		}
-		if (inputType === defInputType.dropdownWithSearch) {
-			if (col === defCol.currencyIds) {
-				return (
-					<DropdownWithSearch
-						key={`input-${col}`}
-						title={t(title)}
-						options={currencyList}
-						selected={selectedCurrencies}
-						onSelect={OnSelectCurrency}
-					/>
-				);
-			}
-			if (col === defCol.statuses) {
-				return (
-					<DropdownWithSearch
-						key={`input-${col}`}
-						title={t(title)}
-						options={statusOptions}
-						selected={selectedStatus}
-						onSelect={OnSelectStatus}
-					/>
-				);
-			}
-		}
-
-		return (
-			<InputBox
-				key={`input-${col}`}
-				title={t(title)}
-				className="btn-group"
-				value={data[col]}
-				onChange={e =>
-					editField({
-						col,
-						val: e.target.value
-					})
-				}
-			/>
-		);
-	});
 
 	return (
 		<form
@@ -403,9 +217,161 @@ const FormPanel = ({
 				});
 			}}>
 			<div className="bd-example">
-				{arr}
+				<div className="row">
+					<h6>{t("MemberList.RegisterDate")}</h6>
+					<DatetimePicker
+						id="registerDate"
+						setDateRange={setRegisterDate}
+					/>
+				</div>
+				<div className="row">
+					<DropdownWithSearch
+						title={t("MemberList.Currency")}
+						options={currencyList}
+						selected={selectedCurrencies}
+						onSelect={OnSelectCurrency}
+					/>
+					<InputBox
+						title={t("MemberList.MemberCode")}
+						className="btn-group col-md-3"
+						value={data[defCol.userName]}
+						onChange={e =>
+							editField({
+								col: defCol.userName,
+								val: e.target.value
+							})
+						}
+					/>
+					<InputBox
+						title={t("MemberList.FullName")}
+						className="btn-group col-md-3"
+						value={data[defCol.accountName]}
+						onChange={e =>
+							editField({
+								col: defCol.accountName,
+								val: e.target.value
+							})
+						}
+					/>
+					<InputBox
+						title={t("MemberList.SabaId")}
+						className="btn-group col-md-3"
+						value={data[defCol.tpUserName]}
+						onChange={e =>
+							editField({
+								col: defCol.tpUserName,
+								val: e.target.value
+							})
+						}
+					/>
+				</div>
+
+				<div className="row">
+					<InputBox
+						title={t("MemberList.AffiliateId")}
+						className="btn-group col-md-3"
+						value={data[defCol.affCode]}
+						onChange={e =>
+							editField({
+								col: defCol.affCode,
+								val: e.target.value
+							})
+						}
+					/>
+					<DropdownWithSearch
+						title={t("MemberList.Status")}
+						options={statusOptions}
+						selected={selectedStatus}
+						onSelect={OnSelectStatus}
+					/>
+					<InputBox
+						title={t("MemberList.EmailAddress")}
+						className="btn-group col-md-3"
+						value={data[defCol.email]}
+						onChange={e =>
+							editField({
+								col: defCol.email,
+								val: e.target.value
+							})
+						}
+					/>
+					<InputBox
+						title={t("MemberList.PhoneNumber")}
+						className="btn-group col-md-3"
+						value={data[defCol.phoneNo]}
+						onChange={e =>
+							editField({
+								col: defCol.phoneNo,
+								val: e.target.value
+							})
+						}
+					/>
+				</div>
+
+				<div className="row">
+					<div className="btn-group col-md-3">
+						<h6>{t("MemberList.DateOfBirth")}</h6>
+						<div className="d-flex">
+							<div className="btn-group">
+								<DatetimePicker
+									id="birth"
+									setDateRange={setBirth}
+									isRange={false}
+									disabled={!data.birthCheck}
+								/>
+								<div className="btn btn-outline-secondary">
+									<input
+										className="form-check-input"
+										type="checkbox"
+										checked={data.birthCheck ?? false}
+										onChange={() => {
+											setData(pre => ({
+												...pre,
+												birthCheck: !pre.birthCheck
+											}));
+										}}
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<InputBox
+						title={t("MemberList.BankAccountNumber")}
+						className="btn-group col-md-3"
+						value={data[defCol.bankAccountNumber]}
+						onChange={e =>
+							editField({
+								col: defCol.bankAccountNumber,
+								val: e.target.value
+							})
+						}
+					/>
+					<InputBox
+						title={t("MemberList.LoginIp")}
+						className="btn-group col-md-3"
+						value={data[defCol.loginIp]}
+						onChange={e =>
+							editField({
+								col: defCol.loginIp,
+								val: e.target.value
+							})
+						}
+					/>
+				</div>
+
 				<div>
-					<button type="submit" className="btn btn-primary float-end">
+					<button
+						type="submit"
+						className="btn btn-primary float-end"
+						onSubmit={e => {
+							e.preventDefault();
+							clickSubmit({
+								currentPage,
+								pageSize,
+								clickPageNumber,
+								resetPage: true
+							});
+						}}>
 						{t("MemberList.Search")}
 					</button>
 				</div>
@@ -436,6 +402,13 @@ FormPanel.propTypes = {
 	pageSize: PropTypes.number,
 	currentPage: PropTypes.number,
 	clickPageNumber: PropTypes.func
+};
+
+const statusStyle = {
+	1: "success",
+	2: "warning",
+	3: "danger",
+	4: "dark"
 };
 
 const ReportPanel = ({
@@ -491,8 +464,7 @@ const ReportPanel = ({
 
 	const arr = data.map((el, i) => {
 		const currencyName = getCurrencyName(el.currencyId);
-		const status = statusOptions.find(s => s.value === el.status)
-			.displayText;
+		const status = statusOptions.find(s => s.value === el.status);
 		const custTag = el.tagList ? getTagByStatus(el.tagList) : "";
 
 		return (
@@ -510,7 +482,13 @@ const ReportPanel = ({
 					</Link>
 				</td>
 				<td>{dayjs(el.regTime).format("YYYY/MM/DD HH:mm:ss")}</td>
-				<td>{status}</td>
+				<td>
+					<div
+						className={`alert alert-${statusStyle[status.value]}`}
+						role="alert">
+						{status.displayText}
+					</div>
+				</td>
 				<td>{el.vipLevel}</td>
 				<td>{custTag}</td>
 				<td>{el.agent}</td>
@@ -523,36 +501,54 @@ const ReportPanel = ({
 	return (
 		<div className="bd-example">
 			<div className="table-responsive">
-				<Pagination
-					t={t}
-					currentPage={currentPage}
-					totalPages={totalPages}
-					rowCount={rowCount}
-					pageSize={pageSize}
-					clickPageNumber={clickPageNumber}
-					onSelectEntry={onSelectEntry}>
-					<table className="table table-striped table-hover">
-						<thead className="table-dark">
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">{t("MemberList.Currency")}</th>
-								<th scope="col">
-									{t("MemberList.MemberCode")}
-								</th>
-								<th scope="col">
-									{t("MemberList.RegisterTime")}
-								</th>
-								<th scope="col">{t("MemberList.Status")}</th>
-								<th scope="col">{t("MemberList.VIPLevel")}</th>
-								<th scope="col">{t("MemberList.TagList")}</th>
-								<th scope="col">{t("MemberList.AgentName")}</th>
-								<th scope="col">{t("MemberList.SabaId")}</th>
-								<th scope="col">{t("MemberList.IsTest")}</th>
-							</tr>
-						</thead>
-						<tbody>{data.length ? arr : <Empty />}</tbody>
-					</table>
-				</Pagination>
+				{!report?.data?.length ? (
+					<Empty />
+				) : (
+					<Pagination
+						t={t}
+						currentPage={currentPage}
+						totalPages={totalPages}
+						rowCount={rowCount}
+						pageSize={pageSize}
+						clickPageNumber={clickPageNumber}
+						onSelectEntry={onSelectEntry}>
+						<table className="table table-striped table-hover">
+							<thead className="table-dark">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">
+										{t("MemberList.Currency")}
+									</th>
+									<th scope="col">
+										{t("MemberList.MemberCode")}
+									</th>
+									<th scope="col">
+										{t("MemberList.RegisterTime")}
+									</th>
+									<th scope="col">
+										{t("MemberList.Status")}
+									</th>
+									<th scope="col">
+										{t("MemberList.VIPLevel")}
+									</th>
+									<th scope="col">
+										{t("MemberList.TagList")}
+									</th>
+									<th scope="col">
+										{t("MemberList.AgentName")}
+									</th>
+									<th scope="col">
+										{t("MemberList.SabaId")}
+									</th>
+									<th scope="col">
+										{t("MemberList.IsTest")}
+									</th>
+								</tr>
+							</thead>
+							<tbody>{arr}</tbody>
+						</table>
+					</Pagination>
+				)}
 			</div>
 		</div>
 	);
