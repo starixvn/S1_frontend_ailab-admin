@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { menuContext, userInfoContext, popBoxContext } from "../context";
 import { useHandleAuth } from "../../hook";
-import TabBar from "./tabBar";
 import { defPopBoxType } from "../popBox";
 import { siteInfo } from "../../config";
 import { SiteIdDropdown } from "./SiteIdDropdown";
@@ -33,7 +32,6 @@ const Header = () => {
 				to={`/${siteInfo.defaultIndex}`}>
 				{t("Admin.lbl_Admin")}
 			</Link>
-			<TabBar />
 
 			<SiteIdDropdown />
 

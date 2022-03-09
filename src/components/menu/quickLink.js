@@ -73,7 +73,7 @@ const useHandleTab = ({ locationFuncKey, currentState }) => {
 		if (locationFuncKey === FuncKey) {
 			history.push({
 				pathname: `/${
-					currentState.NewAdmin
+					afterCloselinkState.NewAdmin
 						? siteInfo.newSitePrefixUrl
 						: siteInfo.oldSitePrefixUrl
 				}/${getPathName(afterCloselinkState)}`,
@@ -85,7 +85,7 @@ const useHandleTab = ({ locationFuncKey, currentState }) => {
 	return { menu, clickClose };
 };
 
-const TabBar = () => {
+const QuickLink = () => {
 	const location = useLocation();
 	const { FuncKey: locationFuncKey } = location?.state ?? {};
 	const { menu, clickClose } = useHandleTab({
@@ -94,7 +94,6 @@ const TabBar = () => {
 	});
 
 	const length = menu.tabBar?.length - 1 ?? 0;
-	const allowToClose = length !== 0;
 	const tabs = menu.tabBar?.map(
 		({ Category, Controller, Action, Title, FuncKey, NewAdmin }, idx) => {
 			const linkState = {
@@ -109,19 +108,14 @@ const TabBar = () => {
 			const afterCloselinkState =
 				idx === length ? menu.tabBar[idx - 1] : menu.tabBar[idx + 1];
 			return (
-				<TabItem
+				<LinkItem
 					key={`header-tabs-${FuncKey}`}
 					linkState={linkState}
 					clickClose={() =>
 						clickClose({ FuncKey, afterCloselinkState })
 					}
-					active={
-						locationFuncKey
-							? FuncKey === locationFuncKey
-							: FuncKey === siteInfo.defaultFuncKey
-					}
 					afterCloselinkState={afterCloselinkState}
-					allowToClose={allowToClose}
+					allowToClose={length !== 0}
 				/>
 			);
 		}
@@ -137,8 +131,8 @@ const TabBar = () => {
 	);
 };
 
-const TabItem = ({ linkState, clickClose, active, allowToClose }) => (
-	<div className={`btn btn-outline-primary${active ? " active" : ""}`}>
+const LinkItem = ({ linkState, clickClose, allowToClose }) => (
+	<div className="btn btn-outline-secondary">
 		<Link
 			to={{
 				pathname: `/${
@@ -160,7 +154,7 @@ const TabItem = ({ linkState, clickClose, active, allowToClose }) => (
 	</div>
 );
 
-TabItem.propTypes = {
+LinkItem.propTypes = {
 	linkState: PropTypes.shape({
 		Controller: PropTypes.string.isRequired,
 		Action: PropTypes.string.isRequired,
@@ -168,8 +162,7 @@ TabItem.propTypes = {
 		NewAdmin: PropTypes.bool
 	}).isRequired,
 	clickClose: PropTypes.func.isRequired,
-	active: PropTypes.bool.isRequired,
 	allowToClose: PropTypes.bool.isRequired
 };
 
-export default TabBar;
+export default QuickLink;

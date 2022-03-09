@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { menuContext } from "../context";
 import MenuList from "../../datas/menu";
 import { siteInfo } from "../../config";
+import QuickLink from "./quickLink";
 
 const Levels = ({
 	level,
@@ -122,7 +123,14 @@ const MenuItems = ({ areaHandler, t, showArea, allowfuncKeys, clickMenu }) => {
 const Menu = () => {
 	const { t } = useTranslation();
 	const { menu, setMenu } = useContext(menuContext);
-	const clickMenu = ({ Category, Controller, Action, Title, FuncKey }) => {
+	const clickMenu = ({
+		Category,
+		Controller,
+		Action,
+		Title,
+		FuncKey,
+		NewAdmin
+	}) => {
 		const { tabBar } = menu;
 		if (!tabBar.some(tab => tab.FuncKey === FuncKey)) {
 			setMenu(prev => {
@@ -133,7 +141,14 @@ const Menu = () => {
 					? prevTabBar
 					: [
 							...prevTabBar,
-							{ Category, Controller, Action, Title, FuncKey }
+							{
+								Category,
+								Controller,
+								Action,
+								Title,
+								FuncKey,
+								NewAdmin
+							}
 					  ];
 
 				return { ...prev, tabBar: newTabBar };
@@ -189,6 +204,8 @@ const Menu = () => {
 					allowfuncKeys={menu.allowfuncKeys}
 					clickMenu={clickMenu}
 				/>
+
+				<QuickLink />
 			</div>
 		</nav>
 	);
