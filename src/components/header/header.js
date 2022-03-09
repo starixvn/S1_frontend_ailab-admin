@@ -6,6 +6,7 @@ import { useHandleAuth } from "../../hook";
 import TabBar from "./tabBar";
 import { defPopBoxType } from "../popBox";
 import { siteInfo } from "../../config";
+import { SiteIdDropdown } from "./SiteIdDropdown";
 
 const Header = () => {
 	const { t } = useTranslation();
@@ -33,6 +34,9 @@ const Header = () => {
 				{t("Admin.lbl_Admin")}
 			</Link>
 			<TabBar />
+
+			<SiteIdDropdown />
+
 			<button
 				className="navbar-toggler"
 				type="button"

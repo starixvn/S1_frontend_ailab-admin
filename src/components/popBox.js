@@ -1,68 +1,105 @@
-import React, { useContext, lazy, Suspense } from "react";
+import React, { useContext, lazy, Suspense, useMemo } from "react";
+
 import { popBoxContext } from "./context";
+import { ModalConfirm } from "./Modal/modalConfirm";
 
 export const defPopBoxType = {
 	default: "default",
 	changePwd: "changePwd",
-	tagPopBox: "tagPopBox"
+	tagPopBox: "tagPopBox",
+	csdAddPersonalMessage: "csdAddPersonalMessage"
 };
 
 const PopBox = () => {
-	const { popBox, setPopBox } = useContext(popBoxContext);
+	const { popBox, setPopBox, conformPopBox } = useContext(popBoxContext);
 
 	const handlePopBox = () => {
 		setPopBox({ isOpen: false });
 	};
 
-	let content = null;
-	switch (popBox.popBoxType) {
-		case defPopBoxType.changePwd: {
-			const ChangePWD = lazy(() => import("./header/changePwd"));
-			content = (
-				<Suspense fallback={<div />}>
-					<ChangePWD />
-				</Suspense>
-			);
+	const content = useMemo(() => {
+		let _content = null;
+		switch (popBox.popBoxType) {
+			case defPopBoxType.changePwd: {
+				const ChangePWD = lazy(() => import("./header/changePwd"));
+				_content = (
+					<Suspense fallback={<div />}>
+						<ChangePWD />
+					</Suspense>
+				);
 
-			break;
-		}
-		case defPopBoxType.tagPopBox: {
-			const TagPopBox = lazy(() => import("./tagManagement/tagPopBox"));
-			content = (
-				<Suspense fallback={<div />}>
-					<TagPopBox
-						tagData={popBox.tagData}
-						refresh={popBox.refresh}
-					/>
-				</Suspense>
-			);
+				break;
+			}
 
-			break;
+			case defPopBoxType.csdAddPersonalMessage: {
+				const ModalAddPersonalMessage = lazy(() =>
+					import(
+						"../pages/CSD/PersonalMessage/ModalAddPersonalMessage"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<ModalAddPersonalMessage popBoxData={popBox.data} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.tagPopBox: {
+				const TagPopBox = lazy(() =>
+					import("./tagManagement/tagPopBox")
+				);
+				_content = (
+					<Suspense fallback={<div />}>
+						<TagPopBox
+							tagData={popBox.tagData}
+							refresh={popBox.refresh}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			default: {
+				_content = (
+					<div className="modal-body">
+						{popBox.content}
+						{popBox.hasBtn ? popBox.btnBar : null}
+					</div>
+				);
+				break;
+			}
 		}
-		default: {
-			content = (
-				<div className="modal-body">
-					{popBox.content}
-					{popBox.hasBtn ? popBox.btnBar : null}
-				</div>
-			);
-			break;
-		}
-	}
+		return _content;
+	}, [popBox.popBoxType]);
 
 	return (
 		<div
 			className={`modal fade${
-				popBox.isOpen ? " show" : ""
+				popBox.isOpen || conformPopBox.isOpen ? " show" : ""
 			} modal-level-1`}
 			id="exampleModalCenter"
 			tabIndex="-1"
 			aria-labelledby="exampleModalCenterTitle"
-			style={{ display: `${popBox.isOpen ? "block" : "none"}` }}
-			aria-hidden={!popBox.isOpen}
-			aria-modal={popBox.isOpen}>
+			style={{
+				display: `${
+					popBox.isOpen || conformPopBox.isOpen ? "block" : "none"
+				}`
+			}}
+			aria-hidden={!popBox.isOpen || conformPopBox.isOpen}
+			aria-modal={popBox.isOpen || conformPopBox.isOpen}>
 			<div className="modal-dialog modal-dialog-centered">
-				<div className="modal-content">
+				<div
+					className="modal-content"
+					style={{
+						visibility: !conformPopBox.isOpen
+							? "visible"
+							: "hidden",
+						position: "absolute"
+					}}>
 					<div className="modal-header">
 						<h5
 							className="modal-title"
@@ -78,6 +115,15 @@ const PopBox = () => {
 						/>
 					</div>
 					{content}
+				</div>
+
+				<div
+					className="modal-content"
+					style={{
+						visibility: conformPopBox.isOpen ? "visible" : "hidden",
+						position: "absolute"
+					}}>
+					<ModalConfirm />
 				</div>
 			</div>
 		</div>

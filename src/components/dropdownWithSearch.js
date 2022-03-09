@@ -112,9 +112,9 @@ export default function Component({
 	};
 
 	return (
-		<div className="btn-group">
+		<div className="btn-group col-md-3">
 			<h6>{title}</h6>
-			<div className="" ref={ref}>
+			<div className="long_button" ref={ref}>
 				<button
 					className={`btn btn-outline-secondary dropdown-toggle${
 						open ? " show" : ""
@@ -123,7 +123,7 @@ export default function Component({
 					aria-expanded={open}
 					type="button"
 					onClick={ClickDropdown}>
-					{displaySelected}
+					<span>{displaySelected}</span>
 				</button>
 				<ul className={`dropdown-menu${open ? " show" : ""}`}>
 					<div className="input-group">

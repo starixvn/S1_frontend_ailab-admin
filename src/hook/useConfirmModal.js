@@ -1,17 +1,26 @@
 import { useState } from "react";
 
 const useConfirmModal = () => {
-	const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-	const [confirmInfo, setConfirmInfo] = useState({});
+	const [conformPopBox, setConformPopBox] = useState({
+		isOpen: false,
+		title: "",
+		content: "",
+		hasBtn: false,
+		btnBar: null
+	});
 
 	const confirm = ({ title, icon, content, onOk, onCancel }) => {
-		setShowConfirmModal(true);
-
-		setConfirmInfo({ title, icon, content, onOk, onCancel });
+		setConformPopBox({
+			isOpen: true,
+			title,
+			icon,
+			content,
+			onOk,
+			onCancel
+		});
 	};
 
-	return { showConfirmModal, confirmInfo, setShowConfirmModal, confirm };
+	return { conformPopBox, setConformPopBox, confirm };
 };
 
 export { useConfirmModal };

@@ -16,6 +16,7 @@ import { siteInfo } from "./config";
 import DepositListing from "./pages/finance/depositListing";
 // import { PersonalMessage } from "./pages/CSD";
 import MemberList from "./pages/CSD/memberList";
+import { PersonalMessage } from "./pages/CSD";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -63,10 +64,10 @@ function App() {
 									<Dashboard />
 								</Route>
 
-								{/* <Route
-									path="/NewAdmin/Member/PersonalMessageBatch"
+								<Route
+									path={`/${path.personalMessage.root}`}
 									component={PersonalMessage}
-								/> */}
+								/>
 
 								<Route
 									path={`/${path.memberList.root}`}

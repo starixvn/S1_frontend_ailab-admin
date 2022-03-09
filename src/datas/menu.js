@@ -133,8 +133,8 @@ export default [
 			{
 				displayKey: "Menu.CSD.MemberListing",
 				FuncKey: "CustManage/CustInfoList",
-				Controller: "member",
-				Action: "memberList",
+				Controller: "Member",
+				Action: "MemberList",
 				Icon: "",
 				Childs: null,
 				NewAdmin: true
