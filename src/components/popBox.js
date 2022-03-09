@@ -6,6 +6,7 @@ import { ModalConfirm } from "./Modal/modalConfirm";
 export const defPopBoxType = {
 	default: "default",
 	changePwd: "changePwd",
+	withdrawalSetting: "withdrawalSetting",
 	tagPopBox: "tagPopBox",
 	csdAddPersonalMessage: "csdAddPersonalMessage"
 };
@@ -25,6 +26,20 @@ const PopBox = () => {
 				_content = (
 					<Suspense fallback={<div />}>
 						<ChangePWD />
+					</Suspense>
+				);
+
+				break;
+			}
+			case defPopBoxType.withdrawalSetting: {
+				const WithdrawalSettingPopBox = lazy(() =>
+					import(
+						"../components/withdrawalSetting/withdrawalSetting.popBox"
+					)
+				);
+				_content = (
+					<Suspense fallback={<div />}>
+						<WithdrawalSettingPopBox {...popBox.params} />
 					</Suspense>
 				);
 
@@ -106,13 +121,15 @@ const PopBox = () => {
 							id="exampleModalCenterTitle">
 							{popBox.title}
 						</h5>
-						<button
-							type="button"
-							className="btn-close"
-							data-bs-dismiss="modal"
-							aria-label="Close"
-							onClick={handlePopBox}
-						/>
+						{popBox.hideClosingBtn ? null : (
+							<button
+								type="button"
+								className="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+								onClick={handlePopBox}
+							/>
+						)}
 					</div>
 					{content}
 				</div>

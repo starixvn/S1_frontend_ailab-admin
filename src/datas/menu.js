@@ -206,10 +206,11 @@ export default [
 					{
 						displayKey: "Menu.CSD.WithdrawalKYCControl",
 						FuncKey: "Message/WithdrawalKYCControl",
-						Controller: "Message",
+						Controller: "Member",
 						Action: "WithdrawalKYCControl",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					}
 				]
 			},

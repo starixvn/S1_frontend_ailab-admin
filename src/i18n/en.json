@@ -150,8 +150,10 @@
 	"PopBox": {
 		"lbl_Cancel": "Cancel",
 		"lbl_Submit": "Submit",
+		"Yes": "Yes",
 		"lbl_Ok": "OK",
-		"Success": "Success"
+		"Success": "Success",
+		"AreYouSure": "Are You Sure?"
 	},
 	"DepositList": {
 		"SubmitDate": "Submit Date",
@@ -209,6 +211,16 @@
 		"ShowingEntriesHint": "Showing {{firstEntry}} to {{lastEntry}} of {{rowCount}} entries",
 		"Show": "Show",
 		"Entries": "Entries"
+	},
+	"WithdrawalSetting":{
+		"WithdrawalSetting": "Withdrawal Setting",
+		"Site": "Site",
+		"Action": "Action",
+		"Currency": "Currency",
+		"Amount": "Amount",
+		"Edit": "Edit",
+		"Success": "Success",
+		"Refresh": "Refresh"
 	},
 	"CSD": {
 		"PersonalMessage": {

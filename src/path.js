@@ -20,6 +20,9 @@ export default {
 		root: "dashboard"
 	},
 	memberList: {
-		root: `${siteInfo.newSitePrefixUrl}/member/memberList`
+		root: `${siteInfo.newSitePrefixUrl}/Member/MemberList`
+	},
+	withdrawalSetting: {
+		root: `${siteInfo.newSitePrefixUrl}/Member/WithdrawalKYCControl`
 	}
 };
