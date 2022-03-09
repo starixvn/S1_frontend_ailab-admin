@@ -828,3 +828,25 @@ input[type="color"].btn {
   margin: auto 0 auto auto;
   text-align: right;
 }
+
+.Withdrawal_Condition {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding-left: 0;
+}
+
+.Withdrawal_Condition span, .Withdrawal_Condition .input-group, .Withdrawal_Condition .form-check-label {
+  margin-right: 0.5rem;
+}
+
+.Withdrawal_Condition .form-check {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.Withdrawal_Condition .form-check .form-check-input {
+  margin: 0;
+  min-width: 1rem;
+}
