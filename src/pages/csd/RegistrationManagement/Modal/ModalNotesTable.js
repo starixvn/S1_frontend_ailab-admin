@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Modal, Row, Col, Button, Table } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
-import { ButtonWithLoading, Loading } from "../../../../components";
+import { ButtonWithLoading, Empty, Loading } from "../../../../components";
 import { popBoxContext } from "../../../../components/context";
 import {
 	useDeleteRegLiveStatusNoteFetcher,
@@ -72,6 +72,8 @@ const ModalNotesTable = ({ popBoxData }) => {
 						))}
 					</tbody>
 				</Table>
+
+				{regLiveStatusNotes.length === 0 && <Empty />}
 			</div>
 		</Modal.Body>
 	);
