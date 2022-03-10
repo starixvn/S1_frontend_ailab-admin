@@ -51,7 +51,7 @@
 			"Finance": "Finance",
 			"BankCardManagement": "Bank Card Management",
 			"DepositRequest": "Deposit Listing",
-			"WithdrawalRequest": "Withdrawal Request",
+			"WithdrawalListing": "Withdrawal Listing",
 			"BalanceAdjustment": "Withdrawable Adjustment",
 			"BalanceAdjustmentBatch": "Adjustment Listing",
 			"WithdrawalLimitAdjust": "WithdrawalLimit Adjustment",
@@ -229,5 +229,26 @@
 			"UploadBatchMessage": "Upload Batch Message",
 			"PopUp": "Pop Up"
 		}
+	},
+	"WithdrawalListing":{
+		"SubmitDate": "Submit Date",
+		"Currency": "Currency",
+		"Status": "Status",
+		"Type": "Type",
+		"VIPLevel": "VIP Level",
+		"ReferenceId": "Reference Id",
+		"MemberCode": "Member Code",
+		"Amount": "Amount",
+		"Search": "Search",
+		"Export": "Export",
+		"KYC": "KYC",
+		"Risk": "Risk",
+		"WithdrawalCount": "Withdrawal Count",
+		"Bank": "Bank",
+		"CreateDate": "Create Date",
+		"FlowEndDate": "Flow End Date",
+		"UpdatedDate": "Updated Date",
+		"Yes": "Yes",
+		"No": "No"
 	}
 }

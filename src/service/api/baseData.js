@@ -6,11 +6,6 @@ export const defStatus = {
 	Disable: 2
 };
 
-export const api_baseData_GetTagByStatus = () =>
-	apiV2Request.post("/BaseData/GetTagByStatus", {
-		status: defStatus.All
-	});
-
 export const api_BaseData_GetTagByStatus = status =>
 	apiV2Request.post("/BaseData/GetTagByStatus", { status });
 

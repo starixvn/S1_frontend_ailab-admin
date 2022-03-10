@@ -22,6 +22,9 @@ export default {
 	memberList: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/MemberList`
 	},
+	withdrawalListing: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/WithdrawalList`
+	},
 	withdrawalSetting: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/WithdrawalKYCControl`
 	}
