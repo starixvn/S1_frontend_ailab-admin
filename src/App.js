@@ -15,8 +15,8 @@ import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
-// import { PersonalMessage } from "./pages/CSD";
 import MemberList from "./pages/csd/memberList";
+import WithdrawalListing from "./pages/finance/withdrawalListing";
 import { PersonalMessage } from "./pages/csd";
 
 const reactAlertOptions = {
@@ -73,6 +73,10 @@ function App() {
 								<Route
 									path={`/${path.memberList.root}`}
 									component={MemberList}
+								/>
+								<Route
+									path={`/${path.withdrawalListing.root}`}
+									component={WithdrawalListing}
 								/>
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}

@@ -25,7 +25,7 @@ export default function Component({
 	));
 
 	return (
-		<div className="btn-group">
+		<div className="btn-group col-md-3">
 			<h6>{title}</h6>
 			<InputGroup>
 				<DropdownButton

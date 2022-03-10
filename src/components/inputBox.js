@@ -44,7 +44,7 @@ InputBox.defaultProps = {
 	value: "",
 	placeholder: "",
 	inputType: "",
-	className: "",
+	className: "btn-group col-md-3",
 	disabled: false,
 	required: false,
 	onBlur: () => {}

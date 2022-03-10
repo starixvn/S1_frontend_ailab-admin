@@ -420,13 +420,13 @@ export default [
 				NewAdmin: true
 			},
 			{
-				displayKey: "Menu.Content.BannerManagement",
-				Title: "Banner Management",
-				FuncKey: "Marketing/BannerManage",
-				Controller: "Marketing",
-				Action: "BannerManage",
+				displayKey: "Menu.Finance.WithdrawalListing",
+				FuncKey: "Finance/WithdrawalList",
+				Controller: "Finance",
+				Action: "WithdrawalList",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.Finance.WithdrawalAccountingList",
