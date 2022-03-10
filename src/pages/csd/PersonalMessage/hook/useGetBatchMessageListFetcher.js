@@ -5,7 +5,7 @@ import { api_personalMessage_GetBatchMessageList } from "../../../../service/api
 const useGetBatchMessageListFetcher = () => {
 	const isMountedRef = useMounted();
 
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState();
 	const [batchMessageList, setBatchMessageList] = useState([]);
 	const [totalPages, setTotalPages] = useState(0);
 	const [rowCount, setRowCount] = useState(0);
