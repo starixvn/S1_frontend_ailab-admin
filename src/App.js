@@ -18,7 +18,6 @@ import DepositListing from "./pages/finance/depositListing";
 import { PersonalMessage, RegistrationManagement } from "./pages/csd";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
-import { PersonalMessage } from "./pages/csd";
 
 const reactAlertOptions = {
 	timeout: 5000,
