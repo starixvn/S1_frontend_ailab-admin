@@ -42,10 +42,13 @@ const ModalConfirm = () => {
 			</Modal.Header>
 			<Modal.Body>{content}</Modal.Body>
 			<Modal.Footer>
-				<Button variant="secondary" onClick={handleCancel}>
+				<Button
+					className="w-25"
+					variant="secondary"
+					onClick={handleCancel}>
 					{t("PopBox.lbl_Cancel")}
 				</Button>
-				<Button variant="primary" onClick={handleOK}>
+				<Button className="w-25" variant="primary" onClick={handleOK}>
 					{t("PopBox.lbl_Ok")}
 				</Button>
 			</Modal.Footer>

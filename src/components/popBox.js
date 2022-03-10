@@ -7,7 +7,10 @@ export const defPopBoxType = {
 	default: "default",
 	changePwd: "changePwd",
 	tagPopBox: "tagPopBox",
-	csdAddPersonalMessage: "csdAddPersonalMessage"
+	csdAddPersonalMessage: "csdAddPersonalMessage",
+	csdRegistrationManagementEditStatus: "csdRegistrationManagementEditStatus",
+	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
+	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable"
 };
 
 const PopBox = () => {
@@ -41,6 +44,60 @@ const PopBox = () => {
 				_content = (
 					<Suspense fallback={<div />}>
 						<ModalAddPersonalMessage popBoxData={popBox.data} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.csdRegistrationManagementEditStatus: {
+				const RegistrationManagementModalEditStatus = lazy(() =>
+					import(
+						"../pages/csd/RegistrationManagement/Modal/ModalEditStatus"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<RegistrationManagementModalEditStatus
+							popBoxData={popBox.data}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.csdRegistrationManagementAddNotes: {
+				const RegistrationManagementAddNotes = lazy(() =>
+					import(
+						"../pages/csd/RegistrationManagement/Modal/ModalAddNotes"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<RegistrationManagementAddNotes
+							popBoxData={popBox.data}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.csdRegistrationManagementNotesTable: {
+				const RegistrationManagementNotesTable = lazy(() =>
+					import(
+						"../pages/csd/RegistrationManagement/Modal/ModalNotesTable"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<RegistrationManagementNotesTable
+							popBoxData={popBox.data}
+						/>
 					</Suspense>
 				);
 
