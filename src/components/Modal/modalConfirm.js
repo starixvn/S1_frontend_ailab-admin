@@ -36,7 +36,7 @@ const ModalConfirm = () => {
 
 	return (
 		<>
-			<Modal.Header closeButton>
+			<Modal.Header>
 				{icon}
 				<Modal.Title>{title}</Modal.Title>
 			</Modal.Header>

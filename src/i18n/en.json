@@ -51,7 +51,7 @@
 			"Finance": "Finance",
 			"BankCardManagement": "Bank Card Management",
 			"DepositRequest": "Deposit Listing",
-			"WithdrawalRequest": "Withdrawal Request",
+			"WithdrawalListing": "Withdrawal Listing",
 			"BalanceAdjustment": "Withdrawable Adjustment",
 			"BalanceAdjustmentBatch": "Adjustment Listing",
 			"WithdrawalLimitAdjust": "WithdrawalLimit Adjustment",
@@ -150,8 +150,10 @@
 	"PopBox": {
 		"lbl_Cancel": "Cancel",
 		"lbl_Submit": "Submit",
+		"Yes": "Yes",
 		"lbl_Ok": "OK",
-		"Success": "Success"
+		"Success": "Success",
+		"AreYouSure": "Are You Sure?"
 	},
 	"DepositList": {
 		"SubmitDate": "Submit Date",
@@ -210,6 +212,16 @@
 		"Show": "Show",
 		"Entries": "Entries"
 	},
+	"WithdrawalSetting":{
+		"WithdrawalSetting": "Withdrawal Setting",
+		"Site": "Site",
+		"Action": "Action",
+		"Currency": "Currency",
+		"Amount": "Amount",
+		"Edit": "Edit",
+		"Success": "Success",
+		"Refresh": "Refresh"
+	},
 	"CSD": {
 		"PersonalMessage": {
 			"Title": "PersonalMessage",
@@ -220,5 +232,26 @@
 		"RegistrationManagement": {
 			"Title": "RegistrationManagement"
 		}
+	},
+	"WithdrawalListing":{
+		"SubmitDate": "Submit Date",
+		"Currency": "Currency",
+		"Status": "Status",
+		"Type": "Type",
+		"VIPLevel": "VIP Level",
+		"ReferenceId": "Reference Id",
+		"MemberCode": "Member Code",
+		"Amount": "Amount",
+		"Search": "Search",
+		"Export": "Export",
+		"KYC": "KYC",
+		"Risk": "Risk",
+		"WithdrawalCount": "Withdrawal Count",
+		"Bank": "Bank",
+		"CreateDate": "Create Date",
+		"FlowEndDate": "Flow End Date",
+		"UpdatedDate": "Updated Date",
+		"Yes": "Yes",
+		"No": "No"
 	}
 }
