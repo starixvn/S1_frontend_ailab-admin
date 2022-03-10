@@ -2,8 +2,8 @@
 import React from "react";
 import { string, objectOf, any, func, arrayOf } from "prop-types";
 import { Col, Form, Row, Tab, Tabs } from "react-bootstrap";
-import { Editor } from "../../../components/editor";
-import { MODAL_TYPE } from "./def";
+import { Editor } from "../../../../components/editor";
+import { MODAL_TYPE } from "../def";
 
 const ModalAddPersonalMessageTabs = ({
 	type,

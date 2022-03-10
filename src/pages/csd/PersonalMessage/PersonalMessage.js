@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { Search, Plus } from "react-bootstrap-icons";
 import Layout from "../../../components/layout";
 import DatetimePicker from "../../../components/datetimePicker";
 import { allSiteListContext, popBoxContext } from "../../../components/context";
@@ -34,10 +35,7 @@ const PersonalMessage = () => {
 		getBatchMessageList
 	} = useGetBatchMessageListFetcher();
 
-	const {
-		loading: deleteLoading,
-		deleteBatchMessage
-	} = useDeleteBatchMessageFetcher();
+	const { deleteBatchMessage } = useDeleteBatchMessageFetcher();
 
 	const { exportMessageReport } = useExportMessageReportFetcher();
 
@@ -92,44 +90,60 @@ const PersonalMessage = () => {
 				<i className="bi bi-align-bottom" />
 
 				<div className="bd-example">
-					<div className="btn-group" style={{ width: "348px" }}>
-						<h6>{t("Common.DateRange")}</h6>
-						<DatetimePicker setDateRange={setDateRange} />
+					<Row>
+						<Form.Group as={Col} lg={4}>
+							<Form.Label>{t("Common.DateRange")}</Form.Label>
+
+							<DatetimePicker setDateRange={setDateRange} />
+						</Form.Group>
+					</Row>
+
+					<Row>
+						<Col lg={9} />
+						<Col lg={3} className="d-flex justify-content-end">
+							<Button
+								onClick={() => openAddMessageModal()}
+								type="button"
+								className="me-2"
+								style={{ width: "120px" }}
+								variant="success">
+								<Plus className="fs-5" />
+
+								{t("CSD.PersonalMessage.AddNew")}
+							</Button>
+
+							<ButtonWithLoading
+								style={{ width: "120px" }}
+								loading={loading}
+								onClick={() => clickPageNumber(1)}>
+								<Search className="me-2" />
+
+								{t("Common.Search")}
+							</ButtonWithLoading>
+						</Col>
+					</Row>
+				</div>
+
+				{loading !== undefined && (
+					<div className="bd-example">
+						<Pagination
+							t={t}
+							currentPage={currentPage}
+							totalPages={totalPages || 1}
+							pageSize={pageSize}
+							rowCount={rowCount}
+							onSelectEntry={onSelectEntry}
+							clickPageNumber={clickPageNumber}>
+							<PersonalMessageTable
+								loading={loading}
+								batchMessageList={batchMessageList}
+								onUpdateBatchMessage={handleUpdateBatchMessage}
+								onDeleteBatchMessage={handleDeleteBatchMessage}
+								onExportReport={handleExportReport}
+							/>
+						</Pagination>
 					</div>
-
-					<Button
-						onClick={() => openAddMessageModal()}
-						type="button"
-						variant="success">
-						{t("CSD.PersonalMessage.AddNew")}
-					</Button>
-
-					<ButtonWithLoading
-						style={{ width: "80px" }}
-						loading={loading}
-						onClick={() => clickPageNumber(1)}>
-						{t("Common.Search")}
-					</ButtonWithLoading>
-				</div>
-
-				<div className="bd-example">
-					<Pagination
-						t={t}
-						currentPage={currentPage}
-						totalPages={totalPages}
-						pageSize={pageSize}
-						rowCount={rowCount}
-						onSelectEntry={onSelectEntry}
-						clickPageNumber={clickPageNumber}>
-						<PersonalMessageTable
-							loading={loading}
-							batchMessageList={batchMessageList}
-							onUpdateBatchMessage={handleUpdateBatchMessage}
-							onDeleteBatchMessage={handleDeleteBatchMessage}
-							onExportReport={handleExportReport}
-						/>
-					</Pagination>
-				</div>
+				)}
 			</main>
 		</Layout>
 	);

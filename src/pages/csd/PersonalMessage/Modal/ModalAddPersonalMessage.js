@@ -3,18 +3,21 @@ import React, { useState, useContext, useEffect } from "react";
 import { number, shape, string } from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, Form } from "react-bootstrap";
-import { allSiteListContext, popBoxContext } from "../../../components/context";
-import { useLanguageState, useSelectCurrencies } from "../../../hook";
+import {
+	allSiteListContext,
+	popBoxContext
+} from "../../../../components/context";
+import { useLanguageState, useSelectCurrencies } from "../../../../hook";
 
 import { ModalAddPersonalMessageFilter } from "./ModalAddPersonalMessageFilter";
 import { ModalAddPersonalMessageTabs } from "./ModalAddPersonalMessageTabs";
-import { MODAL_TYPE, MODE } from "./def";
+import { MODAL_TYPE, MODE } from "../def";
 import {
 	useGetBatchMessageFetcher,
 	useSendMessageBatchFetcher,
 	useUpdateBatchMessageFetcher
-} from "./hook";
-import { ButtonWithLoading } from "../../../components";
+} from "../hook";
+import { ButtonWithLoading } from "../../../../components";
 
 const formValidator = ({ form, language, type }) => {
 	const newErrors = {};

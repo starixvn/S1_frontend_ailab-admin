@@ -12,8 +12,8 @@ import {
 	Tabs
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { ACCOUNT_STATUS_LIST, MODE, MODAL_TYPE } from "./def";
-import Dropdown from "../../../components/dropdown";
+import { ACCOUNT_STATUS_LIST, MODE, MODAL_TYPE } from "../def";
+import Dropdown from "../../../../components/dropdown";
 
 const ModalAddPersonalMessageFilter = ({
 	type,
