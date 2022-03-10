@@ -13,6 +13,9 @@ export default {
 	personalMessage: {
 		root: `${siteInfo.newSitePrefixUrl}/Message/PersonalMsgBatch`
 	},
+	registrationManagement: {
+		root: `${siteInfo.newSitePrefixUrl}/CustManage/RegistrationManagement`
+	},
 	depositList: {
 		root: `${siteInfo.newSitePrefixUrl}/finance/depositList`
 	},

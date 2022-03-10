@@ -15,6 +15,7 @@ import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
+import { PersonalMessage, RegistrationManagement } from "./pages/csd";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
 import { PersonalMessage } from "./pages/csd";
@@ -68,6 +69,11 @@ function App() {
 								<Route
 									path={`/${path.personalMessage.root}`}
 									component={PersonalMessage}
+								/>
+
+								<Route
+									path={`/${path.registrationManagement.root}`}
+									component={RegistrationManagement}
 								/>
 
 								<Route

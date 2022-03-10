@@ -47,3 +47,8 @@ export const permissionRequest = axios.create({
 	withCredentials: true,
 	baseURL: `${rootURL}/ApiV2/Permission`
 });
+
+export const registrationManagementRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/ApiV2/RegistrationManagement`
+});
