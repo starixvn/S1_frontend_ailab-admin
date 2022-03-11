@@ -155,7 +155,8 @@ export default [
 				Controller: "CustManage",
 				Action: "RegistrationManagement",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.CSD.TpFailRecordReport",
@@ -179,7 +180,8 @@ export default [
 						Controller: "Message",
 						Action: "PersonalMsgBatch",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					},
 					{
 						displayKey: "Menu.CSD.TeleCSD",
@@ -338,14 +340,6 @@ export default [
 					defMenuCategory.CSD.Communication
 				],
 				Childs: [
-					{
-						displayKey: "Menu.CSD.PersonalMessage",
-						FuncKey: "Message/PersonalMsgBatch",
-						Controller: "Message",
-						Action: "PersonalMsgBatch",
-						Icon: "",
-						Childs: null
-					},
 					{
 						displayKey: "Menu.CSD.TeleCSD",
 						FuncKey: "CustManage/TeleCSD",
