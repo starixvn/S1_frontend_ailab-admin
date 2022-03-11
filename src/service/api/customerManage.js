@@ -40,3 +40,8 @@ export const api_customerManage_GetCustInfoList = ({
 		bankAccountNumber: bankAccountNumber || null,
 		statuses
 	});
+
+export const api_customerManage_GetCustInfoDetail = ({ custId }) =>
+	customerManageRequest.post("/GetCustInfoDetail", {
+		custId
+	});

@@ -15,6 +15,7 @@ import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
+import MemberInformation from "./pages/member/memberDetail";
 import AdjustmentListing from "./pages/finance/adjustmentListing";
 import { PersonalMessage, RegistrationManagement, BetLimit } from "./pages/csd";
 import MemberList from "./pages/csd/memberList";
@@ -92,10 +93,17 @@ function App() {
 								/>
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
+
 								<Route
 									component={DepositListing}
 									path={`/${path.depositList.root}`}
 								/>
+
+								<Route
+									component={MemberInformation}
+									path={`/${path.memberInformation.root}`}
+								/>
+
 								<Route
 									component={WithdrawalSetting}
 									path={`/${path.withdrawalSetting.root}`}

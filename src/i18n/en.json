@@ -259,6 +259,27 @@
 			"Title": "BetLimit"
 		}
 	},
+	"Member":{
+		"MemberDetail":{
+			"Title":"Member Information"
+		}
+	},
+	"Status":{
+		"1":"Running",
+		"2":"Suspend",
+		"3":"Closed",
+		"4":"Lock",
+		"5":"UnLock"
+	},
+	"Iovation":{
+		"A":"Allow",
+		"D":"Deny",
+		"R":"Review"
+	},
+	"ActStatus":{
+		"1":"NonDepoist",
+		"2":"Deposited"
+	},
 	"WithdrawalListing": {
 		"SubmitDate": "Submit Date",
 		"Currency": "Currency",
