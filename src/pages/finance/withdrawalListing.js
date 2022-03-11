@@ -294,18 +294,21 @@ const WithdrawalListing = () => {
 								options={currencyList}
 								selected={selectedCurrencies}
 								onSelect={OnSelectCurrency}
+								className="btn-group col-md-3"
 							/>
 							<DropdownWithSearch
 								title={t("WithdrawalListing.Status")}
 								options={statusOptions}
 								selected={selectedStatus}
 								onSelect={onSelectStatus}
+								className="btn-group col-md-3"
 							/>
 							<DropdownWithSearch
 								title={t("WithdrawalListing.Type")}
 								options={typeOptions}
 								selected={selectedType}
 								onSelect={onSelectType}
+								className="btn-group col-md-3"
 							/>
 							<InputBox
 								title={t("DepositList.ReferenceId")}
@@ -335,6 +338,7 @@ const WithdrawalListing = () => {
 								options={VIPLevelOPtions}
 								selected={selectedVIPLevel}
 								onSelect={onSelectVIPLevel}
+								className="btn-group col-md-3"
 							/>
 							<ButtonWithDropdown
 								title={t("WithdrawalListing.Amount")}

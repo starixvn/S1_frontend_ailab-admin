@@ -19,6 +19,7 @@ import AdjustmentListing from "./pages/finance/adjustmentListing";
 import { PersonalMessage, RegistrationManagement } from "./pages/csd";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
+import ChangeVIPLevel from "./pages/csd/changeVipLevel";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -68,17 +69,14 @@ function App() {
 								<Route path={`/${path.adjustmentListing.root}`}>
 									<AdjustmentListing />
 								</Route>
-
 								<Route
 									path={`/${path.personalMessage.root}`}
 									component={PersonalMessage}
 								/>
-
 								<Route
 									path={`/${path.registrationManagement.root}`}
 									component={RegistrationManagement}
 								/>
-
 								<Route
 									path={`/${path.memberList.root}`}
 									component={MemberList}
@@ -96,6 +94,10 @@ function App() {
 								<Route
 									component={WithdrawalSetting}
 									path={`/${path.withdrawalSetting.root}`}
+								/>
+								<Route
+									component={ChangeVIPLevel}
+									path={`/${path.changeVipLevel.root}`}
 								/>
 								<Route component={NoMatch} />
 							</Switch>

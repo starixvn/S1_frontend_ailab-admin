@@ -230,6 +230,7 @@ const FormPanel = ({
 						options={currencyList}
 						selected={selectedCurrencies}
 						onSelect={OnSelectCurrency}
+						className="btn-group col-md-3"
 					/>
 					<InputBox
 						title={t("MemberList.MemberCode")}
@@ -283,6 +284,7 @@ const FormPanel = ({
 						options={statusOptions}
 						selected={selectedStatus}
 						onSelect={OnSelectStatus}
+						className="btn-group col-md-3"
 					/>
 					<InputBox
 						title={t("MemberList.EmailAddress")}

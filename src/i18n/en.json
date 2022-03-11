@@ -28,13 +28,14 @@
 			"KYC": "KYC",
 			"MemberGameSetting": "MemberGameSetting",
 			"MemberListing": "Member Listing",
-			"Announcement": "Announcement",
-			"PersonalMsgBatch": "Personal Msg Batch",
+			"Announcement":"Announcement",
+			"PersonalMsgBatch":"Personal Msg Batch",
+			"ChangeVipLevel":"Change VIP Level",
+			"WithdrawalKYCControl":"Withdrawal KYC Control",
+			"TeleCSD":"TeleCSD",
+			"TagManagement":"Tag Management",
+			"AddTag":"Add Tag",
 			"ChangeVipLevelBatch": "Change Vip Level (Batch)",
-			"WithdrawalKYCControl": "Withdrawal KYC Control",
-			"TeleCSD": "TeleCSD",
-			"TagManagement": "Tag Management",
-			"AddTag": "Add Tag",
 			"TagName": "Tag name",
 			"TagColor": "Tag Color",
 			"Description": "Description",
@@ -275,5 +276,16 @@
 		"UpdatedDate": "Updated Date",
 		"Yes": "Yes",
 		"No": "No"
+	},
+	"ChangeVipLevel":{
+		"UploadFile": "Upload File",
+		"Submit": "Submit",
+		"DownloadTemplate": "Download Template",
+		"ErrorCode": "Error Code",
+		"Message": "Message",
+		"Status": "Status",
+		"MemberCode": "Member Code",
+		"SabaId": "Saba ID",
+		"UploadFileIsRequired": "Upload file is required"
 	}
 }

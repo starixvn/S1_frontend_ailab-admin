@@ -34,5 +34,8 @@ export default {
 	},
 	withdrawalSetting: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/WithdrawalKYCControl`
+	},
+	changeVipLevel: {
+		root: `${siteInfo.newSitePrefixUrl}/Member/ChangeVipLevelBatch`
 	}
 };
