@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAlert } from "react-alert";
-import dayjs from "dayjs";
 import Layout from "../../components/layout";
 import { NavBar } from "../../components/memberDetail/nav";
 import { api_customerManage_GetCustInfoDetail } from "../../service/api/customerManage";
 import { useGetCurrencyData } from "../../hook";
 import Dropdown from "../../components/dropdown";
-import { number_format } from "../../components/common";
+import { number_format, datetime_format } from "../../components/common";
 
 export default function Page(props) {
 	const { t } = useTranslation();
@@ -356,7 +355,7 @@ const SiginUpInfo = ({ custInfo }) => {
 				<div className="row">
 					<div className="col-5">Register Date</div>
 					<div className="col-7 small">
-						{dayjs(custInfo.regTime).format("YYYY-MM-DD HH:mm:ss")}
+						{datetime_format(custInfo.regTime)}
 					</div>
 				</div>
 				<div className="row">
@@ -384,19 +383,13 @@ const SiginUpInfo = ({ custInfo }) => {
 				<div className="row">
 					<div className="col-5">Last Login Date</div>
 					<div className="col-7 small">
-						{dayjs(custInfo.lastLoginTime).format(
-							"YYYY-MM-DD HH:mm:ss"
-						)}
+						{datetime_format(custInfo.lastLoginTime)}
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-5">Last Activity Time</div>
 					<div className="col-7 small">
-						{custInfo.reloadTime
-							? dayjs(custInfo.reloadTime).format(
-									"YYYY-MM-DD HH:mm:ss"
-							  )
-							: "N/A"}
+						{datetime_format(custInfo.reloadTime)}
 					</div>
 				</div>
 				<div className="row">
@@ -459,11 +452,7 @@ const FinanceInfo = ({ custInfo, t }) => (
 				<div className="col-md-4">
 					<div>Last Deposit Date</div>
 					<div className="small">
-						{custInfo.lastDepositTime
-							? dayjs(custInfo.lastDepositTime).format(
-									"YYYY-MM-DD HH:mm:ss"
-							  )
-							: "N/A"}
+						{datetime_format(custInfo.lastDepositTime)}
 					</div>
 				</div>
 				<div className="col-md-4">
@@ -479,11 +468,7 @@ const FinanceInfo = ({ custInfo, t }) => (
 				<div className="col-md-4">
 					<div>Last Withdrawal Date</div>
 					<div className="small">
-						{custInfo.lastWithdrawlTime
-							? dayjs(custInfo.lastWithdrawlTime).format(
-									"YYYY-MM-DD HH:mm:ss"
-							  )
-							: "N/A"}
+						{datetime_format(custInfo.lastWithdrawlTime)}
 					</div>
 				</div>
 				<div className="col-md-4">
@@ -495,11 +480,7 @@ const FinanceInfo = ({ custInfo, t }) => (
 				<div className="col-md-4">
 					<div>First Deposit Date</div>
 					<div className="small">
-						{custInfo.firstDepositTime
-							? dayjs(custInfo.firstDepositTime).format(
-									"YYYY-MM-DD HH:mm:ss"
-							  )
-							: "N/A"}
+						{datetime_format(custInfo.firstDepositTime)}
 					</div>
 				</div>
 			</div>
@@ -583,11 +564,7 @@ const GameAndWalletInfo = ({ custInfo, t, alert }) => {
 						<div className="col-md-6">
 							<div>Last Bet Date</div>
 							<div className="small">
-								{custInfo.lastBettingTime
-									? dayjs(custInfo.lastBettingTime).format(
-											"YYYY-MM-DD HH:mm:ss"
-									  )
-									: "N/A"}
+								{datetime_format(custInfo.lastBettingTime)}
 							</div>
 						</div>
 					</div>

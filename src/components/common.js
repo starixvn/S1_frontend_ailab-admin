@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const setCookie = (cookieName, cookieValue, exdays) => {
 	const d = new Date();
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -94,3 +96,6 @@ export const multipleDropdownFilter = (options, option) => {
 
 	return newOption;
 };
+
+export const datetime_format = date =>
+	date ? dayjs(date).format("YYYY-MM-DD HH:mm:ss") : "N/A";
