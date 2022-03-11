@@ -132,12 +132,13 @@ export default [
 				NewAdmin: true
 			},
 			{
-				displayKey: "Menu.CSD.ChangeVipLevelBatch",
+				displayKey: "Menu.CSD.ChangeVipLevel",
 				FuncKey: "Message/ChangeVipLevelBatch",
-				Controller: "Message",
+				Controller: "Member",
 				Action: "ChangeVipLevelBatch",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.CSD.TagManagement",
