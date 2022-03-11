@@ -11,3 +11,5 @@ export * from "./useConfirmModal";
 export * from "./useAmountFilter";
 export * from "./useGetEnumType";
 export * from "./useSelectCheckBox";
+export * from "./useGetTpCategoryFetcher";
+export * from "./useGetTpGameTypeListByCategoryFetcher";

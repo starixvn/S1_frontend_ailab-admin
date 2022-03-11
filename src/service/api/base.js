@@ -52,3 +52,8 @@ export const registrationManagementRequest = axios.create({
 	withCredentials: true,
 	baseURL: `${rootURL}/ApiV2/RegistrationManagement`
 });
+
+export const tpBetLimitRequest = axios.create({
+	withCredentials: true,
+	baseURL: `${rootURL}/ApiV2/TpBetLimit`
+});

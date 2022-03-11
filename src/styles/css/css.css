@@ -81,6 +81,33 @@ a:focus, button:focus, input:focus {
   border: 1px solid #ced4da;
 }
 
+.modal-body .search + .dropdown-menu {
+  position: unset;
+  padding: 0;
+}
+
+.modal-body .search + .dropdown-menu li {
+  font-size: small;
+}
+
+.modal-body .search + .dropdown-menu li a {
+  border-bottom: 1px solid #dee2e6;
+  padding: 0.75rem;
+}
+
+.modal-body .search + .dropdown-menu li a h6 {
+  margin-bottom: 0;
+}
+
+.modal-body .search + .dropdown-menu li a h6:nth-child(1) {
+  font-weight: bold;
+}
+
+.modal-body .search + .dropdown-menu li:last-child a {
+  color: #0d6efd;
+  border: 0;
+}
+
 header {
   padding: 0 !important;
   position: fixed !important;
@@ -94,6 +121,33 @@ header > .search {
   width: 30rem;
   max-width: 100%;
   display: flex;
+  position: relative;
+}
+
+header > .search > .dropdown-menu {
+  padding: 0;
+}
+
+header > .search > .dropdown-menu li {
+  font-size: small;
+}
+
+header > .search > .dropdown-menu li a {
+  border-bottom: 1px solid #dee2e6;
+  padding: 0.75rem;
+}
+
+header > .search > .dropdown-menu li a h6 {
+  margin-bottom: 0;
+}
+
+header > .search > .dropdown-menu li a h6:nth-child(1) {
+  font-weight: bold;
+}
+
+header > .search > .dropdown-menu li:last-child a {
+  color: #0d6efd;
+  border: 0;
 }
 
 header > .search .form-control {
@@ -123,6 +177,9 @@ main {
 
 .navbar .container-fluid {
   justify-content: flex-start;
+  padding-top: 0;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
 }
 
 .navbar .container-fluid > a {
@@ -768,7 +825,7 @@ h6 {
   z-index: 1052;
 }
 
-#_react-alert_ {
+#_react-alert_, #__react-alert__ {
   z-index: 1080;
 }
 
@@ -849,4 +906,14 @@ input[type="color"].btn {
 .Withdrawal_Condition .form-check .form-check-input {
   margin: 0;
   min-width: 1rem;
+}
+
+.taginput {
+  border: 1px solid  #ced4da;
+  border-radius: 0.25rem;
+}
+
+.modal-content .dropdown-menu {
+  max-height: 190px;
+  overflow-y: auto;
 }

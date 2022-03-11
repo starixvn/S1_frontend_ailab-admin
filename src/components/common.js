@@ -80,3 +80,17 @@ export const downloadExcelFile = (data, fileName) => {
 	link.click();
 	document.body.removeChild(link);
 };
+
+export const multipleDropdownFilter = (options, option) => {
+	let newOption = [];
+
+	const isIncludes = options.some(({ value }) => value === option.value);
+
+	if (isIncludes) {
+		newOption = options.filter(({ value }) => value !== option.value);
+	} else {
+		newOption = options.concat([option]);
+	}
+
+	return newOption;
+};
