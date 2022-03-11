@@ -29,6 +29,9 @@ export default {
 	dashboard: {
 		root: "dashboard"
 	},
+	memberInformation: {
+		root: `${siteInfo.newSitePrefixUrl}/member/memberDetail/:id`
+	},
 	memberList: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/MemberList`
 	},

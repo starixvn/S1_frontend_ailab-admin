@@ -33,6 +33,7 @@ import { api_WithdrawalLimitAdjustment_GetCustAndWalletInfo } from "../../servic
 import { api_BaseData_GetBankInfoOffListByCustVerify } from "../../service/api/baseData";
 import { api_DepositSubmission_Submit } from "../../service/api/depositSubmission";
 import { Empty } from "../../components/empty";
+import path from "../../path";
 
 const Requried = styled.label`
 	color: #a94442;
@@ -352,7 +353,7 @@ const defColumns = options => [
 		titleKey: defColumnTitle.ReferenceId,
 		dataColumn: "transId",
 		columnType: defColumnType.link,
-		route: "Test/Test"
+		route: "NewAdmin/Test/Test"
 	},
 	{
 		titleKey: defColumnTitle.Currency,
@@ -363,7 +364,8 @@ const defColumns = options => [
 		titleKey: defColumnTitle.MemberCode,
 		dataColumn: "userName",
 		columnType: defColumnType.link,
-		route: "Test/Test"
+		route: path.memberInformation.root.replace("/:id", ""),
+		routeParamColumn: "custId"
 	},
 	{
 		titleKey: defColumnTitle.VIPLevel,
@@ -488,10 +490,13 @@ const Result = ({ datas, options, selectAll, onReject, pageInfo }) => {
 				content = (
 					<Link
 						to={{
-							pathname: `/NewAdmin/${def.route}?data=${
-								data[def.dataColumn]
+							pathname: `/${def.route}/${
+								data[def.routeParamColumn ?? def.dataColumn]
 							}`,
-							state: { data: data[def.dataColumn] }
+							state: {
+								data:
+									data[def.routeParamColumn ?? def.dataColumn]
+							}
 						}}>
 						{data[def.dataColumn]}
 					</Link>
