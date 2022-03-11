@@ -30,7 +30,8 @@ const Component = ({
 	onSelect,
 	placeholder,
 	disabled,
-	required
+	required,
+	divClassName
 }) => {
 	const [selected, setSelected] = useState(optionParser(value, options));
 
@@ -50,6 +51,25 @@ const Component = ({
 		setSelected(optionParser(value, options));
 	}, [value]);
 
+	const selectElem = (
+		<Form.Select
+			value={selected.value}
+			onChange={handleChange}
+			disabled={disabled}>
+			{placeholder && (
+				<option disabled value={-1} key={-1}>
+					{placeholder}
+				</option>
+			)}
+
+			{parsedOptions?.map((option, index) => (
+				<option key={`${index}-${option.value}`} value={option.value}>
+					{option.displayKey ? option.displayKey : option.displayText}
+				</option>
+			))}
+		</Form.Select>
+	);
+
 	return (
 		<>
 			{title && (
@@ -59,26 +79,11 @@ const Component = ({
 				</h6>
 			)}
 
-			<Form.Select
-				value={selected.value}
-				onChange={handleChange}
-				disabled={disabled}>
-				{placeholder && (
-					<option disabled value={-1} key={-1}>
-						{placeholder}
-					</option>
-				)}
-
-				{parsedOptions?.map((option, index) => (
-					<option
-						key={`${index}-${option.value}`}
-						value={option.value}>
-						{option.displayKey
-							? option.displayKey
-							: option.displayText}
-					</option>
-				))}
-			</Form.Select>
+			{divClassName ? (
+				<div className={divClassName}>{selectElem}</div>
+			) : (
+				selectElem
+			)}
 		</>
 	);
 };

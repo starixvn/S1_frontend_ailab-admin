@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useAlert } from "react-alert";
 import { Button, Form, Modal, InputGroup, FormControl } from "react-bootstrap";
@@ -16,7 +16,6 @@ import {
 	useGetDateRange,
 	useSelectCurrencies,
 	useAllSiteListFetcher,
-	useSelectSiteId,
 	useAmountFilter,
 	useSelectEnumTypes,
 	useSelectCheckBox,
@@ -34,6 +33,8 @@ import { api_BaseData_GetBankInfoOffListByCustVerify } from "../../service/api/b
 import { api_DepositSubmission_Submit } from "../../service/api/depositSubmission";
 import { Empty } from "../../components/empty";
 import path from "../../path";
+import { allSiteListContext } from "../../components/context";
+import { number_format, datetime_format } from "../../components/common";
 
 const Requried = styled.label`
 	color: #a94442;
@@ -47,6 +48,7 @@ const Title = ({ displayText, required }) => (
 );
 
 export default function Page() {
+	const { siteId } = useContext(allSiteListContext);
 	const alert = useAlert();
 	const [refId, setRefId] = useState("");
 	const { allSiteList } = useAllSiteListFetcher();
@@ -75,19 +77,12 @@ export default function Page() {
 	const handleShowPopup = () => setShowPopup(true);
 
 	const {
-		selected: siteId_selected,
-		OnSelect: siteId_OnSelect,
-		options: siteId_options,
-		getAPIPayload: siteId_getAPIPayload
-	} = useSelectSiteId();
-
-	const {
 		OnSelectCurrency,
 		currencyList,
 		selected: currencies_selected,
 		getAPIPayload: currency_getAPIPayload
 	} = useSelectCurrencies({
-		siteId: siteId_selected?.value,
+		siteId,
 		allSiteList,
 		defaultSelectAll: true
 	});
@@ -152,7 +147,7 @@ export default function Page() {
 			const res = await api_Deposit_GetList({
 				pageNumber: currentPage ?? 1,
 				pageSize,
-				siteIds: siteId_getAPIPayload(siteId_selected),
+				siteIds: [siteId],
 				depositId: refId,
 				userName: memberCode,
 				depositTypes: DepositTypeEnum_getAPIPayload(
@@ -199,81 +194,91 @@ export default function Page() {
 			<main className="col-md-9 col-lg-10">
 				<h1 className="h2">{t("Menu.Finance.DepositRequest")}</h1>
 				<div className="bd-example">
-					<h6>{t("DepositList.SubmitDate")}</h6>
-					<DatetimePicker id="range" setDateRange={setDateRange} />
-
-					<div className="btn-group">
-						<Dropdown
-							title={t("DepositList.SiteId")}
-							options={siteId_options}
-							onSelect={siteId_OnSelect}
-							value={siteId_selected}
-						/>
+					<div className="row">
+						<div className="btn-group col-md-12">
+							<h6>{t("DepositList.SubmitDate")}</h6>
+							<DatetimePicker
+								id="range"
+								setDateRange={setDateRange}
+							/>
+						</div>
 					</div>
 
-					<DropdownWithSearch
-						title={t("DepositList.Currency")}
-						options={currencyList}
-						onSelect={OnSelectCurrency}
-						selected={currencies_selected}
-					/>
-					<DropdownWithSearch
-						title={t("DepositList.Status")}
-						options={DepositStatusEnum_options}
-						onSelect={DepositStatusEnum_OnSelect}
-						selected={DepositStatusEnum_selected}
-					/>
-					<DropdownWithSearch
-						title={t("DepositList.Type")}
-						options={DepositTypeEnum_options}
-						onSelect={DepositTypeEnum_OnSelect}
-						selected={DepositTypeEnum_selected}
-					/>
-					<InputBox
-						title={t("DepositList.ReferenceId")}
-						className="btn-group"
-						value={refId}
-						onChange={e => setRefId(e.target.value)}
-					/>
-					<InputBox
-						title={t("DepositList.MemberCode")}
-						className="btn-group"
-						value={memberCode}
-						onChange={e => setMemberCode(e.target.value)}
-					/>
-					<DropdownWithSearch
-						title={t("DepositList.VIPLevel")}
-						options={VIPLevelEnum_options}
-						onSelect={VIPLevelEnum_OnSelect}
-						selected={VIPLevelEnum_selected}
-					/>
-					<ButtonWithDropdown
-						title={t("DepositList.Amount")}
-						selected={Amount_selected}
-						OnSelect={Amount_OnSelect}
-						options={Amount_options}
-						OnEditAmount={Amount_OnEditAmount}
-						amount={Amount}
-					/>
-					<Button
-						variant="success"
-						type="button"
-						onClick={handleShowPopup}>
-						{t("DepositList.AddNew")}
-					</Button>
-					<Button
-						variant="primary"
-						type="submit"
-						onClick={() =>
-							onSubmit({
-								currentPage,
-								pageSize,
-								clickPageNumber,
-								resetPage: true
-							})
-						}>
-						{t("DepositList.Submit")}
-					</Button>
+					<div className="row">
+						<DropdownWithSearch
+							title={t("DepositList.Currency")}
+							options={currencyList}
+							onSelect={OnSelectCurrency}
+							selected={currencies_selected}
+							className="btn-group col-md-3"
+						/>
+						<DropdownWithSearch
+							title={t("DepositList.Status")}
+							options={DepositStatusEnum_options}
+							onSelect={DepositStatusEnum_OnSelect}
+							selected={DepositStatusEnum_selected}
+							className="btn-group col-md-3"
+						/>
+						<DropdownWithSearch
+							title={t("DepositList.Type")}
+							options={DepositTypeEnum_options}
+							onSelect={DepositTypeEnum_OnSelect}
+							selected={DepositTypeEnum_selected}
+							className="btn-group col-md-3"
+						/>
+						<InputBox
+							title={t("DepositList.ReferenceId")}
+							className="btn-group col-md-3"
+							value={refId}
+							onChange={e => setRefId(e.target.value)}
+						/>
+					</div>
+					<div className="row">
+						<InputBox
+							title={t("DepositList.MemberCode")}
+							className="btn-group col-md-3"
+							value={memberCode}
+							onChange={e => setMemberCode(e.target.value)}
+						/>
+						<DropdownWithSearch
+							title={t("DepositList.VIPLevel")}
+							options={VIPLevelEnum_options}
+							onSelect={VIPLevelEnum_OnSelect}
+							selected={VIPLevelEnum_selected}
+							className="btn-group col-md-3"
+						/>
+						<ButtonWithDropdown
+							title={t("DepositList.Amount")}
+							selected={Amount_selected}
+							OnSelect={Amount_OnSelect}
+							options={Amount_options}
+							OnEditAmount={Amount_OnEditAmount}
+							amount={Amount}
+						/>
+					</div>
+					<div>
+						<Button
+							className="mx-3 float-end"
+							variant="primary"
+							type="submit"
+							onClick={() =>
+								onSubmit({
+									currentPage,
+									pageSize,
+									clickPageNumber,
+									resetPage: true
+								})
+							}>
+							{t("DepositList.Submit")}
+						</Button>
+						<Button
+							className=" float-end"
+							variant="success"
+							type="button"
+							onClick={handleShowPopup}>
+							{t("DepositList.AddNew")}
+						</Button>
+					</div>
 				</div>
 				{result?.datas && (
 					<Result
@@ -306,14 +311,11 @@ export default function Page() {
 					handleClosePopup={handleClosePopup}
 					t={t}
 					allSiteList={allSiteList}
+					siteId={siteId}
 				/>
 			</main>
 		</Layout>
 	);
-}
-
-function dateformat(date) {
-	return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
 }
 
 function convertToDisplayText(options, value) {
@@ -400,12 +402,12 @@ const defColumns = options => [
 	{
 		titleKey: defColumnTitle.Amount,
 		dataColumn: "amount",
-		formatFunc: v => v
+		formatFunc: number_format
 	},
 	{
 		titleKey: defColumnTitle.ActualDeposit,
 		dataColumn: "actualDeposit",
-		formatFunc: v => v
+		formatFunc: number_format
 	},
 	{
 		titleKey: defColumnTitle.Bank,
@@ -426,12 +428,12 @@ const defColumns = options => [
 	{
 		titleKey: defColumnTitle.CreateDate,
 		dataColumn: "createTime",
-		formatFunc: dateformat
+		formatFunc: datetime_format
 	},
 	{
 		titleKey: defColumnTitle.LastUpdateDate,
 		dataColumn: "updateTime",
-		formatFunc: dateformat
+		formatFunc: datetime_format
 	}
 ];
 
@@ -552,14 +554,9 @@ const Result = ({ datas, options, selectAll, onReject, pageInfo }) => {
 	);
 };
 
-const Popup = ({ showPopup, handleClosePopup, t }) => {
+const Popup = ({ showPopup, handleClosePopup, t, siteId }) => {
 	const isMountedRef = useMounted();
 	const alert = useAlert();
-	const {
-		selected: siteId_selected,
-		OnSelect: siteId_OnSelect,
-		options: siteId_options
-	} = useSelectSiteId();
 
 	const [currency, setCurrency] = useState([]);
 	const { currencyData } = useGetCurrencyData({
@@ -589,11 +586,11 @@ const Popup = ({ showPopup, handleClosePopup, t }) => {
 			Promise.allSettled([
 				api_WithdrawalLimitAdjustment_GetCustAndWalletInfo({
 					userName: memberCode,
-					siteId: siteId_selected.value
+					siteId
 				}),
 				api_BaseData_GetBankInfoOffListByCustVerify({
 					userName: memberCode,
-					siteId: siteId_selected.value
+					siteId
 				})
 			]).then(([resUserCurrency, resBankInfoList]) => {
 				if (resUserCurrency.value.data.errorCode === 0) {
@@ -647,7 +644,7 @@ const Popup = ({ showPopup, handleClosePopup, t }) => {
 		if (onVaild()) {
 			try {
 				const Detail = {
-					SiteId: siteId_selected.value,
+					SiteId: siteId,
 					UserName: memberCode,
 					Amount: amount,
 					Comment: Remark,
@@ -691,79 +688,80 @@ const Popup = ({ showPopup, handleClosePopup, t }) => {
 
 			<Modal.Body>
 				<Form noValidate validated={false} onSubmit={onSubmit}>
-					<Dropdown
-						title={t("DepositList.SiteId")}
-						options={siteId_options}
-						onSelect={siteId_OnSelect}
-						value={siteId_selected}
-					/>
-
-					<Title
-						displayText={t("DepositList.MemberCode")}
-						required={true}
-					/>
-					<InputGroup>
-						<FormControl
-							value={memberCode}
-							onChange={e => setMemberCode(e.target.value)}
-							onBlur={onSearchUser}
-							aria-describedby="basic-addon2"
+					<div className="row">
+						<Title
+							displayText={t("DepositList.MemberCode")}
+							required={true}
 						/>
-						<InputGroup.Text id="basic-addon2">
-							{currencyData?.[0]?.displayText || "-"}
-						</InputGroup.Text>
-					</InputGroup>
+						<InputGroup>
+							<FormControl
+								value={memberCode}
+								onChange={e => setMemberCode(e.target.value)}
+								onBlur={onSearchUser}
+								aria-describedby="basic-addon2"
+							/>
+							<InputGroup.Text id="basic-addon2">
+								{currencyData?.[0]?.displayText || "-"}
+							</InputGroup.Text>
+						</InputGroup>
 
-					<Dropdown
-						title={`${t("DepositList.CompanyAccount")}`}
-						options={companyAccount_Options}
-						onSelect={companyAccount_OnSelect}
-						value={companyAccount_selected}
-						required={true}
-					/>
+						<Dropdown
+							title={`${t("DepositList.CompanyAccount")}`}
+							options={companyAccount_Options}
+							onSelect={companyAccount_OnSelect}
+							value={companyAccount_selected}
+							required={true}
+							divClassName="input-group"
+						/>
 
-					<InputBox
-						title={`${t("DepositList.Bank")}`}
-						disabled={true}
-						value={companyAccount_selected?.bankName || ""}
-					/>
+						<InputBox
+							className="input-group"
+							title={`${t("DepositList.Bank")}`}
+							disabled={true}
+							value={companyAccount_selected?.bankName || ""}
+						/>
 
-					<InputBox
-						title={`${t("DepositList.CompanyAccountName")}`}
-						disabled={true}
-						value={companyAccount_selected?.accountName || ""}
-					/>
+						<InputBox
+							className="input-group"
+							title={`${t("DepositList.CompanyAccountName")}`}
+							disabled={true}
+							value={companyAccount_selected?.accountName || ""}
+						/>
 
-					<InputBox
-						title={`${t("DepositList.Amount")}`}
-						required={true}
-						value={amount}
-						onChange={e => setAmount(e.target.value)}
-					/>
+						<InputBox
+							className="input-group"
+							title={`${t("DepositList.Amount")}`}
+							required={true}
+							value={amount}
+							onChange={e => setAmount(e.target.value)}
+						/>
 
-					<InputBox
-						title={`${t("DepositList.BankReferenceNo")}`}
-						value={BankReferenceNo}
-						onChange={e => setBankReferenceNo(e.target.value)}
-					/>
+						<InputBox
+							className="input-group"
+							title={`${t("DepositList.BankReferenceNo")}`}
+							value={BankReferenceNo}
+							onChange={e => setBankReferenceNo(e.target.value)}
+						/>
 
-					<Title
-						displayText={t("DepositList.DepositDate")}
-						required={true}
-					/>
+						<Title
+							displayText={t("DepositList.DepositDate")}
+							required={true}
+						/>
+						<div className="input-group">
+							<DatetimePicker
+								id="singleRange"
+								isRange={false}
+								setDateRange={setDateRange}
+							/>
+						</div>
 
-					<DatetimePicker
-						id="singleRange"
-						isRange={false}
-						setDateRange={setDateRange}
-					/>
-
-					<InputBox
-						title={`${t("DepositList.Remark")}`}
-						value={Remark}
-						onChange={e => setRemark(e.target.value)}
-					/>
-
+						<InputBox
+							className="input-group"
+							title={`${t("DepositList.Remark")}`}
+							value={Remark}
+							onChange={e => setRemark(e.target.value)}
+						/>
+					</div>
 					<Form.Group controlId="formFile">
 						<Title
 							displayText={t("DepositList.BankSlip")}
