@@ -206,10 +206,11 @@ export default [
 					{
 						displayKey: "Menu.CSD.WithdrawalKYCControl",
 						FuncKey: "Message/WithdrawalKYCControl",
-						Controller: "Message",
+						Controller: "Member",
 						Action: "WithdrawalKYCControl",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					}
 				]
 			},
@@ -425,7 +426,17 @@ export default [
 				Controller: "Marketing",
 				Action: "BannerManage",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
+			},
+			{
+				displayKey: "Menu.Finance.WithdrawalListing",
+				FuncKey: "Finance/WithdrawalList",
+				Controller: "Finance",
+				Action: "WithdrawalList",
+				Icon: "",
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.Finance.WithdrawalAccountingList",

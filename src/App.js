@@ -13,10 +13,11 @@ import IframePage from "./pages/iframePage";
 import MenuList from "./datas/menu";
 import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
+import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
-// import { PersonalMessage } from "./pages/CSD";
 import MemberList from "./pages/csd/memberList";
-import { PersonalMessage } from "./pages/csd";
+import { PersonalMessage, RegistrationManagement } from "./pages/csd";
+import WithdrawalListing from "./pages/finance/withdrawalListing";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -70,14 +71,27 @@ function App() {
 								/>
 
 								<Route
+									path={`/${path.registrationManagement.root}`}
+									component={RegistrationManagement}
+								/>
+
+								<Route
 									path={`/${path.memberList.root}`}
 									component={MemberList}
+								/>
+								<Route
+									path={`/${path.withdrawalListing.root}`}
+									component={WithdrawalListing}
 								/>
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
 								<Route
 									component={DepositListing}
 									path={`/${path.depositList.root}`}
+								/>
+								<Route
+									component={WithdrawalSetting}
+									path={`/${path.withdrawalSetting.root}`}
 								/>
 								<Route component={NoMatch} />
 							</Switch>

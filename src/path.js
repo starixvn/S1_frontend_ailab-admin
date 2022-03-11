@@ -13,6 +13,9 @@ export default {
 	personalMessage: {
 		root: `${siteInfo.newSitePrefixUrl}/Message/PersonalMsgBatch`
 	},
+	registrationManagement: {
+		root: `${siteInfo.newSitePrefixUrl}/CustManage/RegistrationManagement`
+	},
 	depositList: {
 		root: `${siteInfo.newSitePrefixUrl}/finance/depositList`
 	},
@@ -20,6 +23,12 @@ export default {
 		root: "dashboard"
 	},
 	memberList: {
-		root: `${siteInfo.newSitePrefixUrl}/member/memberList`
+		root: `${siteInfo.newSitePrefixUrl}/Member/MemberList`
+	},
+	withdrawalListing: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/WithdrawalList`
+	},
+	withdrawalSetting: {
+		root: `${siteInfo.newSitePrefixUrl}/Member/WithdrawalKYCControl`
 	}
 };

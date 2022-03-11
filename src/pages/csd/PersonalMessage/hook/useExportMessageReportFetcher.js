@@ -1,5 +1,6 @@
 import { useAlert } from "react-alert";
 import { useTranslation } from "react-i18next";
+import { downloadExcelFile } from "../../../../components/common";
 import { useMounted } from "../../../../hook";
 import { api_personalMessage_ExportSendMessageBatchResultReport } from "../../../../service/api/personalMessage";
 
@@ -18,20 +19,7 @@ const useExportMessageReportFetcher = () => {
 				return;
 			}
 
-			const blob = new Blob([data], {
-				type:
-					"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-			});
-
-			const url = window.URL.createObjectURL(blob);
-
-			const link = document.createElement("a");
-			link.href = url;
-			link.download = "PersonalMessageReport.xlsx";
-
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
+			downloadExcelFile(data, "PersonalMessageReport");
 		} catch (error) {
 			alert.error(error.message || t("Error.DefaultError"));
 		}

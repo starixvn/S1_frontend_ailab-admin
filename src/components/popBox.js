@@ -6,8 +6,12 @@ import { ModalConfirm } from "./Modal/modalConfirm";
 export const defPopBoxType = {
 	default: "default",
 	changePwd: "changePwd",
+	withdrawalSetting: "withdrawalSetting",
 	tagPopBox: "tagPopBox",
-	csdAddPersonalMessage: "csdAddPersonalMessage"
+	csdAddPersonalMessage: "csdAddPersonalMessage",
+	csdRegistrationManagementEditStatus: "csdRegistrationManagementEditStatus",
+	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
+	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable"
 };
 
 const PopBox = () => {
@@ -30,17 +34,85 @@ const PopBox = () => {
 
 				break;
 			}
+			case defPopBoxType.withdrawalSetting: {
+				const WithdrawalSettingPopBox = lazy(() =>
+					import(
+						"../components/withdrawalSetting/withdrawalSetting.popBox"
+					)
+				);
+				_content = (
+					<Suspense fallback={<div />}>
+						<WithdrawalSettingPopBox {...popBox.params} />
+					</Suspense>
+				);
+
+				break;
+			}
 
 			case defPopBoxType.csdAddPersonalMessage: {
 				const ModalAddPersonalMessage = lazy(() =>
 					import(
-						"../pages/csd/PersonalMessage/ModalAddPersonalMessage"
+						"../pages/csd/PersonalMessage/Modal/ModalAddPersonalMessage"
 					)
 				);
 
 				_content = (
 					<Suspense fallback={<div />}>
 						<ModalAddPersonalMessage popBoxData={popBox.data} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.csdRegistrationManagementEditStatus: {
+				const RegistrationManagementModalEditStatus = lazy(() =>
+					import(
+						"../pages/csd/RegistrationManagement/Modal/ModalEditStatus"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<RegistrationManagementModalEditStatus
+							popBoxData={popBox.data}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.csdRegistrationManagementAddNotes: {
+				const RegistrationManagementAddNotes = lazy(() =>
+					import(
+						"../pages/csd/RegistrationManagement/Modal/ModalAddNotes"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<RegistrationManagementAddNotes
+							popBoxData={popBox.data}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.csdRegistrationManagementNotesTable: {
+				const RegistrationManagementNotesTable = lazy(() =>
+					import(
+						"../pages/csd/RegistrationManagement/Modal/ModalNotesTable"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<RegistrationManagementNotesTable
+							popBoxData={popBox.data}
+						/>
 					</Suspense>
 				);
 
@@ -106,13 +178,15 @@ const PopBox = () => {
 							id="exampleModalCenterTitle">
 							{popBox.title}
 						</h5>
-						<button
-							type="button"
-							className="btn-close"
-							data-bs-dismiss="modal"
-							aria-label="Close"
-							onClick={handlePopBox}
-						/>
+						{popBox.hideClosingBtn ? null : (
+							<button
+								type="button"
+								className="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+								onClick={handlePopBox}
+							/>
+						)}
 					</div>
 					{content}
 				</div>

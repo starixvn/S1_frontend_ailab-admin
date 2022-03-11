@@ -29,6 +29,7 @@ const Component = ({
 	options = [],
 	onSelect,
 	placeholder,
+	disabled,
 	required
 }) => {
 	const [selected, setSelected] = useState(optionParser(value, options));
@@ -58,7 +59,10 @@ const Component = ({
 				</h6>
 			)}
 
-			<Form.Select value={selected.value} onChange={handleChange}>
+			<Form.Select
+				value={selected.value}
+				onChange={handleChange}
+				disabled={disabled}>
 				{placeholder && (
 					<option disabled value={-1} key={-1}>
 						{placeholder}
@@ -83,6 +87,8 @@ Component.defaultProps = {
 	title: "",
 	value: "",
 	placeholder: null,
+	onSelect: () => {},
+	disabled: false,
 	required: false
 };
 
@@ -90,8 +96,9 @@ Component.propTypes = {
 	title: string,
 	value: any,
 	options: arrayOf(any).isRequired,
-	onSelect: func.isRequired,
+	onSelect: func,
 	placeholder: string,
+	disabled: bool,
 	required: bool
 };
 

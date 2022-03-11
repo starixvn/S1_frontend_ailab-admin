@@ -24,17 +24,17 @@
 			"KYC": "KYC",
 			"MemberGameSetting": "MemberGameSetting",
 			"MemberListing": "Member Listing",
-			"Announcement":"Announcement",
-			"PersonalMsgBatch":"Personal Msg Batch",
-			"ChangeVipLevelBatch":"Change Vip Level (Batch)",
-			"WithdrawalKYCControl":"Withdrawal KYC Control",
-			"TeleCSD":"TeleCSD",
-			"TagManagement":"Tag Management",
-			"AddTag":"Add Tag",
+			"Announcement": "Announcement",
+			"PersonalMsgBatch": "Personal Msg Batch",
+			"ChangeVipLevelBatch": "Change Vip Level (Batch)",
+			"WithdrawalKYCControl": "Withdrawal KYC Control",
+			"TeleCSD": "TeleCSD",
+			"TagManagement": "Tag Management",
+			"AddTag": "Add Tag",
 			"TagName": "Tag name",
 			"TagColor": "Tag Color",
 			"Description": "Description",
-			"EditTag" : "Edit Tag",
+			"EditTag": "Edit Tag",
 			"Search": "Search",
 			"Create": "Create",
 			"Action": "Action",
@@ -51,7 +51,7 @@
 			"Finance": "Finance",
 			"BankCardManagement": "Bank Card Management",
 			"DepositRequest": "Deposit Listing",
-			"WithdrawalRequest": "Withdrawal Request",
+			"WithdrawalListing": "Withdrawal Listing",
 			"BalanceAdjustment": "Withdrawable Adjustment",
 			"BalanceAdjustmentBatch": "Adjustment Listing",
 			"WithdrawalLimitAdjust": "WithdrawalLimit Adjustment",
@@ -150,8 +150,10 @@
 	"PopBox": {
 		"lbl_Cancel": "Cancel",
 		"lbl_Submit": "Submit",
+		"Yes": "Yes",
 		"lbl_Ok": "OK",
-		"Success": "Success"
+		"Success": "Success",
+		"AreYouSure": "Are You Sure?"
 	},
 	"DepositList": {
 		"SubmitDate": "Submit Date",
@@ -175,7 +177,7 @@
 		"BankSlip": "Bank Slip",
 		"Cancel": "Cancel"
 	},
-	"MemberList":{
+	"MemberList": {
 		"MemberListing": "Member Listing",
 		"RegisterDate": "Register Date",
 		"Site": "Site",
@@ -203,12 +205,22 @@
 		"Yes": "Yes",
 		"No": "No"
 	},
-	"Hint":{
-		"NothingSelected":"Nothing Selected",
-		"ItemsSelected":"{{count}} items selected",
+	"Hint": {
+		"NothingSelected": "Nothing Selected",
+		"ItemsSelected": "{{count}} items selected",
 		"ShowingEntriesHint": "Showing {{firstEntry}} to {{lastEntry}} of {{rowCount}} entries",
 		"Show": "Show",
 		"Entries": "Entries"
+	},
+	"WithdrawalSetting":{
+		"WithdrawalSetting": "Withdrawal Setting",
+		"Site": "Site",
+		"Action": "Action",
+		"Currency": "Currency",
+		"Amount": "Amount",
+		"Edit": "Edit",
+		"Success": "Success",
+		"Refresh": "Refresh"
 	},
 	"CSD": {
 		"PersonalMessage": {
@@ -216,6 +228,30 @@
 			"AddNew": "Add New",
 			"UploadBatchMessage": "Upload Batch Message",
 			"PopUp": "Pop Up"
+		},
+		"RegistrationManagement": {
+			"Title": "RegistrationManagement"
 		}
+	},
+	"WithdrawalListing":{
+		"SubmitDate": "Submit Date",
+		"Currency": "Currency",
+		"Status": "Status",
+		"Type": "Type",
+		"VIPLevel": "VIP Level",
+		"ReferenceId": "Reference Id",
+		"MemberCode": "Member Code",
+		"Amount": "Amount",
+		"Search": "Search",
+		"Export": "Export",
+		"KYC": "KYC",
+		"Risk": "Risk",
+		"WithdrawalCount": "Withdrawal Count",
+		"Bank": "Bank",
+		"CreateDate": "Create Date",
+		"FlowEndDate": "Flow End Date",
+		"UpdatedDate": "Updated Date",
+		"Yes": "Yes",
+		"No": "No"
 	}
 }

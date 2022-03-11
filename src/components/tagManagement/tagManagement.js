@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useHandlePage } from "../../hook/useHandlePage";
 import { menuContext, userInfoContext, popBoxContext } from "../context";
-import TabBar from "../header/tabBar";
 import { Pagination } from "../pagination";
 import { Empty } from "../empty";
 import { defPopBoxType } from "../popBox";
