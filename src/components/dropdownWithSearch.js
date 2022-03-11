@@ -43,7 +43,8 @@ export default function Component({
 	options,
 	selected,
 	onSelect,
-	displayItems
+	displayItems,
+	className = "btn-group"
 }) {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
@@ -112,7 +113,7 @@ export default function Component({
 	};
 
 	return (
-		<div className="btn-group col-md-3">
+		<div className={className}>
 			<h6>{title}</h6>
 			<div className="long_button" ref={ref}>
 				<button

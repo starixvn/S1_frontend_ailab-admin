@@ -10,6 +10,10 @@ export default {
 	tagManagement: {
 		root: `${siteInfo.newSitePrefixUrl}/CustManage/TagManagement`
 	},
+	adjustmentListing: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/AdjustmentListing`
+	},
+
 	personalMessage: {
 		root: `${siteInfo.newSitePrefixUrl}/Message/PersonalMsgBatch`
 	},

@@ -108,7 +108,6 @@ const BasicPagination = ({
 
 	const firstEntry = (currentPage - 1) * pageSize + 1;
 	const lastEntry = firstEntry + pageSize - 1;
-
 	if (totalPages !== 0)
 		return (
 			<>
