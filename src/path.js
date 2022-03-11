@@ -20,6 +20,9 @@ export default {
 	registrationManagement: {
 		root: `${siteInfo.newSitePrefixUrl}/CustManage/RegistrationManagement`
 	},
+	userBetLimit: {
+		root: `${siteInfo.newSitePrefixUrl}/CustManage/UserBetLimit`
+	},
 	depositList: {
 		root: `${siteInfo.newSitePrefixUrl}/finance/depositList`
 	},

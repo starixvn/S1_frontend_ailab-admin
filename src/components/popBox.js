@@ -13,7 +13,8 @@ export const defPopBoxType = {
 	csdAddPersonalMessage: "csdAddPersonalMessage",
 	csdRegistrationManagementEditStatus: "csdRegistrationManagementEditStatus",
 	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
-	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable"
+	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable",
+	csdBetLimitAddLimit: "csdBetLimitAddLimit"
 };
 
 const PopBox = () => {
@@ -140,6 +141,20 @@ const PopBox = () => {
 						<RegistrationManagementNotesTable
 							popBoxData={popBox.data}
 						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.csdBetLimitAddLimit: {
+				const BetLimitModalAddBetLimit = lazy(() =>
+					import("../pages/csd/BetLimit/Modal/ModalAddBetLimit")
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<BetLimitModalAddBetLimit popBoxData={popBox.data} />
 					</Suspense>
 				);
 

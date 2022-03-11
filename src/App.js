@@ -16,7 +16,7 @@ import { siteInfo } from "./config";
 import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
 import AdjustmentListing from "./pages/finance/adjustmentListing";
-import { PersonalMessage, RegistrationManagement } from "./pages/csd";
+import { PersonalMessage, RegistrationManagement, BetLimit } from "./pages/csd";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
 import ChangeVIPLevel from "./pages/csd/changeVipLevel";
@@ -77,6 +77,11 @@ function App() {
 									path={`/${path.registrationManagement.root}`}
 									component={RegistrationManagement}
 								/>
+								<Route
+									path={`/${path.userBetLimit.root}`}
+									component={BetLimit}
+								/>
+
 								<Route
 									path={`/${path.memberList.root}`}
 									component={MemberList}

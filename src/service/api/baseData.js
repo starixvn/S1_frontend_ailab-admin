@@ -19,3 +19,17 @@ export const api_BaseData_GetBankInfoOffListByCustVerify = ({
 		userName,
 		sabaId
 	});
+
+export const api_BaseData_GetTpGameTypeListByCategory = async categoryId => {
+	const { data } = await apiV2Request.post(
+		"/BaseData/GetTpGameTypeListByCategory",
+		{
+			categoryId
+		}
+	);
+
+	if (data.errorCode !== 0) {
+		throw new Error(data.message);
+	}
+	return data?.data ?? [];
+};

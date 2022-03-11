@@ -235,7 +235,7 @@
 		"Show": "Show",
 		"Entries": "Entries"
 	},
-	"WithdrawalSetting":{
+	"WithdrawalSetting": {
 		"WithdrawalSetting": "Withdrawal Setting",
 		"Site": "Site",
 		"Action": "Action",
@@ -254,9 +254,12 @@
 		},
 		"RegistrationManagement": {
 			"Title": "RegistrationManagement"
+		},
+		"BetLimit": {
+			"Title": "BetLimit"
 		}
 	},
-	"WithdrawalListing":{
+	"WithdrawalListing": {
 		"SubmitDate": "Submit Date",
 		"Currency": "Currency",
 		"Status": "Status",

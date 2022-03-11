@@ -229,7 +229,8 @@ export default [
 						Controller: "CustManage",
 						Action: "UserBetLimit",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					}
 				]
 			}
