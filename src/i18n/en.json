@@ -2,7 +2,11 @@
 	"Common": {
 		"Download": "Download",
 		"DateRange": "Date Range",
-		"Search": "Search"
+		"Search": "Search",
+		"AddBatch":"Add Batch",
+		"UploadFile":"Upload File",
+		"AddNew":"Add New",
+		"Time":"Time"
 	},
 	"Menu": {
 		"Home": {
@@ -66,8 +70,7 @@
 			"DepositTimeReport": "Deposit Time",
 			"WithdrawalTimeReport": "Withdrawal Time",
 			"WithdrawalLimitManagement": "Withdrawal Limit",
-			"USDTWithdrawalLimitManagement": "Crypto Withdrawal Limit",
-			"AdjustmentLimitManagement": "Adjustment Limit"
+			"USDTWithdrawalLimitManagement": "Crypto Withdrawal Limit"
 		},
 		"Administration": {
 			"Administration": "Administration",
@@ -154,6 +157,25 @@
 		"lbl_Ok": "OK",
 		"Success": "Success",
 		"AreYouSure": "Are You Sure?"
+	},
+	
+	"Finance": {
+		"AdjustmentListing":{
+			"AdjustmentLimitManagement": "Adjustment Limit",
+			"GetCustId": "Get customer ID",
+			"AdjustmentType":"Adjustment Type",
+			"CreateDate":"Create Date",
+			"CustId":"Cust ID",
+			"TransId":"Trans ID",
+			"SabaId":"SabaId",
+			"Operator":"Operator",
+			"WalletType":"WalletType",
+			"Balance":"Balance",
+			"AddBalanceAdjustment":"Add Balance Adjustment",
+			"AddBatchBalanceAdjustment":"Add Balance Adjustment (Batch)",
+			"WithdrawCondition":"Withdraw Condition"
+		}
+		
 	},
 	"DepositList": {
 		"SubmitDate": "Submit Date",

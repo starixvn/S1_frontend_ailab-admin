@@ -8,6 +8,8 @@ export const defPopBoxType = {
 	changePwd: "changePwd",
 	withdrawalSetting: "withdrawalSetting",
 	tagPopBox: "tagPopBox",
+	addAdjPopBox: "addAdjPopBox",
+	addBatchAdjPopBox: "addBatchAdjPopBox",
 	csdAddPersonalMessage: "csdAddPersonalMessage",
 	csdRegistrationManagementEditStatus: "csdRegistrationManagementEditStatus",
 	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
@@ -43,6 +45,31 @@ const PopBox = () => {
 				_content = (
 					<Suspense fallback={<div />}>
 						<WithdrawalSettingPopBox {...popBox.params} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.addAdjPopBox: {
+				const AddAdjPopBox = lazy(() =>
+					import("./finance/adjustmentListing/addAdjPopBox")
+				);
+				_content = (
+					<Suspense fallback={<div />}>
+						<AddAdjPopBox refresh={popBox.refresh} />
+					</Suspense>
+				);
+
+				break;
+			}
+			case defPopBoxType.addBatchAdjPopBox: {
+				const AddBatchAdjPopBox = lazy(() =>
+					import("./finance/adjustmentListing/addBatchAdjPopBox")
+				);
+				_content = (
+					<Suspense fallback={<div />}>
+						<AddBatchAdjPopBox refresh={popBox.refresh} />
 					</Suspense>
 				);
 
@@ -145,8 +172,9 @@ const PopBox = () => {
 				break;
 			}
 		}
+
 		return _content;
-	}, [popBox.popBoxType]);
+	}, [popBox.popBoxType, popBox.content]);
 
 	return (
 		<div

@@ -60,14 +60,6 @@ export const newFuncKey = [
 
 export const deleted = [
 	{
-		displayKey: "Menu.Finance.BalanceAdjustmentBatch",
-		FuncKey: "Finance/BalanceAdjustmentBatch",
-		Controller: "Finance",
-		Action: "BalanceAdjustmentBatch",
-		Icon: "",
-		Childs: null
-	},
-	{
 		Key: "BonusInfoReport",
 		Title: "Bonus Report",
 		FuncKey: "Marketing/BonusInfoReport",
@@ -442,6 +434,23 @@ export default [
 				FuncKey: "Finance/PaymentAdjustment",
 				Controller: "Finance",
 				Action: "PaymentAdjustment",
+				Icon: "",
+				Childs: null
+			},
+			{
+				displayKey: "Menu.Finance.BalanceAdjustmentBatch",
+				FuncKey: "Finance/BalanceAdjustmentBatch",
+				Controller: "Finance",
+				Action: "AdjustmentListing",
+				Icon: "",
+				Childs: null,
+				NewAdmin: true
+			},
+			{
+				displayKey: "Menu.Finance.WithdrawalLimitAdjust",
+				FuncKey: "Finance/WithdrawalLimitAdjust",
+				Controller: "Finance",
+				Action: "WithdrawalLimitAdjust",
 				Icon: "",
 				Childs: null
 			},
