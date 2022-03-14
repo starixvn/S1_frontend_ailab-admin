@@ -2,11 +2,7 @@
 import React from "react";
 import { any, func, objectOf } from "prop-types";
 import { Card, Col, Form, Row, Tab, Tabs } from "react-bootstrap";
-
-const numericRegex = num => {
-	const value = String(num).replace(/^(0+)|[^\d]+/g, "");
-	return Number(value);
-};
+import { numericRegex } from "../../../../components/common";
 
 const ModalAddBetLimitTabs = ({
 	selectedTpCategoryOptions,

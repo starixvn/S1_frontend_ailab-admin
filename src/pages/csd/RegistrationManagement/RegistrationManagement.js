@@ -7,7 +7,7 @@ import {
 	useSelectCurrencies
 } from "../../../hook";
 
-import { Pagination } from "../../../components";
+import { Empty, Pagination } from "../../../components";
 import { RegistrationManagementFilter } from "./RegistrationManagementFilter";
 import { MemoRegistrationManagementTable } from "./RegistrationManagementTable";
 import { allSiteListContext, popBoxContext } from "../../../components/context";
@@ -68,7 +68,7 @@ const RegistrationManagement = () => {
 	};
 
 	const {
-		currentPage,
+		currentPage = 1,
 		pageSize,
 		clickPageNumber,
 		onSelectEntry
@@ -135,6 +135,10 @@ const RegistrationManagement = () => {
 		[siteId]
 	);
 
+	const tableRowStartIndex = (currentPage - 1) * pageSize + 1;
+
+	const isEmpty = regLiveStatusList.length === 0 && loading === false;
+
 	return (
 		<Layout afterLogin={true}>
 			<main className="col-md-9 col-lg-10">
@@ -153,22 +157,27 @@ const RegistrationManagement = () => {
 
 				{loading !== undefined && (
 					<div className="bd-example">
-						<Pagination
-							t={t}
-							currentPage={currentPage}
-							totalPages={totalPages || 1}
-							pageSize={pageSize}
-							rowCount={rowCount}
-							onSelectEntry={onSelectEntry}
-							clickPageNumber={clickPageNumber}>
-							<MemoRegistrationManagementTable
-								loading={loading}
-								regLiveStatusList={regLiveStatusList}
-								onEditStatueModal={handleEditStatueModal}
-								onAddNotesModal={handleAddNotesModal}
-								onNotesTableModal={handleNotesTableModal}
-							/>
-						</Pagination>
+						{isEmpty ? (
+							<Empty />
+						) : (
+							<Pagination
+								t={t}
+								currentPage={currentPage}
+								totalPages={totalPages}
+								pageSize={pageSize}
+								rowCount={rowCount}
+								onSelectEntry={onSelectEntry}
+								clickPageNumber={clickPageNumber}>
+								<MemoRegistrationManagementTable
+									loading={loading}
+									regLiveStatusList={regLiveStatusList}
+									tableRowStartIndex={tableRowStartIndex}
+									onEditStatueModal={handleEditStatueModal}
+									onAddNotesModal={handleAddNotesModal}
+									onNotesTableModal={handleNotesTableModal}
+								/>
+							</Pagination>
+						)}
 					</div>
 				)}
 			</main>

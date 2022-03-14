@@ -1,5 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { string, objectOf, any, func, arrayOf } from "prop-types";
 import { Col, Form, Row, Tab, Tabs } from "react-bootstrap";
 import { Editor } from "../../../../components/editor";
@@ -14,6 +15,7 @@ const ModalAddPersonalMessageTabs = ({
 	setField,
 	setLanguage
 }) => {
+	const { t } = useTranslation();
 	const personalMsg = form?.personalMsg;
 
 	const handleContentChange = (lang, value) => {
@@ -38,7 +40,7 @@ const ModalAddPersonalMessageTabs = ({
 					<Row className="mb-3">
 						<Form.Group as={Col}>
 							<Form.Label>
-								Pop up Message
+								{t("CSD.PersonalMessage.PopUpMessage")}
 								{form.IsPopup && (
 									<span style={{ color: "red" }}>*</span>
 								)}
@@ -69,7 +71,7 @@ const ModalAddPersonalMessageTabs = ({
 					<Row className="mb-3">
 						<Form.Group as={Col}>
 							<Form.Label>
-								Title
+								{t("Common.Title")}
 								{lang === "en" && (
 									<span style={{ color: "red" }}>*</span>
 								)}
@@ -96,7 +98,7 @@ const ModalAddPersonalMessageTabs = ({
 					<Row className="mb-3">
 						<Form.Group as={Col}>
 							<Form.Label>
-								Content
+								{t("Common.Content")}
 								{lang === "en" && (
 									<span style={{ color: "red" }}>*</span>
 								)}

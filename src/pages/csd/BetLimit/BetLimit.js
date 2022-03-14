@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "../../../components/layout";
 import { useGetDateRange, useHandlePage } from "../../../hook";
-import { Pagination } from "../../../components";
+import { Empty, Pagination } from "../../../components";
 import { allSiteListContext, popBoxContext } from "../../../components/context";
 import { defPopBoxType } from "../../../components/popBox";
 import { useDeleteBetLimitFetcher, useTpBetLimitListFetcher } from "./hook";
@@ -48,7 +48,7 @@ const BetLimit = () => {
 	};
 
 	const {
-		currentPage,
+		currentPage = 1,
 		pageSize,
 		clickPageNumber,
 		onSelectEntry
@@ -85,6 +85,10 @@ const BetLimit = () => {
 		handleSearchSubmit();
 	};
 
+	const tableRowStartIndex = (currentPage - 1) * pageSize + 1;
+
+	const isEmpty = betLimitList.length === 0 && loading === false;
+
 	return (
 		<Layout afterLogin={true}>
 			<main className="col-md-9 col-lg-10">
@@ -101,21 +105,26 @@ const BetLimit = () => {
 
 				{loading !== undefined && (
 					<div className="bd-example">
-						<Pagination
-							t={t}
-							currentPage={currentPage}
-							totalPages={totalPages || 1}
-							pageSize={pageSize}
-							rowCount={rowCount}
-							onSelectEntry={onSelectEntry}
-							clickPageNumber={clickPageNumber}>
-							<BetLimitTable
-								loading={loading}
-								betLimitList={betLimitList}
-								onUpdateBetLimit={handleUpdateBetLimit}
-								onDeleteBetLimit={handleDeleteBetLimit}
-							/>
-						</Pagination>
+						{isEmpty ? (
+							<Empty />
+						) : (
+							<Pagination
+								t={t}
+								currentPage={currentPage}
+								totalPages={totalPages}
+								pageSize={pageSize}
+								rowCount={rowCount}
+								onSelectEntry={onSelectEntry}
+								clickPageNumber={clickPageNumber}>
+								<BetLimitTable
+									loading={loading}
+									betLimitList={betLimitList}
+									tableRowStartIndex={tableRowStartIndex}
+									onUpdateBetLimit={handleUpdateBetLimit}
+									onDeleteBetLimit={handleDeleteBetLimit}
+								/>
+							</Pagination>
+						)}
 					</div>
 				)}
 			</main>
