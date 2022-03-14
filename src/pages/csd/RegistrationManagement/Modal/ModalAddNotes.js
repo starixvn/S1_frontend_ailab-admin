@@ -28,8 +28,7 @@ const ModalAddNotes = ({ popBoxData }) => {
 
 	const handleSubmit = () => {
 		confirm({
-			title: "Are you sure ?",
-
+			content: t("PopBox.AreYouSure"),
 			onOk: () => {
 				addRegLiveStatusNote({
 					custId,

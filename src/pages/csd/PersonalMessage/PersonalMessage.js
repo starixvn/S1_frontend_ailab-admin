@@ -6,7 +6,7 @@ import Layout from "../../../components/layout";
 import DatetimePicker from "../../../components/datetimePicker";
 import { allSiteListContext, popBoxContext } from "../../../components/context";
 import { defPopBoxType } from "../../../components/popBox";
-import { ButtonWithLoading, Pagination } from "../../../components";
+import { ButtonWithLoading, Empty, Pagination } from "../../../components";
 import { MODAL_TYPE } from "./def";
 import { useGetDateRange, useHandlePage } from "../../../hook";
 import { PersonalMessageTable } from "./PersonalMessageTable";
@@ -52,7 +52,7 @@ const PersonalMessage = () => {
 	};
 
 	const {
-		currentPage,
+		currentPage = 1,
 		pageSize,
 		clickPageNumber,
 		onSelectEntry
@@ -82,6 +82,10 @@ const PersonalMessage = () => {
 	const handleExportReport = batchId => {
 		exportMessageReport(batchId);
 	};
+
+	const tableRowStartIndex = (currentPage - 1) * pageSize + 1;
+
+	const isEmpty = batchMessageList.length === 0 && loading === false;
 
 	return (
 		<Layout afterLogin={true}>
@@ -126,22 +130,31 @@ const PersonalMessage = () => {
 
 				{loading !== undefined && (
 					<div className="bd-example">
-						<Pagination
-							t={t}
-							currentPage={currentPage}
-							totalPages={totalPages || 1}
-							pageSize={pageSize}
-							rowCount={rowCount}
-							onSelectEntry={onSelectEntry}
-							clickPageNumber={clickPageNumber}>
-							<PersonalMessageTable
-								loading={loading}
-								batchMessageList={batchMessageList}
-								onUpdateBatchMessage={handleUpdateBatchMessage}
-								onDeleteBatchMessage={handleDeleteBatchMessage}
-								onExportReport={handleExportReport}
-							/>
-						</Pagination>
+						{isEmpty ? (
+							<Empty />
+						) : (
+							<Pagination
+								t={t}
+								currentPage={currentPage}
+								totalPages={totalPages}
+								pageSize={pageSize}
+								rowCount={rowCount}
+								onSelectEntry={onSelectEntry}
+								clickPageNumber={clickPageNumber}>
+								<PersonalMessageTable
+									loading={loading}
+									batchMessageList={batchMessageList}
+									tableRowStartIndex={tableRowStartIndex}
+									onUpdateBatchMessage={
+										handleUpdateBatchMessage
+									}
+									onDeleteBatchMessage={
+										handleDeleteBatchMessage
+									}
+									onExportReport={handleExportReport}
+								/>
+							</Pagination>
+						)}
 					</div>
 				)}
 			</main>

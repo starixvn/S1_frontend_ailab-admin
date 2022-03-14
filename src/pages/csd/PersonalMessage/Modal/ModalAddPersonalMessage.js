@@ -17,7 +17,7 @@ import {
 	useSendMessageBatchFetcher,
 	useUpdateBatchMessageFetcher
 } from "../hook";
-import { ButtonWithLoading } from "../../../../components";
+import { ButtonWithLoading, Loading } from "../../../../components";
 
 const formValidator = ({ form, language, type }) => {
 	const newErrors = {};
@@ -82,7 +82,7 @@ const ModalAddPersonalMessage = ({ popBoxData }) => {
 
 	const { allSiteList, siteId } = useContext(allSiteListContext);
 
-	const { setPopBox, confirm } = useContext(popBoxContext);
+	const { setPopBox } = useContext(popBoxContext);
 
 	const {
 		loading: sendMessageBatchLoading,
@@ -179,6 +179,8 @@ const ModalAddPersonalMessage = ({ popBoxData }) => {
 
 	return (
 		<>
+			{batchMessageLoading && <Loading />}
+
 			<Modal.Body>
 				<Form noValidate onSubmit={handleSubmit}>
 					<ModalAddPersonalMessageFilter
@@ -205,11 +207,15 @@ const ModalAddPersonalMessage = ({ popBoxData }) => {
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button variant="secondary" onClick={closePopBox}>
+				<Button
+					variant="secondary"
+					className="w-25"
+					onClick={closePopBox}>
 					{t("PopBox.lbl_Cancel")}
 				</Button>
 				<ButtonWithLoading
 					type="submit"
+					className="w-25"
 					loading={batchMessageLoading || sendMessageBatchLoading}
 					onClick={handleSubmit}>
 					{t("PopBox.lbl_Submit")}

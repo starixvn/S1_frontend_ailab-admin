@@ -29,8 +29,7 @@ const ModalEditStatus = ({ popBoxData }) => {
 
 	const handleSubmit = () => {
 		confirm({
-			title: "Are you sure ?",
-
+			content: t("PopBox.AreYouSure"),
 			onOk: async () => {
 				await setRegLiveStatus({
 					siteId,

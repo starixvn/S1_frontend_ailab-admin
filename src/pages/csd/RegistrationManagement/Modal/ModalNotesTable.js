@@ -1,5 +1,7 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useContext } from "react";
-import { Modal, Row, Col, Button, Table } from "react-bootstrap";
+import { any, objectOf } from "prop-types";
+import { Modal, Table } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 import { ButtonWithLoading, Empty, Loading } from "../../../../components";
@@ -28,7 +30,7 @@ const ModalNotesTable = ({ popBoxData }) => {
 
 	const handleDeleteClick = id => () => {
 		confirm({
-			title: "Are you sure ?",
+			content: t("PopBox.AreYouSure"),
 			onOk: async () => {
 				await deleteRegLiveStatusNote({ id, custId });
 
@@ -45,10 +47,12 @@ const ModalNotesTable = ({ popBoxData }) => {
 				<Table striped bordered hover>
 					<thead className="table-dark">
 						<tr>
-							<th>Note</th>
-							<th>Updated By</th>
-							<th>Updated Date</th>
-							<th className="text-center">Action</th>
+							<th>{t("Common.Note")}</th>
+							<th>{t("Common.UpdatedBy")}</th>
+							<th>{t("Common.UpdatedDate")}</th>
+							<th className="text-center">
+								{t("Common.Action")}
+							</th>
 						</tr>
 					</thead>
 
@@ -77,6 +81,10 @@ const ModalNotesTable = ({ popBoxData }) => {
 			</div>
 		</Modal.Body>
 	);
+};
+
+ModalNotesTable.propTypes = {
+	popBoxData: objectOf(any).isRequired
 };
 
 export default ModalNotesTable;

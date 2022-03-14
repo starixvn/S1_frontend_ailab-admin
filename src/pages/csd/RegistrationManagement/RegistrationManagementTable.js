@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { memo } from "react";
-import { any, arrayOf, bool, func } from "prop-types";
+import { any, arrayOf, bool, func, number } from "prop-types";
 import { Table } from "react-bootstrap";
 import {
 	CheckCircle,
@@ -9,13 +9,14 @@ import {
 	XCircle,
 	CardList
 } from "react-bootstrap-icons";
-import { ButtonWithLoading, Empty, Loading } from "../../../components";
-
+import { ButtonWithLoading, Loading } from "../../../components";
 import { DEPOSIT_STATUS, STATUS_TYPE } from "./def";
+import { datetime_format } from "../../../components/common";
 
 const RegistrationManagementTable = ({
 	loading,
 	regLiveStatusList,
+	tableRowStartIndex,
 	onEditStatueModal,
 	onAddNotesModal,
 	onNotesTableModal
@@ -26,6 +27,7 @@ const RegistrationManagementTable = ({
 		<Table striped bordered hover>
 			<thead className="table-dark">
 				<tr>
+					<th>#</th>
 					<th>Currency</th>
 					<th>Affiliates Code </th>
 					<th>Agent</th>
@@ -41,7 +43,7 @@ const RegistrationManagementTable = ({
 			</thead>
 
 			<tbody>
-				{regLiveStatusList.map(item => {
+				{regLiveStatusList.map((item, index) => {
 					const depositStatus =
 						DEPOSIT_STATUS.find(
 							({ value }) => value === item.actStatus
@@ -53,6 +55,7 @@ const RegistrationManagementTable = ({
 
 					return (
 						<tr key={`${item.regTime}-${item.custId}`}>
+							<td>{tableRowStartIndex + index}</td>
 							<td>{item.currency}</td>
 							<td>{item.affCode}</td>
 							<td>{item.agent}</td>
@@ -96,7 +99,7 @@ const RegistrationManagementTable = ({
 									<XCircle className="text-danger" />
 								)}
 							</td>
-							<td>{item.regTime}</td>
+							<td>{datetime_format(item.regTime)}</td>
 							<td>{depositStatus}</td>
 							<td>{status}</td>
 						</tr>
@@ -104,14 +107,13 @@ const RegistrationManagementTable = ({
 				})}
 			</tbody>
 		</Table>
-
-		{regLiveStatusList.length === 0 && <Empty />}
 	</div>
 );
 
 RegistrationManagementTable.propTypes = {
 	loading: bool.isRequired,
 	regLiveStatusList: arrayOf(any).isRequired,
+	tableRowStartIndex: number.isRequired,
 	onEditStatueModal: func.isRequired,
 	onAddNotesModal: func.isRequired,
 	onNotesTableModal: func.isRequired
