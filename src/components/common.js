@@ -100,7 +100,4 @@ export const multipleDropdownFilter = (options, option) => {
 export const datetime_format = date =>
 	date ? dayjs(date).format("YYYY-MM-DD HH:mm:ss") : "N/A";
 
-export const numericRegex = num => {
-	const value = String(num).replace(/^(0+)|[^\d]+/g, "");
-	return Number(value);
-};
+export const numericRegex = num => String(num).replace(/^(0+)|[^\d]+/g, "");

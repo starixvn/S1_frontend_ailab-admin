@@ -135,7 +135,7 @@ const ModalAddWithdrawalAdjust = () => {
 										event.target.value
 									);
 
-									setField("amount", _amount || "");
+									setField("amount", _amount);
 								}}
 							/>
 						</InputGroup>
