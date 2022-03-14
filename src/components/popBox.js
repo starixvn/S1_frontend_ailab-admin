@@ -8,7 +8,6 @@ export const defPopBoxType = {
 	changePwd: "changePwd",
 	tagPopBox: "tagPopBox",
 	withdrawalSetting: "withdrawalSetting",
-	tagPopBox: "tagPopBox",
 	addAdjPopBox: "addAdjPopBox",
 	addBatchAdjPopBox: "addBatchAdjPopBox",
 	csdAddPersonalMessage: "csdAddPersonalMessage",
@@ -16,6 +15,8 @@ export const defPopBoxType = {
 	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
 	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable",
 	csdBetLimitAddLimit: "csdBetLimitAddLimit",
+	financeDepsoitProcess: "financeDepsoitProcess",
+	financeDepsoitAdjAmount: "financeDepsoitAdjAmount",
 	financeWithdrawalLimitAdjustAddModal: "financeWithdrawalLimitAdjustAddModal"
 };
 
@@ -189,6 +190,34 @@ const PopBox = () => {
 							tagData={popBox.tagData}
 							refresh={popBox.refresh}
 						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.financeDepsoitProcess: {
+				const Component = lazy(() =>
+					import("./finance/depositListing/depositProcessPopBox")
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<Component popBoxData={popBox.data} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.financeDepsoitAdjAmount: {
+				const Component = lazy(() =>
+					import("./finance/depositListing/adjustAmountPopBox")
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<Component popBoxData={popBox.data} />
 					</Suspense>
 				);
 

@@ -355,7 +355,8 @@ const defColumns = options => [
 		titleKey: defColumnTitle.ReferenceId,
 		dataColumn: "transId",
 		columnType: defColumnType.link,
-		route: "NewAdmin/Test/Test"
+		route: path.depositDetail.root.replace("/:transId", ""),
+		routeParamColumn: "transId"
 	},
 	{
 		titleKey: defColumnTitle.Currency,
