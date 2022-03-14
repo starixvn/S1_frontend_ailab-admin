@@ -15,7 +15,8 @@ export const defPopBoxType = {
 	csdRegistrationManagementEditStatus: "csdRegistrationManagementEditStatus",
 	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
 	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable",
-	csdBetLimitAddLimit: "csdBetLimitAddLimit"
+	csdBetLimitAddLimit: "csdBetLimitAddLimit",
+	financeWithdrawalLimitAdjustAddModal: "financeWithdrawalLimitAdjustAddModal"
 };
 
 const PopBox = () => {
@@ -156,6 +157,22 @@ const PopBox = () => {
 				_content = (
 					<Suspense fallback={<div />}>
 						<BetLimitModalAddBetLimit popBoxData={popBox.data} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.financeWithdrawalLimitAdjustAddModal: {
+				const Modal = lazy(() =>
+					import(
+						"../pages/finance/WithdrawableAdjustment/Modal/ModalAddWithdrawalAdjust.js"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<Modal popBoxData={popBox.data} />
 					</Suspense>
 				);
 

@@ -18,6 +18,7 @@ import DepositListing from "./pages/finance/depositListing";
 import MemberInformation from "./pages/member/memberDetail";
 import AdjustmentListing from "./pages/finance/adjustmentListing";
 import { PersonalMessage, RegistrationManagement, BetLimit } from "./pages/csd";
+import { WithdrawableAdjustment } from "./pages/finance";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
 import ChangeVIPLevel from "./pages/csd/changeVipLevel";
@@ -91,6 +92,12 @@ function App() {
 									path={`/${path.withdrawalListing.root}`}
 									component={WithdrawalListing}
 								/>
+
+								<Route
+									path={`/${path.withdrawableAdjustment.root}`}
+									component={WithdrawableAdjustment}
+								/>
+
 								<Route exact path="/" component={IframePage} />
 								{iframeRoutes()}
 

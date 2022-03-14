@@ -429,9 +429,10 @@ export default [
 				displayKey: "Menu.Finance.BalanceAdjustment",
 				FuncKey: "Finance/PaymentAdjustment",
 				Controller: "Finance",
-				Action: "PaymentAdjustment",
+				Action: "WithdrawalLimitAdjust",
 				Icon: "",
-				Childs: null
+				Childs: null,
+				NewAdmin: true
 			},
 			{
 				displayKey: "Menu.Finance.BalanceAdjustmentBatch",

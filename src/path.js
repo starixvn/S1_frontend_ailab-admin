@@ -38,6 +38,9 @@ export default {
 	withdrawalListing: {
 		root: `${siteInfo.newSitePrefixUrl}/Finance/WithdrawalList`
 	},
+	withdrawableAdjustment: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/WithdrawalLimitAdjust`
+	},
 	withdrawalSetting: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/WithdrawalKYCControl`
 	},
