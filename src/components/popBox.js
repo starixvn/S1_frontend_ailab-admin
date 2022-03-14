@@ -6,6 +6,7 @@ import { ModalConfirm } from "./Modal/modalConfirm";
 export const defPopBoxType = {
 	default: "default",
 	changePwd: "changePwd",
+	tagPopBox: "tagPopBox",
 	withdrawalSetting: "withdrawalSetting",
 	tagPopBox: "tagPopBox",
 	addAdjPopBox: "addAdjPopBox",

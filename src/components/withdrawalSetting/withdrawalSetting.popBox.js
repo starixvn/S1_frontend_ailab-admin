@@ -81,7 +81,6 @@ const WithdrawalSettingPopBox = ({
 				<br />
 				<InputBox
 					title={t("WithdrawalSetting.Amount")}
-					className="mb-5"
 					value={inputAmount}
 					onChange={handleInputChange}
 				/>

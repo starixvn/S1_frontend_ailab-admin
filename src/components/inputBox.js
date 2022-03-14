@@ -15,7 +15,9 @@ const InputBox = ({
 	className,
 	disabled,
 	required,
-	onBlur
+	onBlur,
+	isValid,
+	errorFeedBack
 }) => (
 	<div className={className}>
 		<h6>
@@ -25,7 +27,7 @@ const InputBox = ({
 		<div className="input-group has-validation">
 			<input
 				type={inputType ?? "text"}
-				className="form-control"
+				className={`form-control ${isValid ? "" : "is-invalid"}`}
 				placeholder={placeholder}
 				value={value}
 				aria-describedby="basic-addon1"
@@ -34,7 +36,7 @@ const InputBox = ({
 				onBlur={onBlur}
 				required={required}
 			/>
-			<div className="invalid-feedback">Please choose a username.</div>
+			<div className="invalid-feedback">{errorFeedBack}</div>
 		</div>
 	</div>
 );
@@ -44,10 +46,12 @@ InputBox.defaultProps = {
 	value: "",
 	placeholder: "",
 	inputType: "",
-	className: "btn-group col-md-3",
+	className: "btn-group",
 	disabled: false,
 	required: false,
-	onBlur: () => {}
+	onBlur: () => {},
+	isValid: true,
+	errorFeedBack: ""
 };
 
 InputBox.propTypes = {
@@ -63,7 +67,9 @@ InputBox.propTypes = {
 	className: PropTypes.string,
 	disabled: PropTypes.bool,
 	required: PropTypes.bool,
-	onBlur: PropTypes.func
+	onBlur: PropTypes.func,
+	isValid: PropTypes.bool,
+	errorFeedBack: PropTypes.string
 };
 
 export default InputBox;
