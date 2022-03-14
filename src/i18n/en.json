@@ -3,10 +3,12 @@
 		"Download": "Download",
 		"DateRange": "Date Range",
 		"Search": "Search",
-		"AddBatch":"Add Batch",
-		"UploadFile":"Upload File",
-		"AddNew":"Add New",
-		"Time":"Time"
+		"AddBatch": "Add Batch",
+		"UploadFile": "Upload File",
+		"AddNew": "Add New",
+		"Time": "Time",
+		"Remark": "Remark",
+		"Action": "Action"
 	},
 	"Menu": {
 		"Home": {
@@ -28,13 +30,13 @@
 			"KYC": "KYC",
 			"MemberGameSetting": "MemberGameSetting",
 			"MemberListing": "Member Listing",
-			"Announcement":"Announcement",
-			"PersonalMsgBatch":"Personal Msg Batch",
-			"ChangeVipLevel":"Change VIP Level",
-			"WithdrawalKYCControl":"Withdrawal KYC Control",
-			"TeleCSD":"TeleCSD",
-			"TagManagement":"Tag Management",
-			"AddTag":"Add Tag",
+			"Announcement": "Announcement",
+			"PersonalMsgBatch": "Personal Msg Batch",
+			"ChangeVipLevel": "Change VIP Level",
+			"WithdrawalKYCControl": "Withdrawal KYC Control",
+			"TeleCSD": "TeleCSD",
+			"TagManagement": "Tag Management",
+			"AddTag": "Add Tag",
 			"ChangeVipLevelBatch": "Change Vip Level (Batch)",
 			"TagName": "Tag name",
 			"TagColor": "Tag Color",
@@ -69,6 +71,7 @@
 			"Setting": "Setting",
 			"Report": "Report",
 			"DepositTimeReport": "Deposit Time",
+			"AdjustmentLimitManagement": "AdjustmentLimitManagement",
 			"WithdrawalTimeReport": "Withdrawal Time",
 			"WithdrawalLimitManagement": "Withdrawal Limit",
 			"USDTWithdrawalLimitManagement": "Crypto Withdrawal Limit"
@@ -159,24 +162,39 @@
 		"Success": "Success",
 		"AreYouSure": "Are You Sure?"
 	},
-	
+
 	"Finance": {
-		"AdjustmentListing":{
+		"AdjustmentListing": {
 			"AdjustmentLimitManagement": "Adjustment Limit",
 			"GetCustId": "Get customer ID",
-			"AdjustmentType":"Adjustment Type",
-			"CreateDate":"Create Date",
-			"CustId":"Cust ID",
-			"TransId":"Trans ID",
-			"SabaId":"SabaId",
-			"Operator":"Operator",
-			"WalletType":"WalletType",
-			"Balance":"Balance",
-			"AddBalanceAdjustment":"Add Balance Adjustment",
-			"AddBatchBalanceAdjustment":"Add Balance Adjustment (Batch)",
-			"WithdrawCondition":"Withdraw Condition"
+			"AdjustmentType": "Adjustment Type",
+			"CreateDate": "Create Date",
+			"CustId": "Cust ID",
+			"TransId": "Trans ID",
+			"SabaId": "SabaId",
+			"Operator": "Operator",
+			"WalletType": "WalletType",
+			"Balance": "Balance",
+			"AddBalanceAdjustment": "Add Balance Adjustment",
+			"AddBatchBalanceAdjustment": "Add Balance Adjustment (Batch)",
+			"WithdrawCondition": "Withdraw Condition"
+		},
+		"WithdrawableAdjustment": {
+			"Title": "WithdrawableAdjustment",
+			"MemberCode": "Member Code",
+			"ReferenceId": "Reference Id",
+			"AdjustType": "Adjust Type",
+			"AdjustAmount": "Adjust Amount",
+			"Status": "Status",
+			"Remark": "Remark",
+			"CreatedBy": "Created By",
+			"CreateDate": "Create Date",
+			"AddNew": "AddNew",
+			"AddWithdrawalLimit": "Add Withdrawal Limit",
+			"Balance": "Balance",
+			"DifferenceAmount": "Difference Amount",
+			"EligibleWithdrawalAmount": "Eligible Withdrawal Amount"
 		}
-		
 	},
 	"DepositList": {
 		"SubmitDate": "Submit Date",
@@ -259,26 +277,26 @@
 			"Title": "BetLimit"
 		}
 	},
-	"Member":{
-		"MemberDetail":{
-			"Title":"Member Information"
+	"Member": {
+		"MemberDetail": {
+			"Title": "Member Information"
 		}
 	},
-	"Status":{
-		"1":"Running",
-		"2":"Suspend",
-		"3":"Closed",
-		"4":"Lock",
-		"5":"UnLock"
+	"Status": {
+		"1": "Running",
+		"2": "Suspend",
+		"3": "Closed",
+		"4": "Lock",
+		"5": "UnLock"
 	},
-	"Iovation":{
-		"A":"Allow",
-		"D":"Deny",
-		"R":"Review"
+	"Iovation": {
+		"A": "Allow",
+		"D": "Deny",
+		"R": "Review"
 	},
-	"ActStatus":{
-		"1":"NonDepoist",
-		"2":"Deposited"
+	"ActStatus": {
+		"1": "NonDepoist",
+		"2": "Deposited"
 	},
 	"WithdrawalListing": {
 		"SubmitDate": "Submit Date",
@@ -301,7 +319,7 @@
 		"Yes": "Yes",
 		"No": "No"
 	},
-	"ChangeVipLevel":{
+	"ChangeVipLevel": {
 		"UploadFile": "Upload File",
 		"Submit": "Submit",
 		"DownloadTemplate": "Download Template",
