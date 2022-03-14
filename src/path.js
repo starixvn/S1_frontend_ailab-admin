@@ -26,6 +26,9 @@ export default {
 	depositList: {
 		root: `${siteInfo.newSitePrefixUrl}/finance/depositList`
 	},
+	depositDetail: {
+		root: `${siteInfo.newSitePrefixUrl}/finance/depositDetail/:transId`
+	},
 	dashboard: {
 		root: "dashboard"
 	},

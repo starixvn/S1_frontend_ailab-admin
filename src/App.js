@@ -22,6 +22,7 @@ import { WithdrawableAdjustment } from "./pages/finance";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
 import ChangeVIPLevel from "./pages/csd/changeVipLevel";
+import DepositDetail from "./pages/finance/depositDetail";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -118,6 +119,11 @@ function App() {
 								<Route
 									component={ChangeVIPLevel}
 									path={`/${path.changeVipLevel.root}`}
+								/>
+
+								<Route
+									component={DepositDetail}
+									path={`/${path.depositDetail.root}`}
 								/>
 								<Route component={NoMatch} />
 							</Switch>

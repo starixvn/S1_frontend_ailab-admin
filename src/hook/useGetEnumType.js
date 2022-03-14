@@ -56,7 +56,12 @@ const defFilter = {
 };
 
 const useSelectEnumTypes = props => {
-	const { enumName, defaultSelectAll, defaultSelectFirst } = props;
+	const {
+		enumName,
+		defaultSelectAll,
+		defaultSelectFirst,
+		useFrontendFilter = true
+	} = props;
 	const [selected, setSelected] = useState([]);
 	const [options, setOptions] = useState([]);
 
@@ -76,6 +81,7 @@ const useSelectEnumTypes = props => {
 					const datas = res.data.data
 						?.filter(
 							r =>
+								useFrontendFilter === false ||
 								!defFilter[enumName]?.some(
 									f => f.value === r.value
 								)
