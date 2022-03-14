@@ -7,8 +7,15 @@
 		"UploadFile": "Upload File",
 		"AddNew": "Add New",
 		"Time": "Time",
+		"Content": "Content",
 		"Remark": "Remark",
-		"Action": "Action"
+		"Action": "Action",
+		"Title": "Title",
+		"UpdatedBy": "Updated By",
+		"UpdatedDate": "Updated Date",
+		"CreatedBy": "Created By",
+		"CreatedDate": "Created Date",
+		"Note": "Note"
 	},
 	"Menu": {
 		"Home": {
@@ -162,7 +169,6 @@
 		"Success": "Success",
 		"AreYouSure": "Are You Sure?"
 	},
-
 	"Finance": {
 		"AdjustmentListing": {
 			"AdjustmentLimitManagement": "Adjustment Limit",
@@ -268,13 +274,16 @@
 			"Title": "PersonalMessage",
 			"AddNew": "Add New",
 			"UploadBatchMessage": "Upload Batch Message",
-			"PopUp": "Pop Up"
+			"PopUp": "Pop Up",
+			"PopUpMessage": "Pop up Message"
 		},
 		"RegistrationManagement": {
 			"Title": "RegistrationManagement"
 		},
 		"BetLimit": {
-			"Title": "BetLimit"
+			"Title": "BetLimit",
+			"UserName": "User Name",
+			"GameCategory": "Game Category"
 		}
 	},
 	"Member": {

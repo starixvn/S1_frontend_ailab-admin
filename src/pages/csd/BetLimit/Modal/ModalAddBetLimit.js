@@ -140,7 +140,7 @@ const ModalAddBetLimit = ({ popBoxData }) => {
 			<Modal.Body>
 				<Row>
 					<Form.Group as={Col} lg={4}>
-						<Form.Label>User Name</Form.Label>
+						<Form.Label>{t("CSD.BetLimit.UserName")}</Form.Label>
 
 						<Form.Control
 							onChange={event => setUserName(event.target.value)}
@@ -150,7 +150,9 @@ const ModalAddBetLimit = ({ popBoxData }) => {
 					</Form.Group>
 
 					<Form.Group as={Col} lg={5}>
-						<Form.Label>Game Category</Form.Label>
+						<Form.Label>
+							{t("CSD.BetLimit.GameCategory")}
+						</Form.Label>
 
 						<div>
 							<DropdownWithSearch
@@ -175,11 +177,16 @@ const ModalAddBetLimit = ({ popBoxData }) => {
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button variant="secondary" onClick={closePopBox}>
+				<Button
+					variant="secondary"
+					className="w-25"
+					onClick={closePopBox}>
 					{t("PopBox.lbl_Cancel")}
 				</Button>
 
 				<ButtonWithLoading
+					loading={loading}
+					className="w-25"
 					disabled={selectedTpCategoryOptions.length === 0}
 					type="button"
 					onClick={handleSubmit}>

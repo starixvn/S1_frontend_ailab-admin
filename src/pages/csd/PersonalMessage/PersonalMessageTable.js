@@ -1,18 +1,22 @@
 /* eslint-disable react/forbid-prop-types */
 import { useContext } from "react";
-import { any, arrayOf, bool, func } from "prop-types";
+import { useTranslation } from "react-i18next";
+import { any, arrayOf, bool, func, number } from "prop-types";
 import { Pencil, Trash, FileEarmarkArrowDown } from "react-bootstrap-icons";
 import { Table } from "react-bootstrap";
 import { popBoxContext } from "../../../components/context";
-import { ButtonWithLoading, Empty, Loading } from "../../../components";
+import { ButtonWithLoading, Loading } from "../../../components";
+import { datetime_format } from "../../../components/common";
 
 const PersonalMessageTable = ({
 	loading,
 	batchMessageList,
+	tableRowStartIndex,
 	onUpdateBatchMessage,
 	onDeleteBatchMessage,
 	onExportReport
 }) => {
+	const { t } = useTranslation();
 	const { confirm } = useContext(popBoxContext);
 
 	const handleUpdateBatchMessage = batchId => () => {
@@ -21,8 +25,7 @@ const PersonalMessageTable = ({
 
 	const handleDeleteBatchMessage = batchId => () => {
 		confirm({
-			title: "Are you sure ?",
-
+			content: t("PopBox.AreYouSure"),
 			onOk() {
 				onDeleteBatchMessage(batchId);
 			}
@@ -36,16 +39,18 @@ const PersonalMessageTable = ({
 			<Table striped bordered hover>
 				<thead className="table-dark">
 					<tr>
-						<th>Title</th>
-						<th>Content</th>
-						<th>Updated By</th>
-						<th className="text-center">Action</th>
-						<th>Updated Date</th>
+						<th>#</th>
+						<th>{t("Common.Title")}</th>
+						<th>{t("Common.Content")}</th>
+						<th>{t("Common.UpdatedBy")}</th>
+						<th className="text-center">{t("Common.Action")}</th>
+						<th>{t("Common.UpdatedDate")}</th>
 					</tr>
 				</thead>
 				<tbody>
-					{batchMessageList.map(item => (
+					{batchMessageList.map((item, index) => (
 						<tr key={`${item.createTime}-${item.updateTime}`}>
+							<td>{tableRowStartIndex + index}</td>
 							<td>{item.title}</td>
 							<td>{item.content}</td>
 							<td>{item.author}</td>
@@ -83,19 +88,18 @@ const PersonalMessageTable = ({
 									</ButtonWithLoading>
 								</span>
 							</td>
-							<td>{item.updateTime}</td>
+							<td>{datetime_format(item.updateTime)}</td>
 						</tr>
 					))}
 				</tbody>
 			</Table>
-
-			{batchMessageList.length === 0 && <Empty />}
 		</div>
 	);
 };
 
 PersonalMessageTable.propTypes = {
 	loading: bool.isRequired,
+	tableRowStartIndex: number.isRequired,
 	batchMessageList: arrayOf(any).isRequired,
 	onUpdateBatchMessage: func.isRequired,
 	onDeleteBatchMessage: func.isRequired,

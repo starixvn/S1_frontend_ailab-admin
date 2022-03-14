@@ -24,7 +24,7 @@ const BetLimitFilter = ({
 				</Form.Group>
 
 				<Form.Group as={Col} lg={4}>
-					<Form.Label>User Name</Form.Label>
+					<Form.Label>{t("CSD.BetLimit.UserName")}</Form.Label>
 
 					<Form.Control
 						onChange={event =>
