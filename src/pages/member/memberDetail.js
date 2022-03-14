@@ -26,7 +26,7 @@ export default function Page(props) {
 						...data
 					});
 				} else {
-					alert.error(message || `[${errorCode}] error`);
+					alert.error(`[${errorCode}] ${message || "error"}`);
 				}
 			} catch (error) {}
 		};

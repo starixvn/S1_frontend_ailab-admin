@@ -126,7 +126,7 @@ const MemberList = () => {
 						clickPageNumber({ pageNumber: 1, execCallback: false });
 					}
 				} else {
-					alert.error(message || `[${errorCode}] error`);
+					alert.error(`[${errorCode}] ${message || "error"}`);
 				}
 			},
 			() => {
@@ -437,7 +437,7 @@ const ReportPanel = ({
 				if (errorCode === 0) {
 					setTagList(_tagList);
 				} else {
-					alert.error(message || `[${errorCode}] error`);
+					alert.error(`[${errorCode}] ${message || "error"}`);
 				}
 			},
 			() => {
