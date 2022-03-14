@@ -26,7 +26,7 @@ const useSendWithdrawalLimitAdjustmentFetcher = () => {
 			await api_WithdrawalLimitAdjustment_Send({
 				custId,
 				adjustType,
-				amount,
+				amount: Number(amount),
 				memo
 			});
 
