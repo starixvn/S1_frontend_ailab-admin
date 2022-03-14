@@ -1,7 +1,8 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 import { useHandlePage } from "../../hook/useHandlePage";
-import { menuContext, userInfoContext, popBoxContext } from "../context";
+import { popBoxContext } from "../context";
 import { Pagination } from "../pagination";
 import { Empty } from "../empty";
 import { defPopBoxType } from "../popBox";
@@ -67,7 +68,7 @@ const TagManagement = () => {
 	} = useHandlePage({
 		callback: arg =>
 			getTagByStatus({
-				page: arg.page,
+				page: arg.currentPage,
 				pageSize: arg.pageSize || pageSize
 			})
 	});
@@ -89,7 +90,7 @@ const TagManagement = () => {
 			console.error(error);
 		}
 	};
-
+	const startEntry = (currentPage - 1) * pageSize + 1;
 	return (
 		<main className="col-md-9 col-lg-10">
 			<h1 className="h2">{t("Menu.CSD.TagManagement")}</h1>
@@ -125,109 +126,123 @@ const TagManagement = () => {
 				</button>
 			</div>
 
-			<div className="bd-example">
-				{tableContent.rows?.length ? (
-					<Pagination
-						t={t}
-						currentPage={currentPage}
-						totalPages={tableContent.totalPages}
-						totalEntries={tableContent.rowCount}
-						pageSize={pageSize}
-						clickPageNumber={clickPageNumber}
-						onSelectEntry={({ value, displayText }) => {
-							onSelectEntry({ value, displayText });
-						}}>
-						<div className="table-responsive">
-							<table className="table table-striped table-hover">
-								<thead className="table-dark">
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">
-											{t("Menu.CSD.Action")}
-										</th>
-										<th scope="col">
-											{t("Menu.CSD.TagName")}
-										</th>
-										<th scope="col">
-											{t("Menu.CSD.TagColor")}
-										</th>
-										<th scope="col">
-											{t("Menu.CSD.Description")}
-										</th>
-										<th scope="col">
-											{t("Menu.CSD.UpdatedBy")}
-										</th>
-										<th scope="col">
-											{t("Menu.CSD.UpdatedDate")}
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									{tableContent.rows.map(el => (
-										<tr key={el.id}>
-											<th>{el.id}</th>
-											<td>
-												<button
-													type="button"
-													onClick={() =>
-														setPopBox({
-															isOpen: true,
-															popBoxType:
-																defPopBoxType.tagPopBox,
-															title: t(
-																"Menu.CSD.EditTag"
-															),
-															tagData: {
-																id: el.id,
-																tagColour:
-																	el.tagColour,
-																description:
-																	el.description,
-																tagName:
-																	el.tagName
-															},
-															refresh: () =>
-																getTagByStatus({
-																	page: 1,
-																	pageSize: 10
-																})
-														})
-													}
-													className="btn btn-primary btn-sm">
-													<i className="icon icon-edit" />
-												</button>
-												<button
-													type="button"
-													onClick={() =>
-														activateTag(el.id)
-													}
-													className="btn btn-primary btn-sm">
-													<i className="icon icon-check" />
-												</button>
-											</td>
-											<td>{el.tagName}</td>
-											<td>
-												<div
-													className="square"
-													style={{
-														background: `${el.tagColour}`
-													}}>
-													{el.tagColour}
-												</div>
-											</td>
-											<td>{el.description}</td>
-											<td>{el.updator}</td>
-											<td>{el.updateTime}</td>
+			{tableContent.rows !== null && (
+				<div className="bd-example">
+					{tableContent.rows?.length ? (
+						<Pagination
+							t={t}
+							currentPage={currentPage}
+							totalPages={tableContent.totalPages}
+							rowCount={tableContent.rowCount}
+							pageSize={pageSize}
+							clickPageNumber={clickPageNumber}
+							onSelectEntry={({ value, displayText }) => {
+								onSelectEntry({ value, displayText });
+							}}>
+							<div className="table-responsive">
+								<table className="table table-striped table-hover">
+									<thead className="table-dark">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">
+												{t("Menu.CSD.Action")}
+											</th>
+											<th scope="col">
+												{t("Menu.CSD.TagName")}
+											</th>
+											<th scope="col">
+												{t("Menu.CSD.TagColor")}
+											</th>
+											<th scope="col">
+												{t("Menu.CSD.Description")}
+											</th>
+											<th scope="col">
+												{t("Menu.CSD.UpdatedBy")}
+											</th>
+											<th scope="col">
+												{t("Menu.CSD.UpdatedDate")}
+											</th>
 										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					</Pagination>
-				) : (
-					<Empty />
-				)}
-			</div>
+									</thead>
+									<tbody>
+										{tableContent.rows.map((el, idx) => (
+											<tr key={el.id}>
+												<th>{startEntry + idx}</th>
+												<td>
+													<button
+														type="button"
+														onClick={() =>
+															setPopBox({
+																isOpen: true,
+																popBoxType:
+																	defPopBoxType.tagPopBox,
+																title: t(
+																	"Menu.CSD.EditTag"
+																),
+																tagData: {
+																	id: el.id,
+																	tagColour:
+																		el.tagColour,
+																	description:
+																		el.description,
+																	tagName:
+																		el.tagName
+																},
+																refresh: () =>
+																	getTagByStatus(
+																		{
+																			page: 1,
+																			pageSize: 10
+																		}
+																	)
+															})
+														}
+														className="btn btn-primary btn-sm">
+														<i className="icon icon-edit" />
+													</button>
+													<button
+														type="button"
+														onClick={() =>
+															activateTag(el.id)
+														}
+														className="btn btn-primary btn-sm">
+														{el.status ? (
+															<i className="icon icon-close" />
+														) : (
+															<i className="icon icon-check" />
+														)}
+													</button>
+												</td>
+												<td>{el.tagName}</td>
+												<td>
+													<div
+														className="square"
+														style={{
+															background: `${el.tagColour}`
+														}}>
+														{el.tagColour}
+													</div>
+												</td>
+												<td>{el.description}</td>
+												<td>{el.updator}</td>
+												<td>
+													{dayjs(
+														el.updateTime
+													).format(
+														"YYYY-MM-DD HH:mm:ss"
+													)}
+												</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</div>
+						</Pagination>
+					) : (
+						<Empty />
+					)}
+				</div>
+			)}
 		</main>
 	);
 };
