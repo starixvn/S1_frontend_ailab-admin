@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React from "react";
+import React, { useContext } from "react";
 import { any, arrayOf, bool, number } from "prop-types";
 import { Table } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
@@ -7,19 +7,31 @@ import { useTranslation } from "react-i18next";
 import { Badge, ButtonWithLoading, Loading } from "../../../components";
 import { number_format } from "../../../components/common";
 import { PURPOSE_TYPE, Badge_BG_Type } from "./def";
+import { popBoxContext } from "../../../components/context";
 
 const BankAccountTable = ({
 	loading,
 	tableRowStartIndex,
 	bankInfoList,
-	bankDetailOptions
+	bankDetailOptions,
+	onDeleteBankCard
 }) => {
 	const { t } = useTranslation();
+	const { confirm } = useContext(popBoxContext);
 
 	const statusType = bankDetailOptions.reduce(
 		(arr, cur) => ({ ...arr, ...{ [cur.value]: cur.displayText } }),
 		{}
 	);
+
+	const handleDelete = bankId => () => {
+		confirm({
+			content: t("PopBox.AreYouSure"),
+			onOk() {
+				onDeleteBankCard(bankId);
+			}
+		});
+	};
 
 	return (
 		<div className="table-responsive">
@@ -49,7 +61,7 @@ const BankAccountTable = ({
 
 				<tbody>
 					{bankInfoList.map((item, index) => (
-						<tr key={item.index}>
+						<tr key={`${item.index}-${item.bankId}`}>
 							<td>{tableRowStartIndex + index}</td>
 
 							<td>{item.bankCode}</td>
@@ -74,6 +86,7 @@ const BankAccountTable = ({
 
 								<span role="button" className="m-2">
 									<ButtonWithLoading
+										onClick={handleDelete(item.bankId)}
 										tooltip="Delete"
 										variant="danger">
 										<Trash />
@@ -101,6 +114,7 @@ BankAccountTable.propTypes = {
 	loading: bool.isRequired,
 	tableRowStartIndex: number.isRequired,
 	bankInfoList: arrayOf(any).isRequired,
-	bankDetailOptions: arrayOf(any).isRequired
+	bankDetailOptions: arrayOf(any).isRequired,
+	onDeleteBankCard: func.isRequired
 };
 export { BankAccountTable };

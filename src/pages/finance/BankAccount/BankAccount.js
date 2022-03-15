@@ -11,6 +11,7 @@ import {
 } from "../../../hook";
 import { BankAccountFilter } from "./BankAccountFilter";
 import { BankAccountTable } from "./BankAccountTable";
+import { useDeleteBankCardFetcher } from "./hook";
 import { useGetListBySiteIdFetcher } from "./hook/useGetListBySiteIdFetcher";
 
 const BankAccount = () => {
@@ -49,6 +50,8 @@ const BankAccount = () => {
 		getListBySiteId
 	} = useGetListBySiteIdFetcher();
 
+	const { deleteBankCard } = useDeleteBankCardFetcher();
+
 	const handleSearchSubmit = pageData => {
 		const { currentPage = 1, pageSize = 10 } = pageData ?? {};
 
@@ -80,6 +83,12 @@ const BankAccount = () => {
 			data: {},
 			popBoxType: defPopBoxType.financeBankAccountAddModal
 		});
+	};
+
+	const handleDeleteBankCard = async bankId => {
+		await deleteBankCard(bankId);
+
+		handleSearchSubmit();
 	};
 
 	const tableRowStartIndex = (currentPage - 1) * pageSize + 1;
@@ -122,6 +131,7 @@ const BankAccount = () => {
 									tableRowStartIndex={tableRowStartIndex}
 									bankInfoList={bankInfoList}
 									bankDetailOptions={bankDetailOptions}
+									onDeleteBankCard={handleDeleteBankCard}
 								/>
 							</Pagination>
 						)}
