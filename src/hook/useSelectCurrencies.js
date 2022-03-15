@@ -19,7 +19,11 @@ const useSelectCurrencies = props => {
 			setCurrencyIds(list.find(s => s.siteId === siteId)?.iCurrencyList);
 
 			if (currencyData) {
-				setCurrencyList(currencyData);
+				setCurrencyList(() =>
+					props.haveAll
+						? [{ value: 0, displayText: "All" }, ...currencyData]
+						: currencyData
+				);
 
 				if (defaultSelectFirst) {
 					setSelected(currencyData?.[0] ? [currencyData?.[0]] : []);

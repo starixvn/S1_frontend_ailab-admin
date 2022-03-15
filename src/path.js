@@ -47,6 +47,9 @@ export default {
 	withdrawalSetting: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/WithdrawalKYCControl`
 	},
+	withdrawalTimeReport: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/withdrawalTimeReport`
+	},
 	changeVipLevel: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/ChangeVipLevelBatch`
 	}

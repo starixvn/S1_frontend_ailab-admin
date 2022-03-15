@@ -21,6 +21,7 @@ import { PersonalMessage, RegistrationManagement, BetLimit } from "./pages/csd";
 import { WithdrawableAdjustment } from "./pages/finance";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
+import WithdrawalTimeReport from "./pages/finance/withdrawalTimeReport";
 import ChangeVIPLevel from "./pages/csd/changeVipLevel";
 import DepositDetail from "./pages/finance/depositDetail";
 
@@ -93,6 +94,10 @@ function App() {
 								<Route
 									path={`/${path.withdrawalListing.root}`}
 									component={WithdrawalListing}
+								/>
+								<Route
+									path={`/${path.withdrawalTimeReport.root}`}
+									component={WithdrawalTimeReport}
 								/>
 
 								<Route
