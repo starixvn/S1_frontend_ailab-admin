@@ -339,5 +339,11 @@
 		"MemberCode": "Member Code",
 		"SabaId": "Saba ID",
 		"UploadFileIsRequired": "Upload file is required"
+	},
+	"AdjustTypeEnum":{
+		"Debit":"+ Main Wallet",
+		"Credit":"- Main Wallet",
+		"IncreaseBonus":"+ Bonus",
+		"ReduceBonus":"- Bonus"
 	}
 }

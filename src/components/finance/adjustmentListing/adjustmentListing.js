@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAlert } from "react-alert";
 import dayjs from "dayjs";
@@ -18,6 +19,7 @@ import Datetimepicker from "../../datetimePicker";
 import DropdownWithSearch from "../../dropdownWithSearch";
 import { Loading } from "../../loading";
 import { api_Finance_AdjustmentReport_GetList } from "../../../service/api/balanceAdj";
+import { siteInfo } from "../../../config";
 
 const AdjustmentListing = () => {
 	const { t } = useTranslation();
@@ -51,7 +53,9 @@ const AdjustmentListing = () => {
 		getAPIPayload: AdjustTypeEnum_getAPIPayload
 	} = useSelectEnumTypes({
 		enumName: "AdjustTypeEnum",
-		defaultSelectAll: false
+		defaultSelectAll: true,
+		useFrontendMapping: true,
+		useFrontendFilter: true
 	});
 
 	const onVaild = () => {
@@ -138,7 +142,7 @@ const AdjustmentListing = () => {
 
 					<DropdownWithSearch
 						title={t("DepositList.Type")}
-						options={AdjustTypeEnum_options.slice(0, 4)}
+						options={AdjustTypeEnum_options}
 						onSelect={AdjustTypeEnum_OnSelect}
 						selected={AdjustTypeEnum_selected}
 						className="btn-group col-md-3"
@@ -204,106 +208,115 @@ const AdjustmentListing = () => {
 				</div>
 			</div>
 
-			<div className="bd-example">
-				{loading && <Loading />}
-				{tableContent.rows?.length ? (
-					<Pagination
-						t={t}
-						currentPage={currentPage}
-						totalPages={tableContent.totalPages}
-						rowCount={tableContent.rowCount}
-						pageSize={pageSize}
-						clickPageNumber={clickPageNumber}
-						onSelectEntry={({ value, displayText }) => {
-							onSelectEntry({ value, displayText });
-						}}>
-						<div className="table-responsive">
-							<table className="table table-striped table-hover">
-								<thead className="table-dark">
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">
-											{t("DepositList.Currency")}
-										</th>
-										<th scope="col">
-											{t("DepositList.MemberCode")}
-										</th>
-										<th scope="col">
-											{t(
-												"Finance.AdjustmentListing.AdjustmentType"
-											)}
-										</th>
-										<th scope="col">
-											{t(
-												"Finance.AdjustmentListing.CreateDate"
-											)}
-										</th>
-										<th scope="col">
-											{t(
-												"Finance.AdjustmentListing.CustId"
-											)}
-										</th>
-										<th scope="col">
-											{t(
-												"Finance.AdjustmentListing.TransId"
-											)}
-										</th>
-										<th scope="col">
-											{t("DepositList.Amount")}
-										</th>
-										<th scope="col">
-											{t("DepositList.Status")}
-										</th>
-										<th scope="col">
-											{t("DepositList.Remark")}
-										</th>
-										<th scope="col">
-											{t(
-												"Finance.AdjustmentListing.SabaId"
-											)}
-										</th>
-										<th scope="col">
-											{t(
-												"Finance.AdjustmentListing.Operator"
-											)}
-										</th>
-										<th scope="col">
-											{t(
-												"Finance.AdjustmentListing.WalletType"
-											)}
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									{tableContent.rows.map((el, idx) => (
-										<tr key={el.transId}>
-											<th>{startEntry + idx}</th>
-											<td>{el.currencyName}</td>
-											<td>{el.userName}</td>
-											<td>{el.adjustTypeName}</td>
-											<td>
-												{dayjs(el.createTime).format(
-													"YYYY-MM-DD HH:mm:ss"
+			{tableContent.rows !== null && (
+				<div className="bd-example">
+					{loading && <Loading />}
+					{tableContent.rows?.length ? (
+						<Pagination
+							t={t}
+							currentPage={currentPage}
+							totalPages={tableContent.totalPages}
+							rowCount={tableContent.rowCount}
+							pageSize={pageSize}
+							clickPageNumber={clickPageNumber}
+							onSelectEntry={({ value, displayText }) => {
+								onSelectEntry({ value, displayText });
+							}}>
+							<div className="table-responsive">
+								<table className="table table-striped table-hover">
+									<thead className="table-dark">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">
+												{t("DepositList.Currency")}
+											</th>
+											<th scope="col">
+												{t("DepositList.MemberCode")}
+											</th>
+											<th scope="col">
+												{t(
+													"Finance.AdjustmentListing.AdjustmentType"
 												)}
-											</td>
-											<td>{el.custId}</td>
-											<td>{el.transId}</td>
-											<td>{el.amount}</td>
-											<td>{el.statusName}</td>
-											<td>{el.memo}</td>
-											<td>{el.sabaID}</td>
-											<td>{el.operator}</td>
-											<td>{el.walletType}</td>
+											</th>
+											<th scope="col">
+												{t(
+													"Finance.AdjustmentListing.CreateDate"
+												)}
+											</th>
+											<th scope="col">
+												{t(
+													"Finance.AdjustmentListing.CustId"
+												)}
+											</th>
+											<th scope="col">
+												{t(
+													"Finance.AdjustmentListing.TransId"
+												)}
+											</th>
+											<th scope="col">
+												{t("DepositList.Amount")}
+											</th>
+											<th scope="col">
+												{t("DepositList.Status")}
+											</th>
+											<th scope="col">
+												{t("DepositList.Remark")}
+											</th>
+											<th scope="col">
+												{t(
+													"Finance.AdjustmentListing.SabaId"
+												)}
+											</th>
+											<th scope="col">
+												{t(
+													"Finance.AdjustmentListing.Operator"
+												)}
+											</th>
+											<th scope="col">
+												{t(
+													"Finance.AdjustmentListing.WalletType"
+												)}
+											</th>
 										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					</Pagination>
-				) : (
-					<Empty />
-				)}
-			</div>
+									</thead>
+									<tbody>
+										{tableContent.rows.map((el, idx) => (
+											<tr key={el.transId}>
+												<th>{startEntry + idx}</th>
+												<td>{el.currencyName}</td>
+												<td>
+													<Link
+														to={`/${siteInfo.newSitePrefixUrl}/member/memberDetail/${el.custId}`}>
+														{el.userName}
+													</Link>
+												</td>
+												<td>{el.adjustTypeName}</td>
+												<td>
+													{dayjs(
+														el.createTime
+													).format(
+														"YYYY-MM-DD HH:mm:ss"
+													)}
+												</td>
+												<td>{el.custId}</td>
+												<td>{el.transId}</td>
+												<td>{el.amount}</td>
+												<td>{el.statusName}</td>
+												<td>{el.memo}</td>
+												<td>{el.sabaID}</td>
+												<td>{el.operator}</td>
+												<td>{el.walletType}</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</div>
+						</Pagination>
+					) : (
+						<Empty />
+					)}
+				</div>
+			)}
 		</main>
 	);
 };

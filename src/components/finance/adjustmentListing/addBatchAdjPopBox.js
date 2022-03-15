@@ -7,7 +7,6 @@ import { popBoxContext, allSiteListContext } from "../../context";
 
 import { useSelectEnumTypes } from "../../../hook/index";
 import Dropdown from "../../dropdown";
-
 import { api_Finance_BalanceAdjustment_AddBatch } from "../../../service/api/balanceAdj";
 
 const defColNames = {
@@ -22,6 +21,14 @@ const initValue = {
 	[defColNames.withdrawalLimitOption]: "",
 	[defColNames.withdrawal]: "",
 	[defColNames.optSite]: ""
+};
+
+const errorFeedBacks = {
+	excelUpload: "Batch excel file does not allow null."
+};
+
+const initErrValue = {
+	excelUpload: ""
 };
 
 const Requried = styled.label`
@@ -41,6 +48,7 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 	const [payloads, setPayloads] = useState(initValue);
 	const { siteId } = useContext(allSiteListContext);
 	const [excelUpload, setExcelUpload] = useState("");
+	const [errors, setErrors] = useState(initErrValue);
 	const isMountedRef = useRef(null);
 	const alert = useAlert();
 	useEffect(() => {
@@ -59,21 +67,33 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 		setPopBox({ isOpen: false });
 	};
 
+	const handleSelect = ({ value }) => {
+		setPayloads(prev => ({ ...prev, option: value }));
+	};
+
 	const {
 		selected: AdjustTypeEnum_selected,
-		OnSelect: AdjustTypeEnum_OnSelect,
-		options: AdjustTypeEnum_options,
-		getAPIPayload: AdjustTypeEnum_getAPIPayload
+		options: AdjustTypeEnum_options
 	} = useSelectEnumTypes({
 		enumName: "AdjustTypeEnum",
 		defaultSelectAll: false,
-		defaultSelectFirst: true
+		defaultSelectFirst: true,
+		useFrontendFilter: true
 	});
 
 	const onVaild = () => {
 		let checked = true;
-		if (!excelUpload) {
-			alert.error("Batch excel file can't be null");
+
+		if (excelUpload) {
+			setErrors(prev => ({
+				...prev,
+				excelUpload: ""
+			}));
+		} else {
+			setErrors(prev => ({
+				...prev,
+				excelUpload: errorFeedBacks.excelUpload
+			}));
 			checked = false;
 		}
 
@@ -88,7 +108,9 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 			formData.append(defColNames.optSite, siteId);
 			formData.append(
 				defColNames.option,
-				AdjustTypeEnum_selected[0].value
+				payloads.option === ""
+					? AdjustTypeEnum_selected[0].value
+					: payloads.option
 			);
 			formData.append(
 				defColNames.withdrawal,
@@ -109,7 +131,7 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 			} else {
 				alert.error(`[${res.data.errorCode}] ${res.data.message}`);
 			}
-		} catch (error) {
+		} catch (err) {
 			alert.error("[999] Something went wrong...");
 		}
 	};
@@ -120,15 +142,15 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 				<div className="mt-3 mb-3">
 					<Dropdown
 						title={t("Finance.AdjustmentListing.AdjustmentType")}
-						options={AdjustTypeEnum_options.slice(0, 4)}
-						onSelect={AdjustTypeEnum_OnSelect}
+						options={AdjustTypeEnum_options}
+						onSelect={handleSelect}
 						selected={AdjustTypeEnum_selected}
 						required={true}
 					/>
 				</div>
 
 				<h6>{t("Finance.AdjustmentListing.WithdrawCondition")}</h6>
-				<div className="form-check Withdrawal_Condition">
+				<div className="form-check Withdrawal_Condition mb-3">
 					<span>{t("DepositList.Amount")} X</span>
 					<div className="input-group">
 						<input
@@ -156,14 +178,12 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 					</div>
 				</div>
 				<Form.Group controlId="formFile">
-					<Title
-						displayText={t("Common.UploadFile")}
-						required={true}
-					/>
 					<Form.Control
 						type="file"
+						isInvalid={errors.excelUpload !== ""}
 						onChange={e => setExcelUpload(e.target.files?.[0])}
 					/>
+					<div className="invalid-feedback">{errors.excelUpload}</div>
 				</Form.Group>
 			</div>
 			<div className="modal-footer">
