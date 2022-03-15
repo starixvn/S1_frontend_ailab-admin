@@ -525,7 +525,8 @@ export default [
 						Controller: "Finance",
 						Action: "BankInfoList",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					},
 					{
 						displayKey: "Menu.Finance.PaymentManagement",

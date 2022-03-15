@@ -15,7 +15,8 @@
 		"UpdatedDate": "Updated Date",
 		"CreatedBy": "Created By",
 		"CreatedDate": "Created Date",
-		"Note": "Note"
+		"Note": "Note",
+		"Currency": "Currency"
 	},
 	"Menu": {
 		"Home": {
@@ -63,7 +64,7 @@
 		},
 		"Finance": {
 			"Finance": "Finance",
-			"BankCardManagement": "Bank Card Management",
+			"BankCardManagement": "Bank Account",
 			"DepositRequest": "Deposit Listing",
 			"WithdrawalListing": "Withdrawal Listing",
 			"BalanceAdjustment": "Withdrawable Adjustment",
@@ -200,6 +201,9 @@
 			"Balance": "Balance",
 			"DifferenceAmount": "Difference Amount",
 			"EligibleWithdrawalAmount": "Eligible Withdrawal Amount"
+		},
+		"BankAccount": {
+			"Title": "Bank Account"
 		}
 	},
 	"DepositList": {

@@ -18,7 +18,7 @@ import DepositListing from "./pages/finance/depositListing";
 import MemberInformation from "./pages/member/memberDetail";
 import AdjustmentListing from "./pages/finance/adjustmentListing";
 import { PersonalMessage, RegistrationManagement, BetLimit } from "./pages/csd";
-import { WithdrawableAdjustment } from "./pages/finance";
+import { WithdrawableAdjustment, BankAccount } from "./pages/finance";
 import MemberList from "./pages/csd/memberList";
 import WithdrawalListing from "./pages/finance/withdrawalListing";
 import ChangeVIPLevel from "./pages/csd/changeVipLevel";
@@ -97,6 +97,11 @@ function App() {
 								<Route
 									path={`/${path.withdrawableAdjustment.root}`}
 									component={WithdrawableAdjustment}
+								/>
+
+								<Route
+									path={`/${path.bankAccount.root}`}
+									component={BankAccount}
 								/>
 
 								<Route exact path="/" component={IframePage} />

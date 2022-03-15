@@ -44,6 +44,9 @@ export default {
 	withdrawableAdjustment: {
 		root: `${siteInfo.newSitePrefixUrl}/Finance/WithdrawalLimitAdjust`
 	},
+	bankAccount: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/BankInfoList`
+	},
 	withdrawalSetting: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/WithdrawalKYCControl`
 	},
