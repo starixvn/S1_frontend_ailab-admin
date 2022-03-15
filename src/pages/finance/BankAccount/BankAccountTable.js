@@ -1,39 +1,26 @@
+/* eslint-disable react/forbid-prop-types */
 import React from "react";
+import { any, arrayOf, bool, number } from "prop-types";
 import { Table } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 import { Badge, ButtonWithLoading, Loading } from "../../../components";
+import { number_format } from "../../../components/common";
+import { PURPOSE_TYPE, Badge_BG_Type } from "./def";
 
-// * remove later
-const data = [
-	{
-		bankId: 0,
-		accountName: "string",
-		accountNo: "string",
-		ifscCode: "string",
-		minAmount: 0,
-		maxAmount: 0,
-		dailyLimitAmount: 0,
-		purpose: 0,
-		dummy: 0,
-		memo: "string",
-		bSort: 0,
-		currencyId: 0,
-		bankCode: "string",
-		bankName: "string",
-		bankLogo: "string",
-		bankSite: "string",
-		sort: 0,
-		status: 0,
-		pointLevel: 0,
-		sysId: 0
-	}
-];
-
-const BankAccountTable = () => {
+const BankAccountTable = ({
+	loading,
+	tableRowStartIndex,
+	bankInfoList,
+	bankDetailOptions
+}) => {
 	const { t } = useTranslation();
 
-	const loading = false;
+	const statusType = bankDetailOptions.reduce(
+		(arr, cur) => ({ ...arr, ...{ [cur.value]: cur.displayText } }),
+		{}
+	);
+
 	return (
 		<div className="table-responsive">
 			{loading && <Loading />}
@@ -42,41 +29,39 @@ const BankAccountTable = () => {
 				<thead className="table-dark">
 					<tr>
 						<th>#</th>
+
 						<th>Bank Code</th>
 						<th>Bank Name</th>
 						<th>Account No</th>
 						<th>Account Name</th>
 						<th>Vip Level</th>
+
 						<th>Min Amount</th>
 						<th>Max Amount</th>
 						<th>Daily Limit Amount</th>
-						<th>purpose</th>
-						<th className="text-center">Status</th>
-						<th>Dummy</th>
-						<th>Sort</th>
-
 						<th className="text-center">{t("Common.Action")}</th>
+						<th className="text-center">Status</th>
+
+						<th>purpose</th>
+						<th>Dummy</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					{data.map((item, index) => (
-						<tr key={item.sysId}>
-							<td>{index}</td>
+					{bankInfoList.map((item, index) => (
+						<tr key={item.index}>
+							<td>{tableRowStartIndex + index}</td>
+
 							<td>{item.bankCode}</td>
 							<td>{item.bankName}</td>
 							<td>{item.accountNo}</td>
+
+							<td>{number_format(item.minAmount)}</td>
+							<td>{number_format(item.maxAmount)}</td>
+							<td>{number_format(item.dailyLimitAmount)}</td>
+
 							<td>{item.accountName}</td>
 							<td>{item.pointLevel}</td>
-							<td>{item.minAmount}</td>
-							<td>{item.maxAmount}</td>
-							<td>{item.dailyLimitAmount}</td>
-							<td>{item.purpose}</td>
-							<td className="text-center">
-								<Badge bg="success">{item.status}</Badge>
-							</td>
-							<td>{item.dummy}</td>
-							<td>{item.sort}</td>
 
 							<td className="d-flex justify-content-center">
 								<span role="button" className="m-2">
@@ -95,6 +80,15 @@ const BankAccountTable = () => {
 									</ButtonWithLoading>
 								</span>
 							</td>
+							<td className="text-center">
+								<Badge
+									bg={Badge_BG_Type[item.status] ?? "dark"}>
+									{statusType[item.status]}
+								</Badge>
+							</td>
+
+							<td>{PURPOSE_TYPE[item.purpose] ?? ""}</td>
+							<td>{item.dummy}</td>
 						</tr>
 					))}
 				</tbody>
@@ -103,4 +97,10 @@ const BankAccountTable = () => {
 	);
 };
 
+BankAccountTable.propTypes = {
+	loading: bool.isRequired,
+	tableRowStartIndex: number.isRequired,
+	bankInfoList: arrayOf(any).isRequired,
+	bankDetailOptions: arrayOf(any).isRequired
+};
 export { BankAccountTable };
