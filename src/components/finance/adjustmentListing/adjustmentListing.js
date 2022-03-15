@@ -35,6 +35,7 @@ const AdjustmentListing = () => {
 		rowCount: 0
 	});
 	const [userName, setUserName] = useState("");
+
 	const {
 		OnSelectCurrency,
 		currencyList,

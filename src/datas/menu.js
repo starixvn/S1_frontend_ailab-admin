@@ -499,7 +499,8 @@ export default [
 						Controller: "Finance",
 						Action: "WithdrawalTimeReport",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					},
 					{
 						displayKey: "Menu.Finance.AdjustmentReport",

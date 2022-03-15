@@ -63,6 +63,24 @@ const defFilter = {
 			name: "ThirdMinus",
 			value: 6
 		}
+	],
+	WithdrawalStatusEnum: [
+		{
+			name: "Pending",
+			value: 1
+		},
+		{
+			name: "OnHold",
+			value: 2
+		},
+		{
+			name: "ToKyc",
+			value: 8
+		},
+		{
+			name: "Error",
+			value: 99
+		}
 	]
 };
 
