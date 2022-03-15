@@ -20,7 +20,7 @@ const Index = () => {
 	const url = Controller && Action ? `${Controller}/${Action}` : defaultIndex;
 	return (
 		<Layout>
-			<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<main className="col-md-9 col-lg-10">
 				{funcKey in menu?.allowfuncKeys && (
 					<iframe
 						title={Title ?? "Index"}
