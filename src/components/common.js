@@ -66,21 +66,21 @@ export const classNames = classNameList => {
 	return classNameList.filter(Boolean).join(" ");
 };
 
-export const downloadExcelFile = (data, fileName) => {
-	const blob = new Blob([data], {
+export const downloadExcelFile = (res, fileName) => {
+	const blob = new Blob([res.data], {
 		type:
 			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 	});
-
-	const url = window.URL.createObjectURL(blob);
-
-	const link = document.createElement("a");
-	link.href = url;
-	link.download = `${fileName}.xlsx`;
-
-	document.body.appendChild(link);
-	link.click();
-	document.body.removeChild(link);
+	const downloadUrl = window.URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	if (typeof a.download === "undefined") {
+		window.location.href = downloadUrl;
+	} else {
+		a.href = downloadUrl;
+		a.download = fileName;
+		document.body.appendChild(a);
+		a.click();
+	}
 };
 
 export const multipleDropdownFilter = (options, option) => {

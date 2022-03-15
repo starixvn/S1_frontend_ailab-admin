@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAlert } from "react-alert";
 import { Button, Form, Modal, InputGroup, FormControl } from "react-bootstrap";
@@ -26,7 +26,8 @@ import {
 
 import {
 	api_Deposit_GetList,
-	api_Deposit_BatchRejected
+	api_Deposit_BatchRejected,
+	api_Deposit_Export
 } from "../../service/api/deposit";
 import { api_WithdrawalLimitAdjustment_GetCustAndWalletInfo } from "../../service/api/WithdrawalLimitAdjustment";
 import { api_BaseData_GetBankInfoOffListByCustVerify } from "../../service/api/baseData";
@@ -34,7 +35,13 @@ import { api_DepositSubmission_Submit } from "../../service/api/depositSubmissio
 import { Empty } from "../../components/empty";
 import path from "../../path";
 import { allSiteListContext } from "../../components/context";
-import { number_format, datetime_format } from "../../components/common";
+import {
+	number_format,
+	datetime_format,
+	downloadExcelFile
+} from "../../components/common";
+import { Loading } from "../../components/loading";
+import { ButtonWithLoading } from "../../components/buttonWithLoading";
 
 const Requried = styled.label`
 	color: #a94442;
@@ -48,6 +55,7 @@ const Title = ({ displayText, required }) => (
 );
 
 export default function Page() {
+	const isMountedRef = useRef(null);
 	const { siteId } = useContext(allSiteListContext);
 	const alert = useAlert();
 	const [refId, setRefId] = useState("");
@@ -56,6 +64,7 @@ export default function Page() {
 	const { dateRange, setDateRange } = useGetDateRange();
 	const { t } = useTranslation();
 
+	const [result_Loading, setResult_Loading] = useState(false);
 	const [result, setResult] = useState({
 		datas: null,
 		totalPages: null,
@@ -126,14 +135,53 @@ export default function Page() {
 		OnEditAmount: Amount_OnEditAmount
 	} = useAmountFilter();
 
+	useEffect(() => {
+		isMountedRef.current = true;
+		return () => {
+			isMountedRef.current = false;
+		};
+	});
+
 	const onReject = async () => {
 		try {
 			if (RejectTransId_GetSelected()?.length) {
 				const res = await api_Deposit_BatchRejected({ rejectTransIds });
 				if (res.data.errorCode !== 0) {
-					alert.error(`[${res.data.errorCode}] ${res.data.message}`);
+					alert.error(
+						`[${res.data.errorCode}] ${res.data.message || "error"}`
+					);
 				}
 			}
+		} catch (error) {}
+	};
+
+	const onExport = async ({ currentPage, pageSize }) => {
+		try {
+			const response = await api_Deposit_Export({
+				pageNumber: currentPage ?? 1,
+				pageSize,
+				siteIds: [siteId],
+				depositId: refId,
+				userName: memberCode,
+				depositTypes: DepositTypeEnum_getAPIPayload(
+					DepositTypeEnum_selected
+				),
+				currencyIds: currency_getAPIPayload(currencies_selected),
+				startDate: dateRange.startDate,
+				endDate: dateRange.endDate,
+				statuses: DepositStatusEnum_getAPIPayload(
+					DepositStatusEnum_selected
+				),
+				levelStatuses: VIPLevelEnum_getAPIPayload(
+					VIPLevelEnum_selected
+				),
+				amountType: Amount_getAPIPayload(Amount_selected),
+				amount: Amount
+			});
+
+			if (!isMountedRef.current) return;
+			const today = dayjs().format("YYYYMMDD");
+			downloadExcelFile(response, `exportDeposit${today}`);
 		} catch (error) {}
 	};
 
@@ -144,6 +192,7 @@ export default function Page() {
 		resetPage
 	}) => {
 		try {
+			setResult_Loading(true);
 			const res = await api_Deposit_GetList({
 				pageNumber: currentPage ?? 1,
 				pageSize,
@@ -166,7 +215,9 @@ export default function Page() {
 				amount: Amount
 			});
 
-			if (res.data.errorCode === 0) {
+			const { errorCode, message } = res.data;
+
+			if (errorCode === 0) {
 				setResult({
 					datas: res.data.data,
 					rowCount: res.data.rowCount,
@@ -176,9 +227,14 @@ export default function Page() {
 				if (resetPage) {
 					clickPageNumber({ pageNumber: 1, execCallback: false });
 				}
+			} else {
+				alert.error(`[${errorCode}] ${message || "error"}`);
 			}
 		} catch (error) {
+			alert.error(t("Error.DefaultError"));
 			console.log(error);
+		} finally {
+			setResult_Loading(false);
 		}
 	};
 
@@ -257,10 +313,9 @@ export default function Page() {
 						/>
 					</div>
 					<div>
-						<Button
-							className="mx-3 float-end"
-							variant="primary"
-							type="submit"
+						<ButtonWithLoading
+							className="float-end my-2"
+							loading={result_Loading}
 							onClick={() =>
 								onSubmit({
 									currentPage,
@@ -270,9 +325,21 @@ export default function Page() {
 								})
 							}>
 							{t("DepositList.Submit")}
+						</ButtonWithLoading>
+						<Button
+							className="float-end my-2 me-2"
+							variant="info"
+							type="button"
+							onClick={() =>
+								onExport({
+									currentPage,
+									pageSize
+								})
+							}>
+							{t("DepositList.Export")}
 						</Button>
 						<Button
-							className=" float-end"
+							className="float-end my-2 me-2"
 							variant="success"
 							type="button"
 							onClick={handleShowPopup}>
@@ -282,6 +349,7 @@ export default function Page() {
 				</div>
 				{result?.datas && (
 					<Result
+						loading={result_Loading}
 						datas={result?.datas}
 						options={{
 							currencyList,
@@ -438,7 +506,7 @@ const defColumns = options => [
 	}
 ];
 
-const Result = ({ datas, options, selectAll, onReject, pageInfo }) => {
+const Result = ({ datas, options, selectAll, onReject, pageInfo, loading }) => {
 	const { t } = useTranslation();
 
 	const _defColumns = defColumns(options);
@@ -541,6 +609,7 @@ const Result = ({ datas, options, selectAll, onReject, pageInfo }) => {
 							{t("DepositList.Reject")}
 						</Button>
 					}>
+					{loading && <Loading />}
 					<div className="table-responsive d-flex">
 						<table className="table table-striped table-hover w-auto">
 							<thead className="table-dark">
