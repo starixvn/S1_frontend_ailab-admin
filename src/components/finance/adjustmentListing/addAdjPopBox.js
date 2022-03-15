@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Form } from "react-bootstrap";
-import { useAlert } from "react-alert";
 import { popBoxContext, allSiteListContext } from "../../context";
 import { useSelectEnumTypes } from "../../../hook/index";
 import Dropdown from "../../dropdown";
@@ -28,13 +27,23 @@ const initValue = {
 	[defColNames.remark]: ""
 };
 
+const errorFeedBacks = {
+	[defColNames.custId]: "Custom ID does not allow null.",
+	[defColNames.amount]: "Amount does not allow null."
+};
+
+const initErrValue = {
+	[defColNames.custId]: "",
+	[defColNames.amount]: ""
+};
+
 const AddAdjPopBox = ({ refresh }) => {
 	const { t } = useTranslation();
 	const { setPopBox } = useContext(popBoxContext);
 	const [payloads, setPayloads] = useState(initValue);
 	const { siteId } = useContext(allSiteListContext);
 	const isMountedRef = useRef(null);
-	const alert = useAlert();
+
 	useEffect(() => {
 		isMountedRef.current = true;
 		return () => {
@@ -42,12 +51,16 @@ const AddAdjPopBox = ({ refresh }) => {
 		};
 	});
 	const [memberName, setMemberName] = useState("");
-
+	const [errors, setErrors] = useState(initErrValue);
 	const [memberBalance, setMemberBalance] = useState("");
 
 	const editField = ({ col }, e) => {
 		const val = e.target.value;
 		setPayloads(prev => ({ ...prev, [col]: val }));
+	};
+
+	const handleSelect = ({ value }) => {
+		setPayloads(prev => ({ ...prev, option: value }));
 	};
 
 	const clickClose = () => {
@@ -56,32 +69,56 @@ const AddAdjPopBox = ({ refresh }) => {
 
 	const {
 		selected: AdjustTypeEnum_selected,
-		OnSelect: AdjustTypeEnum_OnSelect,
 		options: AdjustTypeEnum_options
 	} = useSelectEnumTypes({
 		enumName: "AdjustTypeEnum",
 		defaultSelectAll: false,
-		defaultSelectFirst: true
+		defaultSelectFirst: true,
+		useFrontendFilter: true
 	});
 
 	const onVaild = () => {
 		let checked = true;
-		if (!memberName) {
-			alert.error("Member Name does not allow null.");
+		if (payloads.amount === "") {
+			setErrors(prev => ({
+				...prev,
+				[defColNames.amount]: errorFeedBacks[defColNames.amount]
+			}));
 			checked = false;
 		} else if (!payloads.custId) {
-			alert.error("Invalid customer ID.");
+			setErrors(prev => ({
+				...prev,
+				[defColNames.custId]: errorFeedBacks[defColNames.custId]
+			}));
 			checked = false;
-		} else if (!payloads.amount) {
-			alert.error("Amount does not allow null.");
-			checked = false;
+		} else {
+			setErrors(initErrValue);
 		}
+
 		return checked;
+	};
+
+	const onBlur = ({ col }, e) => {
+		const val = e.target.value;
+		if (val && val !== "") {
+			setErrors(prev => ({
+				...prev,
+				[col]: ""
+			}));
+		} else {
+			setErrors(prev => ({
+				...prev,
+				[col]: errorFeedBacks[col]
+			}));
+		}
 	};
 
 	const onSearchUser = async () => {
 		if (!memberName) {
-			alert.error("Member Name does not allow null.");
+			setErrors(prev => ({
+				...prev,
+				[defColNames.custId]: errorFeedBacks[defColNames.custId]
+			}));
 			return;
 		}
 		try {
@@ -115,7 +152,10 @@ const AddAdjPopBox = ({ refresh }) => {
 		try {
 			const res = await api_Finance_BalanceAdjustment_Add({
 				custId: payloads.custId,
-				option: AdjustTypeEnum_selected[0].value,
+				option:
+					payloads.option === ""
+						? AdjustTypeEnum_selected[0].value
+						: payloads.option,
 				amount: Number(payloads.amount),
 				withdrawalLimitAmount: Number(payloads.withdrawalLimitAmount),
 				withdrawalLimitOption: payloads.withdrawalLimitOption ? 1 : 0,
@@ -130,11 +170,11 @@ const AddAdjPopBox = ({ refresh }) => {
 					content: <p>{message}</p>
 				});
 			} else {
-				const { errors } = res.data;
+				const { err } = res.data;
 				clickClose();
 				setPopBox({
 					isOpen: true,
-					content: <p>{Object.values(errors)[0]}</p>
+					content: <p>{Object.values(err)[0]}</p>
 				});
 			}
 		} catch (error) {
@@ -145,46 +185,55 @@ const AddAdjPopBox = ({ refresh }) => {
 	return (
 		<>
 			<div className="modal-body">
-				<div className="mb-3">
-					<InputBox
-						title={t("DepositList.MemberCode")}
-						value={memberName}
-						required={true}
-						onChange={e => setMemberName(e.target.value)}
-					/>
-				</div>
-				<div className="mt-3 mb-3">
-					<button
-						type="button"
-						className="btn btn-primary"
-						onClick={onSearchUser}>
-						{t("Finance.AdjustmentListing.GetCustId")}
-					</button>
-				</div>
+				<InputBox
+					title={t("DepositList.MemberCode")}
+					value={memberName}
+					required={true}
+					onChange={e => setMemberName(e.target.value)}
+					className="mb-3"
+					onBlur={onBlur.bind(this, {
+						col: defColNames.custId
+					})}
+					isValid={errors[defColNames.custId] === ""}
+					errorFeedBack={errors[defColNames.custId]}
+				/>
+
+				<button
+					type="button"
+					className="btn btn-primary mb-3"
+					onClick={onSearchUser}>
+					{t("Finance.AdjustmentListing.GetCustId")}
+				</button>
 
 				<InputBox
 					title={t("Finance.AdjustmentListing.Balance")}
 					value={memberBalance}
 					disabled={true}
 					required={true}
+					className="mb-3"
 				/>
-				<div className="mt-3 mb-3">
-					<Dropdown
-						required={true}
-						title={t("Finance.AdjustmentListing.AdjustmentType")}
-						options={AdjustTypeEnum_options.slice(0, 4)}
-						onSelect={AdjustTypeEnum_OnSelect}
-						selected={AdjustTypeEnum_selected}
-					/>
-				</div>
+				<Dropdown
+					required={true}
+					title={t("Finance.AdjustmentListing.AdjustmentType")}
+					options={AdjustTypeEnum_options}
+					onSelect={handleSelect}
+					selected={AdjustTypeEnum_selected}
+					divClassName="mb-3"
+				/>
 
 				<InputBox
+					className="mb-3"
 					title={t("DepositList.Amount")}
 					value={payloads.amount}
 					required={true}
 					onChange={editField.bind(this, {
 						col: defColNames.amount
 					})}
+					onBlur={onBlur.bind(this, {
+						col: defColNames.amount
+					})}
+					isValid={errors[defColNames.amount] === ""}
+					errorFeedBack={errors[defColNames.amount]}
 				/>
 
 				<h6 className="mt-3">
@@ -217,14 +266,17 @@ const AddAdjPopBox = ({ refresh }) => {
 						/>
 					</div>
 				</div>
-
-				<InputBox
-					title={t("DepositList.Remark")}
-					value={payloads.remark}
-					onChange={editField.bind(this, {
-						col: defColNames.remark
-					})}
-				/>
+				<Form.Group className="mb-3">
+					<Form.Label>{t("DepositList.Remark")}</Form.Label>
+					<Form.Control
+						as="textarea"
+						rows={5}
+						value={payloads.remark}
+						onChange={editField.bind(this, {
+							col: defColNames.remark
+						})}
+					/>
+				</Form.Group>
 			</div>
 			<div className="modal-footer">
 				<button

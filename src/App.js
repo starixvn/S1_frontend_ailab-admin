@@ -15,8 +15,8 @@ import Wrapper from "./components/wrapper";
 import { siteInfo } from "./config";
 import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
-import MemberInformation from "./pages/member/memberDetail";
 import AdjustmentListing from "./pages/finance/adjustmentListing";
+import MemberInformation from "./pages/member/memberDetail";
 import { PersonalMessage, RegistrationManagement, BetLimit } from "./pages/csd";
 import { WithdrawableAdjustment } from "./pages/finance";
 import MemberList from "./pages/csd/memberList";
@@ -72,6 +72,7 @@ function App() {
 								<Route path={`/${path.adjustmentListing.root}`}>
 									<AdjustmentListing />
 								</Route>
+
 								<Route
 									path={`/${path.personalMessage.root}`}
 									component={PersonalMessage}

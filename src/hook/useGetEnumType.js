@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { api_enum_GetEnumType } from "../service/api/enum";
 
 const defEnums = {
@@ -52,18 +53,35 @@ const defFilter = {
 			name: "Error",
 			value: 99
 		}
+	],
+	AdjustTypeEnum: [
+		{
+			name: "ThirdAdd",
+			value: 5
+		},
+		{
+			name: "ThirdMinus",
+			value: 6
+		}
 	]
 };
 
 const useSelectEnumTypes = props => {
+	const { t } = useTranslation();
 	const {
 		enumName,
 		defaultSelectAll,
 		defaultSelectFirst,
-		useFrontendFilter = true
+		useFrontendFilter = false,
+		useFrontendMapping = false
 	} = props;
 	const [selected, setSelected] = useState([]);
 	const [options, setOptions] = useState([]);
+
+	const mapping = el =>
+		useFrontendMapping
+			? { ...el, displayText: t(`${enumName}.${el.name}`) }
+			: { value: el.value, displayText: el.name };
 
 	useEffect(() => {
 		const getEnums = async () => {
@@ -86,10 +104,8 @@ const useSelectEnumTypes = props => {
 									f => f.value === r.value
 								)
 						)
-						.map(r => ({
-							value: r.value,
-							displayText: r.name
-						}));
+						.map(r => mapping(r));
+
 					setOptions(datas);
 
 					if (defaultSelectFirst) {
