@@ -222,7 +222,8 @@
 		"DepositDate": "Deposit Date",
 		"Remark": "Remark",
 		"BankSlip": "Bank Slip",
-		"Cancel": "Cancel"
+		"Cancel": "Cancel",
+		"Export":"Export"
 	},
 	"MemberList": {
 		"MemberListing": "Member Listing",

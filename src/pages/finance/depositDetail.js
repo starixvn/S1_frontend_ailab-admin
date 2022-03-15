@@ -16,6 +16,7 @@ import {
 import { useGetCurrencyData, useSelectEnumTypes } from "../../hook";
 import { datetime_format, number_format } from "../../components/common";
 import { Empty } from "../../components/empty";
+import { Loading } from "../../components/loading";
 
 export default function Page(props) {
 	const { setPopBox } = useContext(popBoxContext);
@@ -47,9 +48,10 @@ export default function Page(props) {
 			if (errorCode === 0) {
 				setComments(res.data.data);
 			} else {
-				alert.error(message || `[${errorCode}] error`);
+				alert.error(`[${errorCode}] ${message || "error"}`);
 			}
 		} catch (error) {
+			alert.error(t("Error.DefaultError"));
 		} finally {
 			setComments_Loading(false);
 		}
@@ -63,9 +65,11 @@ export default function Page(props) {
 			if (errorCode === 0) {
 				setDatas(res.data.data);
 			} else {
-				alert.error(message || `[${errorCode}] error`);
+				alert.error(`[${errorCode}] ${message || "error"}`);
 			}
-		} catch (error) {}
+		} catch (error) {
+			alert.error(t("Error.DefaultError"));
+		}
 	};
 
 	useEffect(() => {
@@ -92,9 +96,11 @@ export default function Page(props) {
 				getComments();
 				setPopBox({ isOpen: false });
 			} else {
-				alert.error(message || `[${errorCode}] error`);
+				alert.error(`[${errorCode}] ${message || "error"}`);
 			}
-		} catch (error) {}
+		} catch (error) {
+			alert.error(t("Error.DefaultError"));
+		}
 	};
 
 	const OnClickProcess = () => {
@@ -124,9 +130,11 @@ export default function Page(props) {
 				getByTransId();
 				setPopBox({ isOpen: false });
 			} else {
-				alert.error(message || `[${errorCode}] error`);
+				alert.error(`[${errorCode}] ${message || "error"}`);
 			}
-		} catch (error) {}
+		} catch (error) {
+			alert.error(t("Error.DefaultError"));
+		}
 	};
 
 	const OnClickAdjAmount = () => {
@@ -465,17 +473,7 @@ const Comments = ({ datas, options, loading }) => {
 	return (
 		datas && (
 			<div className="bd-example">
-				{loading && (
-					<div className="loading">
-						<span className="let1">l</span>
-						<span className="let2">o</span>
-						<span className="let3">a</span>
-						<span className="let4">d</span>
-						<span className="let5">i</span>
-						<span className="let6">n</span>
-						<span className="let7">g</span>
-					</div>
-				)}
+				{loading && <Loading />}
 				<div className="table-responsive d-flex">
 					<table className="table table-striped table-hover">
 						<thead className="table-dark">
