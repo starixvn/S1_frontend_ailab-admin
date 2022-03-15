@@ -1,9 +1,9 @@
 /* eslint-disable react/forbid-prop-types */
 import React from "react";
 import { any, arrayOf, bool, number } from "prop-types";
-import { Badge, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { Loading } from "../../../components";
+import { Badge, Loading } from "../../../components";
 import { datetime_format, number_format } from "../../../components/common";
 import { ADJUST_TYPE, STATUS_TYPE } from "./def";
 
@@ -49,7 +49,7 @@ const WithdrawableAdjustmentTable = ({
 				<tbody>
 					{logList.map((item, index) => {
 						const badgeBgType = {
-							1: "secondary",
+							1: "dark",
 							2: "success",
 							3: "danger"
 						};
