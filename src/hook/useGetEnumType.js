@@ -72,16 +72,10 @@ const useSelectEnumTypes = props => {
 		enumName,
 		defaultSelectAll,
 		defaultSelectFirst,
-		useFrontendFilter = false,
-		useFrontendMapping = false
+		useFrontendFilter = true
 	} = props;
 	const [selected, setSelected] = useState([]);
 	const [options, setOptions] = useState([]);
-
-	const mapping = el =>
-		useFrontendMapping
-			? { ...el, displayText: t(`${enumName}.${el.name}`) }
-			: { value: el.value, displayText: el.name };
 
 	useEffect(() => {
 		const getEnums = async () => {
@@ -104,7 +98,12 @@ const useSelectEnumTypes = props => {
 									f => f.value === r.value
 								)
 						)
-						.map(r => mapping(r));
+						.map(r => ({
+							value: r.value,
+							displayText: t(`${enumName}.${r.name}`, {
+								defaultValue: r.name
+							})
+						}));
 
 					setOptions(datas);
 

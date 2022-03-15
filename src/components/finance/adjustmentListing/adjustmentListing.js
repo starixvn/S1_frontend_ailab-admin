@@ -53,9 +53,7 @@ const AdjustmentListing = () => {
 		getAPIPayload: AdjustTypeEnum_getAPIPayload
 	} = useSelectEnumTypes({
 		enumName: "AdjustTypeEnum",
-		defaultSelectAll: true,
-		useFrontendMapping: true,
-		useFrontendFilter: true
+		defaultSelectAll: true
 	});
 
 	const onVaild = () => {
