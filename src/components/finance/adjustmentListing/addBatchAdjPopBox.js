@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Form } from "react-bootstrap";
+import { Form, Button, InputGroup } from "react-bootstrap";
 import { useAlert } from "react-alert";
 import styled from "styled-components";
 import { popBoxContext, allSiteListContext } from "../../context";
@@ -13,14 +13,14 @@ const defColNames = {
 	option: "option",
 	withdrawal: "withdrawal",
 	withdrawalLimitOption: "withdrawalLimitOption",
-	optSite: "optSite"
+	SiteId: "SiteId"
 };
 
 const initValue = {
 	[defColNames.option]: "",
 	[defColNames.withdrawalLimitOption]: "",
 	[defColNames.withdrawal]: "",
-	[defColNames.optSite]: ""
+	[defColNames.SiteId]: ""
 };
 
 const errorFeedBacks = {
@@ -105,7 +105,7 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 
 		try {
 			const formData = new FormData();
-			formData.append(defColNames.optSite, siteId);
+			formData.append(defColNames.SiteId, siteId);
 			formData.append(
 				defColNames.option,
 				payloads.option === ""
@@ -124,13 +124,9 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 			formData.append("excelUpload", excelUpload);
 
 			const res = await api_Finance_BalanceAdjustment_AddBatch(formData);
-
-			if (res.data.errorCode === 0) {
-				alert.show(t("Alert.Success"));
-				refresh();
-			} else {
-				alert.error(`[${res.data.errorCode}] ${res.data.message}`);
-			}
+			res.data?.forEach(el => {
+				alert.show(el.message);
+			});
 		} catch (err) {
 			alert.error("[999] Something went wrong...");
 		}
@@ -178,12 +174,26 @@ const AddBatchAdjPopBox = ({ refresh }) => {
 					</div>
 				</div>
 				<Form.Group controlId="formFile">
-					<Form.Control
-						type="file"
-						isInvalid={errors.excelUpload !== ""}
-						onChange={e => setExcelUpload(e.target.files?.[0])}
-					/>
-					<div className="invalid-feedback">{errors.excelUpload}</div>
+					<InputGroup>
+						<Form.Control
+							type="file"
+							isInvalid={errors.excelUpload !== ""}
+							onChange={e => setExcelUpload(e.target.files?.[0])}
+						/>
+						<div className="invalid-feedback">
+							{errors.excelUpload}
+						</div>
+						<a
+							role="button"
+							href="/resource/exampleFile/BalanceAdjustmentBatch.xlsx"
+							download="BalanceAdjustmentBatch.xlsx">
+							<Button
+								variant="outline-secondary"
+								id="button-addon2">
+								{t("Common.Download")}
+							</Button>
+						</a>
+					</InputGroup>
 				</Form.Group>
 			</div>
 			<div className="modal-footer">

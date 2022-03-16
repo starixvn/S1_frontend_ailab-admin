@@ -96,6 +96,11 @@ const useSelectEnumTypes = props => {
 	const [selected, setSelected] = useState([]);
 	const [options, setOptions] = useState([]);
 
+	const mapping = el =>
+		useFrontendMapping
+			? { ...el, displayText: t(`${enumName}.${el.name}`) }
+			: { value: el.value, displayText: el.name };
+
 	useEffect(() => {
 		const getEnums = async () => {
 			try {
