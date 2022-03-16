@@ -41,7 +41,7 @@
 			"PersonalMsgBatch": "Personal Msg Batch",
 			"ChangeVipLevel": "Change VIP Level",
 			"WithdrawalKYCControl": "Withdrawal KYC Control",
-			"TeleCSD": "TeleCSD",
+			"TeleCSD": "Tele Marketing",
 			"TagManagement": "Tag Management",
 			"AddTag": "Add Tag",
 			"ChangeVipLevelBatch": "Change Vip Level (Batch)",
@@ -362,7 +362,18 @@
 		"IncreaseBonus": "+ Bonus",
 		"ReduceBonus": "- Bonus"
 	},
-	"WithdrawalStatusEnum": {
-		"Draft": "All"
+	"WithdrawalStatusEnum":{
+		"Draft":"All"
+	},
+	"TeleCSD":{
+		"TeleMarketing": "Tele Marketing",
+		"CallOut":"Call Out",
+		"DormantUser":"Dormant User",
+		"Deposit":"Deposit",
+		"AccountStatus":"Account Status",
+		"RegistrationDate":"Registration Date",
+		"ContactNo":"Contact No.",
+		"Log":"Log",
+		"CompleteOnce":"Complete Once"
 	}
 }

@@ -24,6 +24,7 @@ import WithdrawalListing from "./pages/finance/withdrawalListing";
 import WithdrawalTimeReport from "./pages/finance/withdrawalTimeReport";
 import ChangeVIPLevel from "./pages/csd/changeVipLevel";
 import DepositDetail from "./pages/finance/depositDetail";
+import TeleCSD from "./pages/csd/teleCSD";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -130,6 +131,11 @@ function App() {
 								<Route
 									component={DepositDetail}
 									path={`/${path.depositDetail.root}`}
+								/>
+
+								<Route
+									component={TeleCSD}
+									path={`/${path.TeleCSD.root}`}
 								/>
 								<Route component={NoMatch} />
 							</Switch>

@@ -52,5 +52,8 @@ export default {
 	},
 	changeVipLevel: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/ChangeVipLevelBatch`
+	},
+	TeleCSD: {
+		root: `${siteInfo.newSitePrefixUrl}/CustManage/TeleCSD`
 	}
 };
