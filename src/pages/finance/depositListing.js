@@ -693,7 +693,7 @@ const Popup = ({ showPopup, handleClosePopup, t, siteId }) => {
 		if (!memberCode) {
 			alert.error("Member code does not allow null.");
 			checked = false;
-		} else if (!companyAccount_selected.length) {
+		} else if (!companyAccount_selected?.sysId) {
 			alert.error("Company account does not allow null.");
 			checked = false;
 		} else if (amount === "") {
