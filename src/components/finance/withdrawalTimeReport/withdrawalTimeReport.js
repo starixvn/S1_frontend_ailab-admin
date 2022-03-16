@@ -73,7 +73,7 @@ const WithdrawalTimeReport = () => {
 		try {
 			const res = await api_Finance_WithdrawalTimeReport_GetList({
 				siteIds: [siteId],
-				currencyId: payloads.currencyId || currencyList?.[0],
+				currencyId: payloads.currencyId || currencyList?.[0].value,
 				withdrawalId,
 				status:
 					payloads.status ||
@@ -111,7 +111,7 @@ const WithdrawalTimeReport = () => {
 		try {
 			const res = await api_Finance_WithdrawalTimeReport_Export({
 				siteIds: [siteId],
-				currencyId: payloads.currencyId || currencyList?.[0],
+				currencyId: payloads.currencyId || currencyList?.[0].value,
 				withdrawalId,
 				status:
 					payloads.status ||
