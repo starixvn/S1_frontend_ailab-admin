@@ -189,7 +189,8 @@ export default [
 						Controller: "CustManage",
 						Action: "TeleCSD",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					}
 				]
 			},

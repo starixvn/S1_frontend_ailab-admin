@@ -90,7 +90,8 @@ const useSelectEnumTypes = props => {
 		enumName,
 		defaultSelectAll,
 		defaultSelectFirst,
-		useFrontendFilter = true
+		useFrontendFilter = true,
+		hasAll = false
 	} = props;
 	const [selected, setSelected] = useState([]);
 	const [options, setOptions] = useState([]);
@@ -122,8 +123,17 @@ const useSelectEnumTypes = props => {
 								defaultValue: r.name
 							})
 						}));
-
-					setOptions(datas);
+					if (hasAll) {
+						setOptions([
+							{
+								value: 0,
+								displayText: t("WithdrawalStatusEnum.Draft")
+							},
+							...datas
+						]);
+					} else {
+						setOptions(datas);
+					}
 
 					if (defaultSelectFirst) {
 						setSelected(datas?.[0] ? [datas?.[0]] : []);
