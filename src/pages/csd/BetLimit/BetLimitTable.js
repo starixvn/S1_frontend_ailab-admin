@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { any, arrayOf, bool, func, number } from "prop-types";
 import { Table } from "react-bootstrap";
-import { Pencil, Trash } from "react-bootstrap-icons";
 import { ButtonWithLoading, Loading } from "../../../components";
 import { popBoxContext } from "../../../components/context";
 import { datetime_format } from "../../../components/common";
@@ -51,7 +50,7 @@ const BetLimitTable = ({
 				</thead>
 
 				<tbody>
-					{betLimitList.map(item => (
+					{betLimitList.map((item, index) => (
 						<tr key={`${item.createTime}-${item.updateTime}`}>
 							<td>{tableRowStartIndex + index}</td>
 							<td>{item.userName}</td>
@@ -62,7 +61,7 @@ const BetLimitTable = ({
 
 							<td>{item.updateOperator}</td>
 
-							<td>{item.createTime(item.updateTime)}</td>
+							<td>{datetime_format(item.updateTime)}</td>
 
 							<td className="d-flex justify-content-center">
 								<span role="button" className="m-2">
@@ -72,7 +71,7 @@ const BetLimitTable = ({
 										)}
 										tooltip="Edit"
 										variant="primary">
-										<Pencil />
+										<i className="icon icon-edit" />
 									</ButtonWithLoading>
 								</span>
 								<span role="button" className="m-2">
@@ -82,7 +81,7 @@ const BetLimitTable = ({
 										)}
 										tooltip="Delete"
 										variant="danger">
-										<Trash />
+										<i className="icon icon-del" />
 									</ButtonWithLoading>
 								</span>
 							</td>

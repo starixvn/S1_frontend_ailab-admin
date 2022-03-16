@@ -1,12 +1,17 @@
+/* eslint-disable react/forbid-prop-types */
 import React from "react";
-import { func } from "prop-types";
+import { any, arrayOf, func, objectOf } from "prop-types";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Plus, Search } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 import { ButtonWithLoading } from "../../../components";
 import DatetimePicker from "../../../components/datetimePicker";
+import DropdownWithSearch from "../../../components/dropdownWithSearch";
 
 const BetLimitFilter = ({
+	currenciesSelected,
+	currencyList,
+	onSelectCurrency,
 	setField,
 	openAddLimitModal,
 	setDateRange,
@@ -17,20 +22,27 @@ const BetLimitFilter = ({
 	return (
 		<>
 			<Row>
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>{t("Common.DateRange")}</Form.Label>
 
 					<DatetimePicker setDateRange={setDateRange} />
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
-					<Form.Label>{t("CSD.BetLimit.UserName")}</Form.Label>
+				<DropdownWithSearch
+					title={t("DepositList.Currency")}
+					options={currencyList}
+					onSelect={onSelectCurrency}
+					selected={currenciesSelected}
+					className="btn-group col-md-3 mt-1"
+				/>
+
+				<Form.Group as={Col} md={3}>
+					<Form.Label>{t("CSD.BetLimit.MemberCode")}</Form.Label>
 
 					<Form.Control
 						onChange={event =>
 							setField("userName", event.target.value)
 						}
-						placeholder="User Name"
 					/>
 				</Form.Group>
 			</Row>
@@ -64,6 +76,9 @@ const BetLimitFilter = ({
 };
 
 BetLimitFilter.propTypes = {
+	currenciesSelected: objectOf(any).isRequired,
+	currencyList: arrayOf(any).isRequired,
+	onSelectCurrency: func.isRequired,
 	setField: func.isRequired,
 	openAddLimitModal: func.isRequired,
 	setDateRange: func.isRequired,

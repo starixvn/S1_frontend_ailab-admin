@@ -1,6 +1,7 @@
 import { tpBetLimitRequest } from "./base";
 
 export const api_tpBetLimitRequest_GetList = async ({
+	currencyIds,
 	pageNumber,
 	pageSize,
 	siteIds,
@@ -9,6 +10,7 @@ export const api_tpBetLimitRequest_GetList = async ({
 	endDate
 }) => {
 	const { data } = await tpBetLimitRequest.post("/GetList", {
+		currencyIds,
 		pageNumber,
 		pageSize,
 		siteIds,

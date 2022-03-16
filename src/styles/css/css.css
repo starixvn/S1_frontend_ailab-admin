@@ -3,12 +3,28 @@
 @import url(docs.css);
 @import url(signin.css);
 @import url(../fonts/style.css);
+#root {
+  height: 100%;
+}
+
 .row {
   margin-bottom: 1rem;
 }
 
 .row:last-child {
   margin-bottom: 0;
+}
+
+.icon-plus:before {
+  content: "\e904";
+  transform: rotate(45deg);
+  vertical-align: middle;
+  font-size: 16px !important;
+  display: inline-block !important;
+}
+
+.icon-del:before {
+  margin-left: 1.25px;
 }
 
 .btn-group .long_button .dropdown-toggle {
@@ -27,6 +43,7 @@
 
 .dropdown-item {
   padding: 0.4rem 1rem;
+  white-space: break-spaces;
 }
 
 .scrollbar::-webkit-scrollbar, #sidebarMenu::-webkit-scrollbar {
@@ -353,6 +370,16 @@ input[type=date] {
   margin-right: 0.2rem;
 }
 
+.table .btn:not(.btn-primary) .icon-check {
+  background: transparent;
+  color: green;
+}
+
+.table .btn:not(.btn-primary) .icon-close {
+  background: transparent;
+  color: red;
+}
+
 body {
   height: 100%;
 }
@@ -547,10 +574,6 @@ input.dropdown-toggle {
   background: white;
 }
 
-.bd-example > .row {
-  border-bottom: 1px solid #dee2e6;
-}
-
 .bd-example .btn-group {
   margin-bottom: 1rem;
 }
@@ -566,6 +589,7 @@ input.dropdown-toggle {
 }
 
 .bd-example > .row {
+  border-bottom: 1px solid #dee2e6;
   border-bottom: 0;
 }
 
@@ -677,6 +701,7 @@ h6 {
   justify-content: center;
   background: #eee;
   color: #212529;
+  margin-bottom: 0.5rem;
 }
 
 .avatar:before {
@@ -817,6 +842,10 @@ h6 {
   right: 0;
   top: 0;
   transform: translateY(calc(50% + 20px));
+}
+
+.modal-body > .row > .btn-group {
+  flex-flow: column;
 }
 
 .modal-level-1 {
@@ -990,4 +1019,8 @@ input[type="color"].btn {
   font-weight: bold;
   margin-top: 1rem;
   color: #6c757d;
+}
+
+.text-break {
+  width: 100%;
 }
