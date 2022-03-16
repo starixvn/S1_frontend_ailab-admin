@@ -169,6 +169,7 @@ export default function Page(props) {
 							datas={datas}
 							getCurrencyName={getCurrencyName}
 						/>
+						<BankSlip transId={transId} />
 					</div>
 					<div className="col-xl-8">
 						<DepositInformation
@@ -258,6 +259,43 @@ const MemberInformation = ({ getCurrencyName, datas }) =>
 			</div>
 		</div>
 	);
+
+const BankSlip = ({ transId }) => {
+	const [src, setSrc] = useState(null);
+
+	useEffect(() => {
+		const checkImage = () => {
+			const img = new Image();
+			const url = `/apiv2/Deposit/GetReceiptByTransId?transId=${transId}`;
+			img.src = url;
+
+			if (img.complete) {
+				setSrc(url);
+			} else {
+				img.onload = () => {
+					setSrc(url);
+				};
+
+				img.onerror = () => {
+					setSrc(null);
+				};
+			}
+		};
+
+		checkImage();
+	}, []);
+
+	return (
+		src && (
+			<div className="card">
+				<div className="card-body">
+					<h6>Bank Slip</h6>
+					<img style={{ width: "100%" }} src={src} alt="Bank Slip" />
+				</div>
+			</div>
+		)
+	);
+};
 
 const DepositInformation = ({
 	datas,
