@@ -173,25 +173,25 @@
 		"AdjustmentListing": {
 			"AdjustmentLimitManagement": "Adjustment Limit",
 			"GetCustId": "Get customer ID",
-			"AdjustmentType":"Adjustment Type",
-			"CreateDate":"Create Date",
-			"CustId":"Cust ID",
-			"TransId":"Trans ID",
-			"SabaId":"SabaId",
-			"Operator":"Operator",
-			"WalletType":"WalletType",
-			"Balance":"Balance",
-			"AddBalanceAdjustment":"Add Balance Adjustment",
-			"AddBatchBalanceAdjustment":"Add Balance Adjustment (Batch)",
-			"WithdrawCondition":"Withdraw Condition"
+			"AdjustmentType": "Adjustment Type",
+			"CreateDate": "Create Date",
+			"CustId": "Cust ID",
+			"TransId": "Trans ID",
+			"SabaId": "SabaId",
+			"Operator": "Operator",
+			"WalletType": "WalletType",
+			"Balance": "Balance",
+			"AddBalanceAdjustment": "Add Balance Adjustment",
+			"AddBatchBalanceAdjustment": "Add Balance Adjustment (Batch)",
+			"WithdrawCondition": "Withdraw Condition"
 		},
-		"WithdrawalTimeReport":{
-			"WithdrawalTime":"WITHDRAWAL TIME",
-			"ApprovedDate":"Approved Date",
-			"VerifyTimeSpent":"Verify Time Spent",
-			"ApproveTimeSpent":	"toApprovedTime",
-			"CompleteTime" : "completeTime",
-			"ApprovedBy" : "Approved By",
+		"WithdrawalTimeReport": {
+			"WithdrawalTime": "WITHDRAWAL TIME",
+			"ApprovedDate": "Approved Date",
+			"VerifyTimeSpent": "Verify Time Spent",
+			"ApproveTimeSpent": "toApprovedTime",
+			"CompleteTime": "completeTime",
+			"ApprovedBy": "Approved By",
 			"AdjustmentType": "Adjustment Type",
 			"CreateDate": "Create Date",
 			"CustId": "Cust ID",
@@ -239,7 +239,7 @@
 		"Remark": "Remark",
 		"BankSlip": "Bank Slip",
 		"Cancel": "Cancel",
-		"Export":"Export"
+		"Export": "Export"
 	},
 	"MemberList": {
 		"MemberListing": "Member Listing",
@@ -299,7 +299,7 @@
 		},
 		"BetLimit": {
 			"Title": "BetLimit",
-			"UserName": "User Name",
+			"MemberCode": "MemberCode",
 			"GameCategory": "Game Category"
 		}
 	},
@@ -356,13 +356,13 @@
 		"SabaId": "Saba ID",
 		"UploadFileIsRequired": "Upload file is required"
 	},
-	"AdjustTypeEnum":{
-		"Debit":"+ Main Wallet",
-		"Credit":"- Main Wallet",
-		"IncreaseBonus":"+ Bonus",
-		"ReduceBonus":"- Bonus"
+	"AdjustTypeEnum": {
+		"Debit": "+ Main Wallet",
+		"Credit": "- Main Wallet",
+		"IncreaseBonus": "+ Bonus",
+		"ReduceBonus": "- Bonus"
 	},
-	"WithdrawalStatusEnum":{
-		"Draft":"All"
+	"WithdrawalStatusEnum": {
+		"Draft": "All"
 	}
 }

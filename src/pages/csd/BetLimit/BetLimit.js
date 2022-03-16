@@ -1,7 +1,11 @@
 import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "../../../components/layout";
-import { useGetDateRange, useHandlePage } from "../../../hook";
+import {
+	useGetDateRange,
+	useHandlePage,
+	useSelectCurrencies
+} from "../../../hook";
 import { Empty, Pagination } from "../../../components";
 import { allSiteListContext, popBoxContext } from "../../../components/context";
 import { defPopBoxType } from "../../../components/popBox";
@@ -13,7 +17,19 @@ import { MODAL_TYPE } from "./def";
 const BetLimit = () => {
 	const { t } = useTranslation();
 	const { setPopBox } = useContext(popBoxContext);
-	const { siteId } = useContext(allSiteListContext);
+	const { allSiteList, siteId } = useContext(allSiteListContext);
+
+	const {
+		currencyList,
+		selected: currenciesSelected,
+		OnSelectCurrency: onSelectCurrency,
+		getAPIPayload: getCurrenciesAPIPayload
+	} = useSelectCurrencies({
+		siteId,
+		allSiteList,
+		defaultSelectAll: true,
+		defaultSelectFirst: false
+	});
 
 	const {
 		loading,
@@ -37,8 +53,11 @@ const BetLimit = () => {
 	const handleSearchSubmit = async pageData => {
 		const { currentPage = 1, pageSize = 10 } = pageData ?? {};
 
+		const currencyIds = getCurrenciesAPIPayload();
+
 		getTpBetLimitList({
 			...form,
+			currencyIds,
 			startDate,
 			endDate,
 			pageNumber: currentPage,
@@ -91,11 +110,14 @@ const BetLimit = () => {
 
 	return (
 		<Layout afterLogin={true}>
-			<main className="col-md-9 col-lg-10">
+			<main className="col-md-9 col-lg-10 custmanage-userbetlimit">
 				<h1 className="h2">{t("CSD.BetLimit.Title")}</h1>
 
 				<div className="bd-example">
 					<BetLimitFilter
+						currenciesSelected={currenciesSelected}
+						currencyList={currencyList}
+						onSelectCurrency={onSelectCurrency}
 						setField={setField}
 						openAddLimitModal={() => openAddLimitModal()}
 						onSubmit={() => clickPageNumber(1)}

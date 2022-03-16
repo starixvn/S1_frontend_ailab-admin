@@ -91,6 +91,7 @@ const ModalAddBetLimitTabs = ({
 												<Form.Label>Min Bet</Form.Label>
 
 												<Form.Control
+													disabled={!subItem.checked}
 													value={subItem.minBet}
 													onChange={event => {
 														const minBet = numericRegex(
@@ -112,6 +113,7 @@ const ModalAddBetLimitTabs = ({
 												<Form.Label>Max Bet</Form.Label>
 
 												<Form.Control
+													disabled={!subItem.checked}
 													value={subItem.maxBet}
 													onChange={event => {
 														const maxBet = numericRegex(
