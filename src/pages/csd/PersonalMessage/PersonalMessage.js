@@ -95,7 +95,7 @@ const PersonalMessage = () => {
 
 				<div className="bd-example">
 					<Row>
-						<Form.Group as={Col} lg={4}>
+						<Form.Group as={Col} md={3}>
 							<Form.Label>{t("Common.DateRange")}</Form.Label>
 
 							<DatetimePicker setDateRange={setDateRange} />

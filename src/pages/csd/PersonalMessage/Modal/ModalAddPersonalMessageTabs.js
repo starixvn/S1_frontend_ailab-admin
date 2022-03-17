@@ -5,6 +5,7 @@ import { string, objectOf, any, func, arrayOf } from "prop-types";
 import { Col, Form, Row, Tab, Tabs } from "react-bootstrap";
 import { Editor } from "../../../../components/editor";
 import { MODAL_TYPE } from "../def";
+import InputBox from "../../../../components/inputBox";
 
 const ModalAddPersonalMessageTabs = ({
 	type,
@@ -38,18 +39,15 @@ const ModalAddPersonalMessageTabs = ({
 			{languageList.map(lang => (
 				<Tab key={lang} eventKey={lang} title={lang}>
 					<Row className="mb-3">
-						<Form.Group as={Col}>
-							<Form.Label>
-								{t("CSD.PersonalMessage.PopUpMessage")}
-								{form.IsPopup && (
-									<span style={{ color: "red" }}>*</span>
-								)}
-							</Form.Label>
-
-							<Form.Control
+						<Col md={12}>
+							<InputBox
+								title={t("CSD.PersonalMessage.PopUpMessage")}
+								value={personalMsg[lang]?.PopupMessage}
+								required={form.IsPopup}
+								isValid={!errors.popupMessage}
+								errorFeedBack={errors.popupMessage}
+								className="mb-3"
 								disabled={!form.IsPopup}
-								type="text"
-								value={personalMsg[lang]?.PopupMessage ?? ""}
 								onChange={e => {
 									handleContentChange(lang, {
 										PopupMessage: e.target.value
@@ -60,25 +58,30 @@ const ModalAddPersonalMessageTabs = ({
 										["popupMessage"]: null
 									}));
 								}}
-							/>
+								onBlur={e => {
+									handleContentChange(lang, {
+										PopupMessage: e.target.value
+									});
 
-							<Form.Text style={{ color: "red" }}>
-								{errors.popupMessage}
-							</Form.Text>
-						</Form.Group>
+									setErrors(prev => ({
+										...prev,
+										["popupMessage"]: null
+									}));
+								}}
+							/>
+						</Col>
 					</Row>
 
 					<Row className="mb-3">
-						<Form.Group as={Col}>
-							<Form.Label>
-								{t("Common.Title")}
-								{lang === "en" && (
-									<span style={{ color: "red" }}>*</span>
-								)}
-							</Form.Label>
-							<Form.Control
-								type="text"
+						<Col md={12}>
+							<InputBox
+								title={t("Common.Title")}
 								value={personalMsg[lang]?.Title ?? ""}
+								required={true}
+								isValid={!errors.title}
+								errorFeedBack={errors.title}
+								className="mb-3"
+								disabled={!form.IsPopup}
 								onChange={e => {
 									handleContentChange(lang, {
 										Title: e.target.value
@@ -88,11 +91,17 @@ const ModalAddPersonalMessageTabs = ({
 										["title"]: null
 									}));
 								}}
+								onBlur={e => {
+									handleContentChange(lang, {
+										Title: e.target.value
+									});
+									setErrors(prev => ({
+										...prev,
+										["title"]: null
+									}));
+								}}
 							/>
-							<Form.Text style={{ color: "red" }}>
-								{errors.title}
-							</Form.Text>
-						</Form.Group>
+						</Col>
 					</Row>
 
 					<Row className="mb-3">

@@ -62,7 +62,7 @@ const PersonalMessageTable = ({
 											item.batchId
 										)}
 										variant="primary">
-										<Pencil />
+										<i className="icon icon-edit" />
 									</ButtonWithLoading>
 								</span>
 
@@ -73,7 +73,7 @@ const PersonalMessageTable = ({
 											item.batchId
 										)}
 										variant="danger">
-										<Trash />
+										<i className="icon icon-del" />
 									</ButtonWithLoading>
 								</span>
 
@@ -84,7 +84,7 @@ const PersonalMessageTable = ({
 											onExportReport(item.batchId)
 										}
 										variant="secondary">
-										<FileEarmarkArrowDown />
+										<i className="icon icon-excel" />
 									</ButtonWithLoading>
 								</span>
 							</td>

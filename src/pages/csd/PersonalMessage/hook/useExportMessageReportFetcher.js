@@ -11,7 +11,7 @@ const useExportMessageReportFetcher = () => {
 
 	const exportMessageReport = async batchId => {
 		try {
-			const data = await api_personalMessage_ExportSendMessageBatchResultReport(
+			const response = await api_personalMessage_ExportSendMessageBatchResultReport(
 				batchId
 			);
 
@@ -19,7 +19,7 @@ const useExportMessageReportFetcher = () => {
 				return;
 			}
 
-			downloadExcelFile(data, "PersonalMessageReport");
+			downloadExcelFile(response, "PersonalMessageReport");
 		} catch (error) {
 			alert.error(error.message || t("Error.DefaultError"));
 		}
