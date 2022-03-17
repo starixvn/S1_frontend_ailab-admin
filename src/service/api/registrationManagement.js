@@ -51,7 +51,7 @@ export const api_registrationManagementRequest_ExportRegLiveStatusList = async (
 	affiliatesCode,
 	agentCodeType
 }) => {
-	const { data } = await registrationManagementRequest.post(
+	const response = await registrationManagementRequest.post(
 		"/ExportRegLiveStatusList",
 		{
 			siteIds,
@@ -64,10 +64,11 @@ export const api_registrationManagementRequest_ExportRegLiveStatusList = async (
 			endDate,
 			affiliatesCode,
 			agentCodeType
-		}
+		},
+		{ responseType: "blob" }
 	);
 
-	return data;
+	return response;
 };
 
 export const api_registrationManagementRequest_SetRegLiveStatus = async ({

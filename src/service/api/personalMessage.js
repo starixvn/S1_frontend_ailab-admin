@@ -43,14 +43,15 @@ export const api_personalMessage_DeleteBatchMessage = async batchId => {
 };
 
 export const api_personalMessage_ExportSendMessageBatchResultReport = async batchId => {
-	const { data } = await personalMessageRequest.post(
+	const response = await personalMessageRequest.post(
 		"/ExportSendMessageBatchResultReport",
 		{
 			batchId
-		}
+		},
+		{ responseType: "blob" }
 	);
 
-	return data;
+	return response;
 };
 
 export const api_personalMessage_GetBatchMessage = async batchId => {

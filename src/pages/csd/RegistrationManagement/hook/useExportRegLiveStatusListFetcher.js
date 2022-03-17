@@ -11,7 +11,7 @@ const useExportRegLiveStatusListFetcher = () => {
 
 	const exportRegLiveStatusList = async form => {
 		try {
-			const data = await api_registrationManagementRequest_ExportRegLiveStatusList(
+			const response = await api_registrationManagementRequest_ExportRegLiveStatusList(
 				form
 			);
 
@@ -19,7 +19,7 @@ const useExportRegLiveStatusListFetcher = () => {
 				return;
 			}
 
-			downloadExcelFile(data, "RegistrationManagementReport");
+			downloadExcelFile(response, "RegistrationManagementReport");
 		} catch (error) {
 			alert.error(error.message || t("Error.DefaultError"));
 		}
