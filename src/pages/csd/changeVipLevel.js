@@ -6,7 +6,6 @@ import { FileEarmarkArrowDown } from "react-bootstrap-icons";
 import { popBoxContext, allSiteListContext } from "../../components/context";
 import { useHandlePage } from "../../hook";
 import { ButtonWithLoading } from "../../components";
-import { defPopBoxType } from "../../components/popBox";
 import { api_vipLevel_ChangeVipLevelBatch } from "../../service/api/vipLevel";
 import Layout from "../../components/layout";
 import { Pagination } from "../../components/pagination";
@@ -14,7 +13,7 @@ import { Pagination } from "../../components/pagination";
 const ChangeVIPLevel = () => {
 	const { t } = useTranslation();
 	const alert = useAlert();
-	const { setPopBox } = useContext(popBoxContext);
+	const { setPopBox, confirm } = useContext(popBoxContext);
 	const { siteId } = useContext(allSiteListContext);
 	const isMountedRef = useRef(null);
 	const [file, setFile] = useState();
@@ -56,29 +55,11 @@ const ChangeVIPLevel = () => {
 				);
 			};
 
-			setPopBox({
-				isOpen: true,
-				popBoxType: defPopBoxType.default,
-				content: <h3>{t("PopBox.AreYouSure")}</h3>,
-				hasBtn: true,
-				btnBar: (
-					<div className="modal-footer">
-						<button
-							type="button"
-							className="btn btn-success float-end"
-							onClick={upload}>
-							{t("PopBox.Yes")}
-						</button>
-						<button
-							type="button"
-							className="btn btn-danger float-end mx-1"
-							onClick={() => {
-								setPopBox({ isOpen: false });
-							}}>
-							{t("PopBox.lbl_Cancel")}
-						</button>
-					</div>
-				)
+			confirm({
+				content: <h4>{t("PopBox.AreYouSure")}</h4>,
+				onOk() {
+					upload();
+				}
 			});
 		} else {
 			setTip(t("ChangeVipLevel.UploadFileIsRequired"));
@@ -103,7 +84,7 @@ const ChangeVIPLevel = () => {
 
 	return (
 		<Layout afterLogin={true}>
-			<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 member-changeviplevelbatch">
 				<h2>{t("Menu.CSD.ChangeVipLevel")}</h2>
 				<div className="bd-example">
 					<div className="row">
@@ -120,13 +101,11 @@ const ChangeVIPLevel = () => {
 										setFile(e.target.files[0]);
 										setTip("");
 									}}
-									placeholder="Recipient's username"
-									aria-label="Recipient's username"
 									aria-describedby="basic-addon2"
 								/>
 								<a
 									role="button"
-									href="../../../resource/exampleFile/ChangeVipLevelTemplateFile.xlsx"
+									href="/resource/exampleFile/ChangeVipLevelTemplateFile.xlsx"
 									download="ChangeVipLevelTemplateFile.xlsx">
 									<ButtonWithLoading
 										tooltip={t(
