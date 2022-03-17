@@ -15,6 +15,7 @@ export const defPopBoxType = {
 	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
 	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable",
 	csdBetLimitAddLimit: "csdBetLimitAddLimit",
+	withdrawalDetail: "withdrawalDetail",
 	financeDepsoitProcess: "financeDepsoitProcess",
 	financeDepsoitAdjAmount: "financeDepsoitAdjAmount",
 	financeWithdrawalLimitAdjustAddModal: "financeWithdrawalLimitAdjustAddModal"
@@ -196,6 +197,24 @@ const PopBox = () => {
 				break;
 			}
 
+			case defPopBoxType.withdrawalDetail: {
+				const WithdrawalDetailPopBox = lazy(() =>
+					import(
+						"../components/finance/withdrawalListing/withdrawalDetail.popBox"
+					)
+				);
+				_content = (
+					<Suspense fallback={<div />}>
+						<WithdrawalDetailPopBox
+							custInfo={popBox.custInfo}
+							transId={popBox.transId}
+							getData={popBox.getData}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
 			case defPopBoxType.financeDepsoitProcess: {
 				const Component = lazy(() =>
 					import("./finance/depositListing/depositProcessPopBox")

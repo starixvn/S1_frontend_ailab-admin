@@ -200,7 +200,7 @@ export default [
 				Category: [defMenuCategory.CSD.CSD, defMenuCategory.CSD.KYC],
 				Childs: [
 					{
-						displayKey: "Menu.CSD.WithdrawalKYCControl",
+						displayKey: "Menu.CSD.WithdrawalSetting",
 						FuncKey: "Message/WithdrawalKYCControl",
 						Controller: "Member",
 						Action: "WithdrawalKYCControl",

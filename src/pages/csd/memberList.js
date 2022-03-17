@@ -23,6 +23,9 @@ import {
 	defStatus
 } from "../../service/api/baseData";
 import { Empty } from "../../components/empty";
+import { Loading, Badge } from "../../components";
+import path from "../../path";
+import { datetime_format } from "../../components/common";
 
 const defCol = {
 	registerDate: "registerDate",
@@ -46,6 +49,7 @@ const MemberList = () => {
 	const isMountedRef = useRef(null);
 	const [data, setData] = useState({});
 	const [report, setReport] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const { siteId } = useContext(allSiteListContext);
 
 	const {
@@ -104,6 +108,7 @@ const MemberList = () => {
 			siteIds: [siteId]
 		};
 
+		setLoading(true);
 		api_customerManage_GetCustInfoList({ ...payload }).then(
 			res => {
 				if (!isMountedRef.current) return;
@@ -128,9 +133,11 @@ const MemberList = () => {
 				} else {
 					alert.error(`[${errorCode}] ${message || "error"}`);
 				}
+				setLoading(false);
 			},
 			() => {
 				if (!isMountedRef.current) return;
+				setLoading(false);
 				alert.error(t("Error.DefaultError"));
 			}
 		);
@@ -145,7 +152,7 @@ const MemberList = () => {
 
 	return (
 		<Layout afterLogin={true}>
-			<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 member-memberlist">
 				<h2>{t("MemberList.MemberListing")}</h2>
 
 				<FormPanel
@@ -177,6 +184,7 @@ const MemberList = () => {
 						pageSize={pageSize}
 						clickPageNumber={clickPageNumber}
 						onSelectEntry={onSelectEntry}
+						loading={loading}
 					/>
 				)}
 			</main>
@@ -422,7 +430,8 @@ const ReportPanel = ({
 	currentPage,
 	pageSize,
 	clickPageNumber,
-	onSelectEntry
+	onSelectEntry,
+	loading
 }) => {
 	const { getCurrencyName } = useGetCurrencyData({ singleMapping: true });
 	const { data, totalPages, rowCount } = report;
@@ -468,6 +477,7 @@ const ReportPanel = ({
 		const currencyName = getCurrencyName(el.currencyId);
 		const status = statusOptions.find(s => s.value === el.status);
 		const custTag = el.tagList ? getTagByStatus(el.tagList) : "";
+		const memberInformationPath = path.memberInformation.root;
 
 		return (
 			<tr key={`custId-${el.custId}`}>
@@ -477,19 +487,24 @@ const ReportPanel = ({
 					<Link
 						className="nav-link"
 						to={{
-							pathname: `/NewAdmin/member/memberDetail?data=${el.custId}`,
+							pathname: `/${memberInformationPath.replace(
+								"/:id",
+								""
+							)}/${el.custId}`,
 							state: { data: el.custId }
 						}}>
 						{el.userName}
 					</Link>
 				</td>
-				<td>{dayjs(el.regTime).format("YYYY/MM/DD HH:mm:ss")}</td>
+				<td>{datetime_format(el.regTime)}</td>
 				<td>
-					<div
+					{/* <div
 						className={`alert alert-${statusStyle[status.value]}`}
 						role="alert">
+					</div> */}
+					<Badge bg={statusStyle[status.value]}>
 						{status.displayText}
-					</div>
+					</Badge>
 				</td>
 				<td>{el.vipLevel}</td>
 				<td>{custTag}</td>
@@ -502,18 +517,19 @@ const ReportPanel = ({
 
 	return (
 		<div className="bd-example">
-			<div className="table-responsive">
-				{!report?.data?.length ? (
-					<Empty />
-				) : (
-					<Pagination
-						t={t}
-						currentPage={currentPage}
-						totalPages={totalPages}
-						rowCount={rowCount}
-						pageSize={pageSize}
-						clickPageNumber={clickPageNumber}
-						onSelectEntry={onSelectEntry}>
+			{loading && <Loading />}
+			{!report?.data?.length ? (
+				<Empty />
+			) : (
+				<Pagination
+					t={t}
+					currentPage={currentPage}
+					totalPages={totalPages}
+					rowCount={rowCount}
+					pageSize={pageSize}
+					clickPageNumber={clickPageNumber}
+					onSelectEntry={onSelectEntry}>
+					<div className="table-responsive">
 						<table className="table table-striped table-hover">
 							<thead className="table-dark">
 								<tr>
@@ -549,9 +565,9 @@ const ReportPanel = ({
 							</thead>
 							<tbody>{arr}</tbody>
 						</table>
-					</Pagination>
-				)}
-			</div>
+					</div>
+				</Pagination>
+			)}
 		</div>
 	);
 };
@@ -560,7 +576,8 @@ ReportPanel.defaultProps = {
 	currentPage: 1,
 	pageSize: 10,
 	clickPageNumber: () => {},
-	onSelectEntry: () => {}
+	onSelectEntry: () => {},
+	loading: false
 };
 
 ReportPanel.propTypes = {
@@ -572,7 +589,8 @@ ReportPanel.propTypes = {
 	currentPage: PropTypes.number,
 	pageSize: PropTypes.number,
 	clickPageNumber: PropTypes.func,
-	onSelectEntry: PropTypes.func
+	onSelectEntry: PropTypes.func,
+	loading: PropTypes.bool
 };
 
 export default MemberList;
