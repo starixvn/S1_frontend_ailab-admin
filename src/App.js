@@ -25,6 +25,8 @@ import WithdrawalTimeReport from "./pages/finance/withdrawalTimeReport";
 import ChangeVIPLevel from "./pages/csd/changeVipLevel";
 import DepositDetail from "./pages/finance/depositDetail";
 import TeleCSD from "./pages/csd/teleCSD";
+import MemberGameExclusion from "./pages/csd/memberGameExclusion";
+import AddMGE from "./pages/csd/addMGE";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -137,6 +139,17 @@ function App() {
 									component={TeleCSD}
 									path={`/${path.TeleCSD.root}`}
 								/>
+
+								<Route
+									component={MemberGameExclusion}
+									path={`/${path.memberGameExclusion.root}`}
+								/>
+
+								<Route
+									component={AddMGE}
+									path={`/${path.addMGE.root}`}
+								/>
+
 								<Route component={NoMatch} />
 							</Switch>
 						</Router>

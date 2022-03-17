@@ -33,3 +33,6 @@ export const api_BaseData_GetTpGameTypeListByCategory = async categoryId => {
 	}
 	return data?.data ?? [];
 };
+
+export const api_BaseData_GetGameCasinoByTpId = ({ tpId }) =>
+	apiV2Request.post("/BaseData/GetGameCasinoByTpId", { tpId });

@@ -219,12 +219,13 @@ export default [
 				],
 				Childs: [
 					{
-						displayKey: "Menu.CSD.DisableUserForGame",
+						displayKey: "Menu.CSD.MemberGameExclusion",
 						FuncKey: "CustManage/DisableUserForGame",
 						Controller: "CustManage",
-						Action: "DisableUserForGame",
+						Action: "MemberGameExclusion",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					},
 					{
 						displayKey: "Menu.CSD.UserBetLimit",
@@ -365,33 +366,33 @@ export default [
 						Childs: null
 					}
 				]
-			},
-			{
-				displayKey: "Menu.CSD.MemberGameSetting",
-				Icon: "",
-				Category: [
-					defMenuCategory.CSD.CSD,
-					defMenuCategory.CSD.MemberGameSetting
-				],
-				Childs: [
-					{
-						displayKey: "Menu.CSD.DisableUserForGame",
-						FuncKey: "CustManage/DisableUserForGame",
-						Controller: "CustManage",
-						Action: "DisableUserForGame",
-						Icon: "",
-						Childs: null
-					},
-					{
-						displayKey: "Menu.CSD.UserBetLimit",
-						FuncKey: "CustManage/UserBetLimit",
-						Controller: "CustManage",
-						Action: "UserBetLimit",
-						Icon: "",
-						Childs: null
-					}
-				]
 			}
+			// {
+			// 	displayKey: "Menu.CSD.MemberGameSetting",
+			// 	Icon: "",
+			// 	Category: [
+			// 		defMenuCategory.CSD.CSD,
+			// 		defMenuCategory.CSD.MemberGameSetting
+			// 	],
+			// 	Childs: [
+			// 		{
+			// 			displayKey: "Menu.CSD.DisableUserForGame",
+			// 			FuncKey: "CustManage/DisableUserForGame",
+			// 			Controller: "CustManage",
+			// 			Action: "DisableUserForGame",
+			// 			Icon: "",
+			// 			Childs: null
+			// 		},
+			// 		{
+			// 			displayKey: "Menu.CSD.UserBetLimit",
+			// 			FuncKey: "CustManage/UserBetLimit",
+			// 			Controller: "CustManage",
+			// 			Action: "UserBetLimit",
+			// 			Icon: "",
+			// 			Childs: null
+			// 		}
+			// 	]
+			// }
 		]
 	},
 	{

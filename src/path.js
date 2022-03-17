@@ -55,5 +55,11 @@ export default {
 	},
 	TeleCSD: {
 		root: `${siteInfo.newSitePrefixUrl}/CustManage/TeleCSD`
+	},
+	memberGameExclusion: {
+		root: `${siteInfo.newSitePrefixUrl}/CustManage/memberGameExclusion`
+	},
+	addMGE: {
+		root: `${siteInfo.newSitePrefixUrl}/CustManage/addMGE`
 	}
 };

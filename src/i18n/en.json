@@ -57,7 +57,7 @@
 			"ShowEntries": "Show entries",
 			"PersonalMessage": "Personal Message",
 			"RegistrationManagement": "Registration Management",
-			"DisableUserForGame": "Disable User For Game",
+			"MemberGameExclusion": "Member Game Exclusion",
 			"UserBetLimit": "User Bet Limit",
 			"TpFailRecordReport": "Bet Failure Record"
 		},
@@ -375,5 +375,9 @@
 		"ContactNo":"Contact No.",
 		"Log":"Log",
 		"CompleteOnce":"Complete Once"
+	},
+
+	"MemberGameExclusion":{
+		"AddDisableGame":"Add Disable Game"
 	}
 }
