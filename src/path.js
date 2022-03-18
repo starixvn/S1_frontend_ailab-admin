@@ -33,7 +33,10 @@ export default {
 		root: "dashboard"
 	},
 	memberInformation: {
-		root: `${siteInfo.newSitePrefixUrl}/member/memberDetail/:id`
+		root: `${siteInfo.newSitePrefixUrl}/member/memberDetail/:id`,
+		sub: {
+			vipLog: "vipLog"
+		}
 	},
 	memberList: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/MemberList`

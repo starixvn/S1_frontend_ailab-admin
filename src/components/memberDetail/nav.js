@@ -1,135 +1,146 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import path from "../../path";
 
 const defOptions = {
 	csd: [
 		{
 			displayText: "VIP Log",
-			path: "newadmin/member/viplog"
+			path: path.memberInformation.sub.vipLog
 		},
 		{
 			displayText: "Referral Log",
-			path: "newadmin/member/ReferralLog"
+			path: "ReferralLog"
 		},
 		{
 			displayText: "Internal Message Log",
-			path: "newadmin/member/InternalMessageLog"
+			path: "InternalMessageLog"
 		},
 		{
 			displayText: "External Message Log",
-			path: "newadmin/member/ExternalMessageLog"
+			path: "ExternalMessageLog"
 		},
 		{
 			displayText: "Login Log",
-			path: "newadmin/member/LoginLog"
+			path: "LoginLog"
 		},
 		{
 			displayText: "Member Audit Log",
-			path: "newadmin/member/MemberAuditLog"
+			path: "MemberAuditLog"
 		}
 	],
 	finance: [
 		{
 			displayText: "Deposit Log",
-			path: "newadmin/member/DepositLog"
+			path: "DepositLog"
 		},
 		{
 			displayText: "Withdrawal Log",
-			path: "newadmin/member/WithdrawalLog"
+			path: "WithdrawalLog"
 		},
 		{
 			displayText: "Adjustment Log",
-			path: "newadmin/member/AdjustmentLog"
+			path: "AdjustmentLog"
 		},
 		{
 			displayText: "Fund Transfer Log",
-			path: "newadmin/member/FundTransferLog"
+			path: "FundTransferLog"
 		},
 		{
 			displayText: "Transaction Log",
-			path: "newadmin/member/TransactionLog"
+			path: "TransactionLog"
 		},
 		{
 			displayText: "Bank Account Log",
-			path: "newadmin/member/BankAccountLog"
+			path: "BankAccountLog"
 		},
 		{
 			displayText: "Crypto Account Log",
-			path: "newadmin/member/CryptoAccountLog"
+			path: "CryptoAccountLog"
 		}
 	],
 	game: [
 		{
 			displayText: "Bet Summary",
-			path: "newadmin/member/BetSummary"
+			path: "BetSummary"
 		},
 		{
 			displayText: "Bet Detail",
-			path: "newadmin/member/BetDetail"
+			path: "BetDetail"
 		}
 	],
 	marketing: [
 		{
 			displayText: "Rebate Log",
-			path: "newadmin/member/RebateLog"
+			path: "RebateLog"
 		},
 		{
 			displayText: "Bonus Wallet",
-			path: "newadmin/member/BonusWallet"
+			path: "BonusWallet"
 		},
 		{
 			displayText: "Bonus Log",
-			path: "newadmin/member/BonusLog"
+			path: "BonusLog"
 		},
 		{
 			displayText: "VIP Rebate Log",
-			path: "newadmin/member/VIPRebateLog"
+			path: "VIPRebateLog"
 		},
 		{
 			displayText: "Promotion Log",
-			path: "newadmin/member/PromotionLog"
+			path: "PromotionLog"
 		}
 	]
 };
 
-const NavBar = () => {
+const NavBar = ({ custId }) => {
 	const { t } = useTranslation();
 
 	return (
 		<nav className="navbar navbar-expand-lg bg-dark">
 			<div className="container-fluid">
-				<a href="">User Name</a>
+				<Link
+					to={`/${path.memberInformation.root.replace(
+						":id",
+						custId
+					)}`}>
+					User Name
+				</Link>
 				<Dropdown
 					t={t}
 					title="CSD"
 					icon="icon icon-admin"
 					options={defOptions.csd}
+					custId={custId}
 				/>
 				<Dropdown
 					t={t}
 					title="Finance"
 					icon="icon icon-finance"
 					options={defOptions.finance}
+					custId={custId}
 				/>
 				<Dropdown
 					t={t}
 					title="Game"
 					icon="icon icon-game"
 					options={defOptions.game}
+					custId={custId}
 				/>
 				<Dropdown
 					t={t}
 					title="Marketing"
 					icon="icon icon-marketing"
 					options={defOptions.marketing}
+					custId={custId}
 				/>
 			</div>
 		</nav>
 	);
 };
 
-const Dropdown = ({ t, options = [], title, icon }) => {
+const Dropdown = ({ t, options = [], title, icon, custId }) => {
 	const ref = useRef(null);
 	const [open, setOpen] = useState(false);
 
@@ -148,7 +159,11 @@ const Dropdown = ({ t, options = [], title, icon }) => {
 
 	const rows = options?.map(o => (
 		<li key={o.displayText}>
-			<Link className="dropdown-item" to={o.path}>
+			<Link
+				className="dropdown-item"
+				to={`/${path.memberInformation.root.replace(":id", custId)}/${
+					o.path
+				}`}>
 				{o.displayKey ? t(o.displayKey) : o.displayText}
 			</Link>
 		</li>

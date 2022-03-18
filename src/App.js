@@ -17,6 +17,7 @@ import WithdrawalSetting from "./pages/csd/kyc/withdrawalSetting";
 import DepositListing from "./pages/finance/depositListing";
 import AdjustmentListing from "./pages/finance/adjustmentListing";
 import MemberInformation from "./pages/member/memberDetail";
+import { VipLog } from "./pages/member/vip";
 import { PersonalMessage, RegistrationManagement, BetLimit } from "./pages/csd";
 import { WithdrawableAdjustment } from "./pages/finance";
 import MemberList from "./pages/csd/memberList";
@@ -120,8 +121,15 @@ function App() {
 								/>
 
 								<Route
+									exact
 									component={MemberInformation}
 									path={`/${path.memberInformation.root}`}
+								/>
+
+								<Route
+									exact
+									component={VipLog}
+									path={`/${path.memberInformation.root}/${path.memberInformation.sub.vipLog}`}
 								/>
 
 								<Route

@@ -2,8 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useAlert } from "react-alert";
 import { popBoxContext } from "../../components/context";
-import Layout from "../../components/layout";
-import { NavBar } from "../../components/memberDetail/nav";
 import {
 	api_customerManage_GetCustInfoDetail,
 	api_customerManage_ResetProfile,
@@ -27,6 +25,7 @@ import {
 } from "../../components/memberDetail/hook";
 import { ButtonWithLoading } from "../../components/buttonWithLoading";
 import { defPopBoxType } from "../../components/popBox";
+import Wrapper from "../../components/memberDetail/wrapper";
 
 export default function Page(props) {
 	const { t } = useTranslation();
@@ -86,56 +85,50 @@ export default function Page(props) {
 	}, [custId]);
 
 	return (
-		<Layout>
-			<main className="col-md-9 col-lg-10 customerInformation">
-				<h1 className="h2">{t("Member.MemberDetail.Title")}</h1>
-				<NavBar />
-				<div className="row">
-					<div className="col-xl-4">
-						{custInfo && (
-							<Main
-								custInfo={custInfo}
-								t={t}
-								getCustInfoDetail={() =>
-									getCustInfoDetail(custId)
-								}
-								popBox={{
-									confirm,
-									setPopBox
-								}}
-								SetCustStatus={SetCustStatus}
-							/>
-						)}
-						{custInfo && (
-							<SiginUpInfo
-								custInfo={custInfo}
-								t={t}
-								SetCustStatus={SetCustStatus}
-							/>
-						)}
-					</div>
-					<div className="col-xl-8">
-						{custInfo && (
-							<FinanceInfo
-								custInfo={custInfo}
-								t={t}
-								popBox={{
-									confirm,
-									setPopBox
-								}}
-							/>
-						)}
-						{custInfo && (
-							<GameAndWalletInfo
-								custInfo={custInfo}
-								t={t}
-								alert={alert}
-							/>
-						)}
-					</div>
+		<Wrapper custId={custId}>
+			<div className="row">
+				<div className="col-xl-4">
+					{custInfo && (
+						<Main
+							custInfo={custInfo}
+							t={t}
+							getCustInfoDetail={() => getCustInfoDetail(custId)}
+							popBox={{
+								confirm,
+								setPopBox
+							}}
+							SetCustStatus={SetCustStatus}
+						/>
+					)}
+					{custInfo && (
+						<SiginUpInfo
+							custInfo={custInfo}
+							t={t}
+							SetCustStatus={SetCustStatus}
+						/>
+					)}
 				</div>
-			</main>
-		</Layout>
+				<div className="col-xl-8">
+					{custInfo && (
+						<FinanceInfo
+							custInfo={custInfo}
+							t={t}
+							popBox={{
+								confirm,
+								setPopBox
+							}}
+						/>
+					)}
+					{custInfo && (
+						<GameAndWalletInfo
+							custInfo={custInfo}
+							t={t}
+							alert={alert}
+						/>
+					)}
+				</div>
+			</div>
+		</Wrapper>
 	);
 }
 
