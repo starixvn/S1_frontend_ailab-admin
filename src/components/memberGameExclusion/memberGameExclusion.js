@@ -5,22 +5,14 @@ import { useAlert } from "react-alert";
 import dayjs from "dayjs";
 import { Pencil, Trash, CheckLg, XLg } from "react-bootstrap-icons";
 import InputBox from "../inputBox";
-import {
-	useGetDateRange,
-	useSelectCurrencies,
-	useSelectEnumTypes,
-	useHandlePage
-} from "../../hook";
+import { useGetDateRange, useHandlePage } from "../../hook";
 import { popBoxContext, allSiteListContext } from "../context";
 import { Pagination } from "../pagination";
 import { Empty } from "../empty";
-import { defPopBoxType } from "../popBox";
 import Datetimepicker from "../datetimePicker";
 import Dropdown from "../dropdown";
 import {
 	api_CSD_TpDisable_GetList,
-	api_CSD_TpDisable_GetByCustId,
-	api_CSD_TpDisable_Set,
 	api_CSD_TpDisable_UpdateStatus,
 	api_CSD_TpDisable_Delete
 } from "../../service/api/memberGameExc";
@@ -46,7 +38,7 @@ const MemberGameExclusion = () => {
 		pageNumber: 0,
 		rowCount: 0
 	});
-	const { allSiteList, siteId } = useContext(allSiteListContext);
+	const { siteId } = useContext(allSiteListContext);
 	const alert = useAlert();
 	const [userName, setUserName] = useState("");
 	const [selected, setSelected] = useState(initValue.options[0]);
@@ -107,29 +99,30 @@ const MemberGameExclusion = () => {
 				getList({ page: 1, pageSize: 10 });
 				setPopBox({
 					isOpen: true,
-					content: <p>{message}</p>
+					content: <p>{t("Alert.Success")}</p>
 				});
+			} else {
+				alert.error(`[${errorCode}] ${message || "error"}`);
 			}
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	const editRow = () => {};
-
-	const deleteRow = async ({ custId, status }) => {
+	const deleteRow = async ({ custId }) => {
 		try {
 			const res = await api_CSD_TpDisable_Delete({
-				custId,
-				status
+				custId
 			});
 			const { errorCode, message } = res.data;
 			if (errorCode === 0) {
 				getList({ page: 1, pageSize: 10 });
 				setPopBox({
 					isOpen: true,
-					content: <p>{message}</p>
+					content: <p>{t("Alert.Success")}</p>
 				});
+			} else {
+				alert.error(`[${errorCode}] ${message || "error"}`);
 			}
 		} catch (error) {
 			console.error(error);
@@ -154,29 +147,19 @@ const MemberGameExclusion = () => {
 					/>
 				</div>
 				<div className="row">
-					<button
-						onClick={() => getList({ page: 1, pageSize: 10 })}
-						type="button"
-						className="btn btn-primary">
-						{t("Menu.CSD.Search")}
-					</button>
-					<Link
-						to={`/${path.addMGE.root}`}
-						// onClick={() =>
-						// 	setPopBox({
-						// 		isOpen: true,
-						// 		popBoxType: defPopBoxType.addMGEPopBox,
-						// 		title: t("MemberGameExclusion.AddDisableGame")
-						// 		// refresh: () =>
-						// 		// 	getTagByStatus({
-						// 		// 		page: 1,
-						// 		// 		pageSize: 10
-						// 		// 	})
-						// 	})
-						// }
-						className="btn btn-success">
-						{t("Menu.CSD.Create")}
-					</Link>
+					<div className="col">
+						<button
+							onClick={() => getList({ page: 1, pageSize: 10 })}
+							type="button"
+							className="btn btn-primary m-2 float-end">
+							{t("Menu.CSD.Search")}
+						</button>
+						<Link
+							to={`/${path.addMGE.root}`}
+							className="btn btn-success m-2 float-end">
+							{t("Menu.CSD.Create")}
+						</Link>
+					</div>
 				</div>
 			</div>
 			{tableContent.rows !== null && (
@@ -221,22 +204,23 @@ const MemberGameExclusion = () => {
 									</thead>
 									<tbody>
 										{tableContent.rows.map((el, idx) => (
-											<tr key={el.id}>
+											<tr
+												key={`${el.custId}${el.createTime}`}>
 												<th>{startEntry + idx}</th>
 												<td>
-													<button
-														type="button"
-														onClick={() =>
-															editRow({
+													<Link
+														to={{
+															pathname: `/${path.addMGE.root}`,
+															state: {
 																custId:
 																	el.custId,
-																status:
-																	el.status
-															})
-														}
-														className="btn btn-primary btn-sm">
+																userName:
+																	el.userName
+															}
+														}}
+														className="btn btn-primary btn-sm m-1">
 														<Pencil />
-													</button>
+													</Link>
 													<button
 														type="button"
 														onClick={() =>
@@ -245,7 +229,7 @@ const MemberGameExclusion = () => {
 																	el.custId
 															})
 														}
-														className="btn btn-primary btn-sm">
+														className="btn btn-primary btn-sm m-1">
 														<Trash />
 													</button>
 													<button
@@ -263,7 +247,7 @@ const MemberGameExclusion = () => {
 															el.status
 																? "btn-danger"
 																: "btn-success"
-														} btn-sm`}>
+														} btn-sm m-1`}>
 														{el.status ? (
 															<XLg />
 														) : (

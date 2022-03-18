@@ -162,10 +162,10 @@
 		"Success": "success"
 	},
 	"PopBox": {
-		"lbl_Cancel": "Cancel",
-		"lbl_Submit": "Submit",
+		"Cancel": "Cancel",
+		"Submit": "Submit",
 		"Yes": "Yes",
-		"lbl_Ok": "OK",
+		"Ok": "OK",
 		"Success": "Success",
 		"AreYouSure": "Are You Sure?"
 	},
@@ -378,6 +378,7 @@
 	},
 
 	"MemberGameExclusion":{
-		"AddDisableGame":"Add Disable Game"
+		"AddDisableGame":"Add Disable Game",
+		"Back":"Back"
 	}
 }
