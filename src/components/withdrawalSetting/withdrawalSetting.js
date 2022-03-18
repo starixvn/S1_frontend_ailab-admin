@@ -42,7 +42,7 @@ const WithdrawalSetting = () => {
 				if (errorCode === 0) {
 					setKYCList(data);
 				} else {
-					alert.error(message || `[${errorCode}] error`);
+					alert.error(`[${errorCode}] ${message || "error"}`);
 				}
 				setLoading(false);
 			},
@@ -99,7 +99,7 @@ const WithdrawalSetting = () => {
 	});
 
 	return (
-		<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+		<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 member-withdrawalkyccontrol">
 			<h2>{t("WithdrawalSetting.WithdrawalSetting")}</h2>
 
 			<div className="bd-example">

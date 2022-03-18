@@ -10,23 +10,14 @@ import { popBoxContext, allSiteListContext } from "../context";
 import { Pagination } from "../pagination";
 import { Empty } from "../empty";
 import Datetimepicker from "../datetimePicker";
-import Dropdown from "../dropdown";
 import {
 	api_CSD_TpDisable_GetList,
 	api_CSD_TpDisable_UpdateStatus,
 	api_CSD_TpDisable_Delete
 } from "../../service/api/memberGameExc";
 import path from "../../path";
-import { api_getAllData_GetSlotTpList } from "../../service/api/getAllData";
 
 import { siteInfo } from "../../config";
-
-const initValue = {
-	options: [
-		{ value: 1, displayText: "Show All" },
-		{ value: 0, displayText: "Active only" }
-	]
-};
 
 const MemberGameExclusion = () => {
 	const { t } = useTranslation();
@@ -41,7 +32,6 @@ const MemberGameExclusion = () => {
 	const { siteId } = useContext(allSiteListContext);
 	const alert = useAlert();
 	const [userName, setUserName] = useState("");
-	const [selected, setSelected] = useState(initValue.options[0]);
 
 	const getList = async ({ page, pageSize }) => {
 		try {

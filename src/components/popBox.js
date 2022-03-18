@@ -15,16 +15,24 @@ export const defPopBoxType = {
 	csdRegistrationManagementAddNotes: "csdRegistrationManagementAddNotes",
 	csdRegistrationManagementNotesTable: "csdRegistrationManagementNotesTable",
 	csdBetLimitAddLimit: "csdBetLimitAddLimit",
+	withdrawalDetail: "withdrawalDetail",
 	financeDepsoitProcess: "financeDepsoitProcess",
 	financeDepsoitAdjAmount: "financeDepsoitAdjAmount",
-	financeWithdrawalLimitAdjustAddModal: "financeWithdrawalLimitAdjustAddModal"
+	financeWithdrawalLimitAdjustAddModal:
+		"financeWithdrawalLimitAdjustAddModal",
+	memberDetailReasonModal: "memberDetailReasonModal",
+	memberDetailEditProfileModal: "memberDetailEditProfileModal"
 };
 
 const PopBox = () => {
 	const { popBox, setPopBox, conformPopBox } = useContext(popBoxContext);
 
 	const handlePopBox = () => {
-		setPopBox({ isOpen: false });
+		if (popBox.handleClose) {
+			popBox.handleClose();
+		} else {
+			setPopBox({ isOpen: false });
+		}
 	};
 
 	const content = useMemo(() => {
@@ -196,6 +204,24 @@ const PopBox = () => {
 				break;
 			}
 
+			case defPopBoxType.withdrawalDetail: {
+				const WithdrawalDetailPopBox = lazy(() =>
+					import(
+						"../components/finance/withdrawalListing/withdrawalDetail.popBox"
+					)
+				);
+				_content = (
+					<Suspense fallback={<div />}>
+						<WithdrawalDetailPopBox
+							custInfo={popBox.custInfo}
+							transId={popBox.transId}
+							getData={popBox.getData}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
 			case defPopBoxType.financeDepsoitProcess: {
 				const Component = lazy(() =>
 					import("./finance/depositListing/depositProcessPopBox")
@@ -218,6 +244,34 @@ const PopBox = () => {
 				_content = (
 					<Suspense fallback={<div />}>
 						<Component popBoxData={popBox.data} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.memberDetailReasonModal: {
+				const Component = lazy(() =>
+					import("./memberDetail/reasonPopBox")
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<Component onUpdate={popBox.onUpdate} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.memberDetailEditProfileModal: {
+				const Component = lazy(() =>
+					import("./memberDetail/editProfilePopBox")
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<Component onUpdate={popBox.onUpdate} />
 					</Suspense>
 				);
 

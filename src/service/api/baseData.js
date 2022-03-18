@@ -36,3 +36,21 @@ export const api_BaseData_GetTpGameTypeListByCategory = async categoryId => {
 
 export const api_BaseData_GetGameCasinoByTpId = ({ tpId }) =>
 	apiV2Request.post("/BaseData/GetGameCasinoByTpId", { tpId });
+
+export const api_BaseData_GetPayList = ({ currencyId, payId }) =>
+	apiV2Request.post("/BaseData/GetPayList", {
+		currencyId,
+		payId
+	});
+
+export const api_BaseData_GetBankInfoOffList = ({ currencyId, siteId }) =>
+	apiV2Request.post("/BaseData/GetBankInfoOffList", {
+		currencyId,
+		siteId
+	});
+
+export const api_BaseData_GetCryptoPayList = ({ currencyId, channelName }) =>
+	apiV2Request.post("/BaseData/GetCryptoPayList", {
+		currencyId,
+		channelName
+	});

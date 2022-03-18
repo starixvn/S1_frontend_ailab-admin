@@ -43,8 +43,8 @@ const Component = ({
 			_option => _option.value.toString() === event.target.value
 		);
 
+		onSelect(_selected, selected);
 		setSelected(_selected);
-		onSelect(_selected);
 	};
 
 	useEffect(() => {

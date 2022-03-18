@@ -24,13 +24,13 @@ const RegistrationManagementFilter = ({
 	return (
 		<Form>
 			<Row>
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>{t("Common.DateRange")}</Form.Label>
 
 					<DatetimePicker setDateRange={setDateRange} />
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>Currency</Form.Label>
 					<Dropdown
 						value={{ value: form.currencyId }}
@@ -42,7 +42,7 @@ const RegistrationManagementFilter = ({
 					/>
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>Sort</Form.Label>
 					<Dropdown
 						value={{ value: form.sort }}
@@ -54,7 +54,7 @@ const RegistrationManagementFilter = ({
 					/>
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>Status</Form.Label>
 					<Dropdown
 						value={{ value: form.status }}
@@ -64,7 +64,7 @@ const RegistrationManagementFilter = ({
 					/>
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>Deposit Status</Form.Label>
 					<Dropdown
 						value={{ value: form.depositStatus }}
@@ -74,7 +74,7 @@ const RegistrationManagementFilter = ({
 					/>
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>Agent Code</Form.Label>
 					<Dropdown
 						value={{ value: form.agentCodeType }}
@@ -84,7 +84,7 @@ const RegistrationManagementFilter = ({
 					/>
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>Affiliate Code</Form.Label>
 					<Form.Control
 						value={form.affiliatesCode}
@@ -95,7 +95,7 @@ const RegistrationManagementFilter = ({
 					/>
 				</Form.Group>
 
-				<Form.Group as={Col} lg={4}>
+				<Form.Group as={Col} md={3}>
 					<Form.Label>Member Code</Form.Label>
 
 					<Form.Control
@@ -109,9 +109,9 @@ const RegistrationManagementFilter = ({
 			</Row>
 
 			<Row>
-				<Col lg={9} />
+				<Col md={9} />
 
-				<Col lg={3} className="d-flex justify-content-end">
+				<Col md={3} className="d-flex justify-content-end">
 					<ButtonWithLoading
 						type="button"
 						variant="secondary"

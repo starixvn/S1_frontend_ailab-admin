@@ -18,6 +18,7 @@ const WithdrawalSettingPopBox = ({
 	const isMountedRef = useRef(null);
 	const { setPopBox, confirm } = useContext(popBoxContext);
 	const [inputAmount, setInputAmount] = useState(amount);
+	const [tip, setTip] = useState("");
 	const alert = useAlert();
 
 	useEffect(() => {
@@ -42,7 +43,7 @@ const WithdrawalSettingPopBox = ({
 						getKYCList();
 						alert.success(t("PopBox.Success"));
 					} else {
-						alert.error(message || `[${errorCode}] error`);
+						alert.error(`[${errorCode}] ${message || "error"}`);
 					}
 				},
 				() => {
@@ -52,9 +53,11 @@ const WithdrawalSettingPopBox = ({
 			);
 		};
 
-		if (inputAmount !== amount) {
+		if (!inputAmount) {
+			setTip(t("WithdrawalSetting.PleaseEnterAmount"));
+		} else if (inputAmount !== amount) {
 			confirm({
-				content: t("PopBox.AreYouSure"),
+				content: <h4>{t("PopBox.AreYouSure")}</h4>,
 				onOk() {
 					update();
 				}
@@ -72,7 +75,7 @@ const WithdrawalSettingPopBox = ({
 				e.preventDefault();
 				updateAmount();
 			}}>
-			<div className="modal-body">
+			<div className="modal-body mb-5">
 				<Dropdown
 					title={t("WithdrawalSetting.Currency")}
 					options={[currencyName]}
@@ -80,10 +83,12 @@ const WithdrawalSettingPopBox = ({
 				/>
 				<br />
 				<InputBox
+					className=""
 					title={t("WithdrawalSetting.Amount")}
 					value={inputAmount}
 					onChange={handleInputChange}
 				/>
+				<span style={{ color: "red" }}>{tip}</span>
 			</div>
 
 			<div className="modal-footer">

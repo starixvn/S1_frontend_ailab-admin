@@ -53,6 +53,9 @@ export default {
 	changeVipLevel: {
 		root: `${siteInfo.newSitePrefixUrl}/Member/ChangeVipLevelBatch`
 	},
+	withdrawalDetail: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/WithdrawalDetail/:id`
+	},
 	TeleCSD: {
 		root: `${siteInfo.newSitePrefixUrl}/CustManage/TeleCSD`
 	},

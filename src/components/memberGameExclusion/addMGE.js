@@ -1,13 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Form, Button, InputGroup, FormCheck } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useAlert } from "react-alert";
-import { CaretRight, CaretDown } from "react-bootstrap-icons";
-import styled from "styled-components";
-import { Link, Redirect, useLocation } from "react-router-dom";
-import { popBoxContext, allSiteListContext } from "../context";
-import { useSelectEnumTypes } from "../../hook/index";
-import Dropdown from "../dropdown";
+import { Link, useLocation } from "react-router-dom";
+import { allSiteListContext } from "../context";
 import { api_getAllData_GetSlotTpList } from "../../service/api/getAllData";
 import { api_BaseData_GetGameCasinoByTpId } from "../../service/api/baseData";
 import {
@@ -24,10 +20,6 @@ const errorFeedBacks = {
 const AddMGE = () => {
 	const { t } = useTranslation();
 	const location = useLocation();
-	// const { setPopBox } = useContext(popBoxContext);
-	// const [payloads, setPayloads] = useState(initValue);
-	// const [excelUpload, setExcelUpload] = useState("");
-	// const [errors, setErrors] = useState(initErrValue);
 	const { siteId } = useContext(allSiteListContext);
 	const [checkBoxTree, setCheckBoxTree] = useState({
 		parent: [],
@@ -110,50 +102,7 @@ const AddMGE = () => {
 		}
 	};
 
-	const onSubmit = async () => {
-		if (userName === "") {
-			alert.error(errorFeedBacks.userName);
-			return;
-		}
-		try {
-			const res = await api_CSD_TpDisable_Set({
-				userName,
-				siteId,
-				disableTpGame: Object.entries(checkBoxTree.checked).map(el => ({
-					tpId: el[0],
-					gameList: el[1]
-				}))
-			});
-			const { errorCode } = res.data;
-			if (errorCode === 0) {
-				alert.show(t("Alert.Success"));
-			} else {
-				alert.error(`[${errorCode}] ${message || "error"}`);
-			}
-			window.location.replace(`/${path.memberGameExclusion.root}`);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	useEffect(async () => {
-		try {
-			const res = await api_getAllData_GetSlotTpList();
-			const { errorCode, message, data } = res.data;
-			if (errorCode === 0) {
-				setCheckBoxTree(prev => ({
-					...prev,
-					parent: data
-				}));
-			} else {
-				alert.error(`[${errorCode}] ${message || "error"}`);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	}, []);
-
-	useEffect(async () => {
+	const getByCustId = async () => {
 		try {
 			const res = await api_CSD_TpDisable_GetByCustId({
 				custId: location.state.custId
@@ -191,6 +140,53 @@ const AddMGE = () => {
 		} catch (error) {
 			console.error(error);
 		}
+	};
+
+	const onSubmit = async () => {
+		if (userName === "") {
+			alert.error(errorFeedBacks.userName);
+			return;
+		}
+		try {
+			const res = await api_CSD_TpDisable_Set({
+				userName,
+				siteId,
+				disableTpGame: Object.entries(checkBoxTree.checked).map(el => ({
+					tpId: el[0],
+					gameList: el[1]
+				}))
+			});
+			const { errorCode, message } = res.data;
+			if (errorCode === 0) {
+				alert.show(t("Alert.Success"));
+			} else {
+				alert.error(`[${errorCode}] ${message || "error"}`);
+			}
+			// window.location.replace(`/${path.memberGameExclusion.root}`);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	useEffect(async () => {
+		try {
+			const res = await api_getAllData_GetSlotTpList();
+			const { errorCode, message, data } = res.data;
+			if (errorCode === 0) {
+				setCheckBoxTree(prev => ({
+					...prev,
+					parent: data
+				}));
+			} else {
+				alert.error(`[${errorCode}] ${message || "error"}`);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	}, []);
+
+	useEffect(() => {
+		getByCustId();
 	}, [checkBoxTree.parent]);
 
 	return (
@@ -203,6 +199,7 @@ const AddMGE = () => {
 						title={t("DepositList.MemberCode")}
 						value={userName}
 						required={true}
+						disabled={location?.state?.custId}
 						onChange={e => setUserName(e.target.value)}
 					/>
 				</div>
