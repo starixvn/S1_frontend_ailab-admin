@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import dayjs from "dayjs";
+
 import { Pencil } from "react-bootstrap-icons";
+import { datetime_format } from "../../common";
 import {
 	useHandlePage,
 	useGetCryptoCurrenciesAndNetwork,
@@ -243,7 +244,7 @@ const USDTWithdrawalLimitManagement = () => {
 															})
 														}
 														type="button"
-														className="btn btn-primary btn-sm m-1">
+														className="btn btn-primary btn-sm m-2">
 														<Pencil />
 													</button>
 												</td>
@@ -270,10 +271,8 @@ const USDTWithdrawalLimitManagement = () => {
 												<td>{el.withdrawalMin}</td>
 												<td>{el.withdrawalMax}</td>
 												<td>
-													{dayjs(
+													{datetime_format(
 														el.updateTime
-													).format(
-														"YYYY-MM-DD HH:mm:ss"
 													)}
 												</td>
 												<td>{el.updateOperator}</td>
