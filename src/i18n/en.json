@@ -413,5 +413,12 @@
 		"ContactNo":"Contact No.",
 		"Log":"Log",
 		"CompleteOnce":"Complete Once"
+	},
+	"USDTWithdrawalLimitManagement": {
+		"CryptoWithdrawalLimit":"Crypto Withdrawal Limit",
+		"Network":"Network",
+		"CryptoCurrency":"Crypto Currency",
+		"MinimumAmount":"Minimum Amount",
+		"MaximumAmount":"Maximum Amount"
 	}
 }

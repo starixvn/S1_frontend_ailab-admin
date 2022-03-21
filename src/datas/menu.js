@@ -560,7 +560,8 @@ export default [
 						Controller: "Finance",
 						Action: "USDTWithdrawalLimitManagement",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					},
 					{
 						displayKey: "Menu.Finance.AdjustmentLimitManagement",

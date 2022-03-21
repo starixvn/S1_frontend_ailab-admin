@@ -11,3 +11,6 @@ export const api_getAllData_GetTpCategory = async () => {
 	}
 	return data?.data ?? [];
 };
+
+export const api_getAllData_GetCryptoInfoData = () =>
+	getAllDataRequest.post("/GetCryptoInfoData");

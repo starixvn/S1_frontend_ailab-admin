@@ -26,6 +26,7 @@ import ChangeVIPLevel from "./pages/csd/changeVipLevel";
 import WithdrawalDetail from "./components/finance/withdrawalListing/withdrawalDetail";
 import DepositDetail from "./pages/finance/depositDetail";
 import TeleCSD from "./pages/csd/teleCSD";
+import USDTWithdrawalLimitManagement from "./pages/finance/usdtWithdrawalLimitManagement";
 
 const reactAlertOptions = {
 	timeout: 5000,
@@ -141,6 +142,10 @@ function App() {
 								<Route
 									component={TeleCSD}
 									path={`/${path.TeleCSD.root}`}
+								/>
+								<Route
+									component={USDTWithdrawalLimitManagement}
+									path={`/${path.usdtWithdrawalLimitManagement.root}`}
 								/>
 								<Route component={NoMatch} />
 							</Switch>
