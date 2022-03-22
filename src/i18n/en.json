@@ -15,7 +15,9 @@
 		"UpdatedDate": "Updated Date",
 		"CreatedBy": "Created By",
 		"CreatedDate": "Created Date",
-		"Note": "Note"
+		"Note": "Note",
+		"MinimumAmount": "Minimum Amount",
+		"MaximumAmount": "Maximum Amount"
 	},
 	"Menu": {
 		"Home": {
@@ -413,5 +415,8 @@
 		"ContactNo":"Contact No.",
 		"Log":"Log",
 		"CompleteOnce":"Complete Once"
+	},
+	"WithdrawalLimitManagement":{
+		"WithdrawalLimit": "Withdrawal Limit"
 	}
 }

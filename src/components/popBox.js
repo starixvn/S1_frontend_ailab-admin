@@ -21,7 +21,9 @@ export const defPopBoxType = {
 	financeWithdrawalLimitAdjustAddModal:
 		"financeWithdrawalLimitAdjustAddModal",
 	memberDetailReasonModal: "memberDetailReasonModal",
-	memberDetailEditProfileModal: "memberDetailEditProfileModal"
+	memberDetailEditProfileModal: "memberDetailEditProfileModal",
+	editWithdrawalLimitPopBox: "editWithdrawalLimitPopBox",
+	addWithdrawalLimitPopBox: "addWithdrawalLimitPopBox"
 };
 
 const PopBox = () => {
@@ -272,6 +274,45 @@ const PopBox = () => {
 				_content = (
 					<Suspense fallback={<div />}>
 						<Component onUpdate={popBox.onUpdate} />
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.addWithdrawalLimitPopBox: {
+				const Component = lazy(() =>
+					import(
+						"./finance/withdrawalLimitManagement/addWithdrawalLimitPopBox"
+					)
+				);
+
+				_content = (
+					<Suspense fallback={<div />}>
+						<Component
+							currencyList={popBox.currencyList}
+							refresh={popBox.refresh}
+						/>
+					</Suspense>
+				);
+
+				break;
+			}
+
+			case defPopBoxType.editWithdrawalLimitPopBox: {
+				const Component = lazy(() =>
+					import(
+						"./finance/withdrawalLimitManagement/editWithdrawalLimitPopBox"
+					)
+				);
+				console.log(popBox.limitData);
+				_content = (
+					<Suspense fallback={<div />}>
+						<Component
+							limitData={popBox.limitData}
+							currencyList={popBox.currencyList}
+							refresh={popBox.refresh}
+						/>
 					</Suspense>
 				);
 

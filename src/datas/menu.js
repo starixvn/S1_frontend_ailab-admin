@@ -551,7 +551,8 @@ export default [
 						Controller: "Finance",
 						Action: "WithdrawalLimitManagement",
 						Icon: "",
-						Childs: null
+						Childs: null,
+						NewAdmin: true
 					},
 					{
 						displayKey:

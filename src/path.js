@@ -58,5 +58,8 @@ export default {
 	},
 	TeleCSD: {
 		root: `${siteInfo.newSitePrefixUrl}/CustManage/TeleCSD`
+	},
+	withdrawalLimitManagement: {
+		root: `${siteInfo.newSitePrefixUrl}/Finance/withdrawalLimitManagement`
 	}
 };
